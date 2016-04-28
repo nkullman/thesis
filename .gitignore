@@ -7,3 +7,6 @@
 *.out
 *.toc
 *.fmt
+*.bbl
+*.blg
+*.synctex.gz
