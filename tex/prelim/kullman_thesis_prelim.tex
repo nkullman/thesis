@@ -8,7 +8,7 @@
 \Year{2016}
 \Program{Quantitative Ecology and Resource Management}
 
-\Chair{Sándor F. Tóth}{Associate Professor}{School of Environmental and Forest Sciences}
+\Chair{S\'{a}ndor F. T\'{o}th}{Associate Professor}{School of Environmental and Forest Sciences}
 \Signature{David Butman}
 \Signature{W. Art Chaovalitwongse}
 
@@ -19,66 +19,26 @@
 %
 % ----- abstract
 %
-
-
-\setcounter{page}{-1}
-\abstract{%
-This sample dissertation is an aid to students who are attempting
-to format their theses with \LaTeX, a sophisticated
-text formatter widely used by mathematicians and scientists everywhere.
- 
-\begin{itemize}
-\item It describes the use of a specialized
-macro package developed specifically for thesis production
-at the University.
-The macros customize \LaTeX\ for the correct thesis style,
-allowing the student to concentrate on the substance of
-his or her text.%
-\footnote{See Appendix A to obtain the source to this
- thesis and the class file.}
-\item It demonstrates the solutions to a variety of
-formatting challenges found in thesis production.
-\item It serves as a template for a real dissertation.
-\end{itemize}
-}
+\input{./prelim/abstract}
  
 %
 % ----- contents & etc.
 %
 \tableofcontents
 \listoffigures
-%\listoftables  % I have no tables
+%\listoftables  % Uncomment if the thesis contains any tables
  
 %
 % ----- glossary 
 %
-\chapter*{Glossary}      % starred form omits the `chapter x'
-\addcontentsline{toc}{chapter}{Glossary}
-\thispagestyle{plain}
-%
-\begin{glossary}
-
-\item[argument] replacement text which customizes a \LaTeX\ macro for
-each particular usage.
-\item[back-up] a copy of a file to be used when catastrophe strikes
-the original.  People who make no back-ups deserve
-no sympathy.
- 
-\end{glossary}
+\input{./prelim/glossary}
  
 %
 % ----- acknowledgments
 %
-\acknowledgments{% \vskip2pc
-  % {\narrower\noindent
-  I want to thank all those that contributed to my earning this degree.
-  % \par}
-}
+\input{./prelim/ack}
 
 %
 % ----- dedication
 %
-\dedication{\begin{center}To ma femme and my family \end{center}}
-
-%
-% end of the preliminary pages
+\dedication{\begin{center}\textit{To ma femme and my family}\end{center}}
