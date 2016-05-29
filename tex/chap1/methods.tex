@@ -1,18 +1,74 @@
 \section{Methods}
  
-In this thesis the typist
-refers to the user of \LaTeX---the one who
-makes formatting decisions and chooses the appropriate
-formatting commands.
-He or she will most often be the degree candidate.
- 
-This document deals with \LaTeX\ typesetting commands and their
-functions.  Wherever possible the conventions used to display
-text entered by the typist and the resulting formatted output
-are the same as those used by the \TeX books.
-Therefore, {\tt typewriter type} is used to indicate text
-as typed by the computer
-or entered by the typist.
-It is quite the opposite of {\it italics,} which indicates
-a category rather than exact text.  For example,
-{\tt alpha} and {\tt beta} might each be an example of a {\it label}.
+\subsection{Comparing climate change scenarios}
+
+\subsection{Computing the volume of Pareto frontiers}
+To compare the tradeoff structure of each climate change scenario's corresponding Pareto frontier, I calculated the relative volume of the objective space bound by the frontier.  Computing such a volume for a two-dimensional frontier is trivial. Consider figure \ref{fig:2DFrontierVol}.
+\begin{figure}[h]
+  \centering
+    \includegraphics[width=0.5\textwidth]{"../images/2DFrontierVolumeExample"}
+  \caption{A two-dimensional frontier. The volume of this frontier may be computed by summing the areas of the rectangles shown.}
+  \label{fig:2DFrontierVol}
+\end{figure}
+The reader can imagine a process to compute the volume whereby the frontier is divided into rectangles, as shown, and then summing the areas of these rectangles to get the total frontier volume.
+
+Performing a similar computation in three and higher dimensions is less trivial and is an area of active research !CITESOMEONE. The higher-order volume computation is also often accomplished using Monte Carlo simulation !CITE SOMEONE.
+
+I developed the following recursive algorithm to exactly compute the volume of an $n$-dimensional frontier for $n>2$.
+
+Given a set of Pareto optimal solutions $\mathcal{P}$ to a multi-objective mathematical programming model with a set of objectives $O$ of cardinality $N := |O|$, this algorithm computes the volume $V$ of the objective space bounded by the Pareto frontier defined by the solutions $x \in \mathcal{P}$. The objectives are assumed to be normalized so that the objective space is the $N$-dimensional unit hypercube with the origin and the point $\vec{\mathbf{1}}$ defining the nadir objective vector and the ideal objective vector, respectively. That is, all objectives are assumed to be maximized.
+
+We project the objective space into $N-1$ dimensions by eliminating the dimension associated with an (arbitrarily-chosen) objective $p \in O$. We define the set of objectives $\overbar{O} := O \backslash \{p\}$. It is assumed that $x \in \mathcal{P}$ are sorted in descending order according to $p$. The algorithm proceeds by sequentially adding solutions to the ($N-1$)-dimensional space, and calculating the contribution to the frontier volume as a product of the volume contribution in $N-1$ dimensions and its achievement in objective $p$.
+
+Let
+$\overbar{V_x}$ be the ($N-1$)-dimensional volume contribution of solution $x$ and
+$x_p$ be the achievement of solution $x$ in objective $p$. Further, let
+$F$ be the set of non-dominated solutions in $N-1$ dimensions.
+We proceed to compute the $N$-dimensional volume of the frontier $V$ as follows.
+
+\begin{algorithm}[!ht]
+\caption{Computing the volume of a Pareto frontier}
+\begin{algorithmic}[1]
+
+\State $V \gets 0$
+\State $\overbar{V} \gets 0$
+\State $F \gets \emptyset$
+
+% Iterate over each solution
+\ForAll{$x \in \mathcal{P}$}
+
+	\State $\overbar{V}_x \gets \prod_{o \in \overbar{O}} x_{o} - \overbar{V}$
+		
+	\ForAll{$f \in F$}
+		\If{$f_o < x_o \forall o \in \overbar{O}$}
+			\State $F \gets F \backslash \{f\}$
+		\EndIf
+	\EndFor
+	
+	% iterate over subdimensions to "add back the sides"	
+	\ForAll{$o \in \overbar{O}$}
+	
+		\State $F_{x,o} := \set{f \in F : f_o > x_o}$
+		
+		\State Sort $f \in F_{x,o}$ in ascending order by their $o$th component, $f_o$
+		
+		\State $v_i \gets x_o$
+		\ForAll{$f \in F_{x,o}$}
+			\State $v_t \gets f_o$
+			\State $\delta_o :	= v_t - v_i$
+			\State $\overbar{V}_x \gets \overbar{V}_x + \delta_o \prod_{\sigma \in \overbar{O} \backslash \{o\}} f_\sigma$
+			\State $v_i \gets v_t$
+		\EndFor
+		
+	\EndFor
+	
+	\State $F \gets F \cup \{x\}$
+	\State $\overbar{V} \gets \overbar{V} + \overbar{V}_x$
+	\State $V \gets V + x_p \overbar{V}_x$
+\EndFor
+
+
+\end{algorithmic}
+\end{algorithm}
+
+The result of the algorithm is a single metric for each frontier, known as the hypervolume indicator !CITESOMEONE. This metric is used in the field of Evolutionary Algorithms for MultiObjOpt. 
