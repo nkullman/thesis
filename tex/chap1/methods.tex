@@ -1,8 +1,25 @@
 \section{Methods}
- 
-\subsection{Comparing climate change scenarios}
+\subsection{Simultaneous Provision of Ecosystem Services}
+\label{subsec:multiObjModel}
+Aiming to determine how climate change may destabilize the relationships between managed ecosystem services, I followed the IPCC's approach of using scenario-based analyses. I selected three climate projections for consideration. The first scenario is the assumption of no climate change. This is the default assumption for many current studies such as !CITESVETLANASRESEARCH, from which this study is derived. I used this climate scenario as the control against which I  compared the ecosystem service tradeoffs observed in the other scenarios. The second and third scenarios are ensembles of climate models produced by research agencies recognized by the IPCC and assembled by the USFS !CITECLIMATEFVS. Details about the models included in the ensembles can be found in !CITETHECLIMATEMODELSDETAILSPAGE. The second scenario is an ensemble of models for Representative Concentration Pathway (RCP) 4.5 $W/m^2$, and the third scenario is the same ensemble of models for RCP 8.5 $W/m^2$. The RCPs indicate the additional radiative forcing (in $W/m^2$) above pre-industrial levels. I chose these three scenarios because they represent a range of severity in climate change, from a $0 \degree C$ warming by the year 2100 under the control to a $2.6-4.8 \degree C$ warming under the third !CITEAR5SPM.
 
-\subsection{Computing the volume of Pareto frontiers}
+For each climate scenario I parameterized and solved a multi-objective mixed integer-linear mathematical program (MIP). The model is as follows:
+
+
+
+the model for each climate change scenario, producing an . I derived the parameter values  I used Climate FVS to project vegetation growth in the study area over the time horizon. I chose an 80 year time horizon, spanning the years from 2015-2095, divided into four 20-year periods. All management activities will  I received my initial vegetation data from Oregon State University's Landscape Ecology, Modeling, Mapping \& Analysis group !CITELEMMA. I used FVS's Fire and Fuels Extension (FFE) to obtain the average fuel model for each stand, which is used as a proxy for fire hazard. This proxy was chosen, because the higher the fuel model, generally, the larger the fuel loading.
+
+The forest stands in our study area qualified as northern spotted owl habitat if they were part of a contiguous area at least 500 ha in size that met the following qualifications: 
+
+ I employed a scenario-based analysis of potential future climates. Using the ensemble  impacts temporally and spatially explicit multi-objective optimization model to simultaneously minimize fire hazard and sediment delivery to the watershed while maximizing NSO habitat. I assigned an objective for each ecosystem service. The Drink area is partitioned into 303 stands of which 
+
+\subsection{Evaluating Climate Change Scenarios}
+Solving each multi-objective model described in \S \ref{subsec:multiObjModel} produces a set of Pareto efficient points. Each point describes a prescription of management actions that, if followed, will produce an amount of NSO habitat, fire hazard, and sediment delivery as specified by the solution. While the magnitude of ecosystem service 
+
+\subsubsection{Computing a Frontier's Solution Spacing}
+The spacing of solutions along the frontier provide a measure of flexibility for the decision maker. The more solutions 
+
+\subsubsection{Computing a Frontier's Hypervolume Indicator}
 To compare the tradeoff structure of each climate change scenario's corresponding Pareto frontier, I calculated the relative volume of the objective space bound by the frontier.  Computing such a volume for a two-dimensional frontier is trivial. Consider figure \ref{fig:2DFrontierVol}.
 \begin{figure}[h]
   \centering
@@ -26,8 +43,8 @@ $x_p$ be the achievement of solution $x$ in objective $p$. Further, let
 $F$ be the set of non-dominated solutions in $N-1$ dimensions.
 We proceed to compute the $N$-dimensional volume of the frontier $V$ as follows.
 
-\begin{algorithm}[!ht]
-\caption{Computing the volume of a Pareto frontier}
+\begin{figure}[!ht]
+\caption{Algorithm to compute the volume of a Pareto frontier}
 \begin{algorithmic}[1]
 
 \State $V \gets 0$
@@ -69,6 +86,6 @@ We proceed to compute the $N$-dimensional volume of the frontier $V$ as follows.
 
 
 \end{algorithmic}
-\end{algorithm}
+\end{figure}
 
 The result of the algorithm is a single metric for each frontier, known as the hypervolume indicator !CITESOMEONE. This metric is used in the field of Evolutionary Algorithms for MultiObjOpt. 
