@@ -7,6 +7,27 @@ For each climate scenario I parameterized and solved a multi-objective mixed int
 
 %INSERT THE MODEL HERE
 %INSERT THE MODEL DESCRIPTION JUST AFTER IT
+\begin{align*}
+Minimize \quad &\sum_{i\in I,r\in R} F_{i,r} x_{i,r} \\
+Maximize \quad &\sum_{i\in I_\omega} \left(a_i p_i + e a_i \left( \sum_{j \in R_i} x_{i,j}-p_i \right) \right) \\
+Minimize \quad &\max_t \{S_t\}
+\end{align*}
+
+Subject to the following constraints:
+\begin{align}
+\sum_{i\in I,r\in R} s_{i,r,t} x_{i,r} &= S_t \qquad \forall t \in T \\
+\sum_{i \in D_c, j \in R_i} x_{i,j} - |c| q_c &\ge 0 \qquad \forall c \in C \\
+\sum_{c \in C_i} q_c - p_i &\ge 0 \qquad \forall i \in I_\omega \\
+\sum_{r \in R} x_{i,r} &= 1  \qquad \forall i \in I \\
+\sum_{i \in I,r \in 1,3} a_i x_{i,r} &= H_1 \\
+\sum_{i \in I,r \in 2,3} a_i x_{i,r} &= H_2 \\
+H_1 &\le A \\
+H_2 &\le A \\
+\ell H_1 - H_2 &\le 0 \\
+-u H_1 + H_2 &\le 0 \\
+x_{i,r}, p_i, q_c \in \{0,1\} \quad &\forall i \in I, r \in R, c \in C
+\end{align}													
+Equation 1 defines the amount of sediment delivery in each time period. Equations 2 and 3 define account for the total area of NSO habitat, giving additional weight to habitat clusters. Equation 4 specifies that each subdivision of the study area must be assigned to a particular management prescription (even if the prescription is 'do nothing'). Equations 5 through 8 limit the total area of land that can be managed in any given year, and equations 9 and 10 limit the fluctuation in management in between years. Finally, equation 11 simply states that all variables are binary.
 
 Using Climate FVS, I projected vegetation growth through the end of the 80 year planning horizon, which was used to parameterize the models' fuels and NSO coefficients. I received my initial vegetation data from Oregon State University's Landscape Ecology, Modeling, Mapping \& Analysis (LEMMA) group !CITELEMMA.
 
@@ -17,6 +38,8 @@ A forest stand's candidacy for NSO habitat is dependent on THREE CONDITIONS: the
 
 \subsection{Evaluating Climate Change Scenarios}
 Solving each multi-objective model described in \S \ref{subsec:multiObjModel} produces a set of Pareto efficient points. Each point describes a prescription of management actions that, if followed, will produce an amount of NSO habitat, fire hazard, and sediment delivery as specified by the solution. While the magnitude of ecosystem service 
+
+We drew on techniques used to compare sets of solutions in evolutionary algorithms.
 
 \subsubsection{Computing a Frontier's Solution Spacing}
 The spacing of solutions along the frontier provide a measure of flexibility for the decision maker. The more solutions 
