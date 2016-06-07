@@ -1,52 +1,78 @@
 \section{Methods}
-\subsection{Simultaneous Provision of Ecosystem Services}
+To determine the impacts of climate change on the tradeoff structure between ecosystem services, it is first necessary to define how the impacts of climate change are to be captured in the analysis.
+\subsection{Choosing Climate Scenarios for Comparison}
+I chose to capture the effects of climate change using the method employed by the IPCC, namely, through a scenario-based analysis. In a scenario analysis, multiple alternative futures are considered and no prediction is made as to which scenarios are more likely than others. There is no attempt to quantify the probability of realization of any one scenario.
+
+The alternative futures I consider here are climate scenarios. Given the large number of potential future climates considered by the IPCC (see \cite{ipccListOfAR5Models}) combined with the computational complexity involved in the study of each one, I selected a small subset of  future climate scenarios for my analysis. These are ``None'', ``Ensemble RCP 4.5'', and ``Ensemble RCP 8.5''.
+
+The first scenario, ``None'', is the assumption of no climate change. While the number of studies incorporating climate change is increasing, this is still the assumption used for many modern studies such as \cite{svetlanaDissertation2013}, from which this study is derived. Because it has served as the basis for many studies and assumes a static environment resembling today's, the ``None'' climate scenario is the control against which I compare the other two climate scenarios.
+
+As their names suggest, the second and third scenarios are ensembles of future climate projections. The components of the ensembles are global circulation models (GCMs) used in the IPCC's Fifth Assessment (AR5). The USFS's Climate-FVS \cite{dixon2002essential} team selected the ensemble components and created the climate surface corresponding to the collection of these 17 GCMs. The list of the 17 scenarios included in the ensemble can be found in \cite{ClimateModelsInFVSEnsemble}. The climate surface contains a vector of 35 climate parameters at over 11,000 global locations for three time periods \cite{crookston2014climate}. This provides a climate surface for each of the scenarios that, while temporally sparse, is spatially robust. This configuration is useful for the Drink area given its variability in elevation and slow growth.
+
+The ensembles differ in the representative concentration pathway (RCP) assumed in the comoponent GCMs. The RCP indicates the additional radiative forcing (in $W/m^2$) above pre-industrial levels, with higher values of forcing indicative of more severe climate change. The GCMs in Ensemble RCP 4.5 assume a value of 4.5 $W/m^2$ of additional radiative forcing, and the GCMs in Ensemble RCP 8.5 assume 8.5 $W/m^2$ of additional radiative forcing.
+
+I chose these three scenarios because they represent a range of predicted severity of climate change, from a $0 \degree C$ warming by the year 2100 under the ``None'' scenario to a $2.6-4.8 \degree C$ warming under RCP 8.5 \cite{ipcc2013climate}.
+
+\subsection{Generating tradeoff relationships between ecosystem services}
 \label{subsec:whyUsingMultiObjModel}
-Aiming to determine how climate change may destabilize the relationships between managed ecosystem services, I followed the IPCC's approach of using scenario-based analyses. I selected three climate projections for consideration. The first scenario is the assumption of no climate change. This is the default assumption for many current studies such as \cite{svetlanaDissertation2013}, from which this study is derived. I used this climate scenario as the control against which I  compared the ecosystem service tradeoffs observed in the other scenarios.
+With this selection of climate scenarios, how can one determine the relationships between ecosystem services under each scenario? One applicable method is multi-objective mathematical optimization \cite{TothFsci2009}. This approach seeks to maximize a set of objectives subject to a set of constraints. I define my objectives as the ecosystem services that the USFS prioritized for the Drink area. The set of constraints were determined through a combination of input from the USFS as well as logical constraints. The latter includes restrictions such as that one may not perform silvicultural treatments to areas that are not forested; the former includes such restrictions as how many acres may be treated in a given year.
 
-The second and third scenarios are ensembles of climate models produced by research agencies recognized by the IPCC and assembled by the USFS \cite{dixon2002essential}. Details about the global circulation models (GCMs) included in the ensembles can be found in \cite{ClimateModelsInFVSEnsemble}. The second scenario is an ensemble of models for Representative Concentration Pathway (RCP) 4.5 $W/m^2$, and the third scenario is the same ensemble of models for RCP 8.5 $W/m^2$. The RCPs indicate the additional radiative forcing (in $W/m^2$) above pre-industrial levels, with higher values of forcing indicative of more severe climate change. I chose these three scenarios because they represent a range of severity of climate change, from a $0 \degree C$ warming by the year 2100 under the control (first scenario) to a $2.6-4.8 \degree C$ warming under the third \cite{ipcc2013climate}.
+The multi-objective model, or mathematical program, that I built and used for this analysis is provided below. The program involves linear, integer, and binary variables, making it a mixed integer program (MIP). The treatment assignment rules for the model, the acquisition of the required data, and the projection of that data into the future are described here:
 
-In order to provide a basis upon which to compare the tradeoffs among ecosystem services, I parameterized and solved a multi-objective mixed integer-linear mathematical program (MIP) for each climate scenario. The benefit of using this approach is that it produces a set of solutions indicating optimal simultaneous achievement in each of the considered ecosystem services. This set of solutions is known as an efficient frontier or a Pareto frontier. The solutions comprising the frontier are optimal, which means that - for ecosystem services which are in competition - an improvement in one ecosystem service cannot be achieved without sacrificing some amount of another. Prior to beginning this work, I determined that the objectives of reducing fire hazard, providing NSO habitat, and reducing sediment delivery were in conflict. Hence, the frontier generated by the multi-objective MIP provides a means to quantitatively study the conflict between these ecosystem services.
+\subsubsection{Treatment scheduling and assignment rules}
+I simulated the 303 stands in the Drink area over the course of an 80 year planning horizon with all treatment activity occurring in the first 40 years. The activity could be selected to be completed in the first twenty year period, the second twenty year period, both, or neither. The type of treatment to be performed is dependent on silvicultural characteristics (see \S \ref{chap:appBTreatmentSpec}) and was determined \textit{a priori} using the vegetation data described below. As a result, the model needed only to choose whether to perform a treatment on a stand in a given period; the model did not have to select which treatment to perform.
+
+\subsubsection{Acquisition and projection of data}
+The data required to solve the model include, for each climate scenario, each time period and each stand, a measure of fire hazard, determination of suitability for NSO habitat, and the amount of sediment deposit as a result of performing various thinning treatments.
+
+As a measure for fire hazard, I chose the average fuel model of a stand according to the Anderson fuel model rating system \cite{anderson1982aids}. This fuel model rating is an integer 1-13, that describes the fuel characteristics of an area, with larger fuel models corresponding to larger fuel loads, making it a suitable proxy for fire hazard. To determine the initial fuel models of each stand, I obtained the GNN structure map for map year 2012 (\url{http://lemma.forestry.oregonstate.edu/data/structure-maps}) from Oregon State University's Landscape Ecology, Modeling, Mapping \& Analysis (LEMMA) group. The LEMMA group provides this data in a format compatible with the USFS's Forest Vegetation Simulator (FVS). I used FVS's database extension to import this data into FVS and then used FVS's Fire and Fuels Extension\cite{reinhardt2003fire} (FFE) to compute the average fuel model for each stand. I then used Climate-FVS to project the stands' vegetation forward 80 years until the end of the planning horizon under each of the climate scenarios.
+
+Through previous conversations with the USFS, it was determined that any area meeting the following characteristics would be considered ideal NSO habitat:
+\begin{enumerate}
+\item elevation less than 1830 m
+\item the presence of trees with DBH no less than 76 cm
+\item canopy closure of at least 60\%
+\item greater than 200 ha in size
+\end{enumerate}
+I attained a digital elevation model from the US Department of Agriculture's GeoSpatial Data Gateway to compute average stand elevation and check for the first criterion. I checked the second and third criteria using the vegetation data produced by FVS. If the first three criteria are met but the area is not 200 ha in size, it is still classified as NSO habitat but is penalized by a factor of $e = 0.5$. Since stands were generally less than 200 ha in size, the last criterion required the enumeration of all clusters of stands whose combined contiguous area exceeded 200 ha. The model checks whether all stands in such a cluster meet the first three criteria to determine whether the penalization is required.
+
+I retrieved data on sediment delivery using the Watershed Erosion Prediction Project (WEPP) online GIS tool \cite{frankenberger2011development}. This tool takes as input soil textures, treatment types, years of simulation, and custom climate data. I obtained soil texture data for the area from the USDA's Soil Survey Geographic (SSURGO) database. Treatment types are those specified in \S \ref{chap:appBTreatmentSpec}, and the years of simulation correspond to the planning horizon of the model. The custom climate data was obtained through the Climate-FVS climate data server \cite{climateFVSReadyData}. Using the climate data provided by Climate-FVS ensured consistency of climate parameters in the predictions for both sediment and vegetation data.
 
 \subsubsection{The Multi-objective MIP}
-\label{sec:multiObjModel}
 The first objective is to minimize the average fuel model at the end of the 80-year planning horizon:
 \begin{align}
-Minimize \quad & \sum_{i\in I} \sum_{r\in R} F_{i,r} x_{i,r} \label{eqn:objFire}
+Minimize \quad & F = \sum_{i\in I} \sum_{r\in R} F_{i,r} x_{i,r} \label{eqn:objFire}
 \end{align}
-In equation \eqref{eqn:objFire}, I sum over all stands $i \in I$ and all treatment prescriptions $r \in R$ to obtain a cumulative fire hazard metric. The coefficients $F_{i,r}$ are the area-weighted fuel models of each stand $i \in I$ at the end of the planning horizon if stand $i$ is assigned to treatment prescription $r \in R$. The possible treatment prescriptions $r \in R$ are treat in the first period ($r=1$), treat in the second period ($r=2$), treat in both periods ($r=3$), or do not treat ($r=0$). I determined the type of treatment to be performed for a given stand in a given time period \textit{a priori} depending on silvicultural characteristics, so the only decisions in the model are whether to treat a stand $i$ according to treatment schedule $r$.
-
-To determine the coefficients $F_{i,r}$, the fuel model for each stand under each treatment prescription, I began with the GNN structure map for map year 2012 (\url{http://lemma.forestry.oregonstate.edu/data/structure-maps}) from Oregon State University's Landscape Ecology, Modeling, Mapping \& Analysis (LEMMA) group. I used this data with Climate FVS to project vegetation growth through the end of the 80 year planning horizon, using FVS's Fire and Fuels Extension (FFE) to obtain the average fuel model for each stand. I used a stand's area-weighted fuel model as a proxy for fire hazard, because the higher the fuel model, generally, the larger the fuel loading.
+In equation \eqref{eqn:objFire}, I sum over all stands $i \in I$ and all treatment prescriptions $r \in R$ to obtain a cumulative fire hazard metric $F$, which measures the total fire hazard at the area at the end of the planning horizon. The coefficients $F_{i,r}$ are the area-weighted fuel models of each stand $i \in I$ at the end of the planning horizon if stand $i$ is assigned to treatment prescription $r \in R$. The possible treatment prescriptions $r \in R$ are treat in the first period ($r=1$), treat in the second period ($r=2$), treat in both periods ($r=3$), or do not treat ($r=0$).
 
 The second objective is to minimize the peak short-term sediment delivery that results from performing treatments in either period one ($S_1$) or period two ($S_2$):
 \begin{align}
-Minimize \quad \max \{S_1,S_2\} \label{eqn:objSediment}
+Minimize \quad S = \max \{S_1,S_2\} \label{eqn:objSediment}
 \end{align}
 
 The last objective is to maximize the area of suitable northern spotted owl habitat at the end of the planning horizon.
 \begin{align}
-Maximize \quad &\sum_{i\in I_\omega} \left(a_i p_i + e a_i \left( \sum_{j \in R_i} x_{i,j}-p_i \right) \right) \label{eqn:objOwl}
+Maximize \quad & O = \sum_{i\in I_\omega} \left(a_i p_i + e a_i \left( \sum_{j \in R_i} x_{i,j}-p_i \right) \right) \label{eqn:objOwl}
 \end{align}
-The set of stands $i \in I_\omega$ are those that qualify as NSO habitat under at least one treatment prescription $j \in R_i$. If a stand $i$ does not qualify as NSO habitat under any treatment prescriptions (if the set $R_i = \emptyset$), then $i \notin I_\omega$. If the model assigns a stand $i \in I_\omega$ a treatment prescription $j \in R_i$, then stand $i$ qualifies as NSO habitat at the end of the planning horizon and it contributes to the objective function through a combination of its decision variable $x_{i,j}$ and its cluster inclusion trigger variable $p_i$. If the stand is part of a cluster of stands over 200 ha that all qualify as NSO habitat, then the variable $p_i = 1$, and it contributes an amount equal to the stand's area $a_i$. If stand $i$ qualifies as NSO habitat, but it is not part of a 200 ha cluster of suitable habitat, then it contributes an amount equal to its area $a_i$ discounted by a factor $e$. I define $e = 0.5$ in this model because of the sensitivity and large area requirements of the northern spotted owl \cite{us2011revised}.
-
-A stand's qualifying for northern spotted owl habitat is dependent on three conditions: the presence of trees with DBH no less than 76 cm, average stand elevation less than 1830 m, and canopy cover of at least 60\%. I used the same vegetation data to determine stands' NSO habitat suitability as that used to determine the fuel model coefficients $F_{i,r}$.
+The set of stands in the sum $i \in I_\omega$ are those that meet the first three criteria for NSO habitat under at least one treatment prescription $j \in R_i$, where $R_i$ is the set of treatment prescriptions for stand $i$ such that it meets the first three NSO habitat criteria at the end of the planning horizon. If a stand $i$ does not meet these criteria under any treatment prescriptions (if the set $R_i = \{\emptyset\}$), then $i \notin I_\omega$. If the model assigns a stand $i \in I_\omega$ a treatment prescription $j \in R_i$, then stand $i$ meets the first three NSO habitat criteria at the end of the planning horizon, and the variable $x_{i,j}=1$. If, in addition, the stand $i$ is part of a cluster of stands all meeting the first three NSO habitat criteria and whose combined contiguous area is greater than 200 ha, then the variable $p_i = 1$. Notice that when $p_i = 0$, the stand's contribution is discounted by $e = 0.5$, and when $p_i = 1$ it is not.
 
 The objectives are subject to the following constraints. First, I define accounting variables for the sediment delivery that results from the performance of the prescribed management actions.
 \begin{align}
-\sum_{i\in I} \sum_{r\in 1,3} s_{i,r} x_{i,r} = S_1 \label{eqn:constraintSediment1}\\
-\sum_{i\in I} \sum_{r\in 2,3} s_{i,r} x_{i,r} = S_2 \label{eqn:constraintSediment2}
+\sum_{i\in I} \sum_{r\in 1,3} s_{i,1} x_{i,r} = S_1 \label{eqn:constraintSediment1}\\
+\sum_{i\in I} \sum_{r\in 2,3} s_{i,2} x_{i,r} = S_2 \label{eqn:constraintSediment2}
 \end{align}
-The coefficients $s_{i,r}$ are the amount of sediment (in tonnes) that would result from treating stand $i$ according to prescription schedule $r$. To determine the sediment coefficients, I employed the online GIS-based Watershed Erosion Prediction Project (WEPP) tool \cite{frankenberger2011development}. To account for climate change, I used the climate data generated by Climate FVS to create custom climate files for the WEPP simulations.
+The coefficients $s_{i,t}$ are the amount of sediment (in tonnes) that would result from treating stand $i$ in time period $t$.
 
 In order to control the trigger variables $p_i$ indicating a stand's inclusion in a 200 ha cluster of NSO habitat, I used the following two constraints:
 \begin{align}
 \sum_{i \in D_c} \sum_{j \in R_i} x_{i,j} - |c| q_c &\ge 0 \qquad \forall c \in C \label{eqn:constraintClusterTriggers}\\
 \sum_{c \in C_i} q_c - p_i &\ge 0 \qquad \forall i \in I_\omega \label{eqn:constraintPVarTriggers}
 \end{align}
-$C$ is the set of all clusters whose combined area is greater than 200 ha. Equation \eqref{eqn:constraintClusterTriggers} specifies that all stands $i \in D_c$ within a cluster $c \in C$ must be assigned a management prescription such that they meet all NSO habitat criteria in order for the cluster trigger variable $q_c$ to take value 1.
+$c \in C$ are the clusters of stands whose combined area is greater than 200 ha. A cluster $c$ contains the set of stands $i \in D_c$. Equation \eqref{eqn:constraintClusterTriggers} specifies that all stands $i \in D_c$ within a cluster $c \in C$ must be assigned a management prescription such that they meet all NSO habitat criteria in order for the cluster trigger variable $q_c$ to take value 1.
 
-Equation \eqref{eqn:constraintPVarTriggers} specifies that if no cluster $c \in C_i$ - the set of clusters that contain site $i$ - meets NSO qualifications, then the trigger variable $p_i$ must equal 0. If some cluster $c \in C_i$ does meet NSO qualifications, then the objective function \eqref{eqn:objOwl} will draw up the value of variable $p_i$ to 1.
+Equation \eqref{eqn:constraintPVarTriggers} specifies that if no cluster $c \in C_i$ - the set of clusters that contain site $i$ - meets NSO qualifications, then the trigger variable $p_i$ must equal 0. If some cluster $c \in C_i$ does meet NSO qualifications, then the objective function \eqref{eqn:objOwl} will draw up the value of the variable $p_i$ to 1.
 
-I also enforce the restriction that each stand may be assigned to at most one treatment prescription.
+I also impose the restriction that each stand may be assigned to at most one treatment prescription.
 \begin{align}
 \sum_{r \in R} x_{i,r} = 1  \qquad \forall i \in I \label{eqn:constraintOnePrescrip}
 \end{align}
@@ -58,22 +84,22 @@ Next, I ensured that the area treated in each time period is less than a prespec
 H_1 &\le A \label{eqn:constraintAreaRestr1}\\
 H_2 &\le A \label{eqn:constraintAreaRestr2}
 \end{align}
-where the first two equations define the accounting variables for the areas treated in time periods 1 and 2, $H_1$ and $H_2$.
+where the first two equations define the accounting variables for the areas treated in time periods 1 and 2, $H_1$ and $H_2$, and the second two equations impose the upper bound.
 
-Finally, I specified fluctuation constraints to bound the differences in area treated in between time periods:
+Finally, I specified fluctuation constraints to bound the differences in the area treated in between time periods:
 \begin{align}
 \ell H_1 - H_2 &\le 0 \label{eqn:constraintAreaFlucL}\\
 -u H_1 + H_2 &\le 0 \label{eqn:constraintAreaFlucU}
 \end{align}
 I define a maximum of 20\% fluctuation between time periods. That is, $\ell = 0.8$ and $u = 1.2$.
 
-Together with the binary specifications on our variables in equation \eqref{eqn:constraintNonNeg}, the complete model is
+Together with the binary specifications on our variables (equation \eqref{eqn:constraintNonNeg}), the complete model is
 \begin{align*}
 Minimize \quad & \\
-&\sum_{i\in I,r\in R} F_{i,r} x_{i,r}\\
-&\max \{S_1,S_2\}\\
+F=&\sum_{i\in I}\sum_{r\in R} F_{i,r} x_{i,r}\\
+S=&\max \{S_1,S_2\}\\
 Maximize \quad & \\
-&\sum_{i\in I_\omega} \left(a_i p_i + e a_i \left( \sum_{j \in R_i} x_{i,j}-p_i \right) \right)
+O=&\sum_{i\in I_\omega} \left(a_i p_i + e a_i \left( \sum_{j \in R_i} x_{i,j}-p_i \right) \right)
 \end{align*}
 
 Subject to:
@@ -92,88 +118,119 @@ H_2 &\le A \notag\\
 x_{i,r}, p_i, q_c \in \{0,1\} \quad &\forall i \in I, r \in R, c \in C \label{eqn:constraintNonNeg}
 \end{align}
 
+\subsection{Model solution}
+Solving a bounded and non-degenerate multi-objective optimization problem with $N$ objectives produces a set of objective vectors (also called ``solutions'') $\mathbf{z} \in Z$ where $\mathbf{z}=\braket{z^1,\ldots,z^N}$. The set of solutions $Z$ is referred to as the Pareto-optimal frontier or efficient frontier or, simply, frontier. The solutions comprising an efficient frontier have the special relationship such that no component of a solution $\mathbf{z}^i$ can be improved upon without one of the other components $\mathbf{z}^j$ ($j \neq i$) degrading. For example, this relationship in the current problem means that further reducing fire hazard would require either additional sediment deposits, the sacrifice of NSO habitat, or both.
+
+Thus the efficient frontier provides information on the tradeoff structure that exists between ecosystem services. Parameterizing and solving the model for each of the climate scenarios generates three frontiers: $Z_{\text{None}}$, $Z_{4.5}$, and $Z_{8.5}$. As climate is the driver of the differences in these frontiers, the comparison of frontiers provides insight into how climate impacts the tradeoff structures between the ecosystem services.
+
+To solve the models, I wrote my own implementation of T\'{o}th's Alpha-Delta algorithm \cite{TothThesis} that is generalized for any multi-objective problem with $N \ge 2$ objectives. The Alpha-Delta algorithm finds the optimal set $Z$ by iteratively slicing the $N$-dimensional objective space with a tilted $N-1$ dimensional plane. To derive the frontiers, I used an alpha parameter of $\alpha = .01$ and delta parameters of $\delta_{O} = 1$ ha and $\delta_S = 0.5$ tonnes for the NSO habitat and sediment delivery objectives, respectively.
 
 \subsection{Comparing Tradeoffs under each Climate Change Scenario}
-Solving the model described in Section \ref{subsec:whyUsingMultiObjModel} generates a set of non-dominated points comprising an efficient frontier. As we have a model for each climate scenario, we have an efficient frontier for each scenario. Each point on the frontier achieves a certain amount in each objective with no improvement possible in one objective without sacrificing achievement in one of the others. The structure of a frontier therefore provides information about the tradeoffs and the conflicting relationships between the ecosystem services. Comparing the frontiers then allows us to compare the conflicting relationships among the ecosystem services between climate scenarios.
 
-The best means of comparing efficient frontiers is "neither trivial nor definite" (PyGMO hypervolume indicator page). We draw from ideas from the field of heuristics for solving multiobj opt problems. In those cases, the comparison of frontiers allows the developers of the heuristics to compare their search methods against others (by comparing their resulting frontiers against a controlled non-dominated set). In our case, comparing frontiers has physical meaning regarding management actions and how climate will impact relationships between forest ecosystem services.
+No standardized procedure exists for comparing frontiers or measuring the conflict between objectives within a frontier. To address the former, I draw on methods used in the field of evolutionary multi-objective optimization (EMO). To address the latter, I apply methods used in objective pruning in many-objective optimization.
 
-\subsubsection{Slopes between points or something}
-Like summing the squares of the slopes in between two objectives for a given solution. Think of parallel coordinates plot. How to capture the fact that some objectives have a bunch of straight lines going between them (or lines going every which way) and others have a very clear crisscrossing? I think I have a note to self somewhere on "little-master" PC about this. 
+\subsubsection{Comparing frontiers}
+Researchers in the field of EMO develop algorithms to generate a set of non-dominated solutions that best represent the true Pareto-optimal frontier \cite{deb2001multi}. To test their algorithms, they compare their resulting frontiers to a known Pareto front for benchmark multi-objective optimization problems \cite{knowles2002metrics}. There is no assurance of optimality of the solutions derived using these algorithms, so they require a means of comparing the resulting frontiers to determine if one algorithm produces a ``better'' non-dominated frontier than another. Zitzler et al. provide a review of comparison methods in \cite{zitzler2003performance}. These methods aim to quantify certain traits about a frontier that can be used to measure their success in approximation of the true frontier.
 
-\subsubsection{Computing a Frontier's Solution Spacing}
-The spacing of solutions along the frontier provide a measure of flexibility for the decision maker. The more solutions 
+My motivation in comparing frontiers is different from EMO in that, rather than comparing non-dominated sets produced by identical models, I aim to compare frontiers generated by models with the same structure but different parameterizations. As a result, not all comparison methods are applicable, such as the indicator for the number of Pareto points contained in the frontier (all points on my frontiers are Pareto-optimal). However, other comparison methods still have value in our analysis. I chose a subset of these methods: the binary epsilon and binary hypervolume indicators, and the unary distance, unary hypervolume, and unary spacing indicators.
 
-\subsubsection{Computing the average distance to the ideal solution}
-Computing the average distance from a point on the frontier to the ideal solution is another means of comparing frontiers. The shorter the average distance from the frontier to the ideal solution, in general, the less conflict between the objectives. Conversely, a large distance from the frontier to the ideal solution implies strong conflict between the objectives.
+Note that use of some comparison methods for the frontiers requires the normalization of the objective space. This is because the climate scenarios may significantly alter the bounds on the achievable values of the ecosystem services, resulting in frontiers whose objective spaces will not necessarily overlap and with incomparable distributions of solutions within. The chosen normalization of each frontier is the unit hypercube, with each objective bounded between 0 and 1 and the frontier bounded by $[0,1]^N$. Without loss of generality, I convert all objectives to maximization, define the nadir solution to be at the origin and the ideal solution to be at the point $\vec{\mathbf{1}}$. The nadir solution $\mathbf{z}_{\text{nad}}$ of a frontier of points $z \in Z$ is defined as the objective vector with components
+\begin{align}
+\mathbf{z}_i^{\text{nad}} = \inf_{z} \{ z_i \} \quad \forall 1 \le i \le N
+\end{align}
+and the ideal solution is the objective vector with components
+\begin{align}
+\mathbf{z}_i^{\text{ideal}} = \sup_{z} \{ z_i \} \quad \forall 1 \le i \le N
+\end{align}
 
-\subsubsection{Computing a Frontier's Hypervolume Indicator}
-To compare the tradeoff structure of each climate change scenario's corresponding Pareto frontier, I calculated the relative volume of the objective space bound by the frontier.  Computing such a volume for a two-dimensional frontier is trivial. Consider figure \ref{fig:2DFrontierVol}.
-\begin{figure}[h]
-  \centering
-    \includegraphics[width=0.5\textwidth]{"../images/2DFrontierVolumeExample"}
-  \caption{A two-dimensional frontier. The volume of this frontier may be computed by summing the areas of the rectangles shown.}
-  \label{fig:2DFrontierVol}
-\end{figure}
-The reader can imagine a process to compute the volume whereby the frontier is divided into rectangles, as shown, and then summing the areas of these rectangles to get the total frontier volume.
-
-Performing a similar computation in three and higher dimensions is less trivial and is an area of active research !CITESOMEONE. The higher-order volume computation is also often accomplished using Monte Carlo simulation !CITE SOMEONE.
-
-I developed the following recursive algorithm to exactly compute the volume of an $n$-dimensional frontier for $n>2$.
-
-Given a set of Pareto optimal solutions $\mathcal{P}$ to a multi-objective mathematical programming model with a set of objectives $O$ of cardinality $N := |O|$, this algorithm computes the volume $V$ of the objective space bounded by the Pareto frontier defined by the solutions $x \in \mathcal{P}$. The objectives are assumed to be normalized so that the objective space is the $N$-dimensional unit hypercube with the origin and the point $\vec{\mathbf{1}}$ defining the nadir objective vector and the ideal objective vector, respectively. That is, all objectives are assumed to be maximized.
-
-We project the objective space into $N-1$ dimensions by eliminating the dimension associated with an (arbitrarily-chosen) objective $p \in O$. We define the set of objectives $\overbar{O} := O \backslash \{p\}$. It is assumed that $x \in \mathcal{P}$ are sorted in descending order according to $p$. The algorithm proceeds by sequentially adding solutions to the ($N-1$)-dimensional space, and calculating the contribution to the frontier volume as a product of the volume contribution in $N-1$ dimensions and its achievement in objective $p$.
-
-Let
-$\overbar{V_x}$ be the ($N-1$)-dimensional volume contribution of solution $x$ and
-$x_p$ be the achievement of solution $x$ in objective $p$. Further, let
-$F$ be the set of non-dominated solutions in $N-1$ dimensions.
-We proceed to compute the $N$-dimensional volume of the frontier $V$ as follows.
-
-\begin{figure}[!ht]
-\caption{Algorithm to compute the volume of a Pareto frontier}
-\begin{algorithmic}[1]
-
-\State $V \gets 0$
-\State $\overbar{V} \gets 0$
-\State $F \gets \emptyset$
-
-% Iterate over each solution
-\ForAll{$x \in \mathcal{P}$}
-
-	\State $\overbar{V}_x \gets \prod_{o \in \overbar{O}} x_{o} - \overbar{V}$
-		
-	\ForAll{$f \in F$}
-		\If{$f_o < x_o \forall o \in \overbar{O}$}
-			\State $F \gets F \backslash \{f\}$
-		\EndIf
-	\EndFor
-	
-	% iterate over subdimensions to "add back the sides"	
-	\ForAll{$o \in \overbar{O}$}
-	
-		\State $F_{x,o} := \set{f \in F : f_o > x_o}$
-		
-		\State Sort $f \in F_{x,o}$ in ascending order by their $o$th component, $f_o$
-		
-		\State $v_i \gets x_o$
-		\ForAll{$f \in F_{x,o}$}
-			\State $v_t \gets f_o$
-			\State $\delta_o :	= v_t - v_i$
-			\State $\overbar{V}_x \gets \overbar{V}_x + \delta_o \prod_{\sigma \in \overbar{O} \backslash \{o\}} f_\sigma$
-			\State $v_i \gets v_t$
-		\EndFor
-		
-	\EndFor
-	
-	\State $F \gets F \cup \{x\}$
-	\State $\overbar{V} \gets \overbar{V} + \overbar{V}_x$
-	\State $V \gets V + x_p \overbar{V}_x$
-\EndFor
-
-
-\end{algorithmic}
+\paragraph{Binary epsilon indicator $I_\epsilon$} Given two frontiers, $Z_1$ and $Z_2$, the binary epsilon indicator is defined as \cite{zitzler2003performance}
+\begin{align}
+I_\epsilon (Z_1,Z_2) = \inf_{\epsilon \in \mathbb{R}} \set{\forall \mathbf{z}_2 \in Z_2 \exists \mathbf{z}_1 \in Z_1 : \mathbf{z}_1 \succeq_\epsilon \mathbf{z}_2}
+\end{align}
+where $\succeq$ is the $\epsilon$-dominance relationship:
+\begin{align}
+\mathbf{z}_1 \succeq_\epsilon \mathbf{z}_2 \iff \forall 1 \le i \le N : \epsilon \mathbf{z}_1^i \ge \mathbf{z}_2^i
+\end{align}
+That is, $\epsilon$ is the minimum factor by which all points in one frontier $Z_1$ must be multiplied such that all solutions in $Z_1$ at least weakly dominate all solutions in the other frontier $Z_2$.
+\begin{figure}
+\centering
+\includegraphics[width=.5\textwidth]{../images/BinaryEpsilonFigureLiftedFromZitzler}
+\label{fig:binaryEpsilon}
+\caption{Any frontier $Z$ with solutions in the light gray area (closest to origin) would have $I_\epsilon (Z,A_1) > 1$; $I_\epsilon (A_1,A_1) = I_\epsilon (A_2,A_1) = 1$; any frontier $Z$ existing only in the darker gray areas such as $A_3$ would have $I_\epsilon (Z,A_1) < 1$}
 \end{figure}
 
-The result of the algorithm is a single metric for each frontier, known as the hypervolume indicator !CITESOMEONE. This metric is used in the field of Evolutionary Algorithms for MultiObjOpt. 
+\paragraph{Unary hypervolume indicator $I_{H1}$ and binary hypervolume indicator $I_{H2}$}
+For a frontier $Z$ comprised of solutions $\mathbf{z}=\braket{z^1,\ldots,z^N}$ and with the objective space defined such that the origin is the nadir point, then the volume of a single solution $\mathbf{z}_i$ is the volume of the hyperrectangle $r_i$ whose diagonal corners are the origin and the solution $\mathbf{z}_i$. The hypervolume of the frontier is the volume of the union of the hyperrectangles corresponding to the solutions in the frontier:
+\begin{align}
+I_{H1} (Z) = \text{vol} \left( \bigcup_{i = 1}^{|Z|} r_i \right)
+\end{align}
+Then define the binary hypervolume indicator of two frontiers $Z_1$ and $Z_2$ as \cite{zitzler1999evolutionary}
+\begin{align}
+I_{H2} (Z_1,Z_2) = I_{H1} (Z_1 + Z_2) - I_{H1} (Z_2)
+\end{align}
+where $I_{H1} (Z_1 + Z_2)$ is the unary hypervolume indicator of the merged frontier consisting of all solutions from frontiers $Z_1$ and $Z_2$. The binary hypervolume indicator provides the volume of frontier $Z_1$ that is not contained within frontier $Z_2$. Larger values of $I_{H1}$ correspond to frontiers occupying larger fractions of the objective space, indicating less conflict between the objectives. For frontiers $Z_1$ and $Z_2$ in comparable scales (that is, in normalized objective spaces), if $I_{H2}(Z_1, Z_2) > I_{H2}(Z_2, Z_1)$ this indicates less conflict between objectives in $Z_1$ than in $Z_2$. $I_{H2}$ can also be used to determine if one frontier is ``better'' than another (see Tables \ref{tab:dominanceRelations} and \ref{tab:powerOfIndicatorTests}).
+
+
+I developed a custom algorithm to solve for the unary hypervolume idicator. The details of the algorithm may be found in \S \ref{chap:appAHypervolumeAlgo}.
+
+\begin{table}[]
+\centering
+\label{tab:dominanceRelations}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+Relation           & \multicolumn{2}{c|}{Solutions}                                                                                                                                                                          & \multicolumn{2}{l|}{Frontiers}                                                                                                     \\ \hline
+Strictly dominates & $\mathbf{z}^1 \succ \succ \mathbf{z}^2$ & $\mathbf{z}_i^1$ is better than $\mathbf{z}_i^2 \quad \forall 1 \le i \le N$                                                                                  & $Z_1 \succ \succ Z_2$ & $\exists \mathbf{z}^1 \in Z_1 \succ succ \mathbf{z}^2 \quad \forall \mathbf{z}^2 \in Z_2$                  \\ \hline
+Dominates          & $\mathbf{z}^1 \succ \mathbf{z}^2$       & $\exists 1 \le i \le N : \mathbf{z}_i^1$ is better than $\mathbf{z}_i^2$, and $\mathbf{z}_i^1$ is not worse than $\mathbf{z}_i^2 \quad \forall 1 \le i \le N$ & $Z_1 \succ Z_2$       & every $\mathbf{z}^2 \in Z_2$ is dominated by at least one $\mathbf{z}^1 \in Z_1$                           \\ \hline
+Better             &                                         &                                                                                                                                                               & $Z_1 \rhd Z_2$        & every $\mathbf{z}^2 \in Z_2$ is weakly dominated by at least one $\mathbf{z}^1 \in Z_1$ and $Z_1 \neq Z_2$ \\ \hline
+Weakly dominates   & $\mathbf{z}^1 \succeq \mathbf{z}^2$     & $\mathbf{z}^1$ is at least as good as $\mathbf{z}^2$ in all objectives                                                                                        & $Z_1 \succeq Z_2$     & All solutions in $\mathbf{z}^2 \in Z_2$ are weakly dominated by a solution $\mathbf{z}^1 \in Z_1$          \\ \hline
+Incomparable       & $\mathbf{z}^1 || \mathbf{z}^2$          & Neither $\mathbf{z}^1$ nor $\mathbf{z}^2$ weakly dominates the other                                                                                          & $Z_1 || Z_2$          & Neither $Z_1$ nor $Z_2$ weakly dominates the other                                                         \\ \hline
+\end{tabular}%
+}
+\caption{Definitions of dominance relations between solutions and frontiers \cite{zitzler2003performance}}
+\end{table}
+
+\begin{table}[]
+\centering
+\label{tab:powerOfIndicatorTests}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|l|l|l|}
+\hline
+\multirow{2}{*}{} & \multicolumn{1}{c|}{\multirow{2}{*}{Name of indicator}} & \multicolumn{6}{c|}{Relation}                                                                                                                                                                                                                                                              \\ \cline{3-8} 
+                  & \multicolumn{1}{c|}{}                                   & \multicolumn{1}{c|}{$\succ\succ$} & \multicolumn{1}{c|}{$\succ$} & \multicolumn{1}{c|}{$\rhd$}                             & \multicolumn{1}{c|}{$\succeq$}                & \multicolumn{1}{c|}{$=$}                              & \multicolumn{1}{c|}{$||$}                             \\ \hline
+                  & $I_\epsilon$                                            & $I_\epsilon (Z_1,Z_2) < 1$        & -                            & $I_\epsilon (Z_1,Z_2)\le 1$ $I_\epsilon (Z_2,Z_1) > 1$ & $I_\epsilon (Z_1,Z_2)\le 1$                   & $I_\epsilon (Z_1,Z_2)= 1$ $I_\epsilon (Z_2,Z_1) = 1$ & $I_\epsilon (Z_1,Z_2)> 1$ $I_\epsilon (Z_2,Z_1) > 1$ \\ \hline
+                  & $I_{H2}$                                                & -                                 & -                            & $I_{H2} (Z_1,Z_2)>0$ $I_{H2} (Z_2,Z_1) =0$             & $I_{H2} (Z_1,Z_2)\ge0$ $I_{H2} (Z_2,Z_1) =0$ & $I_{H2} (Z_1,Z_2)=0$ $I_{H2} (Z_2,Z_1) =0$           & $I_{H2} (Z_1,Z_2)>0$ $I_{H2} (Z_2,Z_1) >0$           \\ \hline
+                  & $I_d$                                                   & -                                 & -                            & -                                                       & -                                             & -                                                     & -                                                     \\ \hline
+                  & $I_s$                                                   & -                                 & -                            & -                                                       & -                                             & -                                                     & -                                                     \\ \hline
+\end{tabular}%
+}
+\caption{Tests using indicators to determine dominance relationships between frontiers \cite{zitzler2003performance}. While general tests of dominance relationships may not be avaiable for some metrics (any cell with `-'), conclusions may still be drawn. For instance, $I_d(Z_1) < I_d(Z_2) \Rightarrow Z_2 \ntriangleright Z_1$.}
+\end{table}
+
+\paragraph{Unary distance indicator $I_d$} The unary distance indicator used for the analysis is analogous to the unary distance indicator described in \cite{czyzzak1998pareto}, but instead of computing the distance to a reference Pareto frontier I measure the average distance from the frontier to the ideal solution:
+\begin{align}
+I_d = \frac{\sum_{\mathbf{z} \in Z} ||\mathbf{z}^{\text{ideal}} - \mathbf{z} ||}{N}
+\end{align}
+Smaller values of $I_d$ correspond to frontiers that are closer to the ideal solution, which implies less conflict between the objectives.
+
+\paragraph{Unary Spacing Indicator $I_s$} The unary spacing indicator, or Schott's spacing metric\cite{schott1995fault} computes the standard deviation of the distance between points in the frontier, defined as
+\begin{align}
+I_s = \sqrt{\frac{1}{N-1} \sum_{\mathbf{z} \in Z} (d_z - \overbar{d})^2}
+\end{align}
+where
+\begin{align}
+d_z = \min_{\mathbf{y} \in Z, \mathbf{y} \neq \mathbf{z}} ||\mathbf{z} - \mathbf{y}||
+\end{align}
+and $\overbar{d}$ is the average of all $d_z$. In EMO, the spacing indicator provides a measure of an algorithm's ability to search the frontier space uniformly. In the current analysis, the spacing metric provides a measure of the flexibility afforded to the decision maker under each climate scenario. Larger spacing metrics imply larger sacrifices between decisions and less flexibility.
+
+\subsubsection{Quantifying conflict between objectives within a frontier}
+
+The above methods provide frontier-level metrics of conflict and tradeoffs. To determine the degree of conflict between two objectives within a single frontier, we employ an approach used in many-objective optimization. Given the increased difficulty in solving many-objective optimization problems \cite{khare2003performance}, researchers in this field seek to reduce the number of objectives considered in the model. To determine which objectives most strongly influence the shape of the frontier, they compute the correlation between each pair of objectives \cite{deb2005finding}. The objective pairs with the most negative correlation are most in conflict. To rank the relative conflict between objectives in each climate scenario, I computed their Pearson correlation coefficients:
+\begin{align}
+\rho_{X,Y} = \frac{\text{cov}(X,Y)}{\sigma(X)\sigma(Y)}
+\end{align}
+where, for some objectives $x$ and $y$, $X$ and $Y$ are
+\begin{align}
+X = \{ \mathbf{z}_x^1, \mathbf{z}_x^2, \ldots, \mathbf{z}_x^{|Z|} \} \\
+Y = \{ \mathbf{z}_y^1, \mathbf{z}_y^2, \ldots, \mathbf{z}_y^{|Z|} \} \\
+\end{align}
