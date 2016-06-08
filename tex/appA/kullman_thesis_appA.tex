@@ -2,28 +2,15 @@
  
 \chapter{Computing a Frontier's Hypervolume Indicator}
 \label{chap:appAHypervolumeAlgo}
-To compare the tradeoff structure of each climate change scenario's corresponding Pareto frontier, I calculated the relative volume of the objective space bound by the frontier.  Computing such a volume for a two-dimensional frontier is trivial. Consider figure \ref{fig:2DFrontierVol}.
-\begin{figure}[h]
-  \centering
-    \includegraphics[width=0.5\textwidth]{"../images/2DFrontierVolumeExample"}
-  \caption{A two-dimensional frontier. The volume of this frontier may be computed by summing the areas of the rectangles shown.}
-  \label{fig:2DFrontierVol}
-\end{figure}
-The reader can imagine a process to compute the volume whereby the frontier is divided into rectangles, as shown, and then summing the areas of these rectangles to get the total frontier volume.
 
-Performing a similar computation in three and higher dimensions is less trivial and is an area of active research !CITESOMEONE. The higher-order volume computation is also often accomplished using Monte Carlo simulation !CITE SOMEONE.
+Given a set of Pareto optimal solutions $\mathcal{P}$ to a multi-objective mathematical programming model with a set of objectives $O$ of cardinality $N := |O|$, this algorithm computes the volume $V$ of the objective space bounded by the Pareto frontier defined by the solutions $x \in \mathcal{P}$. The objectives are assumed to be normalized so that the objective space is the $N$-dimensional unit hypercube with the origin and the point $\vec{\mathbf{1}}$ defining the nadir objective vector and the ideal objective vector, respectively. That is, all objectives are assumed to be maximized with bounds $[0,1]$.
 
-I developed the following recursive algorithm to exactly compute the volume of an $n$-dimensional frontier for $n>2$.
+The algorithm projects the objective space into $N-1$ dimensions by eliminating the dimension associated with an (arbitrarily-chosen) objective $p \in O$. The set of objectives is $\overbar{O} := O \backslash \{p\}$. It is assumed that $x \in \mathcal{P}$ are sorted in descending order according to $p$. The algorithm proceeds by sequentially adding solutions to the ($N-1$)-dimensional space, and calculating the contribution to the frontier volume as a product of the volume contribution in $N-1$ dimensions and its achievement in objective $p$.
 
-Given a set of Pareto optimal solutions $\mathcal{P}$ to a multi-objective mathematical programming model with a set of objectives $O$ of cardinality $N := |O|$, this algorithm computes the volume $V$ of the objective space bounded by the Pareto frontier defined by the solutions $x \in \mathcal{P}$. The objectives are assumed to be normalized so that the objective space is the $N$-dimensional unit hypercube with the origin and the point $\vec{\mathbf{1}}$ defining the nadir objective vector and the ideal objective vector, respectively. That is, all objectives are assumed to be maximized.
-
-We project the objective space into $N-1$ dimensions by eliminating the dimension associated with an (arbitrarily-chosen) objective $p \in O$. We define the set of objectives $\overbar{O} := O \backslash \{p\}$. It is assumed that $x \in \mathcal{P}$ are sorted in descending order according to $p$. The algorithm proceeds by sequentially adding solutions to the ($N-1$)-dimensional space, and calculating the contribution to the frontier volume as a product of the volume contribution in $N-1$ dimensions and its achievement in objective $p$.
-
-Let
-$\overbar{V_x}$ be the ($N-1$)-dimensional volume contribution of solution $x$ and
+Let $\overbar{V_x}$ be the ($N-1$)-dimensional volume contribution of solution $x$ and
 $x_p$ be the achievement of solution $x$ in objective $p$. Further, let
 $F$ be the set of non-dominated solutions in $N-1$ dimensions.
-We proceed to compute the $N$-dimensional volume of the frontier $V$ as follows.
+I compute the $N$-dimensional volume of the frontier $V$ as follows.
 
 \begin{figure}[!ht]
 \caption{Algorithm to compute the volume of a Pareto frontier}
