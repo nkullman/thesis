@@ -62,9 +62,9 @@ Given a selection of climate scenarios, I determined the tradeoff relationships 
 
 To allocate the resources, the multi-objective optimization model assigns values to each of a set of decision variables. Here, the decision variables are on which stands and in which period to perform silvicultural treatments. This assignment is captured by the set of decision variables $x_{i,r}$. The model assigns $x_{i,r} = 1$ if stand $i \in I = \{0,1,\ldots,302\}$ (zero-indexed numbering for the 303 management units that comprise the Drink) is to be treated according to schedule $r \in R = \{0,1,2,3\}$, where
 \begin{itemize}
-\item[$r = 0$] is the decision not to treat the stand in either period in the planning horizon,\item[$r = 1$] is the decision to treat the stand in the first period,
-\item[$r = 2$] is the decision to treat the stand in the second period, and
-\item[$r = 3$] is the decision to treat the stand in both periods.
+\item $r = 0$ is the decision not to treat the stand in either period in the planning horizon,\item $r = 1$ is the decision to treat the stand in the first period,
+\item $r = 2$ is the decision to treat the stand in the second period, and
+\item $r = 3$ is the decision to treat the stand in both periods.
 \end{itemize}
 The decision of which type of treatment to perform is not handled by the model; it is determined through the vegetation characteristics as described in \S \ref{chap:appBTreatmentSpec}.
 
@@ -75,7 +75,28 @@ I built a multi-objective model for each of the three climate scenarios. The res
 \subsubsection{Acquisition and projection of data}
 In order to formulate the models, I had to first acquire data. The data required included - for each climate scenario, each time period and each stand - a measure of fire hazard rating, determination of suitability for NSO habitat, and the amount of sediment deposited in the municipal watershed as a result of performing the silvicultural treatments.
 
-As a measure for fire hazard rating, I chose the one employed by Kushch in CITESVETLANA'SMSWHENAVAILABLE. This metric was suitable for the Drink area, because it was developed specifically for the Drink and was deemed appropriate by the area's FIREMANAGER? This metric uses a combination of the following fire characteristics from Anderson's fuel model ratings \cite{anderson1982aids} to assign a fire hazard rating (0-5): flame length, rate of spread, and total fuel load. I extended the rating system to include fuel models in this study that were not present in CITESVETLANA'SMSWHENAVAILABLE.
+For a measure for fire hazard rating, I chose the one employed by Kushch in CITESVETLANA'SMSWHENAVAILABLE. This metric suited this study, because it was developed specifically for the Drink area and was deemed appropriate by the Drink's fire specialist. This metric uses a combination of fire characteristics from Anderson's fuel models \cite{anderson1982aids} to assign a fire hazard rating: flame length, rate of spread, and total fuel load. I extended the rating system to include fuel models in this study that were not present in CITESVETLANA'SMSWHENAVAILABLE. See Table \ref{tab:firehazards}.
+
+\begin{table}[]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{l|c|crrr}
+\multicolumn{1}{c|}{Fuel Model} & \multicolumn{1}{c|}{\textbf{Fire Hazard}} & \multicolumn{1}{c}{Group} & \multicolumn{1}{c}{Flame length (m)} & \multicolumn{1}{c}{Rate of spread (m/hr)} & \multicolumn{1}{c}{Total fuel load (tons/ha)} \\ \hline
+4*                              & \textbf{5}                                       & Shrub                     & 5.79                                 & 1508.76                                   & 32.12                                         \\
+5                               & \textbf{4}                                       & Shrub                     & 1.22                                 & 362.10                                    & 8.65                                          \\
+8                               & \textbf{1}                                       & Timber                    & 0.30                                 & 32.19                                     & 12.36                                         \\
+9*                              & \textbf{2}                                       & Timber                    & 0.79                                 & 150.88                                    & 8.65                                          \\
+10                              & \textbf{2}                                       & Timber                    & 1.46                                 & 158.92                                    & 29.65                                         \\
+11*                             & \textbf{2}                                       & Logging Slash             & 1.07                                 & 120.7                                     & 28.42                                         \\
+12                              & \textbf{4}                                       & Logging Slash             & 2.44                                 & 261.52                                    & 85.50                                         \\
+13                              & \textbf{5}                                       & Logging Slash             & 3.20                                 & 271.58                                    & 143.57                                       
+\end{tabular}%
+}
+\caption[Fire hazard ratings used in multi-objective model]{Fire hazard rating system used here, originally employed by CITESVETLANA'SMSWHENAVAILABLE.\\
+* denotes fuel models in the extended set, not originally present in CITESVETLANA'SMSWHENAVAILABLE.\\
+The fuel model column refers to the Anderson fuel model ratings \cite{anderson1982aids}.}
+\label{tab:firehazards}
+\end{table}
 
 To determine the initial fire hazard ratings of each stand, I used the 2012 GNN structure map (\url{http://lemma.forestry.oregonstate.edu/data/structure-maps}) from Oregon State University's Landscape Ecology, Modeling, Mapping \& Analysis (LEMMA) group. The LEMMA group provides this data in a format compatible with the USFS's Forest Vegetation Simulator (FVS). I mapped the plots from the LEMMA database to the stands in the Drink area in order to produce tree and stand lists. I used these lists with FVS's database extension to import this data into FVS and then used Climate-FVS with the Fire and Fuels Extension\cite{reinhardt2003fire} (FFE) to simulate the stands' vegetation forward 80 years under each climate scenario. The output provides the fire characteristics necessary to compute the fire hazard ratings.
 
@@ -88,129 +109,144 @@ NSO habitat suitability was determined according to the following characteristic
 \end{enumerate}
 I attained a digital elevation model from the US Department of Agriculture's GeoSpatial Data Gateway to compute average stand elevation and check for the first criterion. I checked the second and third criteria using the vegetation data produced by FVS. If the first three criteria are met but the area is less than 200 ha in size, it is still classified as NSO habitat but is penalized by a factor of $e = 0.5$. Since stands were generally less than 200 ha in size, the last criterion required the enumeration of all clusters of stands whose combined contiguous area exceeded 200 ha. The model checks whether all stands in such a cluster meet the first three criteria to determine whether the penalization is required.
 
-I obtained the required data on sediment delivery using the Watershed Erosion Prediction Project (WEPP) online GIS tool \cite{frankenberger2011development}. This tool takes as input soil textures, treatment types, years of simulation, and custom climate data. I obtained soil texture data for the area from the USDA's Soil Survey Geographic (SSURGO) database. Treatment types are those specified in \S \ref{chap:appBTreatmentSpec}, and the years of simulation correspond to the treatment years in the model's planning horizon.
+I obtained the required data on sediment delivery using the Watershed Erosion Prediction Project (WEPP) online GIS tool \cite{frankenberger2011development}. This tool takes as input soil textures, treatment types, years of simulation, and custom climate data. I obtained soil texture data for the Drink area from the USDA's Soil Survey Geographic (SSURGO) database. Treatment types are those specified in \S \ref{chap:appBTreatmentSpec}, and the years of simulation correspond to the treatment years in the model's planning horizon.
 
-The climate data used in Climate-FVS and the WEPP online tool was obtained through the Climate-FVS climate data server \cite{climateFVSReadyData}.
+The climate data used in the Climate-FVS and WEPP simulations was obtained through the Climate-FVS climate data server \cite{climateFVSReadyData}.
 
 \subsubsection{The Multi-objective Optimization Model}
-The first objective in the model is to minimize the average fuel model at the end of the 80-year planning horizon:
+The first objective in the model is to minimize the cumulative fire hazard rating of the Drink area at the end of the 80-year planning horizon:
 \begin{align}
 Minimize \quad & F = \sum_{i\in I} \sum_{r\in R} F_{i,r} x_{i,r} \label{eqn:objFire}
 \end{align}
-In equation \eqref{eqn:objFire}, I sum over all stands $i \in I$ and all treatment prescriptions $r \in R$ to obtain a cumulative fire hazard metric $F$, which measures the total fire hazard of the area at the end of the planning horizon. The coefficients $F_{i,r}$ are the area-weighted fuel models of each stand $i \in I$ at the end of the planning horizon if stand $i$ is assigned to treatment prescription $r \in R$. The possible treatment prescriptions $r \in R$ are treat in the first period ($r=1$), treat in the second period ($r=2$), treat in both periods ($r=3$), or do not treat ($r=0$).
+In equation \eqref{eqn:objFire}, I sum over all stands $i \in I$ and all treatment prescriptions $r \in R$ to obtain a cumulative fire hazard metric $F$, which measures the total fire hazard rating of the Drink area at the end of the planning horizon. The coefficients $F_{i,r}$ are the area-weighted fire hazard ratings for each stand $i \in I$ at the end of the planning horizon if stand $i$ is assigned to treatment prescription $r \in R$.
 
 The second objective is to minimize the peak short-term sediment delivery that results from performing treatments in either period one ($S_1$) or period two ($S_2$):
 \begin{align}
 Minimize \quad S = \max \{S_1,S_2\} \label{eqn:objSediment}
 \end{align}
 
-The last objective is to maximize the area of suitable northern spotted owl habitat at the end of the planning horizon.
+The last objective is to maximize the minimum area of northern spotted owl habitat at the end of each planning period, $O_1$ and $O_2$, for periods 1 and 2, respectively.
 \begin{align}
-Maximize \quad & O = \sum_{i\in I_\omega} \left(a_i p_i + e a_i \left( \sum_{j \in R_i} x_{i,j}-p_i \right) \right) \label{eqn:objOwl}
+Maximize \quad O = \min \{O_1,O_2\} \label{eqn:objOwl}
 \end{align}
-The set of stands in the sum $i \in I_\omega$ are those that meet the first three criteria for NSO habitat under at least one treatment prescription $j \in R_i$, where $R_i$ is the set of treatment prescriptions for stand $i$ such that it meets the first three NSO habitat criteria at the end of the planning horizon. If a stand $i$ does not meet these criteria under any treatment prescriptions (if the set $R_i = \{\emptyset\}$), then $i \notin I_\omega$. If the model assigns a stand $i \in I_\omega$ a treatment prescription $j \in R_i$, then stand $i$ meets the first three NSO habitat criteria at the end of the planning horizon, and the variable $x_{i,j}=1$. If, in addition, the stand $i$ is part of a cluster of stands all meeting the first three NSO habitat criteria and whose combined contiguous area is greater than 200 ha, then the variable $p_i = 1$. Notice that when $p_i = 0$, the stand's contribution is discounted by $e = 0.5$, and when $p_i = 1$ it is not.
 
-The objectives are subject to the following constraints. First, I define accounting variables for the sediment delivery that results from the performance of the prescribed management actions.
+The objectives are subject to the following constraints. First, I defined the accounting variables for the area of NSO habitat available at the end of each planning period:
+\begin{align}
+\sum_{i\in I_{\omega,1}} \left(a_i p_{i,1} + e a_i \left( \sum_{j \in R_{i,1}} x_{i,j}-p_{i,1} \right) \right) = O_1 \label{eqn:constraintOwl1}\\
+\sum_{i\in I_{\omega,2}} \left(a_i p_{i,2} + e a_i \left( \sum_{j \in R_{i,2}} x_{i,j}-p_{i,2} \right) \right) = O_2 \label{eqn:constraintOwl2}
+\end{align}
+The set of stands in the sum $i \in I_{\omega,t}$ are those that meet the first three criteria for NSO habitat under at least one treatment prescription $j \in R_{i,t}$, where $R_{i,t}$ is the set of treatment prescriptions for stand $i$ such that it meets the first three NSO habitat criteria at the end of planning period $t$ (where $t \in \{1,2\}$). If a stand $i$ does not meet these criteria under any treatment prescriptions (if the set $R_{i,t} = \{\emptyset\}$), then $i \notin I_{\omega,t}$. If the model assigns a stand $i \in I_{\omega,t}$ a treatment prescription $j \in R_{i,t}$, then stand $i$ meets the first three NSO habitat criteria at the end of planning period $t$, and the variable $x_{i,j}=1$. If, in addition, the stand $i$ is part of a cluster of stands all meeting the first three NSO habitat criteria at the end of period $t$ and whose combined contiguous area is greater than 200 ha, then the variable $p_{i,t} = 1$. Notice that when $p_{i,t} = 0$, the stand's contribution is discounted by $e = 0.5$, and when $p_{i,t} = 1$ it is not.
+
+Next, I defined the accounting variables for the sediment delivery that results from the performance of the prescribed management actions in each planning period.
 \begin{align}
 \sum_{i\in I} \sum_{r\in 1,3} s_{i,1} x_{i,r} = S_1 \label{eqn:constraintSediment1}\\
 \sum_{i\in I} \sum_{r\in 2,3} s_{i,2} x_{i,r} = S_2 \label{eqn:constraintSediment2}
 \end{align}
 The coefficients $s_{i,t}$ are the amount of sediment (in tonnes) that would result from treating stand $i$ in time period $t$.
 
-In order to control the trigger variables $p_i$ indicating a stand's inclusion in a 200 ha cluster of NSO habitat, I used the following two constraints:
+In order to control the trigger variables $p_{i,t}$ indicating a stand's inclusion in a 200 ha cluster of NSO habitat at the end of period $t$, I used the following two constraints:
 \begin{align}
-\sum_{i \in D_c} \sum_{j \in R_i} x_{i,j} - |c| q_c &\ge 0 \qquad \forall c \in C \label{eqn:constraintClusterTriggers}\\
-\sum_{c \in C_i} q_c - p_i &\ge 0 \qquad \forall i \in I_\omega \label{eqn:constraintPVarTriggers}
+\sum_{i \in D_c} \sum_{j \in R_{i,t}} x_{i,j} - |c| q_{c,t} &\ge 0 \qquad \forall t \in \{1,2\}, c \in C \label{eqn:constraintClusterTriggers}\\
+\sum_{c \in C_i} q_{c,t} - p_{i,t} &\ge 0 \qquad \forall t \in \{1,2\}, i \in I_{\omega,t} \label{eqn:constraintPVarTriggers}
 \end{align}
-$c \in C$ are the clusters of stands whose combined area is greater than 200 ha. A cluster $c$ contains the set of stands $i \in D_c$. Equation \eqref{eqn:constraintClusterTriggers} specifies that all stands $i \in D_c$ within a cluster $c \in C$ must be assigned a management prescription such that they meet all NSO habitat criteria in order for the cluster trigger variable $q_c$ to take value 1.
+$c \in C$ are the clusters of stands whose combined area is greater than 200 ha. A cluster $c$ contains the set of stands $i \in D_c$. Equation \eqref{eqn:constraintClusterTriggers} specifies that all stands $i \in D_c$ within a cluster $c \in C$ must be assigned a management prescription such that they meet all NSO habitat criteria at the end of planning period $t$ in order for the cluster trigger variable $q_{c,t}$ to take value 1.
 
-Equation \eqref{eqn:constraintPVarTriggers} specifies that if no cluster $c \in C_i$ - the set of clusters that contain site $i$ - meets NSO qualifications, then the trigger variable $p_i$ must equal 0. If some cluster $c \in C_i$ does meet NSO qualifications, then the objective function \eqref{eqn:objOwl} will draw up the value of the variable $p_i$ to 1.
+Equation \eqref{eqn:constraintPVarTriggers} specifies that if no cluster $c \in C_i$ - the set of clusters that contain site $i$ - meets NSO qualifications at the end of period $t$, then the trigger variable $p_{i,t}$ must take value 0. If a cluster $c \in C_i$ does meet NSO qualifications at the end of planning period $t$, then the sense of the NSO objective function \eqref{eqn:objOwl} will draw up the value of the variable $p_{i,t}$ to 1.
 
-I also impose the restriction that each stand may be assigned to at most one treatment prescription.
+I also imposed the logical restriction that each stand may be assigned to at most one treatment prescription.
 \begin{align}
 \sum_{r \in R} x_{i,r} = 1  \qquad \forall i \in I \label{eqn:constraintOnePrescrip}
 \end{align}
 
-Next, I ensured that the area treated in each time period is less than a prespecified maximum area $A$:
+Next, I ensured that the area treated in each time period is less than a pre-specified maximum area $A$. Here I used a value of $A = 6000$ acres, or 2428 ha:
 \begin{align}
 \sum_{i \in I} \sum_{r \in 1,3} a_i x_{i,r} &= H_1 \label{eqn:constraintAreaAcctg1}\\
 \sum_{i \in I} \sum_{r \in 2,3} a_i x_{i,r} &= H_2 \label{eqn:constraintAreaAcctg2}\\
 H_1 &\le A \label{eqn:constraintAreaRestr1}\\
 H_2 &\le A \label{eqn:constraintAreaRestr2}
 \end{align}
-where the first two equations define the accounting variables for the areas treated in time periods 1 and 2, $H_1$ and $H_2$, and the second two equations impose the upper bound.
+Equations \ref{eqn:constraintAreaAcctg1} and \ref{eqn:constraintAreaAcctg2} define the accounting variables for the areas treated in time periods 1 and 2, $H_1$ and $H_2$, and equations \ref{eqn:constraintAreaRestr1} and \ref{eqn:constraintAreaRestr2} impose the upper bound.
 
-Finally, I specified fluctuation constraints to bound the differences in the area treated in between time periods:
+Finally, I specified fluctuation constraints to bound the difference in the area treated in each time period:
 \begin{align}
 \ell H_1 - H_2 &\le 0 \label{eqn:constraintAreaFlucL}\\
 -u H_1 + H_2 &\le 0 \label{eqn:constraintAreaFlucU}
 \end{align}
-I define a maximum of 20\% fluctuation between time periods. That is, $\ell = 0.8$ and $u = 1.2$.
+I defined a maximum of 20\% areal fluctuation between the time periods. That is, $\ell = 0.8$ and $u = 1.2$.
 
-Together with the binary specifications on our variables (equation \eqref{eqn:constraintNonNeg}), the complete model is
+Together with the binary specifications on the variables (equation \eqref{eqn:constraintNonNeg}), the complete model is
 \begin{align*}
 Minimize \quad & \\
 F=&\sum_{i\in I}\sum_{r\in R} F_{i,r} x_{i,r}\\
 S=&\max \{S_1,S_2\}\\
 Maximize \quad & \\
-O=&\sum_{i\in I_\omega} \left(a_i p_i + e a_i \left( \sum_{j \in R_i} x_{i,j}-p_i \right) \right)
+O =&\min \{O_1,O_2\}
 \end{align*}
 
 Subject to:
 \begin{align}
+\sum_{i\in I_{\omega,t}} \left(a_i p_{i,t} + e a_i \left( \sum_{j \in R_{i,t}} x_{i,j}-p_{i,t} \right) \right) &= O_t \qquad \forall t \in \{1,2\} \notag\\
 \sum_{i\in I} \sum_{r\in 1,3} s_{i,r} x_{i,r} &= S_1 \notag\\
 \sum_{i\in I} \sum_{r\in 2,3} s_{i,r} x_{i,r} &= S_2 \notag\\
-\sum_{i \in D_c} \sum_{j \in R_i}x_{i,j} - |c| q_c &\ge 0 \qquad \forall c \in C \notag\\
-\sum_{c \in C_i} q_c - p_i &\ge 0 \qquad \forall i \in I_\omega \notag\\
+\sum_{i \in D_c} \sum_{j \in R_{i,t}} x_{i,j} - |c| q_{c,t} &\ge 0 \qquad \forall t \in \{1,2\}, c \in C \notag\\
+\sum_{c \in C_i} q_{c,t} - p_{i,t} &\ge 0 \qquad \forall t \in \{1,2\}, i \in I_{\omega,t} \notag\\
 \sum_{r \in R} x_{i,r} &= 1  \qquad \forall i \in I \notag\\
 \sum_{i \in I} \sum_{r \in 1,3} a_i x_{i,r} &= H_1 \notag\\
 \sum_{i \in I} \sum_{r \in 2,3} a_i x_{i,r} &= H_2 \notag\\
-H_1 &\le A \notag\\
-H_2 &\le A \notag\\
+H_t &\le A \qquad \forall t \in \{1,2\} \notag\\
 \ell H_1 - H_2 &\le 0 \notag\\
 -u H_1 + H_2 &\le 0 \notag\\
 x_{i,r}, p_i, q_c \in \{0,1\} \quad &\forall i \in I, r \in R, c \in C \label{eqn:constraintNonNeg}
 \end{align}
 
 \subsection{Model solution}
-Solving a bounded and non-degenerate multi-objective optimization problem with $N$ objectives produces a set of objective vectors (also called ``solutions'') $\mathbf{z} \in Z$ where $\mathbf{z}=\braket{z^1,\ldots,z^N}$. The set of solutions $Z$ is referred to as the Pareto-optimal frontier or efficient frontier or, simply, frontier. The solutions comprising an efficient frontier have the special relationship such that no component of a solution $\mathbf{z}^i$ can be improved upon without one of the other components $\mathbf{z}^j$ ($j \neq i$) degrading. For example, this relationship in the current problem means that further reducing fire hazard would require either additional sediment deposits, the sacrifice of NSO habitat, or both.
+In general, solving a bounded and non-degenerate multi-objective optimization problem with $N$ objectives produces a set of objective vectors (also called ``solutions'') $\mathbf{z} \in Z$ where $\mathbf{z}=\braket{z^1,\ldots,z^N}$. The set of solutions $Z$ is referred to as the Pareto-optimal frontier or efficient frontier or, simply, frontier. The solutions comprising an efficient frontier have the special relationship such that no component of a solution $\mathbf{z}^i$ can be improved upon without one of the other components $\mathbf{z}^j$ ($j \neq i$) degrading. This quality is known as Pareto efficiency. For example, this relationship in the current problem means that further reducing the value of fire hazard in a solution would result in either additional sediment deposits, a reduction of NSO habitat, or both.
 
-Thus the efficient frontier provides information on the tradeoff structure that exists between ecosystem services. Parameterizing and solving the model for each of the climate scenarios generates three frontiers: $Z_{\text{None}}$, $Z_{4.5}$, and $Z_{8.5}$ for the No climate change, Ensemble RCP 4.5, and Ensemble RCP 8.5 scenarios, respectively. As climate is the driver of the differences in these frontiers, the comparison of frontiers provides insight into how climate impacts the tradeoff structures between the ecosystem services.
+Thus the efficient frontier provides information on the tradeoff structure that exists between ecosystem services. Parameterizing and solving the above model for each of the climate scenarios generates three frontiers: $Z_{\text{None}}$, $Z_{4.5}$, and $Z_{8.5}$ for the None, Ensemble RCP 4.5, and Ensemble RCP 8.5 scenarios, respectively. Since climate is the only thing that differs between the models and their resulting frontiers, the comparison of frontiers provides insight into how climate impacts the tradeoff structures between the ecosystem services.
 
-To solve the models, I wrote my own implementation of T\'{o}th's Alpha-Delta algorithm \cite{TothThesis} that is generalized for any multi-objective problem with $N \ge 2$ objectives. The Alpha-Delta algorithm finds the optimal set $Z$ by iteratively slicing the $N$-dimensional objective space with a tilted $N-1$ dimensional plane. To derive the frontiers, I used an alpha parameter of $\alpha = .01$ and delta parameters of $\delta_{Hab} = 1$ ha and $\delta_{Sed} = 0.5$ tonnes for the NSO habitat and sediment delivery objectives, respectively.
+To solve the models, I wrote my own implementation of T\'{o}th's Alpha-Delta algorithm \cite{TothThesis} utilizing the IBM ILOG CPLEX optimization engine. The Alpha-Delta algorithm finds the optimal set $Z$ by iteratively slicing the $N$-dimensional objective space with a tilted $N-1$ dimensional plane. To derive the frontiers, I used an alpha parameter of $\alpha = .01$ and delta parameters of $\delta_{Hab} = 1$ ha and $\delta_{Sed} = 2$ tonnes for the NSO habitat and sediment delivery objectives, respectively.
 
 \subsection{Comparing Tradeoffs under each Climate Change Scenario}
 
-No standardized procedure exists for comparing frontiers or measuring the conflict between objectives within a frontier. To address the former, I draw on methods used in the field of evolutionary multi-objective optimization (EMO). To address the latter, I apply methods used in objective pruning in many-objective optimization.
+No standardized procedure exists for comparing frontiers or measuring the conflict between objectives within a frontier. To address the former, I drew on methods used in the field of evolutionary multi-objective optimization (EMO). To address the latter, I applied methods used for objective pruning in many-objective optimization.
 
 \subsubsection{Comparing frontiers}
-Researchers in the field of EMO develop algorithms to generate a set of non-dominated solutions that best represent the true Pareto-optimal frontier \cite{deb2001multi}. To test their algorithms, they compare their resulting frontiers to a known Pareto front for benchmark multi-objective optimization problems \cite{knowles2002metrics}. There is no assurance of optimality of the solutions derived using these algorithms, so they require a means of comparing the resulting frontiers to determine if one algorithm produces a ``better'' non-dominated frontier than another. Zitzler et al. provide a review of comparison methods in \cite{zitzler2003performance}. These methods aim to quantify certain traits about a frontier that can be used to measure their success in approximation of the true frontier.
+Researchers in the field of EMO develop algorithms to generate a set of non-dominated solutions that best represents the true Pareto-optimal frontier \cite{deb2001multi}. To test their algorithms, they use them to solve a benchmark multi-objective optimization problem and compare their resulting frontiers to the known Pareto front for that problem \cite{knowles2002metrics}. There is no assurance of optimality of the solutions derived using these algorithms, so they require a means of comparing the resulting frontiers to determine if one algorithm produces a ``better'' non-dominated frontier than another. Zitzler et al. provide a review of comparison methods in \cite{zitzler2003performance}. These methods aim to quantify certain traits about a frontier that can be used to measure their success in approximation of the true frontier.
 
-My motivation in comparing frontiers is different from EMO in that, rather than comparing non-dominated sets produced by identical models, I aim to compare frontiers generated by models with the same structure but different parameterizations. As a result, not all comparison methods are applicable, such as the indicator for the number of Pareto points contained in the frontier (all points on my frontiers are Pareto-optimal). However, other comparison methods still have value in our analysis. I chose a subset of these methods: the binary epsilon and binary hypervolume indicators, and the unary distance, unary hypervolume, and unary spacing indicators.
+My motivation in comparing frontiers is different from EMO in that, rather than comparing non-dominated sets produced by solving identical models, I compared frontiers generated by similar models that have the same structure but different parameterizations. As a result, not all comparison methods are applicable. For instance, the indicator for the number of Pareto points contained in the frontier does not make sense in my case, since all points on my frontiers are Pareto-optimal. However, other comparison methods still have value here. I chose a subset of these methods: the additive binary epsilon and binary hypervolume indicators, and the unary distance, additive unary epsilon, unary hypervolume, and unary spacing indicators.
 
 Note that use of some comparison methods for the frontiers requires the normalization of the objective space. This is because the climate scenarios may significantly alter the bounds on the achievable values of the ecosystem services, resulting in frontiers whose objective spaces will not necessarily overlap and with incomparable distributions of solutions within. The chosen normalization of each frontier is the unit hypercube, with each objective bounded between 0 and 1, yielding a frontier bounded by $[0,1]^N$. Without loss of generality, I convert all objectives to maximization, define the nadir solution to be at the origin and the ideal solution to be at the point $\vec{\mathbf{1}}$. The nadir solution $\mathbf{z}_{\text{nad}}$ of a frontier of points $z \in Z$ is defined as the objective vector with components
 \begin{align}
-\mathbf{z}_i^{\text{nad}} = \inf_{z} \{ z_i \} \quad \forall 1 \le i \le N
+\mathbf{z}_{\text{nad}}^i = \inf_{z} \{ z^i \} \quad \forall 1 \le i \le N
 \end{align}
 and the ideal solution is the objective vector with components
 \begin{align}
-\mathbf{z}_i^{\text{ideal}} = \sup_{z} \{ z_i \} \quad \forall 1 \le i \le N
+\mathbf{z}_{\text{ideal}}^i = \sup_{z} \{ z^i \} \quad \forall 1 \le i \le N
 \end{align}
 
-\paragraph{Binary epsilon indicator $I_\epsilon$} Given two frontiers, $Z_1$ and $Z_2$, the binary epsilon indicator is defined as \cite{zitzler2003performance}
+\paragraph{Additive binary epsilon indicator $I_{\epsilon_+2}$} Given two frontiers, $Z_1$ and $Z_2$, the additive binary epsilon indicator is defined as \cite{zitzler2003performance}
 \begin{align}
-I_\epsilon (Z_1,Z_2) = \inf_{\epsilon \in \mathbb{R}} \set{\forall \mathbf{z}_2 \in Z_2 \; \exists \mathbf{z}_1 \in Z_1 : \mathbf{z}_1 \succeq_\epsilon \mathbf{z}_2}
+I_{\epsilon_+2} (Z_1,Z_2) = \inf_{\epsilon \in \mathbb{R}} \set{\forall \mathbf{z}_2 \in Z_2 \; \exists \mathbf{z}_1 \in Z_1 : \mathbf{z}_1 \succeq_{\epsilon_+} \mathbf{z}_2}
 \end{align}
-where $\succeq_\epsilon$ is the $\epsilon$-dominance relationship:
+where $\succeq_{\epsilon_+}$ is the additive $\epsilon$-dominance relationship:
 \begin{align}
-\mathbf{z}_1 \succeq_\epsilon \mathbf{z}_2 \iff \forall 1 \le i \le N : \epsilon \mathbf{z}_1^i \ge \mathbf{z}_2^i
+\mathbf{z}_1 \succeq_{\epsilon_+} \mathbf{z}_2 \iff \forall 1 \le i \le N : \epsilon + \mathbf{z}_1^i \ge \mathbf{z}_2^i
 \end{align}
-That is, $\epsilon$ is the minimum factor by which all points in one frontier $Z_1$ must be multiplied such that all solutions in $Z_1$ at least weakly dominate all solutions in the other frontier $Z_2$.
+That is, $\epsilon$ is the minimum amount by which all components of all solutions in one frontier $Z_1$ must be increased such that every solution $\mathbf{z}_2 \in Z_2$ is weakly dominated by at least one solution $\mathbf{z}_1 \in Z_1$. See Figure \ref{fig:binaryEpsilon}.
+
 \begin{figure}
 \centering
-\includegraphics[width=.5\textwidth]{../images/BinaryEpsilonFigureLiftedFromZitzler}
+\includegraphics[width=.7\textwidth]{../images/BinaryEpsilonIndicator}
+\caption[The additive binary epsilon indicator $I_{\epsilon_+2}$]{Depiction of the additive binary epsilon indicator $I_{\epsilon_+2}$ and the additive epsilon dominance relationship $\succeq_{\epsilon_+}$.
+
+\begin{minipage}{\linewidth}
+  \begin{align*}
+    I_{\epsilon_+2} (P,A) = -4 < 0 \qquad I_{\epsilon_+2} (P,B) = 0 \qquad I_{\epsilon_+2} (P,C) = 2 > 0
+  \end{align*}
+\end{minipage}
+
+Region III is $\epsilon_+$-dominated for $\epsilon = 2$; region II is $\epsilon_+$-dominated for $\epsilon = 0$; region I is $\epsilon_+$-dominated for $\epsilon = -4$. Note that region II also encompasses region I, and region III encompasses region II.}
 \label{fig:binaryEpsilon}
-\caption[Breakpoint values for the binary epsilon indicator $I_\epsilon$]{Any frontier $Z$ with solutions in the light gray area (closest to origin) would have $I_\epsilon (Z,A_1) > 1$; $I_\epsilon (A_1,A_1) = I_\epsilon (A_2,A_1) = 1$; any frontier $Z$ existing only in the darker gray areas such as $A_3$ would have $I_\epsilon (Z,A_1) < 1$}
 \end{figure}
 
 \paragraph{Unary hypervolume indicator $I_{H1}$ and binary hypervolume indicator $I_{H2}$}
@@ -240,7 +276,7 @@ Weakly dominates   & $\mathbf{z}^1 \succeq \mathbf{z}^2$     & $\mathbf{z}^1$ is
 Incomparable       & $\mathbf{z}^1 || \mathbf{z}^2$          & Neither $\mathbf{z}^1$ nor $\mathbf{z}^2$ weakly dominates the other                                                                                          & $Z_1 || Z_2$          & Neither $Z_1$ nor $Z_2$ weakly dominates the other                                                         \\ \hline
 \end{tabular}%
 }
-\caption[Dominance relations between frontiers and solutions]{Definitions of dominance relations between solutions and frontiers \cite{zitzler2003performance}}
+\caption[Dominance relations between frontiers and solutions]{Definitions of dominance relations between solutions and frontiers, reproduced from \cite{zitzler2003performance}.}
 \label{tab:dominanceRelations}
 \end{table}
 
