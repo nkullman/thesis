@@ -15,7 +15,7 @@ The first objective is the reduction of fire hazard rating through the use of si
 \begin{figure}
 \centering
 \includegraphics[width=.5\textwidth]{../images/DrinkMap_NSOAndWatershed}
-\caption[NSO Habitat and municipal watershed in the Drink Area]{Location of the municipal watershed and the suitable NSO habitat in the Drink area at the beginning of the planning horizon (2015). Interior polygons are the 303 management units.}
+\caption[NSO Habitat and municipal watershed in the Drink Planning Area]{Location of the municipal watershed and the suitable NSO habitat in the Drink area at the beginning of the planning horizon (2015). Interior polygons are the 303 management units.}
 \label{fig:drinkOwlAndWatershed}
 \end{figure}
 
@@ -28,7 +28,7 @@ To accomplish long-term reduction in fire hazard rating for the area, I formed a
 \begin{figure}
 \centering
 \includegraphics[width=.5\textwidth]{../images/DrinkMap_PAGs}
-\caption[Plant association groups in the Drink Planning Area]{Plant association groups in the Drink Planning Area selected for treatment by the US Forest Service.}
+\caption[Plant association groups in the Drink Planning Area]{Plant association groups in the Drink Planning Area that were selected for potential treatments. Other plant association groups exist in the area but were not considered for treatment.}
 \label{fig:drinkPAGs}
 \end{figure}
 
@@ -36,8 +36,8 @@ To assess the treatments' long-term efficacy, I measured the fire hazard of the 
 
 \begin{figure}
 \centering
-\includegraphics[width=.75\textwidth]{../images/Drink_PlanningHorizon_Sketch}
-\caption[Planning horizon schematic]{The planning horizon used in the analysis spans the 80 year period from 2015 to 2095. Treatments may be performed in the first period, the second period, both, or neither. Treatments are assumed to be performed at the mid-point years of each period (black triangles). Sediment delivery is measured on treatment years. Stands' suitability for NSO habitat is measured at the end of the planning periods (gray triangles), and fire hazard at the end of the planning horizon (white triangle).}
+\includegraphics[width=.85\textwidth]{../images/Drink_PlanningHorizon_Sketch}
+\caption[Planning horizon schematic]{The planning horizon used in the analysis spans the 80 year period from 2015 to 2095. Treatments may be performed in the first period, the second period, both, or neither. Treatments are assumed to be performed at the mid-point years of each period (black triangles). Sediment delivery is measured on treatment years. Stands' suitability for NSO habitat is measured at the end of the planning periods (gray triangles), and stands' fire hazard ratings are measured at the end of the planning horizon (white triangle).}
 \label{fig:drinkPlanningHorizon}
 \end{figure}
 
@@ -93,7 +93,7 @@ For a measure for fire hazard rating, I chose the one employed by Kushch in CITE
 \end{tabular}%
 }
 \caption[Fire hazard ratings used in multi-objective model]{Fire hazard rating system used here, originally employed by CITESVETLANA'SMSWHENAVAILABLE.\\
-* denotes fuel models in the extended set, not originally present in CITESVETLANA'SMSWHENAVAILABLE.\\
+* denotes fuel models in the extended set, not present in CITESVETLANA'SMSWHENAVAILABLE.\\
 The fuel model column refers to the Anderson fuel model ratings \cite{anderson1982aids}.}
 \label{tab:firehazards}
 \end{table}
@@ -202,20 +202,19 @@ x_{i,r}, p_i, q_c \in \{0,1\} \quad &\forall i \in I, r \in R, c \in C \label{eq
 \subsection{Model solution}
 In general, solving a bounded and non-degenerate multi-objective optimization problem with $N$ objectives produces a set of objective vectors (also called ``solutions'') $\mathbf{z} \in Z$ where $\mathbf{z}=\braket{z^1,\ldots,z^N}$. The set of solutions $Z$ is referred to as the Pareto-optimal frontier or efficient frontier or, simply, frontier. The solutions comprising an efficient frontier have the special relationship such that no component of a solution $\mathbf{z}^i$ can be improved upon without one of the other components $\mathbf{z}^j$ ($j \neq i$) degrading. This quality is known as Pareto efficiency. For example, this relationship in the current problem means that further reducing the value of fire hazard in a solution would result in either additional sediment deposits, a reduction of NSO habitat, or both.
 
-Thus the efficient frontier provides information on the tradeoff structure that exists between ecosystem services. Parameterizing and solving the above model for each of the climate scenarios generates three frontiers: $Z_{\text{None}}$, $Z_{4.5}$, and $Z_{8.5}$ for the None, Ensemble RCP 4.5, and Ensemble RCP 8.5 scenarios, respectively. Since climate is the only thing that differs between the models and their resulting frontiers, the comparison of frontiers provides insight into how climate impacts the tradeoff structures between the ecosystem services.
+Thus the efficient frontier provides information on the tradeoff structure that exists between ecosystem services. Parameterizing and solving the above model for each of the climate scenarios generates three frontiers: $Z_{\text{None}}$, $Z_{4.5}$, and $Z_{8.5}$ for the None, Ensemble RCP 4.5, and Ensemble RCP 8.5 scenarios, respectively. Since climate is the only thing that differs between the models and their resulting frontiers, comparing the frontiers provides insight into how climate impacts the tradeoff structures between the ecosystem services.
 
 To solve the models, I wrote my own implementation of T\'{o}th's Alpha-Delta algorithm \cite{TothThesis} utilizing the IBM ILOG CPLEX optimization engine. The Alpha-Delta algorithm finds the optimal set $Z$ by iteratively slicing the $N$-dimensional objective space with a tilted $N-1$ dimensional plane. To derive the frontiers, I used an alpha parameter of $\alpha = .01$ and delta parameters of $\delta_{Hab} = 1$ ha and $\delta_{Sed} = 2$ tonnes for the NSO habitat and sediment delivery objectives, respectively.
 
 \subsection{Comparing Tradeoffs under each Climate Change Scenario}
-
-No standardized procedure exists for comparing frontiers or measuring the conflict between objectives within a frontier. To address the former, I drew on methods used in the field of evolutionary multi-objective optimization (EMO). To address the latter, I applied methods used for objective pruning in many-objective optimization.
+By parameterizing and solving the multi-objective model once for each climate scenario, I generated three efficient frontiers. To determine the impact of climate on tradeoffs in ecosystem services, I compared these frontiers and the level of conflict between the objectives within each of them. However, no standardized procedure exists for this task. In order to make comparisons at the frontier (climate scenario) level, I drew on methods used in the field of evolutionary multi-objective optimization (EMO). To address conflict between objectives within a frontier, I applied a method used for objective pruning in many-objective optimization and a variant of a method used in EMO.
 
 \subsubsection{Comparing frontiers}
-Researchers in the field of EMO develop algorithms to generate a set of non-dominated solutions that best represents the true Pareto-optimal frontier \cite{deb2001multi}. To test their algorithms, they use them to solve a benchmark multi-objective optimization problem and compare their resulting frontiers to the known Pareto front for that problem \cite{knowles2002metrics}. There is no assurance of optimality of the solutions derived using these algorithms, so they require a means of comparing the resulting frontiers to determine if one algorithm produces a ``better'' non-dominated frontier than another. Zitzler et al. provide a review of comparison methods in \cite{zitzler2003performance}. These methods aim to quantify certain traits about a frontier that can be used to measure their success in approximation of the true frontier.
+Researchers in the field of EMO develop algorithms to generate a set of non-dominated solutions that best represents the true Pareto-optimal frontier \cite{deb2001multi}. To test their algorithms, they solve a benchmark multi-objective optimization problem and compare their resulting frontiers to the known Pareto front for that problem \cite{knowles2002metrics}. There is no assurance of optimality of the solutions derived using these algorithms, so they require a means of comparing the resulting frontiers to determine if one algorithm produces a ``better'' non-dominated frontier than another. Zitzler et al. provide a review of comparison methods in \cite{zitzler2003performance}. These methods aim to quantify certain traits about a frontier that can be used to measure their success in approximation of the true frontier.
 
-My motivation in comparing frontiers is different from EMO in that, rather than comparing non-dominated sets produced by solving identical models, I compared frontiers generated by similar models that have the same structure but different parameterizations. As a result, not all comparison methods are applicable. For instance, the indicator for the number of Pareto points contained in the frontier does not make sense in my case, since all points on my frontiers are Pareto-optimal. However, other comparison methods still have value here. I chose a subset of these methods: the additive binary epsilon and binary hypervolume indicators, and the unary distance, additive unary epsilon, unary hypervolume, and unary spacing indicators.
+My motivation in comparing frontiers is different from EMO in that, rather than comparing frontiers that result from solving identical models with varying methods, I compared frontiers that result from solving varying models (albeit with the same structure) with identical methods. The primary difference in the output of my approach compared to EMO is the assured optimality of the solutions in my frontiers. Because of this difference, not all comparison methods are applicable. For instance, the indicator for the number of Pareto points contained in the frontier does not make sense in my case, since all points on my frontiers are Pareto-optimal. Despite the difference, however, other comparison methods still have value. I chose a subset of these methods to compare my frontiers: the additive binary epsilon and binary hypervolume indicators, and the unary distance, additive unary epsilon, unary hypervolume, and unary spacing indicators.
 
-Note that use of some comparison methods for the frontiers requires the normalization of the objective space. This is because the climate scenarios may significantly alter the bounds on the achievable values of the ecosystem services, resulting in frontiers whose objective spaces will not necessarily overlap and with incomparable distributions of solutions within.
+Some methods for comparing frontiers require the normalization of the objective space. This is because the climate scenarios alter the bounds on the achievable values of the ecosystem services, resulting in frontiers whose objective spaces do not overlap.
 
 In my analysis and in the definitions that follow, I chose the normalization such that all objectives are maximized, and each frontier is contained within the unit hypercube. That is, each objective is bounded between 0 and 1, yielding a frontier bounded by $[0,1]^N$. Defining the nadir solution $\mathbf{z}_{\text{nad}}$ of a frontier of points $z \in Z$ as the objective vector with components
 \begin{align}
@@ -227,15 +226,34 @@ and the ideal solution as the objective vector with components
 \end{align}
 then under my normalization, the nadir solution is the origin and the ideal solution is the $N$-dimensional vector of ones $\mathbf{1}_N$.
 
+The definitions of dominance terms used here are in Table \ref{tab:dominanceRelations}.
+
+\begin{table}[ht]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|p{.2\linewidth}|p{.1\linewidth}|p{.3\linewidth}|p{.1\linewidth}|p{.3\linewidth}|}
+\hline
+\textbf{Relation}           & \multicolumn{2}{c|}{\textbf{Solutions}}                                                                                                                                                                          & \multicolumn{2}{c|}{\textbf{Frontiers}}                                                                                                     \\ \hline
+Strictly dominates & $\mathbf{z}_1 \succ \succ \mathbf{z}_2$ & $\mathbf{z}_1$ is better than $\mathbf{z}_2$ in all objectives                                                                                  & $Z_1 \succ \succ Z_2$ & Every solution in $Z_2$ is strictly dominated by at least one solution in $Z_1$                  \\ \hline
+Dominates          & $\mathbf{z}_1 \succ \mathbf{z}_2$       & $\mathbf{z}_1$ is better than $\mathbf{z}_2$ in at least one objective and is not worse in any objective & $Z_1 \succ Z_2$       & Every solution in $Z_2$ is dominated by at least one solution in $Z_1$                           \\ \hline
+Better             &                                         &                                                                                                                                                               & $Z_1 \rhd Z_2$        & Every solution in $Z_2$ is weakly dominated by at least one solution in $Z_1$ and $Z_1 \neq Z_2$ \\ \hline
+Weakly dominates   & $\mathbf{z}_1 \succeq \mathbf{z}_2$     & $\mathbf{z}_1$ is at least as good as $\mathbf{z}_2$ in all objectives                                                                                        & $Z_1 \succeq Z_2$     & Every solution in $Z_2$ is weakly dominated by at least one solution in $Z_1$          \\ \hline
+Incomparable       & $\mathbf{z}_1 || \mathbf{z}_2$          & Neither $\mathbf{z}_1$ nor $\mathbf{z}_2$ weakly dominates the other                                                                                          & $Z_1 || Z_2$          & Neither $Z_1$ nor $Z_2$ weakly dominates the other                                                         \\ \hline
+\end{tabular}%
+}
+\caption[Dominance relationships for frontiers and solutions]{Definitions of dominance relationships between solutions and between frontiers, reproduced from \cite{zitzler2003performance}.}
+\label{tab:dominanceRelations}
+\end{table}
+
 \paragraph{Additive binary epsilon indicator $I_{\epsilon_+2}$} Given two frontiers, $Z_1$ and $Z_2$, the additive binary epsilon indicator is defined as \cite{zitzler2003performance}
 \begin{align}
 I_{\epsilon_+2} (Z_1,Z_2) = \inf_{\epsilon \in \mathbb{R}} \set{\forall \mathbf{z}_2 \in Z_2 \; \exists \mathbf{z}_1 \in Z_1 : \mathbf{z}_1 \succeq_{\epsilon_+} \mathbf{z}_2}
 \end{align}
 where $\succeq_{\epsilon_+}$ is the additive $\epsilon$-dominance relationship:
 \begin{align}
-\mathbf{z}_1 \succeq_{\epsilon_+} \mathbf{z}_2 \iff \forall 1 \le i \le N : \epsilon + \mathbf{z}_1^i \ge \mathbf{z}_2^i
+\mathbf{z}_1 \succeq_{\epsilon_+} \mathbf{z}_2 \iff \epsilon + \mathbf{z}_1^i \ge \mathbf{z}_2^i \quad \forall 1 \le i \le N
 \end{align}
-Intuitively, $\epsilon$ is the minimum amount by which a frontier $Z_1$ must be translated such that every solution $\mathbf{z}_2 \in Z_2$ is ``covered''. See Figure \ref{fig:binaryEpsilon}. Positive values of $I_{\epsilon_+2} (Z_1,Z_2)$ indicate the presence of points $\mathbf{z}_2 \in Z_2$ that are not dominated by $Z_1$. Negative values of $I_{\epsilon_+2} (Z_1,Z_2)$ indicate that $Z_1$ strictly dominates $Z_2$ ($Z_1 \succ \succ Z_2$, see Table \ref{tab:dominanceRelations} for details on dominance relationships).
+Intuitively, $\epsilon$ is the minimum amount by which a frontier $Z_1$ must be translated such that every solution $\mathbf{z}_2 \in Z_2$ is ``covered''. See Figure \ref{fig:binaryEpsilon}. Positive values of $I_{\epsilon_+2} (Z_1,Z_2)$ indicate the presence of points $\mathbf{z}_2 \in Z_2$ that are not dominated by $Z_1$. Negative values of $I_{\epsilon_+2} (Z_1,Z_2)$ indicate that $Z_1$ strictly dominates $Z_2$ ($Z_1 \succ \succ Z_2$).
 
 \begin{figure}[ht]
 \centering
@@ -256,12 +274,12 @@ Region III is $\epsilon_+$-dominated for $\epsilon = 2$; region II is $\epsilon_
 \begin{align}
 I_{\epsilon_+} (Z) = I_{\epsilon_+2} (Z,\mathbf{z}_{\text{ideal}})
 \end{align}
-That is, the additive unary epsilon indicator is identical the additive binary epsilon indicator where the second frontier consists of a single point: the ideal solution for the first frontier.
+That is, the additive unary epsilon indicator is identical to the additive binary epsilon indicator where the second frontier consists of a single point: the ideal solution for the first frontier.
 
 This differs from the unary epsilon indicator traditionally used in EMO \cite{zitzler2003performance}. In EMO, the frontier is compared against a reference nondominated set. However, because my frontiers are optimal, there is no reference set against which to compare them.
 
 \paragraph{Unary hypervolume indicator $I_{H1}$ and binary hypervolume indicator $I_{H2}$}
-For every solution $\mathbf{z}_i$ in a frontier $Z$ define the hyperrectangle $r_i$ whose diagonal corners are the origin and the solution vector $\mathbf{z}_i = \braket{z^1,\ldots,z^N}$. Then the hypervolume indicator of the frontier $Z$ is the $N$-dimensional volume of the union of all of the hyperrectangles corresponding to the solutions in $Z$:
+For every solution $\mathbf{z}_i$ in a frontier $Z$ define the hyperrectangle $r_i$ whose diagonal corners are the origin and the objective vector $\mathbf{z}_i = \braket{z^1,\ldots,z^N}$ (see Figure \ref{fig:frontierVolumes}). Then the unary hypervolume indicator of the frontier $Z$ is the $N$-dimensional volume of the union of all of the hyperrectangles corresponding to the solutions in $Z$:
 \begin{align}
 I_{H1} (Z) = \text{vol} \left( \bigcup_{i = 1}^{|Z|} r_i \right)
 \end{align}
@@ -269,52 +287,37 @@ Then define the binary hypervolume indicator of two frontiers $Z_1$ and $Z_2$ as
 \begin{align}
 I_{H2} (Z_1,Z_2) = I_{H1} (Z_1 + Z_2) - I_{H1} (Z_2)
 \end{align}
-where $I_{H1} (Z_1 + Z_2)$ is the unary hypervolume MAKE THIS SENTENCE BETTER AND ADD A FIGURE indicator of the merged frontier consisting of all solutions from frontiers $Z_1$ and $Z_2$. The binary hypervolume indicator provides the volume of frontier $Z_1$ that is not contained within frontier $Z_2$. Larger values of $I_{H1}$ correspond to frontiers occupying larger fractions of the objective space, indicating less conflict between the objectives. For frontiers $Z_1$ and $Z_2$ in comparable scales (that is, in normalized objective spaces), if $I_{H2}(Z_1, Z_2) > I_{H2}(Z_2, Z_1)$ this indicates less conflict between objectives in $Z_1$ than in $Z_2$. $I_{H2}$ can also be used to determine other dominance relationships between frontiers (see Tables \ref{tab:dominanceRelations} and \ref{tab:powerOfIndicatorTests}).
+where $I_{H1} (Z_1 + Z_2)$ is the unary hypervolume indicator of the frontier consisting of the nondominated points in $Z = \{z \in Z_1 \cup Z_2\}$ . See Figure \ref{fig:binaryHypervolume}. The binary hypervolume indicator provides the volume of frontier $Z_1$ that is not contained within frontier $Z_2$. Larger values of $I_{H1}$ correspond to frontiers occupying larger amounts of the objective space. In a normalized objective space, $I_{H2}(Z_1, Z_2) > I_{H2}(Z_2, Z_1)$ indicates areas of less conflict between objectives in $Z_1$ than in $Z_2$.
 
-
-I developed a custom algorithm to solve for the unary hypervolume idicator. The details of the algorithm may be found in \S \ref{chap:appAHypervolumeAlgo}.
-
-\begin{table}[]
+\begin{figure}[ht]
 \centering
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{|l|l|l|l|l|}
-\hline
-Relation           & \multicolumn{2}{c|}{Solutions}                                                                                                                                                                          & \multicolumn{2}{l|}{Frontiers}                                                                                                     \\ \hline
-Strictly dominates & $\mathbf{z}^1 \succ \succ \mathbf{z}^2$ & $\mathbf{z}_i^1$ is better than $\mathbf{z}_i^2 \quad \forall 1 \le i \le N$                                                                                  & $Z_1 \succ \succ Z_2$ & $\exists \mathbf{z}^1 \in Z_1 \succ succ \mathbf{z}^2 \quad \forall \mathbf{z}^2 \in Z_2$                  \\ \hline
-Dominates          & $\mathbf{z}^1 \succ \mathbf{z}^2$       & $\exists 1 \le i \le N : \mathbf{z}_i^1$ is better than $\mathbf{z}_i^2$, and $\mathbf{z}_i^1$ is not worse than $\mathbf{z}_i^2 \quad \forall 1 \le i \le N$ & $Z_1 \succ Z_2$       & every $\mathbf{z}^2 \in Z_2$ is dominated by at least one $\mathbf{z}^1 \in Z_1$                           \\ \hline
-Better             &                                         &                                                                                                                                                               & $Z_1 \rhd Z_2$        & every $\mathbf{z}^2 \in Z_2$ is weakly dominated by at least one $\mathbf{z}^1 \in Z_1$ and $Z_1 \neq Z_2$ \\ \hline
-Weakly dominates   & $\mathbf{z}^1 \succeq \mathbf{z}^2$     & $\mathbf{z}^1$ is at least as good as $\mathbf{z}^2$ in all objectives                                                                                        & $Z_1 \succeq Z_2$     & All solutions in $\mathbf{z}^2 \in Z_2$ are weakly dominated by a solution $\mathbf{z}^1 \in Z_1$          \\ \hline
-Incomparable       & $\mathbf{z}^1 || \mathbf{z}^2$          & Neither $\mathbf{z}^1$ nor $\mathbf{z}^2$ weakly dominates the other                                                                                          & $Z_1 || Z_2$          & Neither $Z_1$ nor $Z_2$ weakly dominates the other                                                         \\ \hline
-\end{tabular}%
-}
-\caption[Dominance relations between frontiers and solutions]{Definitions of dominance relations between solutions and frontiers, reproduced from \cite{zitzler2003performance}.}
-\label{tab:dominanceRelations}
-\end{table}
+\includegraphics[width=.85\textwidth]{../images/FrontierVolumesNo2DOutlines}
+\caption[Hypervolume of Pareto frontiers]{Depiction of the hypervolumes of frontiers with two objectives (left) and three objectives (right).}
+\label{fig:frontierVolumes}
+\end{figure}
 
-\begin{table}[]
+\begin{figure}[ht!]
 \centering
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{|l|l|l|l|l|l|l|l|}
-\hline
-\multirow{2}{*}{} & \multicolumn{1}{c|}{\multirow{2}{*}{Name of indicator}} & \multicolumn{6}{c|}{Relation}                                                                                                                                                                                                                                                              \\ \cline{3-8} 
-                  & \multicolumn{1}{c|}{}                                   & \multicolumn{1}{c|}{$\succ\succ$} & \multicolumn{1}{c|}{$\succ$} & \multicolumn{1}{c|}{$\rhd$}                             & \multicolumn{1}{c|}{$\succeq$}                & \multicolumn{1}{c|}{$=$}                              & \multicolumn{1}{c|}{$||$}                             \\ \hline
-                  & $I_\epsilon$                                            & $I_\epsilon (Z_1,Z_2) < 1$        & -                            & $I_\epsilon (Z_1,Z_2)\le 1$ $I_\epsilon (Z_2,Z_1) > 1$ & $I_\epsilon (Z_1,Z_2)\le 1$                   & $I_\epsilon (Z_1,Z_2)= 1$ $I_\epsilon (Z_2,Z_1) = 1$ & $I_\epsilon (Z_1,Z_2)> 1$ $I_\epsilon (Z_2,Z_1) > 1$ \\ \hline
-                  & $I_{H2}$                                                & -                                 & -                            & $I_{H2} (Z_1,Z_2)>0$ $I_{H2} (Z_2,Z_1) =0$             & $I_{H2} (Z_1,Z_2)\ge0$ $I_{H2} (Z_2,Z_1) =0$ & $I_{H2} (Z_1,Z_2)=0$ $I_{H2} (Z_2,Z_1) =0$           & $I_{H2} (Z_1,Z_2)>0$ $I_{H2} (Z_2,Z_1) >0$           \\ \hline
-                  & $I_d$                                                   & -                                 & -                            & -                                                       & -                                             & -                                                     & -                                                     \\ \hline
-                  & $I_s$                                                   & -                                 & -                            & -                                                       & -                                             & -                                                     & -                                                     \\ \hline
-\end{tabular}%
+\includegraphics[width=.7\textwidth]{../images/BinaryHypervolume}
+\caption[Binary hypervolume indicator]{Depiction of the binary hypervolume indicator. The individual frontiers are shown in the top row: frontier $A$ (left) and frontier $B$ (right). The merged frontier $A+B$ is shown in bottom left - note the absence of points that were dominated when combined. Following the naming of regions as shown in the bottom right figure, the binary hypervolume indicator is equal to
+\begin{minipage}{\linewidth}
+  \begin{align*}
+    I_{H2} (A,B) = \left(\text{area}_a + \text{area}_b + \text{area}_c \right) - \left( \text{area}_b + \text{area}_c \right) = \text{area}_a
+  \end{align*}
+\end{minipage}%
 }
-\caption[Indicator comparisons to determine dominance relationships between frontiers]{Tests using indicators to determine dominance relationships between frontiers \cite{zitzler2003performance}. While general tests of dominance relationships may not be avaiable for some metrics (any cell with `-'), conclusions may still be drawn. For instance, $I_d(Z_1) < I_d(Z_2) \Rightarrow Z_2 \ntriangleright Z_1$.}
-\label{tab:powerOfIndicatorTests}
-\end{table}
+\label{fig:binaryHypervolume}
+\end{figure}
 
-\paragraph{Unary distance indicator $I_d$} The unary distance indicator used for the analysis is analogous to the unary distance indicator described in \cite{czyzzak1998pareto}, but instead of computing the distance to a reference Pareto frontier I measure the average distance from the frontier to the ideal solution:
+I developed a custom algorithm to solve for the hypervolume idicators. The details of the algorithm may be found in \S \ref{chap:appAHypervolumeAlgo}.
+
+\paragraph{Unary distance indicator $I_d$} The unary distance indicator measures the average distance from the frontier to the ideal solution:
 \begin{align}
-I_d = \frac{\sum_{\mathbf{z} \in Z} ||\mathbf{z}^{\text{ideal}} - \mathbf{z} ||}{N}
+I_d = \frac{\sum_{\mathbf{z} \in Z} ||\mathbf{z}_{\text{ideal}} - \mathbf{z} ||}{N}
 \end{align}
-Smaller values of $I_d$ correspond to frontiers that are closer to the ideal solution, which implies less conflict between the objectives.
+Smaller values of $I_d$ correspond to frontiers that are closer to the ideal solution, which may imply less conflict between objectives. This metric is analogous to the unary distance indicator described in \cite{czyzzak1998pareto} and is more commonly used in EMO. Where the metric used here measures the distance to the ideal solution, the metric in \cite{czyzzak1998pareto} measures the distance to a reference Pareto frontier.
 
-\paragraph{Unary Spacing Indicator $I_s$} The unary spacing indicator, or Schott's spacing metric\cite{schott1995fault}, computes the standard deviation of the distance between points in the frontier, defined as
+\paragraph{Unary Spacing Indicator $I_s$} The unary spacing indicator, or Schott's spacing metric\cite{schott1995fault}, computes the standard deviation of the distance between points in the frontier:
 \begin{align}
 I_s = \sqrt{\frac{1}{N-1} \sum_{\mathbf{z} \in Z} (d_z - \overbar{d})^2}
 \end{align}
@@ -322,16 +325,28 @@ where
 \begin{align}
 d_z = \min_{\mathbf{y} \in Z, \mathbf{y} \neq \mathbf{z}} ||\mathbf{z} - \mathbf{y}||
 \end{align}
-and $\overbar{d}$ is the average of all $d_z$. In EMO, the spacing indicator provides a measure of an algorithm's ability to search the frontier space uniformly. Here, the spacing metric provides a measure of the flexibility afforded to the decision maker under each climate scenario. Larger spacing metrics imply larger sacrifices between decisions and less flexibility.
+and $\overbar{d}$ is the average over all $d_z$. In EMO, the spacing indicator provides a measure of an algorithm's ability to search the frontier space uniformly. Here, the spacing metric provides a measure of the flexibility afforded to the decision maker under each climate scenario, since smaller values of $I_s$ imply a higher density of solutions and greater flexibility.
 
 \subsubsection{Quantifying conflict between objectives within a frontier}
 
-The above methods provide frontier-level metrics of conflict and tradeoffs. To determine the degree of conflict between two objectives within a single frontier, we employ an approach used in many-objective optimization. Given the increased difficulty in solving many-objective optimization problems \cite{khare2003performance}, researchers in this field seek to reduce the number of objectives considered in the model. To determine which objectives most strongly influence the shape of the frontier, they compute the correlation between each pair of objectives \cite{deb2005finding}. The objective pairs with the most negative correlation are most in conflict. To rank the relative conflict between objectives in each climate scenario, I compute their Pearson correlation coefficients:
+The above methods provide frontier-level metrics of conflict and tradeoffs. To determine the degree of conflict between two objectives within a single frontier, we employ two techniques. The first is an approach used in many-objective optimization, and the second is a variant of the unary hypervolume indicator.
+
+\paragraph{Pearson correlation coefficients} Given the increased difficulty in solving many-objective optimization problems \cite{khare2003performance}, researchers in this field seek to reduce the number of objectives considered in the model. To determine which objectives most strongly influence the shape of the frontier, they compute the correlation between each pair of objectives \cite{deb2005finding}. Objective pairs with strong negative correlation conflict with one another. To rank the relative conflict between objectives in each climate scenario, I compute their Pearson correlation coefficients:
 \begin{align}
 \rho_{X,Y} = \frac{\text{cov}(X,Y)}{\sigma(X)\sigma(Y)}
 \end{align}
 where, for objectives $x$ and $y$, $X$ and $Y$ are
 \begin{align}
-X = \{ \mathbf{z}_x^1, \mathbf{z}_x^2, \ldots, \mathbf{z}_x^{|Z|} \} \\
-Y = \{ \mathbf{z}_y^1, \mathbf{z}_y^2, \ldots, \mathbf{z}_y^{|Z|} \}
+X = \{ \mathbf{z}^x_1, \mathbf{z}^x_2, \ldots, \mathbf{z}^x_{|Z|} \} \\
+Y = \{ \mathbf{z}^y_1, \mathbf{z}^y_2, \ldots, \mathbf{z}^y_{|Z|} \}
 \end{align}
+
+\paragraph{Area of 2D frontier projection $A_{xy}$}
+The second technique to measure the conflict between objectives within a frontier uses the unary hypervolume indicator. Given a frontier with objective vectors in $N$ dimensions, take two objectives $x$ and $y$, and project the $N$-dimensional frontier to the two-dimensional $xy$-plane. Remove solutions dominated in this projection, and compute the hypervolume indicator (which, in two-dimensions, is simply the area). See Figure \ref{fig:frontierCrossSection}. Larger values of $A_{xy}$ imply less conflict between objectives $x$ and $y$.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{../images/CrossSection2D}
+\caption[Area of 2D frontier projection]{Comparing conflict between objectives based on the area bounded by two-dimensional frontier projection. Left is the original frontier; middle shows the 2D projection of the frontier; right shows the projected frontier with all dominated solutions removed. Assuming both objectives are maximized, the larger the area bounded by the cross-sectional area, the less conflict between the objectives.}
+\label{fig:frontierCrossSection}
+\end{figure}
