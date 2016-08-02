@@ -1,7 +1,11 @@
 \section{Methods}
-\subsection{Study area}
+In response to stakeholder and public wants, forest planners often manage forests for multiple ecosystem services, such as wildlife habitat, recreation, goods production, aesthetics, and carbon sequestration. Such ecosystem services are commonly in conflict with one another, meaning that a forest planner cannot simultaneously maximize the provision of all ecosystem services. Instead, provision of some services must be sacrificed to enable achievement in others. Best compromises must be sought among bundled ecosystem services.
+
+The Drink Planning Area in the Deschutes National Forest is one example of a region in which forest planners must consider the tradeoffs among ecosystem services when making management decisions.
+
+\subsection{Study system}
 \label{subsec:studyArea}
-I selected for the study system the Drink Planning Area which consists of 7056 ha on the east slopes of the Cascade Mountain Range in the Deschutes National Forest (see Figure \ref{fig:drinkOverview}). This area makes for an adequate study system, because it provides conflicting ecosystem services which the US Forest Service seeks to simultaneously optimize.
+The study system for this analysis is the Drink Planning Area. The Drink is a 7056 ha area on the east slopes of the Cascade Mountain Range in the Deschutes National Forest (see Figure \ref{fig:drinkOverview}). Of the ecosystem services provided by the Drink, the US Forest Service has selected three for prioritization.
 
 \begin{figure}[ht]
 \centering
@@ -10,7 +14,9 @@ I selected for the study system the Drink Planning Area which consists of 7056 h
 \label{fig:drinkOverview}
 \end{figure}
 
-The first objective is the reduction of fire hazard rating through the use of silvicultural treatments. The USFS chose this objective because one third of the Drink area comprises the municipal watershed for the cities of Bend, OR and Sisters, OR (see Figure \ref{fig:drinkOwlAndWatershed}) which have a combined population of approximately 90,000. Wildfires pose a threat to the watershed as they cause soil water repellency, surface runoff, and debris torrents \cite{ice2004effects}.
+The first is the protection of the northern spotted owl (NSO) (\textit{Strix occidentalis caurina}), a common, if controversial, indicator species in Pacific Northwest forests. Approximately 43\% of the Drink serves as habitat for the NSO (see Figure \ref{fig:drinkOwlAndWatershed}), and the USFS must protect this species since it is listed as threatened and therefore protected by the Endangered Species Act of 1973 \cite{congress1973endangered}.
+
+The second objective is the reduction of the fire hazard rating across the Drink Area. Implementing silvicultural treatments to reduce the fire hazard of the Drink is critical because, in addition to providing NSO habitat, the municipal watershed for the cities of Bend, OR and Sisters, OR lies within the Drink (see Figure \ref{fig:drinkOwlAndWatershed}). These two cities have a combined population of approximately 90,000 people. Wildfires pose a threat to the their water supply, because wildfires cause soil water repellency, surface runoff, and debris torrents \cite{ice2004effects}.
 
 \begin{figure}
 \centering
@@ -19,11 +25,11 @@ The first objective is the reduction of fire hazard rating through the use of si
 \label{fig:drinkOwlAndWatershed}
 \end{figure}
 
-In addition, approximately 43\% of the Drink serves as habitat for the northern spotted owl (NSO) (\textit{Strix occidentalis caurina}) (Figure \ref{fig:drinkOwlAndWatershed}). The USFS is required to protect the NSO since it is threatened and therefore protected by the Endangered Species Act of 1973 \cite{congress1973endangered}. The protection of NSO habitat is the second objective considered in this analysis.
+While the silvicultural treatments intend to provide long-term protection of the watershed, they also have the potential to introduce short-term increases in sediment delivery to the watershed \cite{o2005conceptual}. The minimization of these short-term peaks in sediment delivery is the the final ecosystem service prioritized by the USFS.
 
-Lastly, I aim to minimize the sediment delivered to the watershed as a result of the treatments applied to reduce fire hazard. While the treatments intend to provide long-term protection of the quality of the watershed, they also have the potential to introduce short-term increases in sediment delivery \cite{o2005conceptual}.
+\subsection{Timeline and assessment of treatment efficacy}
 
-To accomplish long-term reduction in fire hazard rating for the area, I formed a strategic plan for silvicultural treatments to apply across the Drink. The treatments may be applied in each of two 20-year time periods (2015-2035 and 2035-2055) and to each of the 303 management units that comprise the Drink. The division of the management units (stands) was performed \textit{a priori} by the Forest Service. The decision as to which treatment to perform on a stand is entirely dependent on silvicultural characteristics; the rules used to determine the treatment applications can be found in Appendix \ref{chap:appBTreatmentSpec}.
+Temporally, the case study in the Drink Planning Area consists of an 80 year simulation (2015 - 2095). All silvicultural treatments are performed in the first 40 years (2015 - 2055), divided into two 20-year planning periods. Spatially, the Drink is divided into 303 forest stands. Each stand may be treated in either period, neither, or both. Determining which treatment type to apply to a stand was done \textit{a priori} and is entirely dependent on silvicultural characteristics; the rules governing this assignment of treatment type can be found in the appendix, \S \ref{chap:appBTreatmentSpec}.
 
 \begin{figure}
 \centering
@@ -32,7 +38,7 @@ To accomplish long-term reduction in fire hazard rating for the area, I formed a
 \label{fig:drinkPAGs}
 \end{figure}
 
-To assess the treatments' long-term efficacy, I measured the fire hazard of the Drink at the end of an 80-year planning horizon (2015-2095). I measured the area of NSO habitat at the end of each planning period to ensure that the application of treatments did not negatively impact the habitat available for the NSO. Finally, the short-term sediment contributions from performing the treatments were measured at the time of treatment, which is assumed to be at the midpoint year in the planning period (2025 for period 1, 2045 for period 2). The planning horizon including the time of these events is shown in Figure \ref{fig:drinkPlanningHorizon}.
+To assess the treatments' long-term efficacy, the fire hazard rating of the Drink is measured at the end of the 80-year planning horizon in year 2095. The area of NSO habitat is assessed at the end of each planning period, years 2035 and 2055, to ensure that the application of treatments does not negatively impact the available habitat. Finally, at the time of treatment, the resulting short-term spikes in sediment delivery are measured. The time of treatment is assumed to be at the midpoint year in the planning period, years 2025 and 2045. A schematic of the planning horizon including the time of these events is shown in Figure \ref{fig:drinkPlanningHorizon}.
 
 \begin{figure}
 \centering
@@ -41,7 +47,7 @@ To assess the treatments' long-term efficacy, I measured the fire hazard of the 
 \label{fig:drinkPlanningHorizon}
 \end{figure}
 
-The three objectives are inherently in conflict with one another: fuel treatments drive short-term peaks in sediment delivery and potentially reduce owl habitat; minimizing short-term sediment delivery entails fewer treatments and therefore a higher fire hazard; maximizing owl habitat may require forgoing fuel treatments and again lead to higher fire hazard. In this study, I will determine how climate change impacts the tradeoffs that exist among these objectives.
+Competition exists between these bundled ecosystem services: fuel treatments in the watershed drive short-term peaks in sediment delivery and have the potential to reduce owl habitat; yet the prioritization of either NSO habitat or water quality alone entails fewer fuel treatments and increased fire hazard rating as a result. The forest planner, here the USFS, seeks a management plan that balances the provision of these bundled ecosystem services. The ability of the forest planer to decide on such a plan may be improved given a better understanding of the tradeoff relationships among the ecosystem services in the bundle. In this study, I seek to provide information on these tradeoff relationships and do so in a novel method that considers what effects climate change will have.
 
 \subsection{Climate Scenarios Considered}
 To determine the impacts of climate change on the tradeoff structure between ecosystem services, it is first necessary to define how the impacts of climate change will be captured in the analysis. Here I use the method employed by the IPCC, namely, a scenario analysis. In a scenario analysis, multiple alternative futures are considered and no prediction is made as to which scenarios are more likely than others. There is no attempt to quantify the probability of realization of any one scenario, much like how IPCC does not attempt to quantify the probability that any particular climate model is the correct prediction of the future climate.
