@@ -62,10 +62,173 @@ The two ensembles are comprised of the same 17 GCMs, but the assumed representat
 
 These three scenarios were chosen for the analysis as they represent a range of predicted climate change severity, from a $0 \degree C$ warming by the year 2100 under the ``None'' scenario to a $2.6-4.8 \degree C$ warming under RCP 8.5 \cite{ipcc2013climate}.
 
-\subsection{Determining tradeoff relationships between ecosystem services}
+\subsection{Determining tradeoff relationships between ecosystem services and climate scenarios}
 \label{subsec:whyUsingMultiObjModel}
-Given a selection of climate scenarios, I determined the tradeoff relationships between ecosystem services under each scenario using multi-objective mathematical optimization \cite{TothFsci2009}. This approach allocates resources so as to maximize a set of objectives subject to a set of constraints on the resource allocation. The objectives here are the ecosystem services that the USFS prioritized for the Drink area (see \S \ref{subsec:studyArea}). The optimal management of these resources will be Pareto efficient and result in optimal provision of the ecosystem services.
+Each climate scenario is used to parameterize a multi-objective mathematical optimization model. These models determine the allocation of resources for optimal achievement of the objectives. Here, the resources are the application of fuel treatments and the objectives are the ecosystem services prioritized by the Forest Service: NSO habitat, fire hazard reduction, and short-term sediment delivery.
 
+Solving each model generates a suite of management alternatives, each of which attains a certain amount in each ecosystem service. Comparing the ecosystem service achievements in these management alternatives reveals the tradeoff relationships that exist among the ecosystem services. One step further, since each models is parameterized according to a particular climate scenario, comparing the tradeoff relationships across models reveals how climate change impacts these tradeoff relationships.
+
+\subsection{The Multi-objective Optimization Model}
+This section describes the multi-objective zero-one mathematical program to optimize the joint provision of ecosystem services in the Drink area. The model minimizes the fire hazard rating of the area, minimizes the peak sediment delivery occurring as a result of performing fuel treatments, and maximizes the minimum area of NSO habitat after treatment periods in the planning horizon. In the model description, the following notation is used:
+\paragraph{Parameters}
+\begin{itemize}
+\item \textbf{$i \in I = $} the set of all 303 stands in the Drink area
+\item \textbf{$r \in R = $} the set of treatment schedule prescriptions:
+	$$
+	r =
+	\begin{cases}
+	1 &\text{ treatment applied in the first period (2015-2035)}\\
+	2 &\text{ treatment applied in the second period (2035-2055)}\\
+	3 &\text{ treatment applied in both periods}\\
+	0 &\text{ no treatment applied in either period}
+	\end{cases}
+	$$
+\item \textbf{$F_{i,r} = $} the fire hazard rating of stand $i$ at the end of the planning horizon if prescribed to treatment schedule $r$
+\item \textbf{$I_{\omega,t} = $} the set of stands that can qualify as NSO habitat at the end of planning period $t$
+\item \textbf{$a_i = $} the area of stand $i$
+\item \textbf{$e = $} the discount factor applied to NSO habitat that is less than 200 ha in size
+\item \textbf{$j \in R_{i,t} = $} the set of treatment schedules such that stand $i$ qualifies as NSO habitat in planning period $t$
+\item \textbf{$s_{i,t} = $} the contribution in tons of sediment delivered from performing fuel treatments on stand $i$ in planning period $t$
+\item \textbf{$c \in C = $} the set of all clusters of stands whose combined area exceeds 200 hectares
+\item \textbf{$i \in D_c = $} the set of all stands that comprise cluster $c$
+\item \textbf{$c \in C_i = $} the set of all clusters that contain stand $i$
+\item \textbf{$A = $} the maximum area in hectares that may be treated in either planning period
+\item \textbf{$\ell$, $u$ = } the upper and lower bounds, respectively, on the relative fluctuation in the area treated in periods 1 and 2
+\end{itemize}
+
+\paragraph{Decision Variables}
+$$
+x_{i,r} = \begin{cases}
+1 &\text{ if stand $i$ is prescribed to treatment schedule $r$}\\
+0 &\text{ otherwise}
+\end{cases}
+$$ 
+
+\paragraph{Indicator Variables}
+\begin{itemize}
+\item \textbf{$q_{c,t} = 1$} if all stands in cluster $c$ qualify as NSO habitat in planning period $t$ and $q_{c,t} = 0$ otherwise
+\item \textbf{$p_{i,t} = 1$} if in planning period $t$ stand $i$ is part of a cluster $c$ such that $q_{c,t} = 1$; $p_{i,t} = 0$ otherwise
+\end{itemize}
+
+\paragraph{Accounting Variables}
+\begin{itemize}
+\item \textbf{$S_t = $} the contribution in tons of sediment delivered from performing fuel treatments in planning period $t$
+\item \textbf{$O_t = $} the amount of NSO habitat in hectares at the end of planning period $t$
+\item \textbf{$H_t = $} the area in hectares treated in planning period $t$
+\end{itemize}
+
+The model is formulated as follows:
+
+\begin{align}
+Minimize \quad & \notag\\
+&\sum_{i\in I}\sum_{r\in R} F_{i,r} x_{i,r} \label{eqn:objFire} \\
+&\max \{S_1,S_2\} \label{eqn:objSediment} \\
+Maximize \quad & \notag\\
+&\min \{O_1,O_2\} \label{eqn:objOwl}
+\end{align}
+
+Subject to:
+\begin{align}
+\sum_{i\in I_{\omega,t}} \left(a_i p_{i,t} + e a_i \left( \sum_{j \in R_{i,t}} x_{i,j}-p_{i,t} \right) \right) &= O_t \qquad \forall t \in \{1,2\} \label{eqn:constraintDefOwl}\\
+\sum_{i\in I} \sum_{r\in 1,3} s_{i,1} x_{i,r} &= S_1 \label{eqn:constraintSediment1} \\
+\sum_{i\in I} \sum_{r\in 2,3} s_{i,2} x_{i,r} &= S_2 \label{eqn:constraintSediment2} \\
+\sum_{i \in D_c} \sum_{j \in R_{i,t}} x_{i,j} - |c| q_{c,t} &\ge 0 \qquad \forall t \in \{1,2\}, c \in C \label{eqn:constraintClusterTriggers} \\
+\sum_{c \in C_i} q_{c,t} - p_{i,t} &\ge 0 \qquad \forall t \in \{1,2\}, i \in I_{\omega,t} \label{eqn:constraintPVarTriggers} \\
+\sum_{r \in R} x_{i,r} &= 1  \qquad \forall i \in I \label{eqn:constraintOnePrescrip} \\
+\sum_{i \in I} \sum_{r \in 1,3} a_i x_{i,r} &= H_1 \label{eqn:constraintAreaAcctg1} \\
+\sum_{i \in I} \sum_{r \in 2,3} a_i x_{i,r} &= H_2 \label{eqn:constraintAreaAcctg2} \\
+H_t &\le A \qquad \forall t \in \{1,2\} \label{eqn:constraintAreaRestr} \\
+\ell H_1 - H_2 &\le 0 \label{eqn:constraintAreaFlucL} \\
+-u H_1 + H_2 &\le 0 \label{eqn:constraintAreaFlucU} \\
+x_{i,r}, p_i, q_c \in \{0,1\} \quad &\forall i \in I, r \in R, c \in C \label{eqn:constraintNonNeg}
+\end{align}
+
+HERE
+
+The first objective in the model is to minimize the cumulative fire hazard rating of the Drink area at the end of the 80-year planning horizon:
+\begin{align}
+Minimize \quad & F = \sum_{i\in I} \sum_{r\in R} F_{i,r} x_{i,r}
+\end{align}
+In equation \eqref{eqn:objFire}, I sum over all stands $i \in I$ and all treatment prescriptions $r \in R$ to obtain a cumulative fire hazard metric $F$, which measures the total fire hazard rating of the Drink area at the end of the planning horizon. The coefficients $F_{i,r}$ are the area-weighted fire hazard ratings for each stand $i \in I$ at the end of the planning horizon if stand $i$ is assigned to treatment prescription $r \in R$.
+
+The second objective is to minimize the peak short-term sediment delivery that results from performing treatments in either period one ($S_1$) or period two ($S_2$):
+\begin{align}
+Minimize \quad S = \max \{S_1,S_2\}
+\end{align}
+
+The last objective is to maximize the minimum area of northern spotted owl habitat at the end of each planning period, $O_1$ and $O_2$, for periods 1 and 2, respectively.
+\begin{align}
+Maximize \quad O = \min \{O_1,O_2\}
+\end{align}
+
+The objectives are subject to the following constraints. First, I defined the accounting variables for the area of NSO habitat available at the end of each planning period:
+\begin{align}
+\sum_{i\in I_{\omega,1}} \left(a_i p_{i,1} + e a_i \left( \sum_{j \in R_{i,1}} x_{i,j}-p_{i,1} \right) \right) = O_1 \\
+\sum_{i\in I_{\omega,2}} \left(a_i p_{i,2} + e a_i \left( \sum_{j \in R_{i,2}} x_{i,j}-p_{i,2} \right) \right) = O_2
+\end{align}
+The set of stands in the sum $i \in I_{\omega,t}$ are those that meet the first three criteria for NSO habitat under at least one treatment prescription $j \in R_{i,t}$, where $R_{i,t}$ is the set of treatment prescriptions for stand $i$ such that it meets the first three NSO habitat criteria at the end of planning period $t$ (where $t \in \{1,2\}$). If a stand $i$ does not meet these criteria under any treatment prescriptions (if the set $R_{i,t} = \{\emptyset\}$), then $i \notin I_{\omega,t}$. If the model assigns a stand $i \in I_{\omega,t}$ a treatment prescription $j \in R_{i,t}$, then stand $i$ meets the first three NSO habitat criteria at the end of planning period $t$, and the variable $x_{i,j}=1$. If, in addition, the stand $i$ is part of a cluster of stands all meeting the first three NSO habitat criteria at the end of period $t$ and whose combined contiguous area is greater than 200 ha, then the variable $p_{i,t} = 1$. Notice that when $p_{i,t} = 0$, the stand's contribution is discounted by $e = 0.5$, and when $p_{i,t} = 1$ it is not.
+
+Next, I defined the accounting variables for the sediment delivery that results from the performance of the prescribed management actions in each planning period.
+\begin{align}
+\sum_{i\in I} \sum_{r\in 1,3} s_{i,1} x_{i,r} = S_1\\
+\sum_{i\in I} \sum_{r\in 2,3} s_{i,2} x_{i,r} = S_2
+\end{align}
+The coefficients $s_{i,t}$ are the amount of sediment (in tonnes) that would result from treating stand $i$ in time period $t$.
+
+In order to control the trigger variables $p_{i,t}$ indicating a stand's inclusion in a 200 ha cluster of NSO habitat at the end of period $t$, I used the following two constraints:
+\begin{align}
+\sum_{i \in D_c} \sum_{j \in R_{i,t}} x_{i,j} - |c| q_{c,t} &\ge 0 \qquad \forall t \in \{1,2\}, c \in C\\
+\sum_{c \in C_i} q_{c,t} - p_{i,t} &\ge 0 \qquad \forall t \in \{1,2\}, i \in I_{\omega,t}
+\end{align}
+$c \in C$ are the clusters of stands whose combined area is greater than 200 ha. A cluster $c$ contains the set of stands $i \in D_c$. Equation \eqref{eqn:constraintClusterTriggers} specifies that all stands $i \in D_c$ within a cluster $c \in C$ must be assigned a management prescription such that they meet all NSO habitat criteria at the end of planning period $t$ in order for the cluster trigger variable $q_{c,t}$ to take value 1.
+
+Equation \eqref{eqn:constraintPVarTriggers} specifies that if no cluster $c \in C_i$ - the set of clusters that contain site $i$ - meets NSO qualifications at the end of period $t$, then the trigger variable $p_{i,t}$ must take value 0. If a cluster $c \in C_i$ does meet NSO qualifications at the end of planning period $t$, then the sense of the NSO objective function \eqref{eqn:objOwl} will draw up the value of the variable $p_{i,t}$ to 1.
+
+I also imposed the logical restriction that each stand may be assigned to at most one treatment prescription.
+\begin{align}
+\sum_{r \in R} x_{i,r} = 1  \qquad \forall i \in I
+\end{align}
+
+Next, I ensured that the area treated in each time period is less than a pre-specified maximum area $A$. Here I used a value of $A = 6000$ acres, or 2428 ha:
+\begin{align}
+\sum_{i \in I} \sum_{r \in 1,3} a_i x_{i,r} &= H_1 \\
+\sum_{i \in I} \sum_{r \in 2,3} a_i x_{i,r} &= H_2 \\
+H_1 &\le A\\
+H_2 &\le A
+\end{align}
+Equations \ref{eqn:constraintAreaAcctg1} and \ref{eqn:constraintAreaAcctg2} define the accounting variables for the areas treated in time periods 1 and 2, $H_1$ and $H_2$, and equations \ref{eqn:constraintAreaRestr1} and \ref{eqn:constraintAreaRestr2} impose the upper bound.
+
+Finally, I specified fluctuation constraints to bound the difference in the area treated in each time period:
+\begin{align}
+\ell H_1 - H_2 &\le 0 \\
+-u H_1 + H_2 &\le 0
+\end{align}
+I defined a maximum of 20\% areal fluctuation between the time periods. That is, $\ell = 0.8$ and $u = 1.2$.
+
+Together with the binary specifications on the variables (equation \eqref{eqn:constraintNonNeg}), the complete model is
+\begin{align*}
+Minimize \quad & \\
+F=&\sum_{i\in I}\sum_{r\in R} F_{i,r} x_{i,r}\\
+S=&\max \{S_1,S_2\}\\
+Maximize \quad & \\
+O =&\min \{O_1,O_2\}
+\end{align*}
+
+Subject to:
+\begin{align}
+\sum_{i\in I_{\omega,t}} \left(a_i p_{i,t} + e a_i \left( \sum_{j \in R_{i,t}} x_{i,j}-p_{i,t} \right) \right) &= O_t \qquad \forall t \in \{1,2\} \notag\\
+\sum_{i\in I} \sum_{r\in 1,3} s_{i,r} x_{i,r} &= S_1 \notag\\
+\sum_{i\in I} \sum_{r\in 2,3} s_{i,r} x_{i,r} &= S_2 \notag\\
+\sum_{i \in D_c} \sum_{j \in R_{i,t}} x_{i,j} - |c| q_{c,t} &\ge 0 \qquad \forall t \in \{1,2\}, c \in C \notag\\
+\sum_{c \in C_i} q_{c,t} - p_{i,t} &\ge 0 \qquad \forall t \in \{1,2\}, i \in I_{\omega,t} \notag\\
+\sum_{r \in R} x_{i,r} &= 1  \qquad \forall i \in I \notag\\
+\sum_{i \in I} \sum_{r \in 1,3} a_i x_{i,r} &= H_1 \notag\\
+\sum_{i \in I} \sum_{r \in 2,3} a_i x_{i,r} &= H_2 \notag\\
+H_t &\le A \qquad \forall t \in \{1,2\} \notag\\
+\ell H_1 - H_2 &\le 0 \notag\\
+-u H_1 + H_2 &\le 0 \notag\\
+x_{i,r}, p_i, q_c \in \{0,1\} \quad &\forall i \in I, r \in R, c \in C \label{eqn:constraintNonNeg}
+\end{align}
 To allocate the resources, the multi-objective optimization model assigns values to each of a set of decision variables. Here, the decision variables are on which stands and in which period to perform silvicultural treatments. This assignment is captured by the set of decision variables $x_{i,r}$. The model assigns $x_{i,r} = 1$ if stand $i \in I = \{0,1,\ldots,302\}$ (zero-indexed numbering for the 303 management units that comprise the Drink) is to be treated according to schedule $r \in R = \{0,1,2,3\}$, where
 \begin{itemize}
 \item $r = 0$ is the decision not to treat the stand in either period in the planning horizon,\item $r = 1$ is the decision to treat the stand in the first period,
@@ -118,92 +281,6 @@ I attained a digital elevation model from the US Department of Agriculture's Geo
 I obtained the required data on sediment delivery using the Watershed Erosion Prediction Project (WEPP) online GIS tool \cite{frankenberger2011development}. This tool takes as input soil textures, treatment types, years of simulation, and custom climate data. I obtained soil texture data for the Drink area from the USDA's Soil Survey Geographic (SSURGO) database. Treatment types are those specified in \S \ref{chap:appBTreatmentSpec}, and the years of simulation correspond to the treatment years in the model's planning horizon.
 
 The climate data used in the Climate-FVS and WEPP simulations was obtained through the Climate-FVS climate data server \cite{climateFVSReadyData}.
-
-\subsubsection{The Multi-objective Optimization Model}
-The first objective in the model is to minimize the cumulative fire hazard rating of the Drink area at the end of the 80-year planning horizon:
-\begin{align}
-Minimize \quad & F = \sum_{i\in I} \sum_{r\in R} F_{i,r} x_{i,r} \label{eqn:objFire}
-\end{align}
-In equation \eqref{eqn:objFire}, I sum over all stands $i \in I$ and all treatment prescriptions $r \in R$ to obtain a cumulative fire hazard metric $F$, which measures the total fire hazard rating of the Drink area at the end of the planning horizon. The coefficients $F_{i,r}$ are the area-weighted fire hazard ratings for each stand $i \in I$ at the end of the planning horizon if stand $i$ is assigned to treatment prescription $r \in R$.
-
-The second objective is to minimize the peak short-term sediment delivery that results from performing treatments in either period one ($S_1$) or period two ($S_2$):
-\begin{align}
-Minimize \quad S = \max \{S_1,S_2\} \label{eqn:objSediment}
-\end{align}
-
-The last objective is to maximize the minimum area of northern spotted owl habitat at the end of each planning period, $O_1$ and $O_2$, for periods 1 and 2, respectively.
-\begin{align}
-Maximize \quad O = \min \{O_1,O_2\} \label{eqn:objOwl}
-\end{align}
-
-The objectives are subject to the following constraints. First, I defined the accounting variables for the area of NSO habitat available at the end of each planning period:
-\begin{align}
-\sum_{i\in I_{\omega,1}} \left(a_i p_{i,1} + e a_i \left( \sum_{j \in R_{i,1}} x_{i,j}-p_{i,1} \right) \right) = O_1 \label{eqn:constraintOwl1}\\
-\sum_{i\in I_{\omega,2}} \left(a_i p_{i,2} + e a_i \left( \sum_{j \in R_{i,2}} x_{i,j}-p_{i,2} \right) \right) = O_2 \label{eqn:constraintOwl2}
-\end{align}
-The set of stands in the sum $i \in I_{\omega,t}$ are those that meet the first three criteria for NSO habitat under at least one treatment prescription $j \in R_{i,t}$, where $R_{i,t}$ is the set of treatment prescriptions for stand $i$ such that it meets the first three NSO habitat criteria at the end of planning period $t$ (where $t \in \{1,2\}$). If a stand $i$ does not meet these criteria under any treatment prescriptions (if the set $R_{i,t} = \{\emptyset\}$), then $i \notin I_{\omega,t}$. If the model assigns a stand $i \in I_{\omega,t}$ a treatment prescription $j \in R_{i,t}$, then stand $i$ meets the first three NSO habitat criteria at the end of planning period $t$, and the variable $x_{i,j}=1$. If, in addition, the stand $i$ is part of a cluster of stands all meeting the first three NSO habitat criteria at the end of period $t$ and whose combined contiguous area is greater than 200 ha, then the variable $p_{i,t} = 1$. Notice that when $p_{i,t} = 0$, the stand's contribution is discounted by $e = 0.5$, and when $p_{i,t} = 1$ it is not.
-
-Next, I defined the accounting variables for the sediment delivery that results from the performance of the prescribed management actions in each planning period.
-\begin{align}
-\sum_{i\in I} \sum_{r\in 1,3} s_{i,1} x_{i,r} = S_1 \label{eqn:constraintSediment1}\\
-\sum_{i\in I} \sum_{r\in 2,3} s_{i,2} x_{i,r} = S_2 \label{eqn:constraintSediment2}
-\end{align}
-The coefficients $s_{i,t}$ are the amount of sediment (in tonnes) that would result from treating stand $i$ in time period $t$.
-
-In order to control the trigger variables $p_{i,t}$ indicating a stand's inclusion in a 200 ha cluster of NSO habitat at the end of period $t$, I used the following two constraints:
-\begin{align}
-\sum_{i \in D_c} \sum_{j \in R_{i,t}} x_{i,j} - |c| q_{c,t} &\ge 0 \qquad \forall t \in \{1,2\}, c \in C \label{eqn:constraintClusterTriggers}\\
-\sum_{c \in C_i} q_{c,t} - p_{i,t} &\ge 0 \qquad \forall t \in \{1,2\}, i \in I_{\omega,t} \label{eqn:constraintPVarTriggers}
-\end{align}
-$c \in C$ are the clusters of stands whose combined area is greater than 200 ha. A cluster $c$ contains the set of stands $i \in D_c$. Equation \eqref{eqn:constraintClusterTriggers} specifies that all stands $i \in D_c$ within a cluster $c \in C$ must be assigned a management prescription such that they meet all NSO habitat criteria at the end of planning period $t$ in order for the cluster trigger variable $q_{c,t}$ to take value 1.
-
-Equation \eqref{eqn:constraintPVarTriggers} specifies that if no cluster $c \in C_i$ - the set of clusters that contain site $i$ - meets NSO qualifications at the end of period $t$, then the trigger variable $p_{i,t}$ must take value 0. If a cluster $c \in C_i$ does meet NSO qualifications at the end of planning period $t$, then the sense of the NSO objective function \eqref{eqn:objOwl} will draw up the value of the variable $p_{i,t}$ to 1.
-
-I also imposed the logical restriction that each stand may be assigned to at most one treatment prescription.
-\begin{align}
-\sum_{r \in R} x_{i,r} = 1  \qquad \forall i \in I \label{eqn:constraintOnePrescrip}
-\end{align}
-
-Next, I ensured that the area treated in each time period is less than a pre-specified maximum area $A$. Here I used a value of $A = 6000$ acres, or 2428 ha:
-\begin{align}
-\sum_{i \in I} \sum_{r \in 1,3} a_i x_{i,r} &= H_1 \label{eqn:constraintAreaAcctg1}\\
-\sum_{i \in I} \sum_{r \in 2,3} a_i x_{i,r} &= H_2 \label{eqn:constraintAreaAcctg2}\\
-H_1 &\le A \label{eqn:constraintAreaRestr1}\\
-H_2 &\le A \label{eqn:constraintAreaRestr2}
-\end{align}
-Equations \ref{eqn:constraintAreaAcctg1} and \ref{eqn:constraintAreaAcctg2} define the accounting variables for the areas treated in time periods 1 and 2, $H_1$ and $H_2$, and equations \ref{eqn:constraintAreaRestr1} and \ref{eqn:constraintAreaRestr2} impose the upper bound.
-
-Finally, I specified fluctuation constraints to bound the difference in the area treated in each time period:
-\begin{align}
-\ell H_1 - H_2 &\le 0 \label{eqn:constraintAreaFlucL}\\
--u H_1 + H_2 &\le 0 \label{eqn:constraintAreaFlucU}
-\end{align}
-I defined a maximum of 20\% areal fluctuation between the time periods. That is, $\ell = 0.8$ and $u = 1.2$.
-
-Together with the binary specifications on the variables (equation \eqref{eqn:constraintNonNeg}), the complete model is
-\begin{align*}
-Minimize \quad & \\
-F=&\sum_{i\in I}\sum_{r\in R} F_{i,r} x_{i,r}\\
-S=&\max \{S_1,S_2\}\\
-Maximize \quad & \\
-O =&\min \{O_1,O_2\}
-\end{align*}
-
-Subject to:
-\begin{align}
-\sum_{i\in I_{\omega,t}} \left(a_i p_{i,t} + e a_i \left( \sum_{j \in R_{i,t}} x_{i,j}-p_{i,t} \right) \right) &= O_t \qquad \forall t \in \{1,2\} \notag\\
-\sum_{i\in I} \sum_{r\in 1,3} s_{i,r} x_{i,r} &= S_1 \notag\\
-\sum_{i\in I} \sum_{r\in 2,3} s_{i,r} x_{i,r} &= S_2 \notag\\
-\sum_{i \in D_c} \sum_{j \in R_{i,t}} x_{i,j} - |c| q_{c,t} &\ge 0 \qquad \forall t \in \{1,2\}, c \in C \notag\\
-\sum_{c \in C_i} q_{c,t} - p_{i,t} &\ge 0 \qquad \forall t \in \{1,2\}, i \in I_{\omega,t} \notag\\
-\sum_{r \in R} x_{i,r} &= 1  \qquad \forall i \in I \notag\\
-\sum_{i \in I} \sum_{r \in 1,3} a_i x_{i,r} &= H_1 \notag\\
-\sum_{i \in I} \sum_{r \in 2,3} a_i x_{i,r} &= H_2 \notag\\
-H_t &\le A \qquad \forall t \in \{1,2\} \notag\\
-\ell H_1 - H_2 &\le 0 \notag\\
--u H_1 + H_2 &\le 0 \notag\\
-x_{i,r}, p_i, q_c \in \{0,1\} \quad &\forall i \in I, r \in R, c \in C \label{eqn:constraintNonNeg}
-\end{align}
 
 \subsection{Model solution}
 In general, solving a bounded and non-degenerate multi-objective optimization problem with $N$ objectives produces a set of objective vectors (also called ``solutions'') $\mathbf{z} \in Z$ where $\mathbf{z}=\braket{z^1,\ldots,z^N}$. The set of solutions $Z$ is referred to as the Pareto-optimal frontier or efficient frontier or, simply, frontier. The solutions comprising an efficient frontier have the special relationship such that no component of a solution $\mathbf{z}^i$ can be improved upon without one of the other components $\mathbf{z}^j$ ($j \neq i$) degrading. This quality is known as Pareto efficiency. For example, this relationship in the current problem means that further reducing the value of fire hazard in a solution would result in either additional sediment deposits, a reduction of NSO habitat, or both.
