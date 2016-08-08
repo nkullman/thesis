@@ -1,9 +1,12 @@
 \section{Methods}
-In response to stakeholder and public wants, forest planners often manage forests for multiple ecosystem services, such as wildlife habitat, recreation, goods production, aesthetics, and carbon sequestration. Such ecosystem services are commonly in conflict with one another, meaning that forest planners cannot simultaneously maximize the provision of all ecosystem services. Instead, provision of some services must be sacrificed to enable achievement in others. Best compromises must be sought among bundled ecosystem services.
+\label{sec:methods}
+In response to stakeholder and public wants, forest planners often manage forests for multiple ecosystem services simultaneously, such as wildlife habitat, recreation, goods production, aesthetics, and carbon sequestration. Such ecosystem services are commonly in conflict with one another, meaning that forest planners cannot simultaneously maximize the provision of all ecosystem services. Instead, provision of some services must be sacrificed to enable achievement in others, forcing the forest planner to seek a best compromise among the bundle of ecosystem services.
+
+It is currently unknown how climate change will alter the tradeoff relationships among bundled ecosystem services. This drives uncertainty in how forest planners may have to change their compromise strategies to maintain a desired balance among ecosystem services. In this section, I describe a case study in the Deschutes National Forest to quantify the changes in tradeoff relationships and how understanding these changes may result in better management decisions. To quantify the changes in the tradeoff relationships, I employ multi-objective mathematical optimization and compare the results under three different climate change scenarios.
 
 \subsection{Study system}
 \label{subsec:studyArea}
-The Drink Planning Area in the Deschutes National Forest is one example of a region in which forest planners must consider the tradeoffs among ecosystem services when making management decisions. This is the study system for the analysis. The Drink is a 7056 ha area on the east slopes of the Cascade Mountain Range in the Deschutes National Forest (see Figure \ref{fig:drinkOverview}). Of the ecosystem services provided by the Drink, the US Forest Service has selected three for prioritization.
+The Drink Planning Area is a 7056 ha area on the east slopes of the Cascade Mountain Range in the Deschutes National Forest (see Figure \ref{fig:drinkOverview}). Like many managed forests, the Drink is managed for the simultaneous provision of multiple ecosystem services.  The managing entity, the US Forest Service, has specified a bundle of three ecosystem services for prioritization.
 
 \begin{figure}[ht]
 \centering
@@ -12,9 +15,9 @@ The Drink Planning Area in the Deschutes National Forest is one example of a reg
 \label{fig:drinkOverview}
 \end{figure}
 
-The first is the protection of the northern spotted owl (NSO) (\textit{Strix occidentalis caurina}), a common, if controversial, indicator species in Pacific Northwest forests. Because of the availability of dense old growth forest, approximately 43\% of the Drink serves as habitat for the NSO (see Figure \ref{fig:drinkOwlAndWatershed}). The USFS is required to protect this species since it is listed as threatened and therefore protected by the Endangered Species Act of 1973 \cite{congress1973endangered}.
+The first ecosystem service is the provision of habitat for the northern spotted owl (NSO) (\textit{Strix occidentalis caurina}). The NSO is a common, if controversial, indicator species in Pacific Northwest forests. Because of the availability of dense old growth forest in the Drink, approximately 43\% of the area serves as habitat for the NSO (see Figure \ref{fig:drinkOwlAndWatershed}). The USFS is required to protect this species since it is listed as threatened and therefore protected by the Endangered Species Act of 1973 \cite{congress1973endangered}.
 
-The second objective is the reduction of the fire hazard rating across the Drink Area. Implementing silvicultural treatments to reduce the fire hazard of the Drink is critical not only because it provides habitat to the threatened NSO, but also because the municipal watershed for the cities of Bend, OR and Sisters, OR lies within the Drink (see Figure \ref{fig:drinkOwlAndWatershed}). These two cities have a combined population of approximately 90,000 people. Wildfires pose a threat to the their water supply, since wildfires may cause soil water repellency, surface runoff, and debris torrents \cite{ice2004effects}.
+The second ecosystem service the USFS seeks to provide is protection from wildfire. This protection is achieved by way of silvicultural treatments applied to designated treatment areas (stands) across the Drink. The efficacy of these treatments is measured by comparing the fire hazard rating of the stand before and after treatment. The fire hazard rating is described in more detail below and in table \ref{tab:firehazards}. Implementing the silvicultural treatments to reduce the fire hazard rating of the Drink is critical not only because it protects the habitat of the NSO, but also because the Drink Area houses the municipal watershed for the cities of Bend, OR and Sisters, OR (see Figure \ref{fig:drinkOwlAndWatershed}). Wildfires pose a threat to these cities' water supply, because wildfires can cause soil water repellency, surface runoff, and debris torrents \cite{ice2004effects}. In addition, the Drink has never before undergone fuels treatments, which increases the expected severity of a fire should one occur. 
 
 \begin{figure}
 \centering
@@ -23,7 +26,7 @@ The second objective is the reduction of the fire hazard rating across the Drink
 \label{fig:drinkOwlAndWatershed}
 \end{figure}
 
-While the silvicultural treatments intend to provide long-term protection of the watershed, they also have the potential to introduce short-term increases in sediment delivery to the watershed \cite{o2005conceptual}. The minimization of these short-term peaks in sediment delivery is the the final ecosystem service prioritized by the USFS.
+The last ecosystem service is the provision of a watershed with minimal sediment content. While the silvicultural treatments intend to provide long-term protection of the watershed, the implementation of the treatments has the potential to introduce short-term increases in sediment delivery to the watershed \cite{o2005conceptual}. This is expected to be especially true in the Drink Area, where local Forest Service staff have noted that the watershed is unusually susceptible to spikes in sediment delivery as a result from activities within the watershed.
 
 \subsection{Timeline and assessment of treatment efficacy}
 
