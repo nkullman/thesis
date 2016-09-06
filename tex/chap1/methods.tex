@@ -20,7 +20,7 @@ Consider the $M$-objective optimization problem
 \end{align}
 with \textit{objective functions} $f_i(\mathbf{x}), i \in \{1,\ldots,M\}$ and feasible \textit{decision vectors} (or \textit{solutions}) $\mathbf{x} \in \mathbb{R}^n$. $n$ is the number of decision variables in the optimization problem. A set of equality and inequality constraints determine the \textit{feasible decision vector space} $X$. Each objective function $f_i : \mathbb{R}^n \mapsto \mathbb{R}$ maps decision vectors to scalars in $\mathbb{R}$. The vector objective function $\mathbf{f} : X \mapsto \mathbb{R}^M$ maps the feasible decision vector space to the \textit{objective space} $\mathbb{R}^M$.
 
-I define $\mathcal{M}$ as the set of all $M$ objective functions $\mathcal{M} = \{f_1,\ldots,f_m\}$. $\mathcal{L} \subset \mathcal{M}$ defines a sub-dimensional objective set that includes only some of the objectives $f_i \in \mathcal{M}$.
+I define $\mathcal{M}$ as the set of all $M$ objective functions $\mathcal{M} = \{f_1,\ldots,f_M\}$. $\mathcal{L} \subset \mathcal{M}$ defines a sub-dimensional objective set that includes only some of the objectives $f_i \in \mathcal{M}$.
 
 \paragraph{Dominance and frontiers}
 A solution $\mathbf{x}^1$ is said to \textit{dominate} another solution $\mathbf{x}^2$ ($\mathbf{x}^1 \succ \mathbf{x}^2$) if
@@ -29,32 +29,34 @@ A solution $\mathbf{x}^1$ is said to \textit{dominate} another solution $\mathbf
 \end{align}
 The set of non-dominated solutions to the multi-objective problem \eqref{eqn:generalObj} and \eqref{eqn:generalConstraint} is referred to as the \textit{Pareto-optimal set} $P = \{\mathbf{x} \in X | \nexists \mathbf{y} \in X : \mathbf{y} \succ \mathbf{x} \}$.
 
-The \textit{Pareto-optimal frontier}, the \textit{efficient frontier} or, simply, the \textit{frontier} $Z$ is the corresponding set of $M$-dimensional \textit{objective vectors} $\mathbf{z} = [f_1(\mathbf{x}),f_2(\mathbf{x}),\ldots,f_m(\mathbf{x})]$. That is,
+The \textit{Pareto-optimal frontier}, the \textit{efficient frontier} or, simply, the \textit{frontier} $Z$ is the corresponding set of $M$-dimensional \textit{objective vectors} $\mathbf{z} = [f_1(\mathbf{x}),f_2(\mathbf{x}),\ldots,f_M(\mathbf{x})]$. That is,
 \begin{align}
-Z = \{\mathbf{z} = [f_1(\mathbf{x}),\ldots,f_m(\mathbf{x})] \:|\: \mathbf{x} \in P\}
-\end{align}.
-
-\paragraph{Trade-offs} HERE
-The trade-off between two objective vectors is the exchange in objective provisions between them. Formally, the trade-off between two objective vectors $\mathbf{a}$ and $\mathbf{b}$ is defined as the vector
-\begin{align}
-\mathbf{t}_{\mathbf{a},\mathbf{b}} = [b^1 - a^1, b^2 - a^2, \ldots, b^m - a^m]
+Z = \{\mathbf{z} = [f_1(\mathbf{x}),\ldots,f_M(\mathbf{x})] \:|\: \mathbf{x} \in P\}
 \end{align}
-Note that $\mathbf{t}_{\mathbf{a},\mathbf{b}} = - \mathbf{t}_{\mathbf{b},\mathbf{a}}$. Because all solutions are assumed to be Pareto efficient, not all components will be of the same sign.
-
-\paragraph{Presence of conflict}
-If no conflict exists among a set of objectives, the objectives are said to be ``stacked'' or nonconflicting. In such a set, increasing the provision of one objective also increases provision of the others. Formally, I determine whether a set of objectives $\mathcal{M} \subset F$ is stacked by checking if the following holds true:
+Objective vectors' components are referred to in subscripts:
 \begin{align}
-\forall z_1, z_2 \in Z, i \in \mathcal{M}& \notag \\
-&(z_1^i \ge z_2^i) \Rightarrow (z_1^j \ge z_2^j) \qquad \label{eqn:objPairHarmony}\\
-\forall j \in \mathcal{M}, j \neq i&
+\mathbf{z} = [z_1, z_2, \ldots, z_M]
 \end{align}
-This definition is functionally equivalent to that suggested by Zitzler (2009) \cite{brockhoff2009objective} and Purshouse and Fleming (2003) \cite{purshouse2003conflict}.
 
-If the above holds, then the objectives are stacked. Else, there is conflict among the objectives, and the set $\mathcal{M}$ defines a bundle. Note that the bundle may still be reduced by identifying subsets of $\mathcal{M}$ that are stacked. If the statement \eqref{eqn:objPairHarmony} holds for some pair of objectives $i,j \in \mathcal{M}$, $j \neq i$, then the objectives are stacked, and one may be removed from the set $\mathcal{M}$ in order to define a smaller bundle.
+\paragraph{Defining trade-offs and conflict}
+The \textit{trade-off} between two objective vectors $\mathbf{z}^1$ and $\mathbf{z}^2$ is the vector of differences in their objective achievements:
+\begin{align}
+\mathbf{\tau}_{\mathbf{z}^1,\mathbf{z}^2} = [z^2_1 - z^1_1, z^2_2 - z^1_2, \ldots, z^2_M - z^1_M]
+\end{align}
+Note that $\mathbf{t}_{\mathbf{a},\mathbf{b}} = - \mathbf{t}_{\mathbf{b},\mathbf{a}}$.
 
-\paragraph{Measure of conflict}
-Many authors have previously measured conflict (CITEABUNCHLIKEZITZLERANDPURSHOUSEANDGALLEBERLING). Here, we 
-Take all pairs of lines on the PCoords plot. How many of them have same sign on slope vs how many have  diff sign on slope? Zero slope = skip that pair in determining test?
+The presence of \textit{conflict} among a set of objectives $\mathcal{L} \subset \mathcal{M}$ is determined by checking if $\forall z^1, z^2 \in Z, i \in \mathcal{L}$
+\begin{align}
+(z^1_i \ge z^2_i) \Rightarrow (z^1_j \ge z^2_j) \quad \forall j \in \mathcal{L}, j \neq i \label{eqn:objPairHarmony}
+\end{align}
+If \eqref{eqn:objPairHarmony} holds, then the objectives in the objective set $\mathcal{L}$ are not in conflict, and define a \textit{stack} of objectives. Else, there is conflict among the objectives in $\mathcal{L}$, and the set defines a \textit{bundle}. This means of checking for the presence of conflict among an objective set is functionally equivalent to that suggested by Zitzler (2009) \cite{brockhoff2009objective} and Purshouse and Fleming (2003) \cite{purshouse2003conflict}.
+
+\subsection{A new metric to measure conflict}
+After determining that objectives conflict with one another, it may be useful to determine the severity of the conflict. To do so requires a means of measuring this value. Many authors have previously measured conflict between objectives (CITEABUNCHLIKEZITZLERANDPURSHOUSEANDGALLEBERLING). Often times these measurements are intended to determine which objective pairs are negatively correlated, which are positively correlated, and which are independent. Most commonly used metrics derive from measures of linear correlation (such as the Pearson correlation coefficient (CITESOMEPEOPLEWHOHAVEUSEDIT-DEBSAXENA)) or rank correlation (such as Kendall's Tau (CITESOMEMOREPEOPLE), Spearman's rho (MORECITES...), and Zitzler's $\delta$-error (CITEZITZLER'SPIECE)). The intent of these metrics is generally to determine which objectives, out of a large set ($M \ge 4$) may be removed from the problem to make it easier to solve.
+
+I argue, however, that none of these metrics adequately captures the severity of conflict between a pair of objectives.
+
+Consider the following two examples
 
 \subsection{Study system}
 \label{subsec:studyArea}
