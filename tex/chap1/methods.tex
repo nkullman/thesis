@@ -9,8 +9,10 @@
 Bundled ecosystem services conflict with one another, and I argue that understanding the change in this conflict over time will enable forest planners to make more informed management decisions. Here, I provide formal definitions of what it means for ecosystem services to conflict, how to measure changes in conflict, and how a change in conflict impacts trade-off relationships.
 
 \subsection{Terminology}
+For the notation used here, superscripts generally refer to solution identifiers and subscripts generally refer to dimension identifiers. For example, $\mathbf{x}^1$ refers to the first solution, and $x^1_i$ refers to the $i$-th dimension of the first solution.
+
 \label{subsec:terminology}
-\paragraph{Multi-objective problem and solutions}
+\paragraph{The multi-objective problem}
 Consider the $M$-objective optimization problem
 \begin{align}
 \text{Maximize}& \notag \\
@@ -18,14 +20,12 @@ Consider the $M$-objective optimization problem
 \text{subject to}& \notag \\
 & \mathbf{x} \in X \label{eqn:generalConstraint}
 \end{align}
-with \textit{objective functions} $f_i(\mathbf{x}), i \in \{1,\ldots,M\}$ and feasible \textit{decision vectors} (or \textit{solutions}) $\mathbf{x} \in \mathbb{R}^n$. $n$ is the number of decision variables in the optimization problem. A set of equality and inequality constraints determine the \textit{feasible decision vector space} $X$. Each objective function $f_i : \mathbb{R}^n \mapsto \mathbb{R}$ maps decision vectors to scalars in $\mathbb{R}$. The vector objective function $\mathbf{f} : X \mapsto \mathbb{R}^M$ maps the feasible decision vector space to the \textit{objective space} $\mathbb{R}^M$.
-
-I define $\mathcal{M}$ as the set of all $M$ objective functions $\mathcal{M} = \{f_1,\ldots,f_M\}$. $\mathcal{L} \subset \mathcal{M}$ defines a sub-dimensional objective set that includes only some of the objectives $f_i \in \mathcal{M}$.
+with \textit{objective functions} $f_i(\mathbf{x}), i \in \{1,\ldots,M\}$ and feasible \textit{decision vectors} (or \textit{solutions}) $\mathbf{x} \in \mathbb{R}^n$ where $n$ is the number of decision variables in the optimization problem. A set of equality and inequality constraints determine the \textit{feasible decision space} $X$. Each objective function $f_i : \mathbb{R}^n \mapsto \mathbb{R}$ maps decision vectors to scalars in $\mathbb{R}$. The vector objective function $\mathbf{f} : X \mapsto \mathbb{R}^M$ maps the feasible decision space to the \textit{objective space} $\mathbb{R}^M$. The set of all objective functions is the \textit{objective set} $\mathcal{M} = \{f_1,\ldots,f_M\}$.
 
 \paragraph{Dominance and frontiers}
 A solution $\mathbf{x}^1$ is said to \textit{dominate} another solution $\mathbf{x}^2$ ($\mathbf{x}^1 \succ \mathbf{x}^2$) if
 \begin{align}
-\forall f_i \in \mathcal{M} f_i(\mathbf{x}^1) \ge f_i(\mathbf{x}^2) \text{ and } \exists f_i \in \mathcal{M} : f_i(\mathbf{x}^1) > f_i(\mathbf{x}^2)
+\forall f_i \in \mathcal{M} \; f_i(\mathbf{x}^1) \ge f_i(\mathbf{x}^2) \text{ and } \exists f_i \in \mathcal{M} : f_i(\mathbf{x}^1) > f_i(\mathbf{x}^2)
 \end{align}
 The set of non-dominated solutions to the multi-objective problem \eqref{eqn:generalObj} and \eqref{eqn:generalConstraint} is referred to as the \textit{Pareto-optimal set} $P = \{\mathbf{x} \in X | \nexists \mathbf{y} \in X : \mathbf{y} \succ \mathbf{x} \}$.
 
@@ -38,25 +38,54 @@ Objective vectors' components are referred to in subscripts:
 \mathbf{z} = [z_1, z_2, \ldots, z_M]
 \end{align}
 
-\paragraph{Defining trade-offs and conflict}
+\paragraph{Ideal and nadir objective vectors}
+The \textit{ideal objective vector} is defined as
+\begin{align}
+\mathbf{z}^{\text{ideal}} = [z_1^*,\ldots,z_M^*]
+\end{align}
+where $z_i^* = \max_{\mathbf{x} \in X}\{f_i(\mathbf{x})\}$. Analogously, define the nadir solution
+\begin{align}
+\mathbf{z}^{\text{nadir}} = [z_1^\dagger,\ldots,z_M^\dagger]
+\end{align}
+where $z_i^\dagger = \min_{\mathbf{x} \in X}\{f_i(\mathbf{x})\}$.
+
+\paragraph{Sub-dimensions} Define the \textit{sub-dimensional objective set} $\mathcal{L} \subset \mathcal{M}$ as a subset of the objective functions $f_i \in \mathcal{M}$. Call the cardinality of this set $L$. The \textit{sub-dimensional objective vector} (specifically, the $L$-dimensional objective vector) for the solution $\mathbf{x}^i$ is the vector denoted $\mathbf{z}^i_\mathcal{L}$ whose components are $z^i_\ell = f_\ell(\mathbf{x}^i)$, $\forall \ell \in \mathcal{L}$. That is, they are the components of $\mathbf{z}^i$ that correspond to objectives included in both $\mathcal{L}$ and $\mathcal{M}$.
+
+\paragraph{Trade-offs}
 The \textit{trade-off} between two objective vectors $\mathbf{z}^1$ and $\mathbf{z}^2$ is the vector of differences in their objective achievements:
 \begin{align}
-\mathbf{\tau}_{\mathbf{z}^1,\mathbf{z}^2} = [z^2_1 - z^1_1, z^2_2 - z^1_2, \ldots, z^2_M - z^1_M]
+\mathbf{\tau}^{\mathbf{z}^1,\mathbf{z}^2} = [z^2_1 - z^1_1, z^2_2 - z^1_2, \ldots, z^2_M - z^1_M]
 \end{align}
-Note that $\mathbf{t}_{\mathbf{a},\mathbf{b}} = - \mathbf{t}_{\mathbf{b},\mathbf{a}}$.
+Note that $\mathbf{\tau}^{\mathbf{z}^1,\mathbf{z}^2} = - \mathbf{\tau}^{\mathbf{z}^2,\mathbf{z}^1}$.
 
-The presence of \textit{conflict} among a set of objectives $\mathcal{L} \subset \mathcal{M}$ is determined by checking if $\forall z^1, z^2 \in Z, i \in \mathcal{L}$
+Given a sub-dimensional objective set $\mathcal{L}$, define the \textit{sub-dimensional trade-off} $\tau^{\mathbf{z}^1,\mathbf{z}^2}_\mathcal{L}$ as the vector with components $\tau^{\mathbf{z}^1,\mathbf{z}^2}_\ell$, $\forall \ell \in \mathcal{L}$.
+
+\paragraph{Conflict, bundles and stacks}
+Objectives in an objective set $\mathcal{L}$ \textit{do not conflict} if the objectives improve simultaneously:
+$\forall \mathbf{z}^1, \mathbf{z}^2 \in Z, i \in \mathcal{L}$
 \begin{align}
 (z^1_i \ge z^2_i) \Rightarrow (z^1_j \ge z^2_j) \quad \forall j \in \mathcal{L}, j \neq i \label{eqn:objPairHarmony}
 \end{align}
-If \eqref{eqn:objPairHarmony} holds, then the objectives in the objective set $\mathcal{L}$ are not in conflict, and define a \textit{stack} of objectives. Else, there is conflict among the objectives in $\mathcal{L}$, and the set defines a \textit{bundle}. This means of checking for the presence of conflict among an objective set is functionally equivalent to that suggested by Zitzler (2009) \cite{brockhoff2009objective} and Purshouse and Fleming (2003) \cite{purshouse2003conflict}.
+If \eqref{eqn:objPairHarmony} does not hold, then the objectives conflict. A set of objectives that conflict is referred to as a \textit{bundle}, and a set of objectives that do not conflict is referred to as a \textit{stack}.
 
-\subsection{A new metric to measure conflict}
-After determining that objectives conflict with one another, it may be useful to determine the severity of the conflict. To do so requires a means of measuring this value. Many authors have previously measured conflict between objectives (CITEABUNCHLIKEZITZLERANDPURSHOUSEANDGALLEBERLING). Often times these measurements are intended to determine which objective pairs are negatively correlated, which are positively correlated, and which are independent. Most commonly used metrics derive from measures of linear correlation (such as the Pearson correlation coefficient (CITESOMEPEOPLEWHOHAVEUSEDIT-DEBSAXENA)) or rank correlation (such as Kendall's Tau (CITESOMEMOREPEOPLE), Spearman's rho (MORECITES...), and Zitzler's $\delta$-error (CITEZITZLER'SPIECE)). The intent of these metrics is generally to determine which objectives, out of a large set ($M \ge 4$) may be removed from the problem to make it easier to solve.
+This approach to checking for the presence of conflict among an objective set is functionally equivalent to that used by previous studies, such as Brockhoff and Zitzler (2009) \cite{brockhoff2009objective} and Purshouse and Fleming (2003) \cite{purshouse2003conflict}.
 
-I argue, however, that none of these metrics adequately captures the severity of conflict between a pair of objectives.
+\subsection{A new measure of conflict}
+After determining that objectives conflict with one another, one may wish to determine the severity of the conflict. Many authors have previously measured conflict between objectives \cite{brockhoff2009objective}\cite{purshouse2003conflict}\cite{gal1977redundant}, with most commonly used metrics deriving from measures of linear correlation (such as the Pearson correlation coefficient \cite{deb2006searching}) or rank correlation (such as Kendall's Tau \cite{kanoulas2009empirical}, Spearman's rho \cite{karande2012application}, and Zitzler's $\delta$-error \cite{brockhoff2006all}). The intended use of these metrics is often the removal of redundant objectives from a many-objective optimization problem. In such cases, measures of monotonicity or correlation alone may be adequate. However, if a more nuanced understanding of the relationship between the objectives is desired, then a different metric is required.
 
-Consider the following two examples
+Let $\mathbf{z}_{ij}$ be the sub-dimensional objective vector comprised of only the components corresponding to the $i$th and $j$th objectives $\mathbf{z}_{ij} = [z_i,z_j]$. I define the following measure of conflict between objectives $i$ and $j$:
+\begin{align}
+C_{ij} = (1-\rho_{ij})\frac{\overbar{d}_{ij}}{2 d_{max,ij}}
+\end{align}
+where $\overbar{d}_{ij}$ is the average sub-dimensional distance from objective vectors to the ideal solution
+\begin{align}
+\overbar{d}_{ij} = \frac{1}{|Z|} \sum_{\mathbf{z} \in Z} ||\mathbf{z}^{\text{ideal}}_{ij} - \mathbf{z}_{ij}||
+\end{align}
+and
+\begin{align}
+d_{max,ij} = ||\mathbf{z}^{\text{ideal}}_{ij} - \mathbf{z}^{\text{nadir}}_{ij}||
+\end{align}
+and $\rho_{ij}$ is Spearman's rank-correlation coefficient for the solutions' achievements in objectives $i$ and $j$.
 
 \subsection{Study system}
 \label{subsec:studyArea}
