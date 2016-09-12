@@ -9,7 +9,7 @@
 Bundled ecosystem services conflict with one another, and I argue that understanding the change in this conflict over time will enable forest planners to make more informed management decisions. Here, I provide formal definitions of what it means for ecosystem services to conflict, how to measure changes in conflict, and how a change in conflict impacts trade-off relationships.
 
 \subsection{Terminology}
-For the notation used here, superscripts generally refer to solution identifiers and subscripts generally refer to dimension identifiers. For example, $\mathbf{x}^1$ refers to the first solution, and $x^1_i$ refers to the $i$-th dimension of the first solution.
+To aid in the discussion of conflict and trade-offs, prior to defining the new conflict metric I first present the definitions and notation used here. Note that in the following, superscripts generally refer to solution identifiers and subscripts generally refer to dimension identifiers. For example, $\mathbf{x}^1$ refers to the first solution while $x^1_i$ refers to the $i$-th dimension of the first solution.
 
 \label{subsec:terminology}
 \paragraph{The multi-objective problem}
@@ -54,11 +54,11 @@ where $z_i^\dagger = \min_{\mathbf{x} \in X}\{f_i(\mathbf{x})\}$.
 \paragraph{Trade-offs}
 The \textit{trade-off} between two objective vectors $\mathbf{z}^1$ and $\mathbf{z}^2$ is the vector of differences in their objective achievements:
 \begin{align}
-\mathbf{\tau}^{\mathbf{z}^1,\mathbf{z}^2} = [z^2_1 - z^1_1, z^2_2 - z^1_2, \ldots, z^2_M - z^1_M]
+\mathbf{\tau}^{1,2} = [z^2_1 - z^1_1, z^2_2 - z^1_2, \ldots, z^2_M - z^1_M]
 \end{align}
-Note that $\mathbf{\tau}^{\mathbf{z}^1,\mathbf{z}^2} = - \mathbf{\tau}^{\mathbf{z}^2,\mathbf{z}^1}$.
+Note that $\mathbf{\tau}^{1,2} = - \mathbf{\tau}^{2,1}$.
 
-Given a sub-dimensional objective set $\mathcal{L}$, define the \textit{sub-dimensional trade-off} $\tau^{\mathbf{z}^1,\mathbf{z}^2}_\mathcal{L}$ as the vector with components $\tau^{\mathbf{z}^1,\mathbf{z}^2}_\ell$, $\forall \ell \in \mathcal{L}$.
+Given a sub-dimensional objective set $\mathcal{L}$, define the \textit{sub-dimensional trade-off} $\tau^{\mathbf{z}^1,\mathbf{z}^2}_\mathcal{L}$ as the vector with components $\tau^{1,2}_\ell$, $\forall \ell \in \mathcal{L}$.
 
 \paragraph{Conflict, bundles and stacks}
 Objectives in an objective set $\mathcal{L}$ \textit{do not conflict} if the objectives improve simultaneously:
@@ -66,16 +66,16 @@ $\forall \mathbf{z}^1, \mathbf{z}^2 \in Z, i \in \mathcal{L}$
 \begin{align}
 (z^1_i \ge z^2_i) \Rightarrow (z^1_j \ge z^2_j) \quad \forall j \in \mathcal{L}, j \neq i \label{eqn:objPairHarmony}
 \end{align}
-If \eqref{eqn:objPairHarmony} does not hold, then the objectives conflict. A set of objectives that conflict is referred to as a \textit{bundle}, and a set of objectives that do not conflict is referred to as a \textit{stack}.
+If \eqref{eqn:objPairHarmony} does not hold, then the objectives conflict. In the case of objectives that represent goods or services, a set of objectives that conflict is referred to as a \textit{bundle}, and a set of objectives that do not conflict is referred to as a \textit{stack}.
 
 This approach to checking for the presence of conflict among an objective set is functionally equivalent to that used by previous studies, such as Brockhoff and Zitzler (2009) \cite{brockhoff2009objective} and Purshouse and Fleming (2003) \cite{purshouse2003conflict}.
 
 \subsection{A new measure of conflict}
-After determining that objectives conflict with one another, one may wish to determine the severity of the conflict. Many authors have previously measured conflict between objectives \cite{brockhoff2009objective}\cite{purshouse2003conflict}\cite{gal1977redundant}, with most commonly used metrics deriving from measures of linear correlation (such as the Pearson correlation coefficient \cite{deb2006searching}) or rank correlation (such as Kendall's Tau \cite{kanoulas2009empirical}, Spearman's rho \cite{karande2012application}, and Zitzler's $\delta$-error \cite{brockhoff2006all}). The intended use of these metrics is often the removal of redundant objectives from a many-objective optimization problem. In such cases, measures of monotonicity or correlation alone may be adequate. However, if a more nuanced understanding of the relationship between the objectives is desired, then a different metric is required.
+After determining that objectives conflict with one another (see equation \eqref{eqn:objPairHarmony}), one may wish to determine the severity of the conflict. Many authors have previously measured conflict between objectives \cite{brockhoff2009objective}\cite{purshouse2003conflict}\cite{gal1977redundant}, with most commonly used metrics deriving from measures of linear correlation (such as the Pearson correlation coefficient \cite{deb2006searching}) or rank correlation (such as Kendall's Tau \cite{kanoulas2009empirical}, Spearman's rho \cite{karande2012application}, and Zitzler's $\delta$-error \cite{brockhoff2006all}). The intended use of these metrics is often the removal of redundant objectives from a many-objective optimization problem. In such cases, measures of monotonicity or correlation alone may be adequate. However, if a more nuanced understanding of the relationship between the objectives is desired, a different metric is required.
 
 Let $\mathbf{z}_{ij}$ be the sub-dimensional objective vector comprised of only the components corresponding to the $i$th and $j$th objectives $\mathbf{z}_{ij} = [z_i,z_j]$. I define the following measure of conflict between objectives $i$ and $j$:
 \begin{align}
-C_{ij} = (1-\rho_{ij})\frac{\overbar{d}_{ij}}{2 d_{max,ij}}
+C_{ij} = (1-\rho_{ij})\frac{\overbar{d}_{ij}}{2 d_{\max,ij}}
 \end{align}
 where $\overbar{d}_{ij}$ is the average sub-dimensional distance from objective vectors to the ideal solution
 \begin{align}
@@ -83,9 +83,17 @@ where $\overbar{d}_{ij}$ is the average sub-dimensional distance from objective 
 \end{align}
 and
 \begin{align}
-d_{max,ij} = ||\mathbf{z}^{\text{ideal}}_{ij} - \mathbf{z}^{\text{nadir}}_{ij}||
+d_{\max,ij} = ||\mathbf{z}^{\text{ideal}}_{ij} - \mathbf{z}^{\text{nadir}}_{ij}||
 \end{align}
 and $\rho_{ij}$ is Spearman's rank-correlation coefficient for the solutions' achievements in objectives $i$ and $j$.
+
+Some notes about the metric:
+\begin{itemize}
+\item $C_{ij} \in [0,1)$, taking smaller values when there is less conflict between objectives $i$ and $j$ and larger values when there is more.
+\item $C_{ij} = 0$ for nonconflicting objectives per equation \eqref{eqn:objPairHarmony}, because in this case objectives $i$ and $j$ increase monotonically, so $\rho_{ij} = 1$.
+\item For monotonically decreasing objective pairs, $\frac{(1-\rho_{ij})}{2} = 1$, so $C_{ij} = \frac{\overbar{d}{ij}}{d_{\max,ij}}$.
+\end{itemize}
+
 
 \subsection{Study system}
 \label{subsec:studyArea}
