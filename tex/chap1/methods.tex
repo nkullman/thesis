@@ -60,22 +60,35 @@ Note that $\mathbf{\tau}^{1,2} = - \mathbf{\tau}^{2,1}$.
 
 Given a sub-dimensional objective set $\mathcal{L}$, define the \textit{sub-dimensional trade-off} $\tau^{\mathbf{z}^1,\mathbf{z}^2}_\mathcal{L}$ as the vector with components $\tau^{1,2}_\ell$, $\forall \ell \in \mathcal{L}$.
 
-\paragraph{Conflict, bundles and stacks}
+\paragraph{Conflict, monotonicity, bundles and stacks}
 Objectives in an objective set $\mathcal{L}$ \textit{do not conflict} if the objectives improve simultaneously:
 $\forall \mathbf{z}^1, \mathbf{z}^2 \in Z, i \in \mathcal{L}$
 \begin{align}
 (z^1_i \ge z^2_i) \Rightarrow (z^1_j \ge z^2_j) \quad \forall j \in \mathcal{L}, j \neq i \label{eqn:objPairHarmony}
 \end{align}
-If \eqref{eqn:objPairHarmony} does not hold, then the objectives conflict. In the case of objectives that represent goods or services, a set of objectives that conflict is referred to as a \textit{bundle}, and a set of objectives that do not conflict is referred to as a \textit{stack}.
+If \eqref{eqn:objPairHarmony} does not hold, then the objectives conflict. Any pair of objectives $i,j \in \mathcal{M}$ such that equation \eqref{eqn:objPairHarmony} holds are said to \textit{increase monotonically}. If 
+\begin{align}
+(z^1_i \ge z^2_i) \Rightarrow (z^1_j \le z^2_j) \quad \forall \mathbf{z}^1, \mathbf{z}^2 \in Z, j \neq i \label{eqn:objPairMonoDec}
+\end{align}
+holds, then the objectives are said to \textit{decrease monotonically}. When the objectives represent goods or services, define a set of objectives that conflict as a \textit{bundle} and a set of objectives that do not conflict as a \textit{stack}.
 
-This approach to checking for the presence of conflict among an objective set is functionally equivalent to that used by previous studies, such as Brockhoff and Zitzler (2009) \cite{brockhoff2009objective} and Purshouse and Fleming (2003) \cite{purshouse2003conflict}.
+This approach to checking for the presence of conflict among an objective set is functionally equivalent to that used by other studies, such as Brockhoff and Zitzler (2009) \cite{brockhoff2009objective} and Purshouse and Fleming (2003) \cite{purshouse2003conflict}.
 
 \subsection{A new measure of conflict}
-After determining that objectives conflict with one another (see equation \eqref{eqn:objPairHarmony}), one may wish to determine the severity of the conflict. Many authors have previously measured conflict between objectives \cite{brockhoff2009objective}\cite{purshouse2003conflict}\cite{gal1977redundant}, with most commonly used metrics deriving from measures of linear correlation (such as the Pearson correlation coefficient \cite{deb2006searching}) or rank correlation (such as Kendall's Tau \cite{kanoulas2009empirical}, Spearman's rho \cite{karande2012application}, and Zitzler's $\delta$-error \cite{brockhoff2006all}). The intended use of these metrics is often the removal of redundant objectives from a many-objective optimization problem. In such cases, measures of monotonicity or correlation alone may be adequate. However, if a more nuanced understanding of the relationship between the objectives is desired, a different metric is required.
+After determining that objectives conflict with one another (see equation \eqref{eqn:objPairHarmony}), one may wish to determine the severity of the conflict. Consider the frontiers in Figure \ref{fig:ConflictVariesExample}. The conflict between maximization objectives $i$ and $j$ is less in Frontier A than in Frontier B.
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.6\textwidth]{../images/ConflictVariesExample}
+\caption[Example of varying conflict between objectives]{Varying conflict between objectives. The maximization objectives $i$ and $j$ are more in conflict in Frontier A than in Frontier B.}
+\label{fig:ConflictVariesExample}
+\end{figure}
+
+Many authors have previously measured conflict between objectives \cite{brockhoff2009objective}\cite{purshouse2003conflict}\cite{gal1977redundant}, with most commonly used metrics deriving from measures of linear correlation (such as the Pearson correlation coefficient \cite{deb2006searching}) or rank correlation (such as Kendall's Tau \cite{kanoulas2009empirical} or Spearman's rho \cite{karande2012application}%, and Zitzler's $\delta$-error \cite{brockhoff2006all}).
+). The intended use of these metrics is often the removal of redundant objectives from a many-objective optimization problem. In such cases, measures of monotonicity or correlation alone are adequate. However, for a more nuanced understanding of the relationship between the objectives, a different metric is required.
 
 Let $\mathbf{z}_{ij}$ be the sub-dimensional objective vector comprised of only the components corresponding to the $i$th and $j$th objectives $\mathbf{z}_{ij} = [z_i,z_j]$. I define the following measure of conflict between objectives $i$ and $j$:
 \begin{align}
-C_{ij} = (1-\rho_{ij})\frac{\overbar{d}_{ij}}{2 d_{\max,ij}}
+C_{ij} = (1-\rho_{ij})\frac{\overbar{d}_{ij}}{2 d_{\max,ij}} \label{eqn:defConflict}
 \end{align}
 where $\overbar{d}_{ij}$ is the average sub-dimensional distance from objective vectors to the ideal solution
 \begin{align}
@@ -85,14 +98,19 @@ and
 \begin{align}
 d_{\max,ij} = ||\mathbf{z}^{\text{ideal}}_{ij} - \mathbf{z}^{\text{nadir}}_{ij}||
 \end{align}
-and $\rho_{ij}$ is Spearman's rank-correlation coefficient for the solutions' achievements in objectives $i$ and $j$.
+and $\rho_{ij}$ is Spearman's rank-correlation coefficient for the solutions' achievements in objectives $i$ and $j$. Note that $C_{ij} \in [0,1)$, taking smaller values when there is less conflict between objectives $i$ and $j$ and larger values when there is more.
 
-Some notes about the metric:
-\begin{itemize}
-\item $C_{ij} \in [0,1)$, taking smaller values when there is less conflict between objectives $i$ and $j$ and larger values when there is more.
-\item $C_{ij} = 0$ for nonconflicting objectives per equation \eqref{eqn:objPairHarmony}, because in this case objectives $i$ and $j$ increase monotonically, so $\rho_{ij} = 1$.
-\item For monotonically decreasing objective pairs, $\frac{(1-\rho_{ij})}{2} = 1$, so $C_{ij} = \frac{\overbar{d}{ij}}{d_{\max,ij}}$.
-\end{itemize}
+The conflict metric proposed here (equation \eqref{eqn:defConflict}) addresses two major issues:
+\begin{enumerate}
+\item \textbf{Indifference to non-conflicting relationships}. Per the definition of conflict in equation \eqref{eqn:objPairHarmony}, objectives $i,j$ that increase monotonically are not in conflict. Accordingly, $C_{ij}$ should equal 0 in all such cases. This is true for the new metric, since $1-\rho_{ij} = 0$.
+\item \textbf{Consideration of objective achievement}. Recall Figure \ref{fig:ConflictVariesExample} and the intuitive notion that the conflict between objectives $i$ and $j$ is stronger in Frontier B than it is in Frontier A. This notion is guided by the idea that the closer objective vectors are to the sub-dimensional ideal solution on average, the less the conflict between the objectives. While correlation measures do not capture this relationship the proposed metric does. In the extreme case of monotonically decreasing objectives, $\frac{(1-\rho_{ij})}{2} = 1$, so $C_{ij} = \frac{\overbar{d}{ij}}{d_{\max,ij}}$. See Figure \ref{fig:WhyOursIsBetter}.
+\end{enumerate}
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.8\textwidth]{../images/WhyOursIsBetter}
+\caption[Comparing the proposed conflict metric to others used in multi-objective optimization]{HERE.Varying conflict between objectives. The maximization objectives $i$ and $j$ are more in conflict in Frontier A than in Frontier B.}
+\label{fig:WhyOursIsBetter}
+\end{figure}
 
 
 \subsection{Study system}
