@@ -4,12 +4,11 @@
 %
 %It is currently unknown how climate change will alter the trade-off relationships among bundled ecosystem services. This drives uncertainty in whether and how forest planners must change their compromise strategies to maintain a desired balance among ecosystem services. In this section, I describe a case study in the Deschutes National Forest in which I used multi-objective optimization to quantify the changes in trade-off relationships, comparing the results under three different climate change scenarios.
 %
-%WHAT IS CONFLICT. WHAT ARE TRADEOFFS
-%HOW TO QUANTIFY AND MEASURE THESE
+
 Bundled ecosystem services conflict with one another, and I argue that understanding the change in this conflict over time will enable forest planners to make more informed management decisions. Here, I provide formal definitions of what it means for ecosystem services to conflict, how to measure changes in conflict, and how a change in conflict impacts trade-off relationships.
 
 \subsection{Terminology}
-To aid in the discussion of conflict and trade-offs, prior to defining the new conflict metric I first present the definitions and notation used here. Note that in the following, superscripts generally refer to solution identifiers and subscripts generally refer to dimension identifiers. For example, $\mathbf{x}^1$ refers to the first solution while $x^1_i$ refers to the $i$-th dimension of the first solution.
+To aid in the discussion of conflict and trade-offs, prior to defining the new conflict metric, I first present the definitions and notation used here. Note that in the following, superscripts generally refer to solution identifiers and subscripts generally refer to dimension identifiers. For example, $\mathbf{x}^1$ refers to the first solution while $x^1_i$ refers to the $i$-th dimension of the first solution.
 
 \label{subsec:terminology}
 \paragraph{The multi-objective problem}
@@ -39,17 +38,17 @@ Objective vectors' components are referred to in subscripts:
 \end{align}
 
 \paragraph{Ideal and nadir objective vectors}
-The \textit{ideal objective vector} is defined as
+The \textit{ideal objective vector} is defined as the vector
 \begin{align}
-\mathbf{z}^{\text{ideal}} = [z_1^*,\ldots,z_M^*]
+\mathbf{z}^{\text{ideal}} = \max_{\mathbf{x} \in X}\{f_i(\mathbf{x})\} \quad \forall i \in \mathcal{M}.
 \end{align}
-where $z_i^* = \max_{\mathbf{x} \in X}\{f_i(\mathbf{x})\}$. Analogously, define the nadir solution
+Analogously, define the nadir solution as the vector
 \begin{align}
-\mathbf{z}^{\text{nadir}} = [z_1^\dagger,\ldots,z_M^\dagger]
+\mathbf{z}^{\text{nadir}} = \min_{\mathbf{x} \in X}\{f_i(\mathbf{x})\} \quad \forall i \in \mathcal{M}.
 \end{align}
-where $z_i^\dagger = \min_{\mathbf{x} \in X}\{f_i(\mathbf{x})\}$.
 
-\paragraph{Sub-dimensions} Define the \textit{sub-dimensional objective set} $\mathcal{L} \subset \mathcal{M}$ as a subset of the objective functions $f_i \in \mathcal{M}$. Call the cardinality of this set $L$. The \textit{sub-dimensional objective vector} (specifically, the $L$-dimensional objective vector) for the solution $\mathbf{x}^i$ is the vector denoted $\mathbf{z}^i_\mathcal{L}$ whose components are $z^i_\ell = f_\ell(\mathbf{x}^i)$, $\forall \ell \in \mathcal{L}$. That is, they are the components of $\mathbf{z}^i$ that correspond to objectives included in both $\mathcal{L}$ and $\mathcal{M}$.
+
+\paragraph{Sub-dimensions} Define the \textit{sub-dimensional objective set} $\mathcal{L} \subset \mathcal{M}$ as a subset of the objective functions $f_i \in \mathcal{M}$. Call the cardinality of this set $L$. The \textit{sub-dimensional objective vector} (specifically, the $L$-dimensional objective vector) for the solution $\mathbf{x}^i$ is the vector denoted $\mathbf{z}^i_\mathcal{L}$ whose components are $z^i_\ell = f_\ell(\mathbf{x}^i)$, $\forall \ell \in \mathcal{L}$. That is, they are the components of $\mathbf{z}^i$ that correspond to the objectives in $\mathcal{L}$.
 
 \paragraph{Trade-offs}
 The \textit{trade-off} between two objective vectors $\mathbf{z}^1$ and $\mathbf{z}^2$ is the vector of differences in their objective achievements:
@@ -58,7 +57,7 @@ The \textit{trade-off} between two objective vectors $\mathbf{z}^1$ and $\mathbf
 \end{align}
 Note that $\mathbf{\tau}^{1,2} = - \mathbf{\tau}^{2,1}$.
 
-Given a sub-dimensional objective set $\mathcal{L}$, define the \textit{sub-dimensional trade-off} $\tau^{\mathbf{z}^1,\mathbf{z}^2}_\mathcal{L}$ as the vector with components $\tau^{1,2}_\ell$, $\forall \ell \in \mathcal{L}$.
+Given a sub-dimensional objective set $\mathcal{L}$, define the \textit{sub-dimensional trade-off} $\tau^{1,^2}_\mathcal{L}$ as the vector with components $\tau^{1,2}_\ell$, $\forall \ell \in \mathcal{L}$.
 
 \paragraph{Conflict, monotonicity, bundles and stacks}
 Objectives in an objective set $\mathcal{L}$ \textit{do not conflict} if the objectives improve simultaneously:
@@ -70,9 +69,9 @@ If \eqref{eqn:objPairHarmony} does not hold, then the objectives conflict. Any p
 \begin{align}
 (z^1_i \ge z^2_i) \Rightarrow (z^1_j \le z^2_j) \quad \forall \mathbf{z}^1, \mathbf{z}^2 \in Z, j \neq i \label{eqn:objPairMonoDec}
 \end{align}
-holds, then the objectives are said to \textit{decrease monotonically}. When the objectives represent goods or services, define a set of objectives that conflict as a \textit{bundle} and a set of objectives that do not conflict as a \textit{stack}.
+holds, then the objectives are said to \textit{decrease monotonically}. When the objectives represent goods or services, a set of objectives that conflict is defined as a \textit{bundle} and a set of objectives that do not conflict is defined as a \textit{stack}.
 
-This approach to checking for the presence of conflict among an objective set is functionally equivalent to that used by other studies, such as Brockhoff and Zitzler (2009) \cite{brockhoff2009objective} and Purshouse and Fleming (2003) \cite{purshouse2003conflict}.
+The means of detecting conflict among an objective set (equation \eqref{eqn:objPairHarmony})is functionally equivalent to that used by other studies, such as Brockhoff and Zitzler (2009) \cite{brockhoff2009objective} and Purshouse and Fleming (2003) \cite{purshouse2003conflict}.
 
 \subsection{A new measure of conflict}
 After determining that objectives conflict with one another (see equation \eqref{eqn:objPairHarmony}), one may wish to determine the severity of the conflict. Consider the frontiers in Figure \ref{fig:ConflictVariesExample}. The conflict between maximization objectives $i$ and $j$ is greatest in Frontier C and least in Frontier A.
@@ -88,9 +87,9 @@ Many authors have previously measured conflict between objectives \cite{brockhof
 
 Let $\mathbf{z}_{ij}$ be the sub-dimensional objective vector comprised of only the components corresponding to the $i$th and $j$th objectives $\mathbf{z}_{ij} = [z_i,z_j]$. I define the following measure of conflict between objectives $i$ and $j$:
 \begin{align}
-C_{ij} = (1-\rho_{ij})\frac{\overbar{d}_{ij}}{2 d_{\max,ij}} \label{eqn:defConflict}
+C_{ij} = \frac{(1-\rho_{ij})\overbar{d}_{ij}}{2 d_{\max,ij}} \label{eqn:defConflict}
 \end{align}
-where $\overbar{d}_{ij}$ is the average sub-dimensional distance from objective vectors to the ideal solution
+where $\overbar{d}_{ij}$ is the average sub-dimensional distance from objective vectors to the ideal solution:
 \begin{align}
 \overbar{d}_{ij} = \frac{1}{|Z|} \sum_{\mathbf{z} \in Z} ||\mathbf{z}^{\text{ideal}}_{ij} - \mathbf{z}_{ij}||
 \end{align}
@@ -102,16 +101,15 @@ and $\rho_{ij}$ is Spearman's rank-correlation coefficient for the solutions' ac
 
 The conflict metric proposed here (equation \eqref{eqn:defConflict}) addresses two major issues:
 \begin{enumerate}
-\item \textbf{Indifference to non-conflicting relationships}. Per the definition of conflict in equation \eqref{eqn:objPairHarmony}, objectives $i,j$ that increase monotonically are not in conflict. Accordingly, $C_{ij}$ should equal 0 in all such cases. This is true for the new metric, since $1-\rho_{ij} = 0$.
-\item \textbf{Consideration of objective achievement}. Recall Figure \ref{fig:ConflictVariesExample} and the intuitive notion that the conflict between objectives $i$ and $j$ is stronger in Frontier B than it is in Frontier A. This notion is guided by the idea that the closer objective vectors are to the sub-dimensional ideal solution on average, the less the conflict between the objectives. While correlation measures do not capture this relationship the proposed metric does. In the extreme case of monotonically decreasing objectives, $\frac{(1-\rho_{ij})}{2} = 1$, so $C_{ij} = \frac{\overbar{d}{ij}}{d_{\max,ij}}$. See Figure \ref{fig:WhyOursIsBetter}.
+\item \textbf{Indifference to non-conflicting relationships}. Per the definition of conflict in equation \eqref{eqn:objPairHarmony}, objectives $i,j$ that increase monotonically are not in conflict. Accordingly, $C_{ij}$ should equal 0 in all such cases. This is true for the new metric, since for monotonically increasing objectives $1-\rho_{ij} = 0$.
+\item \textbf{Consideration of objective achievement}. Recall Figure \ref{fig:ConflictVariesExample} and the intuitive notion that the conflict between objectives $i$ and $j$ is stronger in Frontier C than it is in Frontier B than it is in Frontier A. This notion is guided by the idea that the closer objective vectors are to the sub-dimensional ideal solution on average, the less the conflict between the objectives. That is, that greater simultaneous objective provision is indicative of less conflict. The proposed metric accounts for this, while correlation measures do not. In the extreme case of monotonically decreasing objectives, $\frac{(1-\rho_{ij})}{2} = 1$, so $C_{ij} = \frac{\overbar{d}{ij}}{d_{\max,ij}}$. See Figure \ref{fig:WhyOursIsBetter} for an example.
 \end{enumerate}
 \begin{figure}[ht]
 \centering
 \includegraphics[width=.9\textwidth]{../images/WhyOursIsBetter}
-\caption[Comparing the proposed conflict metric to others used in multi-objective optimization]{Comparing the proposed metric for conflict $C_{ij}$ against the Pearson product-moment and the Spearman rank correlation coefficients $\rho_{ij}$ and $\rho_{s,ij}$, respectively. While the latter two are identical for frontiers A and C, the proposed metric is greater for frontier C than it is for A. This is because it accounts for the average relative distance to the sub-dimensional ideal objective vector.}
+\caption[Comparing the proposed conflict metric to others used in multi-objective optimization]{Comparing the proposed metric for conflict $C_{ij}$ against the Pearson product-moment and the Spearman rank correlation coefficients ($\rho_{ij}$ and $\rho_{s,ij}$, respectively). While the latter two are identical for frontiers A and C, the proposed metric is greater for frontier C than it is for A. This is because it accounts for the average relative distance to the sub-dimensional ideal objective vector.}
 \label{fig:WhyOursIsBetter}
 \end{figure}
-
 
 \subsection{Study system}
 \label{subsec:studyArea}
