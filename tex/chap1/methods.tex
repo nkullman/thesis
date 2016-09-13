@@ -75,11 +75,11 @@ holds, then the objectives are said to \textit{decrease monotonically}. When the
 This approach to checking for the presence of conflict among an objective set is functionally equivalent to that used by other studies, such as Brockhoff and Zitzler (2009) \cite{brockhoff2009objective} and Purshouse and Fleming (2003) \cite{purshouse2003conflict}.
 
 \subsection{A new measure of conflict}
-After determining that objectives conflict with one another (see equation \eqref{eqn:objPairHarmony}), one may wish to determine the severity of the conflict. Consider the frontiers in Figure \ref{fig:ConflictVariesExample}. The conflict between maximization objectives $i$ and $j$ is less in Frontier A than in Frontier B.
+After determining that objectives conflict with one another (see equation \eqref{eqn:objPairHarmony}), one may wish to determine the severity of the conflict. Consider the frontiers in Figure \ref{fig:ConflictVariesExample}. The conflict between maximization objectives $i$ and $j$ is greatest in Frontier C and least in Frontier A.
 \begin{figure}[ht]
 \centering
 \includegraphics[width=.6\textwidth]{../images/ConflictVariesExample}
-\caption[Example of varying conflict between objectives]{Varying conflict between objectives. The maximization objectives $i$ and $j$ are more in conflict in Frontier A than in Frontier B.}
+\caption[Example of varying conflict between objectives]{Varying conflict between objectives. The conflict between maximization objectives $i$ and $j$ increases from Frontier A to Frontier B to Frontier C.}
 \label{fig:ConflictVariesExample}
 \end{figure}
 
@@ -107,8 +107,8 @@ The conflict metric proposed here (equation \eqref{eqn:defConflict}) addresses t
 \end{enumerate}
 \begin{figure}[ht]
 \centering
-\includegraphics[width=.8\textwidth]{../images/WhyOursIsBetter}
-\caption[Comparing the proposed conflict metric to others used in multi-objective optimization]{HERE.Varying conflict between objectives. The maximization objectives $i$ and $j$ are more in conflict in Frontier A than in Frontier B.}
+\includegraphics[width=.9\textwidth]{../images/WhyOursIsBetter}
+\caption[Comparing the proposed conflict metric to others used in multi-objective optimization]{Comparing the proposed metric for conflict $C_{ij}$ against the Pearson product-moment and the Spearman rank correlation coefficients $\rho_{ij}$ and $\rho_{s,ij}$, respectively. While the latter two are identical for frontiers A and C, the proposed metric is greater for frontier C than it is for A. This is because it accounts for the average relative distance to the sub-dimensional ideal objective vector.}
 \label{fig:WhyOursIsBetter}
 \end{figure}
 
