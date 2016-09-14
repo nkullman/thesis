@@ -8,23 +8,27 @@
 Bundled ecosystem services conflict with one another, and I argue that understanding the change in this conflict over time will enable forest planners to make more informed management decisions. Here, I provide formal definitions of what it means for ecosystem services to conflict, how to measure changes in conflict, and how a change in conflict impacts trade-off relationships.
 
 \subsection{Terminology}
-To aid in the discussion of conflict and trade-offs, prior to defining the new conflict metric, I first present the definitions and notation used here. Note that in the following, superscripts generally refer to solution identifiers and subscripts generally refer to dimension identifiers. For example, $\mathbf{x}^1$ refers to the first solution while $x^1_i$ refers to the $i$-th dimension of the first solution.
+To aid in the discussion of conflict and trade-offs, I first present the definitions and notation used here.% Note that in the following, superscripts generally refer to solution identifiers and subscripts generally refer to dimension identifiers. For example, $\mathbf{x}^1$ refers to the first solution while $x^1_i$ refers to the $i$-th dimension of the first solution.
 
 \label{subsec:terminology}
 \paragraph{The multi-objective problem}
 Consider the $M$-objective optimization problem
 \begin{align}
 \text{Maximize}& \notag \\
-& \mathbf{f} = [f_1(\mathbf{x}), f_2(\mathbf{x}), \ldots, f_M(\mathbf{x}) ]^T \label{eqn:generalObj}\\
+& \mathbf{f} = [f_1(\mathbf{x}), f_2(\mathbf{x}), \ldots, f_M(\mathbf{x}) ] \label{eqn:generalObj}\\
 \text{subject to}& \notag \\
 & \mathbf{x} \in X \label{eqn:generalConstraint}
 \end{align}
-with \textit{objective functions} $f_i(\mathbf{x}), i \in \{1,\ldots,M\}$ and feasible \textit{decision vectors} (or \textit{solutions}) $\mathbf{x} \in \mathbb{R}^n$ where $n$ is the number of decision variables in the optimization problem. A set of equality and inequality constraints determine the \textit{feasible decision space} $X$. Each objective function $f_i : \mathbb{R}^n \mapsto \mathbb{R}$ maps decision vectors to scalars in $\mathbb{R}$. The vector objective function $\mathbf{f} : X \mapsto \mathbb{R}^M$ maps the feasible decision space to the \textit{objective space} $\mathbb{R}^M$. The set of all objective functions is the \textit{objective set} $\mathcal{M} = \{f_1,\ldots,f_M\}$.
+with \textit{objective functions} $f_i(\mathbf{x}), i \in \{1,\ldots,M\}$ and feasible \textit{decision vectors} (or \textit{solutions}) $\mathbf{x} \in \mathbb{R}^n$ where $n$ is the number of decision variables in the optimization problem. A set of equality and inequality constraints determine the \textit{feasible decision space} $X$. Solutions in $X$ are referenced by a superscript: $X = \{\mathbf{x}^1,\mathbf{x}^2,\ldots,\mathbf{x}^{|X|}\}$. Each objective function $f_i : \mathbb{R}^n \mapsto \mathbb{R}$ maps decision vectors to scalars in $\mathbb{R}$. The vector objective function $\mathbf{f} : X \mapsto \mathbb{R}^M$ maps the feasible decision space to the \textit{objective space} $\mathbb{R}^M$. The set of all objective functions is the \textit{objective set} $\mathcal{M} = \{f_1,\ldots,f_M\}$.
 
 \paragraph{Dominance and frontiers}
 A solution $\mathbf{x}^1$ is said to \textit{dominate} another solution $\mathbf{x}^2$ ($\mathbf{x}^1 \succ \mathbf{x}^2$) if
 \begin{align}
-\forall f_i \in \mathcal{M} \; f_i(\mathbf{x}^1) \ge f_i(\mathbf{x}^2) \text{ and } \exists f_i \in \mathcal{M} : f_i(\mathbf{x}^1) > f_i(\mathbf{x}^2)
+\exists f_i \in \mathcal{M} : f_i(\mathbf{x}^1) > f_i(\mathbf{x}^2) \text{ and } \forall f_i \in \mathcal{M} \; f_i(\mathbf{x}^1) \ge f_i(\mathbf{x}^2)
+\end{align}
+A solution $\mathbf{x}^1 \in X$ is \textit{non-dominated} if
+\begin{align}
+\nexists \mathbf{x}^2 \in X : \mathbf{x}^2 \succ \mathbf{x}^1 \}
 \end{align}
 The set of non-dominated solutions to the multi-objective problem \eqref{eqn:generalObj} and \eqref{eqn:generalConstraint} is referred to as the \textit{Pareto-optimal set} $P = \{\mathbf{x} \in X | \nexists \mathbf{y} \in X : \mathbf{y} \succ \mathbf{x} \}$.
 
@@ -48,7 +52,8 @@ Analogously, define the nadir solution as the vector
 \end{align}
 
 
-\paragraph{Sub-dimensions} Define the \textit{sub-dimensional objective set} $\mathcal{L} \subset \mathcal{M}$ as a subset of the objective functions $f_i \in \mathcal{M}$. Call the cardinality of this set $L$. The \textit{sub-dimensional objective vector} (specifically, the $L$-dimensional objective vector) for the solution $\mathbf{x}^i$ is the vector denoted $\mathbf{z}^i_\mathcal{L}$ whose components are $z^i_\ell = f_\ell(\mathbf{x}^i)$, $\forall \ell \in \mathcal{L}$. That is, they are the components of $\mathbf{z}^i$ that correspond to the objectives in $\mathcal{L}$.
+\paragraph{Sub-dimensions}
+Define the \textit{sub-dimensional objective set} $\mathcal{L} \subset \mathcal{M}$ as a subset of the objective functions $f_i \in \mathcal{M}$. Call the cardinality of this set $L$. The \textit{sub-dimensional objective vector} (specifically, the $L$-dimensional objective vector) for the solution $\mathbf{x}^i$ is the vector denoted $\mathbf{z}^i_\mathcal{L}$ whose components are $z^i_\ell = f_\ell(\mathbf{x}^i)$, $\forall \ell \in \mathcal{L}$. That is, they are the components of $\mathbf{z}^i$ that correspond to the objectives in $\mathcal{L}$.
 
 \paragraph{Trade-offs}
 The \textit{trade-off} between two objective vectors $\mathbf{z}^1$ and $\mathbf{z}^2$ is the vector of differences in their objective achievements:
@@ -58,6 +63,20 @@ The \textit{trade-off} between two objective vectors $\mathbf{z}^1$ and $\mathbf
 Note that $\mathbf{\tau}^{1,2} = - \mathbf{\tau}^{2,1}$.
 
 Given a sub-dimensional objective set $\mathcal{L}$, define the \textit{sub-dimensional trade-off} $\tau^{1,^2}_\mathcal{L}$ as the vector with components $\tau^{1,2}_\ell$, $\forall \ell \in \mathcal{L}$.
+
+\paragraph{Relative objective achievements, relative objective vectors, and relative trade-offs}
+For an objective vector $\mathbf{z}$, its \textit{relative achievement in objective }$i$ is
+\begin{align}
+\overbar{z_i} = \frac{z_i - z^\text{nadir}_i}{z^\text{ideal}_i - z^\text{nadir}_i},
+\end{align}
+and the corresponding \textit{relative objective vector} is
+\begin{align}
+\overbar{\mathbf{z}} = [\overbar{z_1},\overbar{z_2},\ldots,\overbar{z_M}].
+\end{align}
+For two objective vectors $\mathbf{z}^1$ and $\mathbf{z}^2$, the corresponding \textit{relative trade-off} is
+\begin{align}
+\overbar{\mathbf{\tau}}^{1,2} = \left[\overbar{z^2_1} - \overbar{z^1_1}, \overbar{z^2_2} - \overbar{z^1_2}, \ldots, \overbar{z^2_M} - \overbar{z^1_M}\right]
+\end{align}
 
 \paragraph{Conflict, monotonicity, bundles and stacks}
 Objectives in an objective set $\mathcal{L}$ \textit{do not conflict} if the objectives improve simultaneously:
