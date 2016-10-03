@@ -28,7 +28,7 @@ A solution $\mathbf{x}^1$ is said to \textit{dominate} another solution $\mathbf
 \end{align}
 A solution $\mathbf{x}^1 \in X$ is \textit{non-dominated} if
 \begin{align}
-\nexists \mathbf{x}^2 \in X : \mathbf{x}^2 \succ \mathbf{x}^1 \}
+\nexists \mathbf{x}^2 \in X : \mathbf{x}^2 \succ \mathbf{x}^1
 \end{align}
 The set of non-dominated solutions to the multi-objective problem \eqref{eqn:generalObj} and \eqref{eqn:generalConstraint} is referred to as the \textit{Pareto-optimal set} $P = \{\mathbf{x} \in X | \nexists \mathbf{y} \in X : \mathbf{y} \succ \mathbf{x} \}$.
 
@@ -90,10 +90,12 @@ If \eqref{eqn:objPairHarmony} does not hold, then the objectives conflict. Any p
 \end{align}
 holds, then the objectives are said to \textit{decrease monotonically}. When the objectives represent goods or services, a set of objectives that conflict is defined as a \textit{bundle} and a set of objectives that do not conflict is defined as a \textit{stack}.
 
-This means of detecting conflict among objectives in an objective set -- checking for monotonically increasing relationships (equation \eqref{eqn:objPairHarmony}) -- is functionally equivalent to that used by other studies, such as Brockhoff and Zitzler (2009) \cite{brockhoff2009objective} and Purshouse and Fleming (2003) \cite{purshouse2003conflict}.
+Equation \eqref{eqn:objPairHarmony} checks for monotonically increasing relationships among objectives. This means of detecting conflict among objectives in an objective set is functionally equivalent to that used by other studies, such as Brockhoff and Zitzler (2009) \cite{brockhoff2009objective} and Purshouse and Fleming (2003) \cite{purshouse2003conflict}.
 
-\subsection{A new measure of conflict}
-After determining that objectives conflict with one another (see equation \eqref{eqn:objPairHarmony}), one may wish to determine the severity of the conflict. Consider the frontiers in Figure \ref{fig:ConflictVariesExample}. The conflict between maximization objectives $i$ and $j$ is greatest in Frontier C and least in Frontier A.
+\subsection{Measuring conflict}
+After determining that objectives conflict with one another, one may wish to determine the severity of the conflict. HYPERVOL HERE.
+
+\subsection{A new measure of conflict}Consider the frontiers in Figure \ref{fig:ConflictVariesExample}. The conflict between maximization objectives $i$ and $j$ is greatest in Frontier C and least in Frontier A.
 \begin{figure}[ht]
 \centering
 \includegraphics[width=.6\textwidth]{../images/ConflictVariesExample}
@@ -262,7 +264,7 @@ To account for the NSO's large habitat requirements, stands must also be members
 \item \textbf{$e$:} the discount factor for sub-200 ha NSO habitat was set to $e = 0.5$ following the convention used in Schroder \textit{et al.} \cite{schroder2016multi}.
 \item \textbf{$j \in R_{i,t}$:} each stand-treatment schedule combination is evaluated at the end of each planning period to determine its suitability as NSO habitat. Treatment schedules for which stand $i$ meets the NSO habitat criteria at the end of treatment period $t$ become members of the set $R_{i,t}$. 
 \item \textbf{$s_{i,t}$:} the contributions of sediment delivery from treatment of stand $i$ in period $t$ were determined using the Watershed Erosion Prediction Project (WEPP) online GIS tool \cite{frankenberger2011development}. This tool takes as input soil textures, treatment types, duration of simulation, and custom climate data. Soil texture data for the Drink area was obtained from the USDA's Soil Survey Geographic (SSURGO) database, treatment types are those specified in \S \ref{chap:appBTreatmentSpec}, and the years of simulation correspond to the treatment years in the model's planning horizon (2015-2095). The custom climate data are those described above for use with Climate-FVS, obtained through the Climate-FVS data server.
-\item \textbf{$C$,$D_c$,$C_i$:} the formulation of clusters was performed \textit{a priori} according to the algorithm used in Rebain and McDill (2003) \cite{rebain2003mixed}. The enumerated clusters can then be used to immediately determine cluster members $D_c$ and cluster-stand relationships $C_i$.
+\item \textbf{$C$,$D_c$,$C_i$:} the formulation of clusters was performed \textit{a priori} according to the algorithm used in Rebain and McDill (2003) \cite{rebain2003mixed}. The enumerated clusters can then be used to immediately determine cluster members $D_c$ and stand-owning clusters $C_i$.
 \item \textbf{$A$:} the maximum area that may be treated in either planning period was defined to be 6000 acres, or approximately 2428 ha
 \item \textbf{$\ell$, $u$:} the relative fluctuation in the area treated in periods 1 and 2 was defined to be 20\%. That is, the lower bound $\ell = 0.8$, and the upper bound $u = 1.2$.
 \end{itemize}
@@ -282,7 +284,7 @@ To account for the NSO's large habitat requirements, stands must also be members
 \end{tabular}%
 }
 \caption[Fire hazard ratings used in multi-objective model]{Fire hazard rating system used here, originally employed by Schroder \textit{et al.} \cite{schroder2016multi}.\\
-* denotes fuel models not present in Schroder \textit{et al.}\\
+Asterisks (*) denote fuel models not present in Schroder \textit{et al.}\\
 The fuel model column refers to the Anderson fuel model ratings \cite{anderson1982aids}.}
 \label{tab:firehazards}
 \end{table}
