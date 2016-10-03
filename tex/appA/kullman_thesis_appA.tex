@@ -2,15 +2,15 @@
  
 \chapter{Computing a Frontier's Hypervolume Indicator}
 \label{chap:appAHypervolumeAlgo}
+%N goes to M, O goes to mathcalM, P goes to Z, p goes to m
+Given an efficient frontier $Z$ comprised of objective vectors $\mathbf{z} = [z_1,\ldots,z_M] \in Z$, this algorithm computes the volume $V$ of the objective space bounded by $Z$. The objectives are assumed to be normalized so that the objective space is the $M$-dimensional unit hypercube with the origin and the point $\vec{\mathbf{1}}$ defining the nadir objective vector and the ideal objective vector, respectively. That is, all objectives are assumed to be maximized and such that
+$$ \forall i \in \{1,\ldots,M\} \quad z_i \in [0,1].$$
 
-Given a set of Pareto optimal solutions $\mathcal{P}$ to a multi-objective mathematical programming model with a set of objectives $O$ of cardinality $N := |O|$, this algorithm computes the volume $V$ of the objective space bounded by the Pareto frontier defined by the solutions $x \in \mathcal{P}$. The objectives are assumed to be normalized so that the objective space is the $N$-dimensional unit hypercube with the origin and the point $\vec{\mathbf{1}}$ defining the nadir objective vector and the ideal objective vector, respectively. That is, all objectives are assumed to be maximized with bounds $[0,1]$.
+The algorithm projects the objective space into $M-1$ dimensions by eliminating the dimension associated with an objective $m \in \mathcal{M}$. We define the sub-dimensional objective set $\mathcal{L} = \mathcal{M} \backslash \{m\}$. It is assumed that $\mathbf{z} \in Z$ are sorted in descending order according to their $m$th component. The algorithm proceeds by sequentially adding solutions to the ($M-1$)-dimensional space, and calculating the contribution to the frontier volume $V$ as a product of the volume contribution in $M-1$ dimensions and $z_m$.
 
-The algorithm projects the objective space into $N-1$ dimensions by eliminating the dimension associated with an (arbitrarily-chosen) objective $p \in O$. The set of objectives is $\overbar{O} := O \backslash \{p\}$. It is assumed that $x \in \mathcal{P}$ are sorted in descending order according to $p$. The algorithm proceeds by sequentially adding solutions to the ($N-1$)-dimensional space, and calculating the contribution to the frontier volume as a product of the volume contribution in $N-1$ dimensions and its achievement in objective $p$.
-
-Let $\overbar{V_x}$ be the ($N-1$)-dimensional volume contribution of solution $x$ and
-$x_p$ be the achievement of solution $x$ in objective $p$. Further, let
-$F$ be the set of non-dominated solutions in $N-1$ dimensions.
-I compute the $N$-dimensional volume of the frontier $V$ as follows.
+Let $\overbar{V_\mathbf{z}}$ be the ($M-1$)-dimensional volume contribution of solution $\mathbf{z}$. Further, let
+$\mathbf{f} \in F$ be the non-dominated objective vectors in $M-1$ dimensions.
+Compute the hypervolume $V$ as follows:
 
 \begin{figure}[!ht]
 \caption[Algorithm to compute the unary hypervolume indicator of a Pareto frontier]{Algorithm to compute the unary hypervolume indicator of a Pareto frontier.}
@@ -21,36 +21,36 @@ I compute the $N$-dimensional volume of the frontier $V$ as follows.
 \State $F \gets \emptyset$
 
 % Iterate over each solution
-\ForAll{$x \in \mathcal{P}$}
+\ForAll{$\mathbf{z} \in Z$}
 
-	\State $\overbar{V}_x \gets \prod_{o \in \overbar{O}} x_{o} - \overbar{V}$
+	\State $\overbar{V}_\mathbf{z} \gets \prod_{\ell \in \mathcal{L}} z_\ell - \overbar{V}$
 		
-	\ForAll{$f \in F$}
-		\If{$f_o < x_o \forall o \in \overbar{O}$}
-			\State $F \gets F \backslash \{f\}$
+	\ForAll{$\mathbf{f} \in F$}
+		\If{$f_\ell < z_\ell \, \forall \ell \in \mathcal{L}$}
+			\State $F \gets F \backslash \{\mathbf{f}\}$
 		\EndIf
 	\EndFor
 	
 	% iterate over subdimensions to "add back the sides"	
-	\ForAll{$o \in \overbar{O}$}
+	\ForAll{$\ell \in \mathcal{L}$}
 	
-		\State $F_{x,o} := \set{f \in F : f_o > x_o}$
+		\State $F_{\mathbf{z},\ell} := \set{\mathbf{f} \in F : f_\ell > z_\ell}$
 		
-		\State Sort $f \in F_{x,o}$ in ascending order by their $o$th component, $f_o$
+		\State Sort $\mathbf{f} \in F_{\mathbf{z},\ell}$ in ascending order by $\ell$th component, $f_\ell$
 		
-		\State $v_i \gets x_o$
-		\ForAll{$f \in F_{x,o}$}
-			\State $v_t \gets f_o$
-			\State $\delta_o :	= v_t - v_i$
-			\State $\overbar{V}_x \gets \overbar{V}_x + \delta_o \prod_{\sigma \in \overbar{O} \backslash \{o\}} f_\sigma$
+		\State $v_i \gets z_\ell$
+		\ForAll{$\mathbf{f} \in F_{\mathbf{z},\ell}$}
+			\State $v_t \gets f_\ell$
+			\State $\delta_\ell := v_t - v_i$
+			\State $\overbar{V}_\mathbf{z} \gets \overbar{V}_\mathbf{z} + \delta_\ell \prod_{\lambda \in \mathcal{L} \backslash \{\ell\}} f_\lambda$
 			\State $v_i \gets v_t$
 		\EndFor
 		
 	\EndFor
 	
-	\State $F \gets F \cup \{x\}$
-	\State $\overbar{V} \gets \overbar{V} + \overbar{V}_x$
-	\State $V \gets V + x_p \overbar{V}_x$
+	\State $F \gets F \cup \{\mathbf{z}\}$
+	\State $\overbar{V} \gets \overbar{V} + \overbar{V}_\mathbf{z}$
+	\State $V \gets V + z_m \overbar{V}_\mathbf{z}$
 \EndFor
 
 
