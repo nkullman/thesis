@@ -3,7 +3,9 @@
 \chapter{Computing a Frontier's Hypervolume Indicator}
 \label{chap:appAHypervolumeAlgo}
 %N goes to M, O goes to mathcalM, P goes to Z, p goes to m
-Given an efficient frontier $Z$ comprised of objective vectors $\mathbf{z} = [z_1,\ldots,z_M] \in Z$, this algorithm computes the volume $V$ of the objective space bounded by $Z$. The objectives are assumed to be normalized so that the objective space is the $M$-dimensional unit hypercube with the origin and the point $\vec{\mathbf{1}}$ defining the nadir objective vector and the ideal objective vector, respectively. That is, all objectives are assumed to be maximized and such that
+Given an efficient frontier $Z$ comprised of objective vectors $\mathbf{z} = [z_1,\ldots,z_M] \in Z$, this algorithm computes the volume $V$ of the objective space bounded by $Z$. This value is known as the hypervolume indicator. For more details on the hypervolume indicator, see \S \ref{chap:appCComparisonMetrics}.
+
+The objectives are assumed to be normalized so that the objective space is the $M$-dimensional unit hypercube with the origin and the point $\vec{\mathbf{1}}$ defining the nadir objective vector and the ideal objective vector, respectively. That is, all objectives are assumed to be maximized and such that
 $$ \forall i \in \{1,\ldots,M\} \quad z_i \in [0,1].$$
 
 The algorithm projects the objective space into $M-1$ dimensions by eliminating the dimension associated with an objective $m \in \mathcal{M}$. We define the sub-dimensional objective set $\mathcal{L} = \mathcal{M} \backslash \{m\}$. It is assumed that $\mathbf{z} \in Z$ are sorted in descending order according to their $m$th component. The algorithm proceeds by sequentially adding solutions to the ($M-1$)-dimensional space, and calculating the contribution to the frontier volume $V$ as a product of the volume contribution in $M-1$ dimensions and $z_m$.
