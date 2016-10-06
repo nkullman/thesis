@@ -1,16 +1,10 @@
 \section{Methods}
 \label{sec:methods}
-%In response to stakeholder and public preferences, forest planners often manage forests for multiple ecosystem services simultaneously, such as wildlife habitat, recreation, goods production, aesthetics, and carbon sequestration. Due to conflicts among these ecosystem services, however, often forest planners cannot simultaneously maximize the provision of all of them. Instead, the provision of some services must be reduced to increase achievement in others. In these cases, the goal is to find the best compromise alternatives.
-%
-%It is currently unknown how climate change will alter the trade-off relationships among bundled ecosystem services. This drives uncertainty in whether and how forest planners must change their compromise strategies to maintain a desired balance among ecosystem services. In this section, I describe a case study in the Deschutes National Forest in which I used multi-objective optimization to quantify the changes in trade-off relationships, comparing the results under three different climate change scenarios.
-%
-
-Bundled ecosystem services conflict with one another, and I argue that understanding the change in this conflict over time will enable forest planners to make more informed management decisions. Here, I provide formal definitions of what it means for ecosystem services to conflict, how to measure changes in conflict, and how a change in conflict impacts trade-off relationships.
+We compare conflict across systems using a case study involving climate change and forest management in the Deschutes National Forest. Prior to describing the case study, we first define the terminology used here.
 
 \subsection{Terminology}
-To aid in the discussion of conflict and trade-offs, I first present the definitions and notation used here.
-
 \label{subsec:terminology}
+  
 \paragraph{The multi-objective problem}
 Consider the $M$-objective optimization problem
 \begin{align}
@@ -88,9 +82,11 @@ If \eqref{eqn:objPairHarmony} does not hold, then the objectives conflict. Any p
 \begin{align}
 (z^1_i \ge z^2_i) \Rightarrow (z^1_j \le z^2_j) \quad \forall \mathbf{z}^1, \mathbf{z}^2 \in Z, j \neq i \label{eqn:objPairMonoDec}
 \end{align}
-holds, then the objectives are said to \textit{decrease monotonically}. When the objectives represent goods or services, a set of objectives that conflict is defined as a \textit{bundle} and a set of objectives that do not conflict is defined as a \textit{stack}.
+holds, then objectives $i$ and $j$ are said to \textit{decrease monotonically}.
 
-Equation \eqref{eqn:objPairHarmony} checks for monotonically increasing relationships among objectives. This means of detecting conflict among objectives in an objective set is functionally equivalent to that used by other studies, such as Brockhoff and Zitzler (2009) \cite{brockhoff2009objective} and Purshouse and Fleming (2003) \cite{purshouse2003conflict}.
+When the objectives represent goods or services, a set of objectives that conflict is defined as a \textit{bundle} and a set of objectives that do not conflict is defined as a \textit{stack}.
+
+Equation \eqref{eqn:objPairHarmony} checks for monotonically increasing relationships among objectives. This means of detecting conflict is functionally equivalent to that used by many studies, such as Brockhoff and Zitzler (2009) \cite{brockhoff2009objective} and Purshouse and Fleming (2003) \cite{purshouse2003conflict}.
 
 \subsection{Measuring conflict}
 % how to quantify conflict? Well, there are these preexisting ways that work well for full-order conflict. Such as hypervol and epsilon. But often we want to know about a pair of objectives, and no good way exists for that currently.
