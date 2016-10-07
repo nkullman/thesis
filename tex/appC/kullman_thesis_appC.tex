@@ -56,19 +56,19 @@ Region III is $\epsilon_+$-dominated for $\epsilon = 2$; region II is $\epsilon_
 \label{sec:unaryEpsIndicator}
 I define the unary epsilon indicator as
 \begin{align}
-I_{\epsilon_+} (Z) = I_{\epsilon_+2} (Z,\mathbf{z}^{\text{ideal}})
+I_{\epsilon_+} (Z) = I_{\epsilon_+2} (Z,\mathbf{z}^{\text{ideal}}) \label{eqn:unaryEpsIndicator}
 \end{align}
 That is, the additive unary epsilon indicator is identical to the additive binary epsilon indicator where the second frontier consists of a single point: the ideal solution for the first frontier.
 
 This differs from the unary epsilon indicator traditionally used in EMO \cite{zitzler2003performance} in which the frontier is compared against a reference nondominated set. However, because the frontiers in the present study have guaranteed optimality, there is no reference set against which to compare them.
 
-\section{Unary hypervolume indicator $I_{H1}$ and binary hypervolume indicator $I_{H2}$}
+\section{Hypervolume Indicators}
 \label{sec:hypervolumeIndicator}
-For every solution $\mathbf{z}^i$ in a frontier $Z$ define the hyperrectangle $r_i$ whose diagonal corners are the origin and the objective vector $\mathbf{z}^i = [z_1,\ldots,z_M]$ (see Figure \ref{fig:frontierVolumes}). Then the unary hypervolume indicator of the frontier $Z$ is the $M$-dimensional volume of the union of all of the hyperrectangles corresponding to the solutions in $Z$:
+For every solution $\mathbf{z}^i$ in a frontier $Z$ define the hyperrectangle $r_i$ whose diagonal corners are the origin and the objective vector $\mathbf{z}^i = [z_1,\ldots,z_M]$ (see Figure \ref{fig:frontierVolumes}). Then the \textit{unary hypervolume indicator} of the frontier $Z$ is the $M$-dimensional volume of the union of all of the hyperrectangles corresponding to the solutions in $Z$:
 \begin{align}
-I_{H1} (Z) = \text{vol} \left( \bigcup_{i = 1}^{|Z|} r_i \right)
+I_{H1} (Z) = \text{vol} \left( \bigcup_{i = 1}^{|Z|} r_i \right) \label{eqn:hypervol}
 \end{align}
-Then define the binary hypervolume indicator of two frontiers $Z^1$ and $Z^2$ as \cite{zitzler1999evolutionary}
+Then define the \textit{binary hypervolume indicator} of two frontiers $Z^1$ and $Z^2$ as \cite{zitzler1999evolutionary}
 \begin{align}
 I_{H2} (Z^1,Z^2) = I_{H1} (Z^1 + Z^2) - I_{H1} (Z^2)
 \end{align}
@@ -96,13 +96,13 @@ where $I_{H1} (Z^1 + Z^2)$ is the unary hypervolume indicator of the frontier co
 
 I developed a custom algorithm to solve for the hypervolume indicators. The details of the algorithm may be found in \S \ref{chap:appAHypervolumeAlgo}.
 
-\subsection{Unary distance indicator $I_d$} The unary distance indicator measures the average distance from the frontier to the ideal solution:
+\section{Unary distance indicator $I_d$} The unary distance indicator measures the average distance from the frontier to the ideal solution:
 \begin{align}
 I_d = \frac{1}{|Z|}\sum_{\mathbf{z} \in Z} ||\mathbf{z}^{\text{ideal}} - \mathbf{z} ||
 \end{align}
 Smaller values of $I_d$ correspond to frontiers that are closer to the ideal solution, which may imply less conflict between objectives. This metric is analogous to the unary distance indicator more commonly used in EMO \cite{czyzzak1998pareto}. Where the metric used here measures the distance to the ideal solution, the traditional metric measures the distance to a reference Pareto frontier.
 
-\subsection{Unary Spacing Indicator $I_s$} The unary spacing indicator, or Schott's spacing metric \cite{schott1995fault}, computes the standard deviation of the distance between points in the frontier:
+\section{Unary Spacing Indicator $I_s$} The unary spacing indicator, or Schott's spacing metric \cite{schott1995fault}, computes the standard deviation of the distance between points in the frontier:
 \begin{align}
 I_s = \sqrt{\frac{1}{|Z|-1} \sum_{\mathbf{z} \in Z} (d_z - \overbar{d})^2}
 \end{align}
@@ -110,4 +110,4 @@ where
 \begin{align}
 d_z = \min_{\mathbf{y} \in Z, \mathbf{y} \neq \mathbf{z}} ||\mathbf{z} - \mathbf{y}||
 \end{align}
-and $\overbar{d}$ is the average over all $d_z$. In EMO, the spacing indicator provides a measure of an algorithm's ability to search the frontier space uniformly. Here, the spacing metric provides a measure of the flexibility afforded to the decision maker under each climate scenario, since smaller values of $I_s$ imply a higher density of solutions and greater flexibility.
+and $\overbar{d}$ is the average over all $d_z$. In EMO, the spacing indicator provides a measure of an algorithm's ability to search the frontier space uniformly. Here, the spacing metric provides a measure of the flexibility afforded to the decision maker, since smaller values of $I_s$ imply less distance between solutions.

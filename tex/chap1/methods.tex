@@ -1,6 +1,6 @@
 \section{Methods}
 \label{sec:methods}
-We compare conflict across systems using a case study involving climate change and forest management in the Deschutes National Forest. Prior to describing the case study, we first define the terminology used here.
+To analyze conflict across systems and demonstrate a novel application of new and existing conflict metrics we perform a case study on the impacts of climate change on forest management in the Deschutes National Forest. Prior to describing the case study, we first define the terminology used here and describe the methods used to measure conflict.
 
 \subsection{Terminology}
 \label{subsec:terminology}
@@ -88,15 +88,11 @@ When the objectives represent goods or services, a set of objectives that confli
 
 Equation \eqref{eqn:objPairHarmony} checks for monotonically increasing relationships among objectives. This means of detecting conflict is functionally equivalent to that used by many studies, such as Brockhoff and Zitzler (2009) \cite{brockhoff2009objective} and Purshouse and Fleming (2003) \cite{purshouse2003conflict}.
 
-\subsection{Measuring conflict}
-% how to quantify conflict? Well, there are these preexisting ways that work well for full-order conflict. Such as hypervol and epsilon. But often we want to know about a pair of objectives, and no good way exists for that currently.
-After determining that objectives conflict with one another, one may wish to determine the severity of the conflict. A number of conflict measures exist. Here, we divide them into two general groups: frontier conflict measures and pairwise conflict measures. The first group is subdivided into unary and binary frontier conflict measures. A good review of these measures is provided in Zitzler CITE. When considering the whole objective set $\mathcal{M}$, a commonly used metric is the relative volume of the $M$-dimensional objective space bounded by a Pareto frontier CITE. This measure is known as the hypervolume indicator. Together with S\'{a}ndor T\'{o}th, I devised an algorithm to compute the value of the hypervolume indicator for any frontier with $M \ge 2$. The algorithm begins with an empty $M-1$-dimensional frontier and proceeds by sorting the objective vectors according to the $M$th component, then iteratively adding them to the sub-dimensional frontier, each time computing the additional volume enclosed by the solution and multiplying it by its value in the $M$th component. Details of the algorithm are in the appendix, \S \ref{chap:appAHypervolumeAlgo}.
+\subsection{Conflict and other frontier qualities}
+% given a system, here's what we're going to measure and how we'll measure it.
+Qualities of an efficient frontier that may be of interest to a decision maker include the number of solutions, the spacing of the solutions, and especially the conflict among the objectives. To measure conflict over the entire objective set $\mathcal{M}$ we use the hypervolume indicator (see equation \eqref{eqn:hypervol}). The hypervolume indicator measures the proportional volume of the objective space bounded by the frontier. A hypervolume indicator value of $I_{H1} < 1$ indicates some conflict among the objectives. We developed a custom algorithm to compute the hypervolume indicator, which is described in detail in \S \ref{chap:appAHypervolumeAlgo}. The unary epsilon indicator also provides a measure of conflict over the entire objective set, representing the distance by which the frontier must be translated in order to cover the ideal solution (see equation \eqref{eqn:unaryEpsIndicator}). The objectives in $\mathcal{M}$ conflict if the unary epsilon indicator $I_{\epsilon+} > 0$. In the case of multiple frontiers, we use the binary epsilon and binary hypervolume indicators to compare them and determine any dominance relationships (see Table \ref{tab:dominanceRelations}). Details on the computation of all of these metrics can be found in \S \ref{chap:appCComparisonMetrics}.
 
-After developing the algorithm independently, we later discovered that researchers in the field of Evolutionary Multi-objective Optimization (EMO) have developed similar algorithms to compute the hypervolume indicator CITE?. However, the application of the In the present study, the hypervolume indicator is used as a measure of conflict among ecosystem services. Comparing hypervolume indicators across frontiers offers a quantification of the impact of climate change on trade-off relationships among ecosystem services. In EMO, the hypervolume indicator is used to assess the performance of stochastic multi-objective optimization algorithms. Hence, while the metric is the same, the algorithm to compute it and its application are entirely unique in this study.
-
-Upon realization of the use of the hypervolume indicator in EMO, I discovered additional frontier comparison metrics used in this field and have adopted them for use here. These include the following indicators: the additive binary epsilon, binary hypervolume, unary distance, additive unary epsilon, and unary spacing. Information on these indicators can be found in the appendix, \S \ref{chap:appCComparisonMetrics}.
-
-In addition to frontier-level comparisons that measure conflict between all ecosystem services simultaneously, it is also worthwhile to consider how climate change may impact the relationship between two specific ecosystem services within the frontier. We developed a new metric to compute this. Described in the next section (right now)...
+With one of Equations \eqref{eqn:objPairHarmony}, \eqref{eqn:hypervol}, or \eqref{eqn:unaryEpsIndicator} determining that conflict exists, another metric is needed to determine which objective pairs contribute to the conflict. Here we propose a new conflict metric crafted specifically for this purpose.
 
 \subsection{A new measure of pairwise conflict}
 % This is our cool new way of drilling down into an objective pair to assess conflict
@@ -136,10 +132,6 @@ The conflict metric proposed here (equation \eqref{eqn:defConflict}) addresses t
 \caption[Comparing the proposed conflict metric to others used in multi-objective optimization]{Comparing the proposed metric for conflict $C_{ij}$ against the Pearson product-moment and the Spearman rank correlation coefficients ($\rho_{ij}$ and $\rho_{s,ij}$, respectively). While the latter two are identical for frontiers A and C, the proposed metric is greater for frontier C than it is for A. This is because it accounts for the average relative distance to the sub-dimensional ideal objective vector.}
 \label{fig:WhyOursIsBetter}
 \end{figure}
-
-\subsection{Other ways to measure a frontier}
-% Besides conflict, here are some other things that might be useful for a decision maker when assessing their potential solutions
-In addition to conflict, a decision maker may be interested in other measures of a solution set. Such values include the spacing between solutions, the number of points on the frontier, and the average distance of solutions from the ideal solution. These metrics are discussed in further detail in THESE SECTIONS, respectively.
 
 \subsection{Study system}
 \label{subsec:studyArea}
