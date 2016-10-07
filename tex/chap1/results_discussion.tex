@@ -1,23 +1,12 @@
- 
 \section{Results and Discussion}
 \label{sec:results}
- 
-DRAFT\\
-The frontiers for each climate scenario can be found in Figure $\ldots$
+We first provide the results of the case study, and then we give more general results about the application of conflict-measuring methods to multiple multi-objective systems.
 
-%\begin{table}[]
-%\centering
-%\resizebox{\textwidth}{!}{%
-%\begin{tabular}{|l|l|l|l|l|l|l|l|}
-%\hline
-%\multirow{2}{*}{} & \multicolumn{1}{c|}{\multirow{2}{*}{Name of indicator}} & \multicolumn{6}{c|}%%{Relation}                                                                                                                                                                                                                                                              %\\ \cline{3-8} 
-%                  & \multicolumn{1}{c|}{}                                   & \multicolumn{1}{c|}%{$\succ\succ$} & \multicolumn{1}{c|}{$\succ$} & \multicolumn{1}{c|}{$\rhd$}                             & \multicolumn{1}{c|}{$\succeq$}                & \multicolumn{1}{c|}{$=$}                              & \multicolumn{1}{c|}{$||$}                             \\ \hline
-%                  & $I_\epsilon$                                            & $I_\epsilon (Z_1,Z_2) < 1$        & -                            & $I_\epsilon (Z_1,Z_2)\le 1$ $I_\epsilon (Z_2,Z_1) > 1$ & $I_\epsilon (Z_1,Z_2)\le 1$                   & $I_\epsilon (Z_1,Z_2)= 1$ $I_\epsilon (Z_2,Z_1) = 1$ & $I_\epsilon (Z_1,Z_2)> 1$ $I_\epsilon (Z_2,Z_1) > 1$ \\ \hline
-%                  & $I_{H2}$                                                & -                                 & -                            & $I_{H2} (Z_1,Z_2)>0$ $I_{H2} (Z_2,Z_1) =0$             & $I_{H2} (Z_1,Z_2)\ge0$ $I_{H2} (Z_2,Z_1) =0$ & $I_{H2} (Z_1,Z_2)=0$ $I_{H2} (Z_2,Z_1) =0$           & $I_{H2} (Z_1,Z_2)>0$ $I_{H2} (Z_2,Z_1) >0$           \\ \hline
-%                  & $I_d$                                                   & -                                 & -                            & -                                                       & -                                             & -                                                     & -                                                     \\ \hline
-%                  & $I_s$                                                   & -                                 & -                            & -                                                       & -                                             & -                                                     & -                                                     \\ \hline
-%\end{tabular}%
-%}
-%\caption[Indicator comparisons to determine dominance relationships between frontiers]{Tests using indicators to determine dominance relationships between frontiers \cite{zitzler2003performance}. While general tests of dominance relationships may not be avaiable for some metrics (any cell with `-'), conclusions may still be drawn. For instance, $I_d(Z_1) < I_d(Z_2) \Rightarrow Z_2 \ntriangleright Z_1$.}
-%\label{tab:powerOfIndicatorTests}
-%\end{table}
+\subsection{Case Study Results}
+We parameterized and solved the multi-objective model (\eqref{eqn:objFire}-\eqref{eqn:constraintNonNeg}) for each of the climate scenarios, generating three efficient frontiers: $Z_{\text{None}}$, $Z_{4.5}$, and $Z_{8.5}$ for the None, Ensemble RCP 4.5, and Ensemble RCP 8.5 scenarios, respectively. Summary details for each frontier are shown in Table MAKETABLE, and the frontiers are shown in Figure MAKEFIGURE.
+
+%MAKETABLE will have a column for each climate scenario, and a row for: max and min value achieved for each objective, number of solutions, hypervolume, unary epsilon indicator, schott's spacing, avg dist to ideal?
+
+%MAKEFIGURE will have a 3D plot for each frontier.
+
+% Talk about sources of conflict in between objectives. Well, the conflict metric is higher for this frontier than for this frontier (graph of cross section). The underlying reason for this is bc the ?sed contrib is higher in this scenario than that scenario? or ?the efficacy of treatments is highest in E85 and on the stands located in the watershed?. Something like that. Look into treatment efficacy on WS stands across the climate scenarios. And the sediment contributions vs climate scenarios
