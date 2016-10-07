@@ -180,14 +180,12 @@ These three chosen scenarios represent a range of predicted climate change sever
 \label{sec:model}
 For each of the three climate scenarios specified in section \ref{sec:climateScenarios}, we parameterize and solve the following multi-objective zero-one mathematical program that optimizes the joint provision of ecosystem services in the Drink Area. The model operates over an 80-year planning horizon (2015-2095). In the planning horizon, there are two treatment periods (2015-2035 and 2035-2055). The model decides on which stands and in which periods to perform silvicultural treatments. Determining the treatment to apply to a stand was done \textit{a priori} and is dependent only on silvicultural characteristics at the time of treatment; the rules governing the assignment of treatment types can be found in the appendix, \S \ref{chap:appBTreatmentSpec}.
 
-The model minimizes the fire hazard rating of the Drink at the end of the 80-year planning horizon, maximizes the area of NSO habitat at the end of each planning period, and minimizes the short-term spikes in sediment delivery resulting from the application of silvicultural treatments.
-
-Treatments are assumed to be performed at the midpoint year in the treatment period, years 2025 and 2045 for the first and second periods, respectively. A schematic of the planning horizon including the time of these events is shown in Figure \ref{fig:drinkPlanningHorizon}.
+The model minimizes the fire hazard rating of the Drink Area at the end of the 80-year planning horizon, maximizes the area of NSO habitat at the end of each planning period, and minimizes the short-term spikes in sediment delivery resulting from the application of silvicultural treatments. Treatments are assumed to be performed at the midpoint year in the treatment periods: years 2025 and 2045 for the first and second periods, respectively. Figure \ref{fig:drinkPlanningHorizon} contains a schematic of the planning horizon showing the time of these events.
 
 \begin{figure}
 \centering
 \includegraphics[width=.85\textwidth]{../images/Drink_PlanningHorizon_Sketch}
-\caption[Planning horizon schematic]{The planning horizon used in the analysis spans the 80 year period from 2015 to 2095. Treatments may be performed in the first period, the second period, both, or neither. Treatments are assumed to be performed at the mid-point years of each period (black triangles). Sediment delivery is measured on treatment years. Stands' suitability for NSO habitat is measured at the end of the planning periods (gray triangles), and stands' fire hazard ratings are measured at the end of the planning horizon (white triangle).}
+\caption[Planning horizon for the case study]{The planning horizon used in the case study spans the 80 year period from 2015 to 2095. Treatments may be performed in the first period, the second period, both, or neither. Treatments are assumed to be performed at the mid-point years of each period (black triangles). Sediment delivery is measured on treatment years. Stands' suitability for NSO habitat is measured at the end of the planning periods (gray triangles), and stands' fire hazard ratings are measured at the end of the planning horizon (white triangle).}
 \label{fig:drinkPlanningHorizon}
 \end{figure}
 
@@ -195,7 +193,7 @@ Treatments are assumed to be performed at the midpoint year in the treatment per
 The following notation is used throughout the model:
 \paragraph{Parameters}
 \begin{itemize}
-\item \textbf{$i \in I$:} the set of all 303 forest stands comprising the Drink area
+\item \textbf{$i \in I$:} the set of forest stands comprising the Drink Area ($|I| = 303$)
 \item \textbf{$r \in R$:} the set of treatment schedule prescriptions:
 	$$
 	r =
@@ -207,11 +205,11 @@ The following notation is used throughout the model:
 	\end{cases}
 	$$
 \item \textbf{$F_{i,r}$:} the area-weighted fire hazard rating of stand $i$ at the end of the planning horizon if prescribed to treatment schedule $r$
-\item \textbf{$I_{\omega,t}$:} the set of stands that can qualify as NSO habitat at the end of planning period $t$
+\item \textbf{$I_{\omega,t}$:} the set of stands that qualify as NSO habitat at the end of planning period $t$ under at least one treatment schedule
 \item \textbf{$a_i$:} the area of stand $i$
-\item \textbf{$e$:} the discount factor applied to NSO habitat that is less than 200 ha in size
+\item \textbf{$e$:} the discount factor applied to NSO habitat when it is not part of a contiguous habitat cluster at least 200 ha in size
 \item \textbf{$j \in R_{i,t}$:} the set of treatment schedules such that stand $i$ qualifies as NSO habitat in planning period $t$
-\item \textbf{$s_{i,t}$:} the contribution in tons of sediment delivered from performing fuel treatments on stand $i$ in planning period $t$
+\item \textbf{$s_{i,t}$:} the amount of sediment (in tons) delivered to the watershed as a result of performing fuel treatments on stand $i$ in planning period $t$
 \item \textbf{$c \in C$:} the set of all clusters of stands whose combined area exceeds 200 hectares
 \item \textbf{$i \in D_c$:} the set of all stands that comprise cluster $c$
 \item \textbf{$c \in C_i$:} the set of all clusters that contain stand $i$
@@ -229,34 +227,34 @@ $$
 
 \paragraph{Indicator Variables}
 \begin{itemize}
-\item \textbf{$q_{c,t} = 1$} if all stands in cluster $c$ qualify as NSO habitat in planning period $t$ and $q_{c,t} = 0$ otherwise
+\item \textbf{$q_{c,t} = 1$} if all stands in cluster $c$ qualify as NSO habitat at the end of planning period $t$; $q_{c,t} = 0$ otherwise
 \item \textbf{$p_{i,t} = 1$} if in planning period $t$ stand $i$ is part of a cluster $c$ such that $q_{c,t} = 1$; $p_{i,t} = 0$ otherwise
 \end{itemize}
 
 \paragraph{Accounting Variables}
 \begin{itemize}
-\item \textbf{$S_t$:} the contribution in tons of sediment delivered from performing fuel treatments in planning period $t$
-\item \textbf{$O_t$:} the amount of NSO habitat in hectares at the end of planning period $t$
-\item \textbf{$H_t$:} the area in hectares treated in planning period $t$
+\item \textbf{$S_t$:} the total sediment delivered to the watershed from performing fuel treatments in planning period $t$
+\item \textbf{$O_t$:} the amount of NSO habitat (in hectares) at the end of planning period $t$
+\item \textbf{$H_t$:} the total area (in hectares) treated in planning period $t$
 \end{itemize}
 
 \subsubsection{Parameterization}
 The model was parameterized as follows:
 \begin{itemize}
-\item \textbf{$F_{i,r}$:} the metric for fire hazard rating used in this analysis originated in the work by Schroder \textit{et al.} \cite{schroder2016multi}. This metric was developed for the Drink area. It uses fire characteristics from Anderson's fuel models \cite{anderson1982aids} to assign a fire hazard rating. I expanded the rating system to include fuel models not present in Schroder \textit{et al.} See Table \ref{tab:firehazards}.
+\item \textbf{$F_{i,r}$:} the metric for fire hazard rating used in this analysis originated in the work by Schroder \textit{et al.} \cite{schroder2016multi}. This metric was developed for the Drink Area. It uses fire characteristics from Anderson's fuel models \cite{anderson1982aids} to assign a fire hazard rating. I expanded the rating system to include fuel models not present in Schroder \textit{et al.} See Table \ref{tab:firehazards}.
 
-The stands' fuels and vegetation characteristics to determine the fire hazard rating were generated using the US Forest Service's Climate-Forest Vegetation Simulator (FVS). Input vegetation data to Climate-FVS came from the 2012 GNN structure map (\url{http://lemma.forestry.oregonstate.edu/data/structure-maps}) from Oregon State University's Landscape Ecology, Modeling, Mapping \& Analysis (LEMMA) group. Plots from the LEMMA database were mapped to the stands in the Drink area in order to produce tree and stand lists. These lists were used with Climate-FVS to simulate the stands' vegetation and fuels characteristics forward for the duration of the planning horizon under each climate scenario. Input climate data for Climate-FVS was obtained through the Climate-FVS climate data server \cite{climateFVSReadyData}.
+The stands' fuels and vegetation characteristics to determine the fire hazard rating were generated using the US Forest Service's Climate-Forest Vegetation Simulator (Climate-FVS). Input vegetation data to Climate-FVS came from the 2012 GNN structure map (\url{http://lemma.forestry.oregonstate.edu/data/structure-maps}) from Oregon State University's Landscape Ecology, Modeling, Mapping \& Analysis (LEMMA) group. Plots from the LEMMA database were mapped to the stands in the Drink area in order to produce tree and stand lists. These lists were used with Climate-FVS to simulate the stands' vegetation and fuels characteristics forward for the duration of the planning horizon under each climate scenario. Input climate data for Climate-FVS was obtained through the Climate-FVS climate data server \cite{climateFVSReadyData}.
 \item \textbf{$I_{\omega,t}$:} the set of stands that qualify as NSO habitat at the end of a planning period $t$ are those that meet the following three criteria, as specified by the USFS:
 	\begin{enumerate}
 	\item elevation less than 1830 m
-	\item the presence of trees with DBH no less than 76 cm
+	\item the presence of trees with diameter at breast height (DBH) at least than 76 cm
 	\item canopy closure of at least 60\%
 	\end{enumerate}
-The elevation requirement was checked using a digital elevation model from the US Department of Agriculture's GeoSpatial Data Gateway; canopy closure and large tree requirements were determined using the simulated vegetation characteristics output from Climate-FVS.
+The elevation requirement was checked using a digital elevation model from the US Department of Agriculture's GeoSpatial Data Gateway; canopy closure and large tree criteria were determined using the simulated vegetation characteristics output from Climate-FVS.
 
-To account for the NSO's large habitat requirements, stands must also be members of a cluster exceeding 200 ha in size, the entirety of which meets the aforementioned NSO habitat criteria. Stands not part of such a cluster have their contributions to owl habitat discounted by a factor of $e$.
+To account for the NSO's large habitat requirements, stands must also be members of a cluster exceeding 200 ha in size, the entirety of which meets the aforementioned NSO habitat criteria. Stands that meet the first three criteria but are not part of such a cluster have their contributions to the total owl habitat discounted by a factor of $e$.
 \item \textbf{$e$:} the discount factor for sub-200 ha NSO habitat was set to $e = 0.5$ following the convention used in Schroder \textit{et al.} \cite{schroder2016multi}.
-\item \textbf{$j \in R_{i,t}$:} each stand-treatment schedule combination is evaluated at the end of each planning period to determine its suitability as NSO habitat. Treatment schedules for which stand $i$ meets the NSO habitat criteria at the end of treatment period $t$ become members of the set $R_{i,t}$. 
+\item \textbf{$j \in R_{i,t}$:} each combination of stand-treatment schedule is evaluated at the end of each planning period to determine its suitability as NSO habitat. The set $R_{i,t}$ consists of treatment schedules for which stand $i$ meets the NSO habitat criteria at the end of treatment period $t$. 
 \item \textbf{$s_{i,t}$:} the contributions of sediment delivery from treatment of stand $i$ in period $t$ were determined using the Watershed Erosion Prediction Project (WEPP) online GIS tool \cite{frankenberger2011development}. This tool takes as input soil textures, treatment types, duration of simulation, and custom climate data. Soil texture data for the Drink area was obtained from the USDA's Soil Survey Geographic (SSURGO) database, treatment types are those specified in \S \ref{chap:appBTreatmentSpec}, and the years of simulation correspond to the treatment years in the model's planning horizon (2015-2095). The custom climate data are those described above for use with Climate-FVS, obtained through the Climate-FVS data server.
 \item \textbf{$C$,$D_c$,$C_i$:} the formulation of clusters was performed \textit{a priori} according to the algorithm used in Rebain and McDill (2003) \cite{rebain2003mixed}. The enumerated clusters can then be used to immediately determine cluster members $D_c$ and stand-owning clusters $C_i$.
 \item \textbf{$A$:} the maximum area that may be treated in either planning period was defined to be 6000 acres, or approximately 2428 ha
@@ -284,7 +282,7 @@ The fuel model column refers to the Anderson fuel model ratings \cite{anderson19
 \end{table}
 
 \subsubsection{Formulation}
-The formulation of the model is as follows:
+The formulation of the multi-objective model is as follows:
 \begin{align}
 Minimize \quad & \notag\\
 &\sum_{i\in I}\sum_{r\in R} F_{i,r} x_{i,r} \label{eqn:objFire} \\
