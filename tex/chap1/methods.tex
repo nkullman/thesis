@@ -34,6 +34,7 @@ Objective vectors' components are referred to in subscripts:
 \begin{align}
 \mathbf{z} = [z_1, z_2, \ldots, z_M]
 \end{align}
+The $i$th component of an objective vector $\mathbf{z}$ represents the achievement in objective $i$ by the corresponding decision vector $\mathbf{x}$.
 
 \paragraph{Ideal and nadir objective vectors}
 The \textit{ideal objective vector} is defined as the vector
@@ -44,19 +45,19 @@ Analogously, define the nadir solution as the vector
 \begin{align}
 \mathbf{z}^{\text{nadir}} = \min_{\mathbf{x} \in X}\{f_i(\mathbf{x})\} \quad \forall i \in \mathcal{M}.
 \end{align}
-
-
-\paragraph{Sub-dimensions}
-Define the \textit{sub-dimensional objective set} $\mathcal{L} \subset \mathcal{M}$ as a subset of the objective functions $f_i \in \mathcal{M}$. Call the cardinality of this set $L$. The \textit{sub-dimensional objective vector} (specifically, the $L$-dimensional objective vector) for the solution $\mathbf{x}^i$ is the vector denoted $\mathbf{z}^i_\mathcal{L}$ whose components are $z^i_\ell = f_\ell(\mathbf{x}^i)$, $\forall \ell \in \mathcal{L}$. That is, they are the components of $\mathbf{z}^i$ that correspond to the objectives in $\mathcal{L}$.
+The ideal objective vector represents the impossible ideal scenario in which each objective is simultaneously optimized. The nadir objective vector represents the worst case scenario in which each objective attains its lowest value. These solutions are the diagonal corners of the minimum bounding box for the efficient frontier $Z$. Since they provide upper and lower bounds for each objective, they serve as reference points against which the decision maker can compare all solutions. 
 
 \paragraph{Trade-offs}
 The \textit{trade-off} between two objective vectors $\mathbf{z}^1$ and $\mathbf{z}^2$ is the vector of differences in their objective achievements:
 \begin{align}
 \mathbf{\tau}^{1,2} = [z^2_1 - z^1_1, z^2_2 - z^1_2, \ldots, z^2_M - z^1_M]
 \end{align}
-Note that $\mathbf{\tau}^{1,2} = - \mathbf{\tau}^{2,1}$.
+The $i$th component of $\mathbf{\tau}^{1,2}$ represents the amount of objective $i$ that would be sacrificed or gained by selecting $\mathbf{z}^2$ instead of $\mathbf{z}^1$.
+Note that $\mathbf{\tau}^{1,2} = - \mathbf{\tau}^{2,1}$. 
 
-Given a sub-dimensional objective set $\mathcal{L}$, define the \textit{sub-dimensional trade-off} $\tau^{1,^2}_\mathcal{L}$ as the vector with components $\tau^{1,2}_\ell$, $\forall \ell \in \mathcal{L}$.
+\paragraph{Sub-dimensions}
+During analysis, we often wish to consider only a subset of the objectives $\mathcal{L} \subset\mathcal{M}$. We define such subsets as \textit{sub-dimensional objective sets}. In these cases, it is simpler to work with constructs that have only those components that correspond to the objectives in $\mathcal{L}$. For instance, define the \textit{sub-dimensional objective vector} for the solution $\mathbf{x}^i$ as $\mathbf{z}^i_\mathcal{L}$ which has components $\forall \ell \in \mathcal{L}. \, z^i_\ell = f_\ell(\mathbf{x}^i)$.
+Define the \textit{sub-dimensional trade-off} $\tau^{1,2}_\mathcal{L}$ as the vector with components $\forall \ell \in \mathcal{L}. \, \tau^{1,2}_\ell$.
 
 \paragraph{Relative objective achievements, relative objective vectors, and relative trade-offs}
 For an objective vector $\mathbf{z}$, its \textit{relative achievement in objective }$i$ is
