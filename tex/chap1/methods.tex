@@ -13,7 +13,7 @@ Consider the $M$-objective optimization problem
 \text{subject to}& \notag \\
 & \mathbf{x} \in X \label{eqn:generalConstraint}
 \end{align}
-with \textit{objective functions} $f_i(\mathbf{x}), i \in \{1,\ldots,M\}$ and feasible \textit{decision vectors} (or \textit{solutions}) $\mathbf{x} \in \mathbb{R}^n$ where $n$ is the number of decision variables in the optimization problem. A set of equality and inequality constraints determine the \textit{feasible decision space} $X$. Solutions in $X$ are referenced by a superscript: $X = \{\mathbf{x}^1,\mathbf{x}^2,\ldots,\mathbf{x}^{|X|}\}$. Each objective function $f_i : \mathbb{R}^n \mapsto \mathbb{R}$ maps decision vectors to scalars in $\mathbb{R}$. The vector objective function $\mathbf{f} : X \mapsto \mathbb{R}^M$ maps the feasible decision space to the \textit{objective space} $\mathbb{R}^M$. The set of all objective functions is the \textit{objective set} $\mathcal{M} = \{f_1,\ldots,f_M\}$.
+with \textit{objective functions} $f_i(\mathbf{x}), i \in \{1,\ldots,M\}$ and feasible \textit{decision vectors} (or \textit{solutions}) $\mathbf{x} \in \mathbb{R}^n$ where $n$ is the number of decision variables in the optimization problem. A set of equality and inequality constraints determine the \textit{feasible decision space} $X$. Solutions in $X$ are referenced by superscripts: $X = \{\mathbf{x}^1,\mathbf{x}^2,\ldots,\mathbf{x}^{|X|}\}$. Each objective function $f_i : \mathbb{R}^n \mapsto \mathbb{R}$ maps decision vectors to scalars in $\mathbb{R}$. The vector objective function $\mathbf{f} : X \mapsto \mathbb{R}^M$ maps the feasible decision space to the \textit{objective space} $\mathbb{R}^M$. The set of all objective functions is the \textit{objective set} $\mathcal{M} = \{f_1,\ldots,f_M\}$.
 
 \paragraph{Dominance and frontiers}
 A solution $\mathbf{x}^1$ is said to \textit{dominate} another solution $\mathbf{x}^2$ ($\mathbf{x}^1 \succ \mathbf{x}^2$) if
@@ -24,7 +24,7 @@ A solution $\mathbf{x}^1 \in X$ is \textit{non-dominated} if
 \begin{align}
 \nexists \mathbf{x}^2 \in X : \mathbf{x}^2 \succ \mathbf{x}^1
 \end{align}
-The set of non-dominated solutions to the multi-objective problem \eqref{eqn:generalObj} and \eqref{eqn:generalConstraint} is referred to as the \textit{Pareto-optimal set} $P = \{\mathbf{x} \in X | \nexists \mathbf{y} \in X : \mathbf{y} \succ \mathbf{x} \}$.
+For a rational decision maker, all dominated solutions may be removed from the analysis, since for a dominated solution $\mathbf{x}^2$ there exists another solution $\mathbf{x}^1$ which is better: $\mathbf{x}^1$ achieves more in at least one objective than $\mathbf{x}^2$, and $\mathbf{x}^1$ does not achieve less in any objective than $\mathbf{x}^2$. Thus, the decision maker will always select a solution from the set of non-dominated decision vectors that solve the multi-objective problem \eqref{eqn:generalObj} and \eqref{eqn:generalConstraint}. We refer to this set as the \textit{Pareto-optimal set} $P = \{\mathbf{x} \in X | \nexists \mathbf{y} \in X : \mathbf{y} \succ \mathbf{x} \}$.
 
 The \textit{Pareto-optimal frontier}, the \textit{efficient frontier} or, simply, the \textit{frontier} $Z$ is the corresponding set of $M$-dimensional \textit{objective vectors} $\mathbf{z} = [f_1(\mathbf{x}),f_2(\mathbf{x}),\ldots,f_M(\mathbf{x})]$. That is,
 \begin{align}
