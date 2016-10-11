@@ -34,7 +34,7 @@ Objective vectors' components are referred to in subscripts:
 \begin{align}
 \mathbf{z} = [z_1, z_2, \ldots, z_M]
 \end{align}
-The $i$th component of an objective vector $\mathbf{z}$ represents the achievement in objective $i$ by the corresponding decision vector $\mathbf{x}$.
+Objective vectors provide the decision maker with knowledge of the objective achievement of a solution $\mathbf{x}$ - the $i$th component of an objective vector $\mathbf{z}$ represents the achievement in objective $i$ by the corresponding decision vector $\mathbf{x}$.
 
 \paragraph{Ideal and nadir objective vectors}
 The \textit{ideal objective vector} is defined as the vector
@@ -45,14 +45,14 @@ Analogously, define the nadir solution as the vector
 \begin{align}
 \mathbf{z}^{\text{nadir}} = \min_{\mathbf{x} \in X}\{f_i(\mathbf{x})\} \quad \forall i \in \mathcal{M}.
 \end{align}
-The ideal objective vector represents the impossible ideal scenario in which each objective is simultaneously optimized. The nadir objective vector represents the worst case scenario in which each objective attains its lowest value. These solutions are the diagonal corners of the minimum bounding box for the efficient frontier $Z$. Since they provide upper and lower bounds for each objective, they serve as reference points against which the decision maker can compare all solutions. 
+The ideal objective vector represents the impossible ideal scenario in which each objective is simultaneously optimized. The nadir objective vector represents the worst case scenario in which each objective attains its lowest value. These solutions are the diagonal corners of the minimum bounding box for the efficient frontier $Z$. Since they provide upper and lower bounds for each objective, they serve as reference points against which the decision maker can compare solutions. 
 
 \paragraph{Trade-offs}
 The \textit{trade-off} between two objective vectors $\mathbf{z}^1$ and $\mathbf{z}^2$ is the vector of differences in their objective achievements:
 \begin{align}
 \mathbf{\tau}^{1,2} = [z^2_1 - z^1_1, z^2_2 - z^1_2, \ldots, z^2_M - z^1_M]
 \end{align}
-The $i$th component of $\mathbf{\tau}^{1,2}$ represents the amount of objective $i$ that would be sacrificed or gained by selecting $\mathbf{z}^2$ instead of $\mathbf{z}^1$.
+The components of $\mathbf{\tau}^{1,2}$ represent the amount of each objective that would be sacrificed or gained by selecting $\mathbf{z}^2$ instead of $\mathbf{z}^1$.
 Note that $\mathbf{\tau}^{1,2} = - \mathbf{\tau}^{2,1}$. 
 
 \paragraph{Sub-dimensions}
@@ -60,7 +60,7 @@ During analysis, we often wish to consider only a subset of the objectives $\mat
 Define the \textit{sub-dimensional trade-off} $\tau^{1,2}_\mathcal{L}$ as the vector with components $\forall \ell \in \mathcal{L}. \, \tau^{1,2}_\ell$.
 
 \paragraph{Relative objective achievements, relative objective vectors, and relative trade-offs}
-For an objective vector $\mathbf{z}$, its \textit{relative achievement in objective }$i$ is
+Using the nadir and ideal objective vectors, we can represent each solution as a vector of its relative objective achievements. This allows for dimensionless and scale-agnostic comparison of solutions. For an objective vector $\mathbf{z}$, its \textit{relative achievement in objective} $i$ is
 \begin{align}
 \overbar{z_i} = \frac{z_i - z^\text{nadir}_i}{z^\text{ideal}_i - z^\text{nadir}_i},
 \end{align}
