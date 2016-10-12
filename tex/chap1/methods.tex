@@ -1,6 +1,6 @@
 \section{Methods}
 \label{sec:methods}
-We lay a foundation for quantitative conflict analysis of multi-objective systems. The analysis involves the use of measures including existing frontier indicators used in EMO, adaptations of indicators used in EMO, and a new measure of conflict that we introduce for the first time here. A case study on the impacts of climate change on forest management serves to illustrate the conflict analysis. Prior to describing the case study, we first define terminology and describe each of the measures used in our analysis.
+We lay a foundation for quantitative conflict analysis of multi-objective systems. The analysis involves the use of measures that include existing indicators of frontier performance used in EMO, adaptations of indicators used in EMO, and a new measure of conflict that we introduce for the first time here. A case study on the impacts of climate change on forest management serves to illustrate the conflict analysis. Prior to describing the case study, we first define terminology and describe each of the measures used in our analysis.
 
 \subsection{Terminology}
 \label{subsec:terminology}
@@ -92,18 +92,26 @@ Equation \eqref{eqn:objPairHarmony} checks for monotonically increasing relation
 \subsection{Conflict and other frontier qualities}
 \label{sec:waysToMeasureFrontiers}
 % given a system, here's what we're going to measure and how we'll measure it.
-Given an efficient frontier, the decision maker will be interested in the conflict among the objectives. To measure conflict over the entire objective set $\mathcal{M}$, we use the hypervolume indicator and the epsilon indicator. To compare conflict between two frontiers, we use the binary equivalent of each of these metrics: the binary hypervolume indicator and the binary epsilon indicator. We describe each of these metrics here. 
+Given an efficient frontier, the decision maker will determine which solution represents the best compromise among the objectives. Knowledge of the conflicts among the objectives enables better decision making, as it may highlight areas of the efficient frontier where objectives are incompatible and areas where advantageous compromises may exist. To help a decision maker understand the total conflict in the multi-objective system, we employ two measures of conflict: the hypervolume indicator and the epsilon indicator, with the hypervolume indicator serving as our primary conflict metric. These metrics map a single efficient frontier to a scalar value. Of course, the scalar value provided by these indicators alone does not provide the decision maker with detail about where the conflict exists within a multi-objective system. To address this question, we developed a new metric that quantifies the conflict between a pair of objectives.
+
+When a decision maker has more than one multi-objective system to compare, they require a means of comparing the efficient frontiers. To make this comparison, we use the binary hypervolume and binary epsilon indicators. These metrics are similar to their non-binary counterparts mentioned above, except they map two efficient frontiers to a scalar. That is, they provide a value for each pair of frontiers, rather than for each frontier individually. 
+
+We describe each of these metrics in more detail here. 
 
 \paragraph{Hypervolume Indicators}
-The hypervolume indicator measures the proportional volume of the objective space bounded by the frontier. For each relative objective vector $\overbar{\mathbf{z}^i}$ in the frontier $Z$, define its corresponding hyperrectangle by $r_i$. $r_i$ is the $M$-orthotope with diagonally opposite points the origin and the point defined by the components of the relative objective vector. Then the hypervolume indicator is the volume of the union of the hyperrectangles $r_i$:
+The hypervolume indicator measures the proportional volume of the objective space bounded by the frontier. We use this to measure conflict because systems with conflicting objectives that inhibit the achievement of one another will produce solutions that do not simultaneously achieve in all of the objectives. This results in solutions whose extension into the objective space is limited, which produces a smaller value for the hypervolume.
+
+For each relative objective vector $\overbar{\mathbf{z}^i}$ in the frontier $Z$, define its corresponding hyperrectangle by $r_i$. $r_i$ is the $M$-orthotope which has as a pair of diagonally opposite points the origin and the point defined by the components of the relative objective vector $\overbar{\mathbf{z}^i}$. Then the hypervolume indicator is the volume of the union of these hyperrectangles $r_i$:
 \begin{align}
 I_{H1} (Z) = \text{vol} \left( \bigcup_{i = 1}^{|Z|} r_i \right) \label{eqn:hypervol}
 \end{align}
-Then define the \textit{binary hypervolume indicator} of two frontiers $Z^1$ and $Z^2$ as \cite{zitzler1999evolutionary}
+Then we can define the \textit{binary hypervolume indicator} of two frontiers $Z^1$ and $Z^2$ as \cite{zitzler1999evolutionary}
 \begin{align}
 I_{H2} (Z^1,Z^2) = I_{H1} (Z^1 + Z^2) - I_{H1} (Z^2)
 \end{align}
-where $I_{H1} (Z^1 + Z^2)$ is the unary hypervolume indicator of the frontier that consists of the nondominated points in $\{Z^1 \cup Z^2\}$. See Figure \ref{fig:binaryHypervolume}. The binary hypervolume indicator provides the volume of frontier $Z^1$ that is not contained within frontier $Z^2$. Larger values of $I_{H1}$ correspond to frontiers occupying larger amounts of the objective space. $I_{H1} < 1$ indicates some conflict among the objectives. $I_{H2}(Z^1, Z^2) > I_{H2}(Z^2, Z^1)$ indicates areas of less conflict between objectives in $Z^1$ than in $Z^2$.
+where $I_{H1} (Z^1 + Z^2)$ is the unary hypervolume indicator of the frontier that consists of the nondominated points in $\{Z^1 \cup Z^2\}$. See Figure \ref{fig:binaryHypervolume}.
+
+We use the binary hypervolume indicator to determine the volume of the objective space that is bounded by frontier $Z^1$ but not frontier $Z^2$. Since $I_{H2}(Z^1, Z^2) > 0$ indicates areas of the objective space bound only by $Z^1$, it also indicates the regional presence of less conflict. See Figure \ref{fig:binaryHypervolume}.
 
 \begin{figure}[ht]
 \centering
@@ -125,10 +133,21 @@ where $I_{H1} (Z^1 + Z^2)$ is the unary hypervolume indicator of the frontier th
 \label{fig:binaryHypervolume}
 \end{figure}
 
-We developed a custom algorithm to compute the hypervolume indicator. The algorithm projects the objective space into $M-1$ dimensions by eliminating the dimension associated with an objective $m \in \mathcal{M}$. We begin with a list of the relative objective vectors $\overbar{\mathbf{z}} \in Z$ sorted in descending order by their $m$th component. The algorithm proceeds by sequentially adding solutions to the ($M-1$)-dimensional space, and calculating the contribution to the frontier volume $V$ as a product of the volume contribution in $M-1$ dimensions and $\overbar{z_m}$.
+We developed a custom algorithm to compute the hypervolume indicator. The algorithm begins with a list of the relative objective vectors, denoted in the algorithm simply by $\mathbf{z} \in Z$. These vectors are assumed to be sorted in descending order based on their $m$th component, for some arbitrary objective $m \in \mathcal{M}$. We define the sub-dimensional objective set $\mathcal{L} = \mathcal{M} \backslash \{m\}$ whose cardinality we denote by $|\mathcal{L}| = L = M - 1$.
+
+We initialize the algorithm with an empty set of non-dominated solutions in $L$ dimensions, $G$. Let the volume of this nondominated set be denoted $\overbar{V}$. We sequentially add solutions from $Z$ to $G$, adding at each iteration the contribution of the solution $\mathbf{z}$ to the hypervolume indicator $V$. These contributions are computed by multiplying the solution's $m$th component $z_m$ by its contribution to the volume of $G$, $\overbar{V}_\mathbf{z}$. See Figure \ref{fig:AlgoAid} for reference ($\overbar{V}_\mathbf{z}$ values are the areas of the yellow regions).
+
+$\overbar{V}_\mathbf{z}$ is computed as follows. Initialize $\overbar{V}_\mathbf{z} = 0$ and add $\mathbf{z}$ to $G$. Remove from $G$ any solutions that are dominated by $\mathbf{z}$ in $L$ dimensions. Add to $\overbar{V}_\mathbf{z}$ the value of the volume of $\mathbf{z}$ in $L$ dimensions (the union of the yellow and gray areas in Figure \ref{fig:AlgoAid}); this is simply the product of its components $\ell \in \mathcal{L}$. Then subtract from $\overbar{V}_\mathbf{z}$ the volume of $G$ prior to the addition of $\mathbf{z}$ (the union of the gray and white areas in Figure \ref{fig:AlgoAid}). The last step is to compute and add back in the volume of the sides of $G$ that were subtracted in the previous step (the white areas in Figure \ref{fig:AlgoAid}). This volume is computed by taking the sum over each dimension $\ell \in \mathcal{L}$ of the areas along that dimension enclosed by the existing solutions in $G$. Pseudocode for the algorithm is presented in Figure \ref{algo:HypervolAlgo}.
 
 \begin{figure}[ht]
-\caption[Algorithm to compute the hypervolume indicator of a Pareto frontier]{Algorithm to compute the hypervolume $V$ of a Pareto frontier. Prior to running the algorithm, pick an objective $m$ from the objective set $\mathcal{M}$ and define the sub-dimensional objective set $\mathcal{L} = \mathcal{M} \backslash \{m\}$. Then sort $\mathbf{z} \in Z$ in descending order by their $m$th component. Here, $\mathbf{z} \in Z$ is the set of relative objective vectors , meaning for each $\mathbf{z}$ and each objective $i \in \mathcal{M}$, $z_i \in [0,1]$. Let $\overbar{V_\mathbf{z}}$ be the ($M-1$)-dimensional volume contribution of the solution $\mathbf{z}$, and let $\mathbf{g} \in G$ be the non-dominated objective vectors in $M-1$ dimensions.}
+\centering
+\caption[First iterations for computing $\overbar{V}$]{\textbf{Computing the hypervolume of a 3D frontier}. Consider a three-dimensional frontier $Z$. We sequentially add solutions to a 2D projection of the frontier, seen here (process moves from left to right). The solutions are added in order of decreasing value in their third component (height -- not seen here). At each iteration, we compute the contribution in 2D as follows: Add the product of the solution's 2D components (the union of the yellow and gray areas). Then subtract all the previous existing frontier area (the union of the gray and white areas). Then add back the value of the sides (white areas). This yields the value of the yellow area. Multiply this value by the third component of the solution to obtain the solution's contribution to the hypervolume $V$.}
+\label{fig:AlgoAid}
+\includegraphics[width=.85\textwidth]{../images/3DFrontierSchematic_SketchUp_FirstSteps_2D_clean}
+\end{figure}
+
+\begin{figure}[ht]
+\caption[Algorithm to compute the hypervolume indicator of a Pareto frontier]{Algorithm to compute the hypervolume $V$ of a Pareto frontier. Prior to running the algorithm, pick an objective $m$ from the objective set $\mathcal{M}$ and define the sub-dimensional objective set $\mathcal{L} = \mathcal{M} \backslash \{m\}$. Then sort $\mathbf{z} \in Z$ in descending order by their $m$th component. Here, $\mathbf{z} \in Z$ is the set of relative objective vectors. Let $\overbar{V_\mathbf{z}}$ be the ($M-1$)-dimensional volume contribution of the solution $\mathbf{z}$, and let $\mathbf{g} \in G$ be the non-dominated objective vectors in $M-1$ dimensions.}
 \label{algo:HypervolAlgo}
 \begin{algorithmic}[1]
 
