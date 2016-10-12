@@ -74,12 +74,12 @@ For two objective vectors $\mathbf{z}^1$ and $\mathbf{z}^2$, the corresponding \
 \end{align}
 
 \paragraph{Conflict, monotonicity, bundles and stacks}
-Objectives in an objective set $\mathcal{L}$ \textit{do not conflict} if the objectives improve simultaneously:
+We use the following test to determine if Objectives in an objective set $\mathcal{L}$ \textit{do not conflict} if the objectives improve simultaneously:
 $\forall \mathbf{z}^1, \mathbf{z}^2 \in Z, i \in \mathcal{L}$
 \begin{align}
 (z^1_i \ge z^2_i) \Rightarrow (z^1_j \ge z^2_j) \quad \forall j \in \mathcal{L}, j \neq i \label{eqn:objPairHarmony}
 \end{align}
-If \eqref{eqn:objPairHarmony} does not hold, then the objectives conflict. Any pair of objectives $i,j \in \mathcal{M}$ such that equation \eqref{eqn:objPairHarmony} holds are said to \textit{increase monotonically}. Conversely, if 
+If \eqref{eqn:objPairHarmony} does not hold, then the objectives conflict. Any pair of objectives $i,j \in \mathcal{M}$ such that equation \eqref{eqn:objPairHarmony} holds are said to \textit{increase monotonically}. In the case of monotonically increasing objectives $i$ and $j$, improving objective $i$ also yields improvement in objective $j$. Conversely, if 
 \begin{align}
 (z^1_i \ge z^2_i) \Rightarrow (z^1_j \le z^2_j) \quad \forall \mathbf{z}^1, \mathbf{z}^2 \in Z, j \neq i \label{eqn:objPairMonoDec}
 \end{align}
@@ -92,7 +92,94 @@ Equation \eqref{eqn:objPairHarmony} checks for monotonically increasing relation
 \subsection{Conflict and other frontier qualities}
 \label{sec:waysToMeasureFrontiers}
 % given a system, here's what we're going to measure and how we'll measure it.
-Qualities of an efficient frontier that may be of interest to a decision maker include the number of solutions and the spacing of the solutions but especially the conflict among the objectives. To measure conflict over the entire objective set $\mathcal{M}$ we use the hypervolume indicator (see equation \eqref{eqn:hypervol}). The hypervolume indicator measures the proportional volume of the objective space bounded by the frontier. A hypervolume indicator value of $I_{H1} < 1$ indicates conflict among the objectives. We developed a custom algorithm to compute the hypervolume indicator, which is described in detail in \S \ref{chap:appAHypervolumeAlgo}. The unary epsilon indicator also provides a measure of conflict over the entire objective set, representing the distance by which the frontier must be translated in order to cover the ideal solution (see equation \eqref{eqn:unaryEpsIndicator}). If the unary epsilon indicator $I_{\epsilon+} > 0$ the objectives in $\mathcal{M}$ conflict. In the case of multiple frontiers, we use the binary epsilon and binary hypervolume indicators to compare them and determine any dominance relationships (see Table \ref{tab:dominanceRelations}). Details on the computation of all of these metrics can be found in \S \ref{chap:appCComparisonMetrics}.
+Given an efficient frontier, the decision maker will be interested in the conflict among the objectives. To measure conflict over the entire objective set $\mathcal{M}$, we use the hypervolume indicator and the epsilon indicator. To compare conflict between two frontiers, we use the binary equivalent of each of these metrics: the binary hypervolume indicator and the binary epsilon indicator. We describe each of these metrics here. 
+
+\paragraph{Hypervolume Indicators}
+The hypervolume indicator measures the proportional volume of the objective space bounded by the frontier. For each relative objective vector $\overbar{\mathbf{z}^i}$ in the frontier $Z$, define its corresponding hyperrectangle by $r_i$. $r_i$ is the $M$-orthotope with diagonally opposite points the origin and the point defined by the components of the relative objective vector. Then the hypervolume indicator is the volume of the union of the hyperrectangles $r_i$:
+\begin{align}
+I_{H1} (Z) = \text{vol} \left( \bigcup_{i = 1}^{|Z|} r_i \right) \label{eqn:hypervol}
+\end{align}
+Then define the \textit{binary hypervolume indicator} of two frontiers $Z^1$ and $Z^2$ as \cite{zitzler1999evolutionary}
+\begin{align}
+I_{H2} (Z^1,Z^2) = I_{H1} (Z^1 + Z^2) - I_{H1} (Z^2)
+\end{align}
+where $I_{H1} (Z^1 + Z^2)$ is the unary hypervolume indicator of the frontier that consists of the nondominated points in $\{Z^1 \cup Z^2\}$. See Figure \ref{fig:binaryHypervolume}. The binary hypervolume indicator provides the volume of frontier $Z^1$ that is not contained within frontier $Z^2$. Larger values of $I_{H1}$ correspond to frontiers occupying larger amounts of the objective space. $I_{H1} < 1$ indicates some conflict among the objectives. $I_{H2}(Z^1, Z^2) > I_{H2}(Z^2, Z^1)$ indicates areas of less conflict between objectives in $Z^1$ than in $Z^2$.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.85\textwidth]{../images/FrontierVolumesNo2DOutlines}
+\caption[Hypervolume of Pareto frontiers]{Depiction of the hypervolumes of frontiers with two objectives (left) and three objectives (right).}
+\label{fig:frontierVolumes}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.7\textwidth]{../images/BinaryHypervolume}
+\caption[Binary hypervolume indicator]{Depiction of the binary hypervolume indicator. The individual frontiers are shown in the top row: frontier $A$ (left) and frontier $B$ (right). The merged frontier $A+B$ is shown in bottom left - note the absence of points that were dominated when combined. Following the naming of regions as shown in the bottom right figure, the binary hypervolume indicator is equal to
+\begin{minipage}{\linewidth}
+  \begin{align*}
+    I_{H2} (A,B) = \left(\text{area}_a + \text{area}_b + \text{area}_c \right) - \left( \text{area}_b + \text{area}_c \right) = \text{area}_a
+  \end{align*}
+\end{minipage}%
+}
+\label{fig:binaryHypervolume}
+\end{figure}
+
+We developed a custom algorithm to compute the hypervolume indicator. The algorithm projects the objective space into $M-1$ dimensions by eliminating the dimension associated with an objective $m \in \mathcal{M}$. We begin with a list of the relative objective vectors $\overbar{\mathbf{z}} \in Z$ sorted in descending order by their $m$th component. The algorithm proceeds by sequentially adding solutions to the ($M-1$)-dimensional space, and calculating the contribution to the frontier volume $V$ as a product of the volume contribution in $M-1$ dimensions and $\overbar{z_m}$.
+
+\begin{figure}[ht]
+\caption[Algorithm to compute the hypervolume indicator of a Pareto frontier]{Algorithm to compute the hypervolume $V$ of a Pareto frontier. Prior to running the algorithm, pick an objective $m$ from the objective set $\mathcal{M}$ and define the sub-dimensional objective set $\mathcal{L} = \mathcal{M} \backslash \{m\}$. Then sort $\mathbf{z} \in Z$ in descending order by their $m$th component. Here, $\mathbf{z} \in Z$ is the set of relative objective vectors , meaning for each $\mathbf{z}$ and each objective $i \in \mathcal{M}$, $z_i \in [0,1]$. Let $\overbar{V_\mathbf{z}}$ be the ($M-1$)-dimensional volume contribution of the solution $\mathbf{z}$, and let $\mathbf{g} \in G$ be the non-dominated objective vectors in $M-1$ dimensions.}
+\label{algo:HypervolAlgo}
+\begin{algorithmic}[1]
+
+\State $V \gets 0$
+\State $\overbar{V} \gets 0$
+\State $G \gets \emptyset$
+
+% Iterate over each solution
+\ForAll{$\mathbf{z} \in Z$}
+
+	\State $\overbar{V}_\mathbf{z} \gets \prod_{\ell \in \mathcal{L}} z_\ell - \overbar{V}$
+		
+	\ForAll{$\mathbf{g} \in G$}
+		\If{$g_\ell < z_\ell \, \forall \ell \in \mathcal{L}$}
+			\State $G \gets G \backslash \{\mathbf{g}\}$
+		\EndIf
+	\EndFor
+	
+	% iterate over subdimensions to "add back the sides"	
+	\ForAll{$\ell \in \mathcal{L}$}
+	
+		\State $G_{\mathbf{z},\ell} := \set{\mathbf{g} \in G : g_\ell > z_\ell}$
+		
+		\State Sort $\mathbf{g} \in G_{\mathbf{z},\ell}$ in ascending order by $\ell$th component, $g_\ell$
+		
+		\State $v_i \gets z_\ell$
+		\ForAll{$\mathbf{g} \in G_{\mathbf{z},\ell}$}
+			\State $v_t \gets g_\ell$
+			\State $\delta_\ell := v_t - v_i$
+			\State $\overbar{V}_\mathbf{z} \gets \overbar{V}_\mathbf{z} + \delta_\ell \prod_{\lambda \in \mathcal{L} \backslash \{\ell\}} g_\lambda$
+			\State $v_i \gets v_t$
+		\EndFor
+		
+	\EndFor
+	
+	\State $G \gets G \cup \{\mathbf{z}\}$
+	\State $\overbar{V} \gets \overbar{V} + \overbar{V}_\mathbf{z}$
+	\State $V \gets V + z_m \overbar{V}_\mathbf{z}$
+\EndFor
+
+
+\end{algorithmic}
+\end{figure}
+
+\paragraph{UnaryEpsPart}
+The unary epsilon indicator also provides a measure of conflict over the entire objective set, representing the distance by which the frontier must be translated in order to cover the ideal solution (see equation \eqref{eqn:unaryEpsIndicator}). If the unary epsilon indicator $I_{\epsilon+} > 0$ the objectives in $\mathcal{M}$ conflict.
+
+\paragraph{BinaryINdicatorsPart}
+EASYTHRUHEREBUTWHATTODOABOUTDOMINANCETABLE
+In the case of multiple frontiers, we use the binary epsilon and binary hypervolume indicators to compare them and determine any dominance relationships (see Table \ref{tab:dominanceRelations}). Details on the computation of all of these metrics can be found in \S \ref{chap:appCComparisonMetrics}.
+WHENMOVINGAPPENDIXUPHERE,DONTADDDISTANCEORSPACINGMETRICS.WEREGOINGTOIGNORETHESEFORNOW
 
 After concluding that conflict exists (equation \eqref{eqn:objPairHarmony}), another metric is needed to determine which objective pairs contribute to the conflict. Here we propose a new conflict metric created specifically for this purpose.
 
