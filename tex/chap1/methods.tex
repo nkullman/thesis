@@ -89,14 +89,14 @@ When the objectives represent goods or services, a set of objectives that confli
 
 Equation \eqref{eqn:objPairHarmony} checks for monotonically increasing relationships among objectives. This means of detecting conflict is functionally equivalent to that used by many studies, such as Brockhoff and Zitzler (2009) \cite{brockhoff2009objective} and Purshouse and Fleming (2003) \cite{purshouse2003conflict}.
 
-\subsection{Conflict and other frontier qualities}
+\subsection{Conflict metrics}
 \label{sec:waysToMeasureFrontiers}
 % given a system, here's what we're going to measure and how we'll measure it.
-Given an efficient frontier, the decision maker will determine which solution represents the best compromise among the objectives. Knowledge of the conflicts among the objectives enables better decision making, as it may highlight areas of the efficient frontier where objectives are incompatible and areas where advantageous compromises may exist. To help a decision maker understand the total conflict in the multi-objective system, we employ two measures of conflict: the hypervolume indicator and the epsilon indicator, with the hypervolume indicator serving as our primary conflict metric. These metrics map a single efficient frontier to a scalar value. Of course, the scalar value provided by these indicators alone does not provide the decision maker with detail about where the conflict exists within a multi-objective system. To address this question, we developed a new metric that quantifies the conflict between a pair of objectives.
+Given an efficient frontier, the decision maker will determine which solution represents the best compromise among the objectives. Knowledge of the conflicts among the objectives enables better decision making, as it may highlight areas of the efficient frontier where objectives are incompatible and areas where advantageous compromises may exist. To help a decision maker understand the total conflict in the multi-objective system, we employ the hypervolume indicator, which measures the percentage of the objective space bounded by the frontier. The hypervolume indicator maps an efficient frontier to a scalar value representing conflict. However, the scalar value provided by the indicator does not provide the decision maker with detail about where the conflict exists within a multi-objective system. To address this question, we developed a new metric that quantifies the conflict between a pair of objectives, allowing the decision maker to determine from which objective pair does the conflict indicated by the hypervolume indicator originate.
 
-When a decision maker has more than one multi-objective system to compare, they require a means of comparing the efficient frontiers. To make this comparison, we use the binary hypervolume and binary epsilon indicators. These metrics are similar to their non-binary counterparts mentioned above, except they map two efficient frontiers to a scalar. That is, they provide a value for each pair of frontiers, rather than for each frontier individually. 
+When a decision maker has more than one multi-objective system to analyze, they require a means of comparing the efficient frontiers. To make this comparison, we use the binary hypervolume indicator. The metric is similar to its non-binary counterpart mentioned above, except it maps two efficient frontiers to a scalar. That is, it provides a value for each pair of frontiers, rather than for each frontier individually.
 
-We describe each of these metrics in more detail here. 
+We describe each of these metrics in more detail here.
 
 \paragraph{Hypervolume Indicators}
 The hypervolume indicator measures the proportional volume of the objective space bounded by the frontier. We use this to measure conflict because systems with conflicting objectives that inhibit the achievement of one another will produce solutions that do not simultaneously achieve in all of the objectives. This results in solutions whose extension into the objective space is limited, which produces a smaller value for the hypervolume.
@@ -111,7 +111,7 @@ I_{H2} (Z^1,Z^2) = I_{H1} (Z^1 + Z^2) - I_{H1} (Z^2)
 \end{align}
 where $I_{H1} (Z^1 + Z^2)$ is the unary hypervolume indicator of the frontier that consists of the nondominated points in $\{Z^1 \cup Z^2\}$. See Figure \ref{fig:binaryHypervolume}.
 
-We use the binary hypervolume indicator to determine the volume of the objective space that is bounded by frontier $Z^1$ but not frontier $Z^2$. Since $I_{H2}(Z^1, Z^2) > 0$ indicates areas of the objective space bound only by $Z^1$, it also indicates the regional presence of less conflict. See Figure \ref{fig:binaryHypervolume}.
+We use the binary hypervolume indicator to determine the volume of the objective space that is bounded by frontier $Z^1$ but not frontier $Z^2$. Values of $I_{H2}(Z^1, Z^2) > 0$ indicate areas of the objective space bound only by $Z^1$, implying the presence of regions of less conflict among the objectives. See Figure \ref{fig:binaryHypervolume}.
 
 \begin{figure}[ht]
 \centering
@@ -192,15 +192,7 @@ $\overbar{V}_\mathbf{z}$ is computed as follows. Initialize $\overbar{V}_\mathbf
 \end{algorithmic}
 \end{figure}
 
-\paragraph{UnaryEpsPart}
-The unary epsilon indicator also provides a measure of conflict over the entire objective set, representing the distance by which the frontier must be translated in order to cover the ideal solution (see equation \eqref{eqn:unaryEpsIndicator}). If the unary epsilon indicator $I_{\epsilon+} > 0$ the objectives in $\mathcal{M}$ conflict.
-
-\paragraph{BinaryINdicatorsPart}
-EASYTHRUHEREBUTWHATTODOABOUTDOMINANCETABLE
-In the case of multiple frontiers, we use the binary epsilon and binary hypervolume indicators to compare them and determine any dominance relationships (see Table \ref{tab:dominanceRelations}). Details on the computation of all of these metrics can be found in \S \ref{chap:appCComparisonMetrics}.
-WHENMOVINGAPPENDIXUPHERE,DONTADDDISTANCEORSPACINGMETRICS.WEREGOINGTOIGNORETHESEFORNOW
-
-After concluding that conflict exists (equation \eqref{eqn:objPairHarmony}), another metric is needed to determine which objective pairs contribute to the conflict. Here we propose a new conflict metric created specifically for this purpose.
+When comparing multi-objective systems, a decision maker may observe unequal hypervolumes across frontiers. Without another means to measure of conflict, the decision maker cannot determine why the inequality exists. Which objective pairs are causing the differences in system-level conflict? We propose here a new conflict metric created specifically to address this question.
 
 \subsection{A new measure of pairwise conflict}
 \label{sec:newConflictMetric}
@@ -213,8 +205,7 @@ Consider the frontiers in Figure \ref{fig:ConflictVariesExample}. The conflict b
 \label{fig:ConflictVariesExample}
 \end{figure}
 
-Many authors have previously measured conflict between objectives \cite{brockhoff2009objective}\cite{purshouse2003conflict}\cite{gal1977redundant}, with most commonly used metrics deriving from measures of linear correlation (such as the Pearson correlation coefficient \cite{deb2006searching}) or rank correlation (such as Kendall's Tau \cite{kanoulas2009empirical} or Spearman's rho \cite{karande2012application}%, and Zitzler's $\delta$-error \cite{brockhoff2006all}).
-). The intended use of these metrics is often the removal of redundant objectives from a many-objective optimization problem. In such cases, measures of monotonicity or correlation alone are adequate. However, the current metrics fall short of providing a quantification of conflict between a pair of objectives. Metrics for linear correlation are limited in their ability to capture the montonicity between objectives, which is the fundamental principle that determines if objectives conflict. Furthermore, both linear and rank correlation metrics fail to capture solutions' objective achievement. Thus, for a more nuanced understanding of the relationship between the objectives, a different metric is required.
+Many authors have previously measured conflict between objectives \cite{brockhoff2009objective}\cite{purshouse2003conflict}\cite{gal1977redundant}, with most commonly used metrics deriving from measures of linear correlation (such as the Pearson correlation coefficient \cite{deb2006searching}) or rank correlation (such as Kendall's Tau \cite{kanoulas2009empirical} or Spearman's rho \cite{karande2012application}). The motivation behind these metrics is often the removal of redundant objectives from a many-objective optimization problem. In such cases, measures of monotonicity or correlation alone suffice. However, the current metrics fall short of providing a quantification of conflict between pairs of objectives. Metrics for linear correlation are limited in their ability to capture the montonicity between objectives, which is the fundamental principle that determines if objectives conflict. Furthermore, both linear and rank correlation metrics fail to capture the objective achievement of the solutions. Thus, for a more nuanced understanding of the relationship between the objectives, a different metric is required.
 
 Let $\mathbf{z}_{ij}$ be the sub-dimensional objective vector comprised of only the components corresponding to the $i$th and $j$th objectives $\mathbf{z}_{ij} = [z_i,z_j]$. I define the following measure of conflict between objectives $i$ and $j$:
 \begin{align}
@@ -241,6 +232,8 @@ The conflict metric proposed here (equation \eqref{eqn:defConflict}) addresses t
 \caption[Comparing the proposed conflict metric to others used in multi-objective optimization]{Comparing the proposed metric for conflict $C_{ij}$ against the Pearson product-moment and the Spearman rank correlation coefficients ($\rho_{ij}$ and $\rho_{s,ij}$, respectively). While the latter two are identical for frontiers A and C, the proposed metric is greater for frontier C than it is for A. This is because it accounts for the average relative distance to the sub-dimensional ideal objective vector.}
 \label{fig:WhyOursIsBetter}
 \end{figure}
+
+%=====
 
 \subsection{Case Study}
 \label{sec:caseStudy}
