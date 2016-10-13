@@ -89,7 +89,7 @@ When the objectives represent goods or services, a set of objectives that confli
 
 Equation \eqref{eqn:objPairHarmony} checks for monotonically increasing relationships among objectives. This means of detecting conflict is functionally equivalent to that used by many studies, such as Brockhoff and Zitzler (2009) \cite{brockhoff2009objective} and Purshouse and Fleming (2003) \cite{purshouse2003conflict}.
 
-\subsection{Conflict metrics}
+\subsection{Measuring conflict: the hypervolume indicators}
 \label{sec:waysToMeasureFrontiers}
 % given a system, here's what we're going to measure and how we'll measure it.
 Given an efficient frontier, the decision maker will determine which solution represents the best compromise among the objectives. Knowledge of the conflicts among the objectives enables better decision making, as it may highlight areas of the efficient frontier where objectives are incompatible and areas where advantageous compromises may exist. To help a decision maker understand the total conflict in the multi-objective system, we employ the hypervolume indicator, which measures the percentage of the objective space bounded by the frontier. The hypervolume indicator maps an efficient frontier to a scalar value representing conflict. However, the scalar value provided by the indicator does not provide the decision maker with detail about where the conflict exists within a multi-objective system. To address this question, we developed a new metric that quantifies the conflict between a pair of objectives, allowing the decision maker to determine from which objective pair does the conflict indicated by the hypervolume indicator originate.
@@ -133,6 +133,7 @@ We use the binary hypervolume indicator to determine the volume of the objective
 \label{fig:binaryHypervolume}
 \end{figure}
 
+\subsection{Computing the hypervolume indicator}
 We developed a custom algorithm to compute the hypervolume indicator. The algorithm begins with a list of the relative objective vectors, denoted in the algorithm simply by $\mathbf{z} \in Z$. These vectors are assumed to be sorted in descending order based on their $m$th component, for some arbitrary objective $m \in \mathcal{M}$. We define the sub-dimensional objective set $\mathcal{L} = \mathcal{M} \backslash \{m\}$ whose cardinality we denote by $|\mathcal{L}| = L = M - 1$.
 
 We initialize the algorithm with an empty set of non-dominated solutions in $L$ dimensions, $G$. Let the volume of this nondominated set be denoted $\overbar{V}$. We sequentially add solutions from $Z$ to $G$, adding at each iteration the contribution of the solution $\mathbf{z}$ to the hypervolume indicator $V$. These contributions are computed by multiplying the solution's $m$th component $z_m$ by its contribution to the volume of $G$, $\overbar{V}_\mathbf{z}$. See Figure \ref{fig:AlgoAid} for reference ($\overbar{V}_\mathbf{z}$ values are the areas of the yellow regions).
@@ -194,7 +195,7 @@ $\overbar{V}_\mathbf{z}$ is computed as follows. Initialize $\overbar{V}_\mathbf
 
 When comparing multi-objective systems, a decision maker may observe unequal hypervolumes across frontiers. Without another means to measure of conflict, the decision maker cannot determine why the inequality exists. Which objective pairs are causing the differences in system-level conflict? We propose here a new conflict metric created specifically to address this question.
 
-\subsection{A new measure of pairwise conflict}
+\subsection{A new measure for pairwise objective conflict}
 \label{sec:newConflictMetric}
 % This is our cool new way of drilling down into an objective pair to assess conflict
 Consider the frontiers in Figure \ref{fig:ConflictVariesExample}. The conflict between maximization objectives $i$ and $j$ is greatest in Frontier C and least in Frontier A.
