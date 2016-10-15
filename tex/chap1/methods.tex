@@ -99,7 +99,7 @@ Any multi-objective problem whose efficient frontier consists of more than one s
 %When a decision maker has more than one multi-objective system to analyze, they require a means of comparing the efficient frontiers. To make this comparison, we use the binary hypervolume indicator. The metric is similar to its non-binary counterpart mentioned above, except it maps two efficient frontiers to a scalar. That is, it provides a value for each pair of frontiers, rather than for each frontier individually.
 
 \subsubsection{Hypervolume indicator}
-The \textit{hypervolume indicator} $I_{H1}(Z)$ measures the percentage of the objective space that is bounded by the non-dominated objective vectors $\mathbf{z} \in Z$. See Figure \ref{fig:frontierVolumes}. Systems with less conflict will produce solutions with greater joint provision of objectives, leading to a greater proportion of enclosed objective space and thus a larger value for the hypervolume. In contrast, systems with more conflict produce solutions with less joint provision of objectives, leading to lesser proportion of enclosed objective space and a smaller value for the hypervolume. That is, the greater the value of the hypervolume indicator, the lower the conflict in the system.
+The \textit{hypervolume indicator} $I_{H1}(Z)$ measures the percentage of the objective space that is bounded by the non-dominated objective vectors $\mathbf{z} \in Z$. See Figure \ref{fig:frontierVolumes}. Systems with less conflict will produce solutions with greater joint provision of objectives, leading to a greater proportion of enclosed objective space and thus a larger value for the hypervolume. In contrast, systems with more conflict produce solutions with less joint provision of objectives, leading to a lesser proportion of enclosed objective space and a smaller value for the hypervolume. That is, the greater the value of the hypervolume indicator, the lower the conflict in the system.
 
 \begin{figure}[ht]
 \centering
@@ -112,7 +112,7 @@ To measure the hypervolume indicator, for each relative objective vector $\overb
 \begin{align}
 I_{H1}(Z) = \text{vol} \left( \bigcup_{i = 1}^{|Z|} r_i \right). \label{eqn:hypervol}
 \end{align}
-Given two frontiers $Z^1$ and $Z^2$, how do you interpret a difference in their hypervolumes? Consider Figure \ref{fig:Hypervol10percent} which shows the relative objective space for a two-dimensional frontier. The shaded square in the lower left represents an achievement of 10\% in each objective. Since the objective space of the relative objective vectors is bounded by the $1 \times 1$ square, this corresponds to 1\% of the objective space. So if $Z^1$ and $Z^2$ are bi-objective frontiers ($M=2$) and if $I_{H1}(Z^1) - I_{H1}(Z^2) = 0.01$, then the solutions in frontier $Z^1$ bound an area equivalent to a 10\% additional achievement in each objective beyond that bounded by the solutions in $Z^2$. That is to say that small differences in the values of the hypervolume represent significant objective gains.
+Given two frontiers $Z^1$ and $Z^2$, how do you interpret a difference in their hypervolumes? Consider Figure \ref{fig:Hypervol10percent} which shows the relative objective space for a two-dimensional frontier. The shaded square in the lower left represents an achievement of 10\% in each objective. Since the objective space of the relative objective vectors is bounded by the $1 \times 1$ square, this corresponds to 1\% of the objective space. So if $Z^1$ and $Z^2$ are bi-objective frontiers ($M=2$) and if $I_{H1}(Z^1) - I_{H1}(Z^2) = 0.01$, then the solutions in frontier $Z^1$ bound an area equivalent to an additional 10\% achievement in each objective beyond that bounded by the solutions in $Z^2$. Small differences in the values of the hypervolume represent significant objective gains.
 
 In general, an increase of $h$ in the value of the hypervolume equates to an increase in each objective of $h^{1/M}$. So if $Z^1$ and $Z^2$ were tri-objective ($M=3$) then an improvement of $.01$ in the value of the hypervolume would represent an improvement of about 22\% in each objective.
 
@@ -124,13 +124,13 @@ In general, an increase of $h$ in the value of the hypervolume equates to an inc
 \end{figure}
 
 \subsubsection{Binary Hypervolume Indicator}
-If a frontier $Z^2$ is found to have a smaller hypervolume than another $Z^1$, how do you determine whether $Z^2$ is completely enclosed within $Z^1$ or simply bounds a different but smaller region of the relative objective space? We use the binary hypervolume indicator to address this question. The binary hypervolume $I_{H2}(Z^1,Z^2)$ computes the volume of the objective space bounded by $Z^1$ but not by $Z^2$. See Figure \ref{fig:binaryHypervolume}. As such, if $Z^2$ is completely enclosed within $Z^1$, then $I_{H2}(Z^2,Z^1) \le 0$. On the other hand, if $I_{H2}(Z^2,Z^1) > 0$ then $Z^2$ encloses regions of the objective space that $Z^1$ does not.
+If a frontier $Z^2$ is found to have a smaller hypervolume than another $Z^1$, one may wonder whether $Z^2$ is completely enclosed within $Z^1$ or simply bounds a different but smaller region of the relative objective space. We use the binary hypervolume indicator to address this question. The binary hypervolume $I_{H2}(Z^1,Z^2)$ computes the volume of the objective space bounded by $Z^1$ but not by $Z^2$. See Figure \ref{fig:binaryHypervolume}. As such, if $Z^2$ is completely enclosed within $Z^1$, then $I_{H2}(Z^2,Z^1) \le 0$. On the other hand, if $I_{H2}(Z^2,Z^1) > 0$ then $Z^2$ encloses regions of the objective space that $Z^1$ does not.
 
-Following the definition proposed by Zitzler (1999) \cite{zitzler1999evolutionary}, we define the \textit{binary hypervolume indicator} of two frontiers $Z^1$ and $Z^2$ as \cite{zitzler1999evolutionary}
+Following the definition proposed by Zitzler (1999) \cite{zitzler1999evolutionary}, the \textit{binary hypervolume indicator} of two frontiers $Z^1$ and $Z^2$ is \cite{zitzler1999evolutionary}
 \begin{align}
 I_{H2} (Z^1,Z^2) = I_{H1} (Z^1 + Z^2) - I_{H1} (Z^2)
 \end{align}
-where $I_{H1} (Z^1 + Z^2)$ is the unary hypervolume indicator of the frontier that consists of the nondominated points in $\{Z^1 \cup Z^2\}$. See Figure \ref{fig:binaryHypervolume}.
+where $I_{H1} (Z^1 + Z^2)$ is the unary hypervolume indicator of the frontier that consists of the nondominated points in $\{Z^1 \cup Z^2\}$. See the lower-left panel in Figure \ref{fig:binaryHypervolume}.
 
 \begin{figure}[ht]
 \centering
@@ -146,11 +146,11 @@ where $I_{H1} (Z^1 + Z^2)$ is the unary hypervolume indicator of the frontier th
 \end{figure}
 
 \subsection{Computing the hypervolume indicator}
-Computing they hypervolume is a nontrivial task that has received attention from the EMO community. For a comparison of previous algorithms that compute the hypervolume, see While (2006) \cite{while2006faster}. For this work, we developed our own algorithm to compute the hypervolume indicator.
+Computing the hypervolume is a nontrivial task that has received attention from the EMO community. For a comparison of previous algorithms that compute the hypervolume, see While (2006) \cite{while2006faster}. For this work, we developed our own algorithm to compute the hypervolume indicator.
 
 The algorithm begins with a list of the relative objective vectors, denoted in the algorithm simply by $\mathbf{z} \in Z$. These vectors are assumed to be sorted in descending order based on their $m$th component, for some arbitrary objective $m \in \mathcal{M}$. We define the sub-dimensional objective set $\mathcal{L} = \mathcal{M} \backslash \{m\}$ whose cardinality we denote by $|\mathcal{L}| = L = M - 1$.
 
-We initialize the algorithm with an empty set of non-dominated solutions in $L$ dimensions; refer to the set as $G$. Let the volume of this nondominated set be denoted $\overbar{V}$. We sequentially add solutions from $Z$ to $G$, at each iteration adding the contribution of the solution $\mathbf{z}$ to the hypervolume indicator $V$. These contributions are computed by multiplying the solution's $m$th component $z_m$ by its contribution to the volume of $G$, $\overbar{V}_\mathbf{z}$. See Figure \ref{fig:AlgoAid} for a visual reference (the solutions' contribution to the volume of $G$, $\overbar{V}_\mathbf{z}$, are the areas of the yellow regions in the figure).
+We initialize the algorithm with an empty set of non-dominated solutions in $L$ dimensions; refer to this set as $G$. Let the volume of this nondominated set be denoted $\overbar{V}$. We sequentially add solutions from $Z$ to $G$, at each iteration adding the contribution of the solution $\mathbf{z}$ to the hypervolume indicator $V$. These contributions are computed by multiplying the solution's $m$th component $z_m$ by its contribution to the volume of $G$, $\overbar{V}_\mathbf{z}$. See Figure \ref{fig:AlgoAid} for a visual reference (the solutions' contribution to the volume of $G$, $\overbar{V}_\mathbf{z}$, are the yellow regions in the figure).
 
 $\overbar{V}_\mathbf{z}$ is computed as follows. Initialize $\overbar{V}_\mathbf{z} = 0$, and add $\mathbf{z}$ to the set $G$. Remove from $G$ any solutions that are dominated by $\mathbf{z}$ in $L$ dimensions. Add to $\overbar{V}_\mathbf{z}$ the value of the volume of $\mathbf{z}$ in $L$ dimensions (the union of the yellow and gray areas in Figure \ref{fig:AlgoAid}); this is simply the product of its components $z_\ell$ for $\ell \in \mathcal{L}$. Then subtract from $\overbar{V}_\mathbf{z}$ the volume of $G$ prior to the addition of $\mathbf{z}$ (the union of the gray and white areas in Figure \ref{fig:AlgoAid}). The last step is to compute and add back in the volume of the ``sides'' of $G$ that were subtracted in the previous step (the white areas in Figure \ref{fig:AlgoAid}). This volume is computed by taking the sum over each dimension $\ell \in \mathcal{L}$ of the areas along that dimension enclosed by the existing solutions in $G$. Pseudocode for this algorithm is presented in Figure \ref{algo:HypervolAlgo}.
 
@@ -210,7 +210,7 @@ $\overbar{V}_\mathbf{z}$ is computed as follows. Initialize $\overbar{V}_\mathbf
 \subsection{A new measure for pairwise objective conflict}
 \label{sec:newConflictMetric}
 % This is our cool new way of drilling down into an objective pair to assess conflict
-When the hypervolume indicates that there is conflict in the system, how does the decision maker determine which objectives are causing the conflict? In the case of the hospital, is it cost and patient throughput that are most conflicting, or is it cost and required back-up? For the forest manager, are carbon sequestration and timber revenue the incompatible objectives responsible for the low hypervolume value, or is it wildlife habitat and timber revenue? If the forest manager oversees multiple independent forests, they may also ask whether the answers to these questions are the same in each. With the current suite of measures available today, the decision maker cannot adequately answer such questions. Here we propose a new measure of conflict to fill this void.
+When the hypervolume indicates that there is conflict in the system, how does the decision maker determine which objectives are responsible for the conflict? In the case of the hospital, is it cost and patient throughput that are most conflicting, or is it cost and required back-up? For the forest manager, are carbon sequestration and timber revenue the incompatible objectives responsible for the low hypervolume value, or is it wildlife habitat and timber revenue? If the forest manager oversees multiple independent forests, they may also ask whether the answers to these questions are the same in each. With the suite of measures currently available, the decision maker cannot adequately answer these questions. Here we propose a new measure of conflict to fill the void.
 
 Consider the frontiers in Figure \ref{fig:ConflictVariesExample}. The conflict between maximization objectives $i$ and $j$ is greatest in Frontier C and least in Frontier A.
 \begin{figure}[ht]
@@ -222,7 +222,7 @@ Consider the frontiers in Figure \ref{fig:ConflictVariesExample}. The conflict b
 
 Many authors have previously measured conflict between objectives \cite{brockhoff2009objective}\cite{purshouse2003conflict}\cite{gal1977redundant}, with most commonly used metrics deriving from measures of linear correlation (such as the Pearson correlation coefficient \cite{deb2006searching}) or rank correlation (such as Kendall's Tau \cite{kanoulas2009empirical} or Spearman's rho \cite{karande2012application}). The motivation behind these metrics is often the removal of redundant objectives from a many-objective optimization problem. In such cases, measures of monotonicity or correlation alone suffice. However, the current metrics fall short of providing a quantification of conflict between pairs of objectives. Metrics for linear correlation are limited in their ability to capture the montonicity between objectives, which is the fundamental principle that determines if objectives conflict. Furthermore, both linear and rank correlation metrics fail to capture the objective achievement of the solutions. Thus, for a more nuanced understanding of the relationship between the objectives, a different metric is required.
 
-Let $\mathbf{z}_{ij}$ be the sub-dimensional objective vector comprised of only the components corresponding to the $i$th and $j$th objectives $\mathbf{z}_{ij} = [z_i,z_j]$. I define the following measure of conflict between objectives $i$ and $j$:
+Let $\mathbf{z}_{ij}$ be the sub-dimensional objective vector comprised of only the components corresponding to the $i$th and $j$th objectives $\mathbf{z}_{ij} = [z_i,z_j]$. We define the following measure of conflict between objectives $i$ and $j$:
 \begin{align}
 C_{ij} = \frac{(1-\rho_{ij})\overbar{d}_{ij}}{2 d_{\max,ij}} \label{eqn:defConflict}
 \end{align}
@@ -247,6 +247,16 @@ The conflict metric proposed here (equation \eqref{eqn:defConflict}) addresses t
 \caption[Comparing the proposed conflict metric to others used in multi-objective optimization]{Comparing the proposed metric for conflict $C_{ij}$ against the Pearson product-moment and the Spearman rank correlation coefficients ($\rho_{ij}$ and $\rho_{s,ij}$, respectively). While the latter two are identical for frontiers A and C, the proposed metric is greater for frontier C than it is for A. This is because it accounts for the average relative distance to the sub-dimensional ideal objective vector.}
 \label{fig:WhyOursIsBetter}
 \end{figure}
+
+To interpret differences in $C_{ij}$ for different objective pairs, we decompose the metric into components: one for rank correlation
+\begin{align}
+c_{ij,\rho} = \frac{1-\rho_{ij}}{2},
+\end{align}
+and one for objective achievement
+\begin{align}
+c_{ij,d} = \frac{\overbar{d}{ij}}{d_{\max,ij}}.
+\end{align}
+
 
 %=====
 
