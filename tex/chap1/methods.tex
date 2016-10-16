@@ -266,12 +266,8 @@ To demonstrate the application of the hypervolume indicators and the proposed pa
 
 \subsubsection{Study area and selection of ecosystem services}
 \label{subsec:studyArea}
-To appreciate the selection of the ecosystem services, it is first necessary to understand the area in which the case study was conducted. The area is known as the Drink Planning Area. It consists of 7056 ha of federally owned forest land on the east slopes of the Cascade Mountain Range located within the Deschutes National Forest. See Figure \ref{fig:drinkOverview}. The Drink contains large areas of old growth forest, having not been logged for many years. The large swaths of old growth forest in the Drink make it prime habitat for the northern spotted owl (NSO) (\textit{Strix occidentalis caurina}, Figure \ref{fig:nso}), an iconic % (albeit controversial \cite{simberloff1998flagships}) 
-inhabitant of Pacific Northwest forests that is listed as a federally threatened species \cite{congress1973endangered}. However, the same old growth conditions that render the area suitable habitat for the NSO also render it susceptible to high-severity wildfires. Such a wildfire would put at risk the NSO's habitat \cite{courtney2004scientific} and one of the Drink's other notable features - the municipal watershed for the cities of Bend, OR and Sisters, OR. Wildfires pose a threat to the cities' water supply, because they can cause soil water repellency, surface runoff, and debris torrents \cite{ice2004effects} which degrade watershed quality.
-
-For these reasons, the managing entity, the United States Forest Service (USFS), would like to perform fuel removals in the Drink in order to reduce the area's fire hazard. However, while performing these fuel removals intends to provide long-term protection of the Drink Area, it has the potential to disrupt the habitat of the NSO \cite{bond2002short} and to induce short-term increases in sediment delivery \cite{o2005conceptual}. The latter is expected to be especially true in the Drink Area, where local USFS staff have noted that the watershed is unusually susceptible to spikes in sediment delivery as a result of foot traffic and other activities that occur within the watershed.
-
-We developed a multi-objective math programming model that performs this optimization of conflicting ecosystem services\footnote{Note that these are not the only ecosystem services of concern to the USFS. While the USFS manages for many services simultaneously, many of the services are stacked rather than bundled, meaning that the ecosystem services are not in conflict. These ecosystem services need not all be considered in our multi-objective model, since the selection and maximization of one ecosystem service entails the maximization of all in the stack. For this reason, we have disregarded non-conflicting ecosystem services and select a minimal bundle on which to employ the multi-objective optimization. Those that do not conflict can be stacked post-optimization.}.
+To appreciate the selection of the ecosystem services, we first describe the area in which the case study was conducted. The area is known as the Drink Planning Area. It consists of 7056 ha of federally owned forest land on the east slopes of the Cascade Mountain Range located within the Deschutes National Forest. See Figure \ref{fig:drinkOverview}. The Drink contains large areas of old growth forest, having not been logged for many years. The large swaths of old growth forest in the Drink make it prime habitat for the northern spotted owl (NSO) (\textit{Strix occidentalis caurina}, Figure \ref{fig:nso}), an iconic % (albeit controversial \cite{simberloff1998flagships}) 
+inhabitant of Pacific Northwest forests that is listed as a federally threatened species \cite{congress1973endangered}. However, the same old growth conditions that render the area suitable habitat for the NSO also render it susceptible to high-severity wildfires. Such a wildfire would put at risk the NSO's habitat \cite{courtney2004scientific} as well as one of the Drink's other notable features - the municipal watershed for the cities of Bend, OR and Sisters, OR. Wildfires pose a threat to the cities' water supply, because they can cause soil water repellency, surface runoff, and debris torrents \cite{ice2004effects} which degrade watershed quality.
 
 \begin{figure}[ht]
 \centering
@@ -279,31 +275,6 @@ We developed a multi-objective math programming model that performs this optimiz
 \caption[Overview of the study system, the Drink Planning Area]{Overview of the study system, the Drink Planning Area (in purple), consisting of 7056 ha in the Deschutes National Forest.}
 \label{fig:drinkOverview}
 \end{figure}
-
-\subsubsection{The multi-objective model}
-The multi-objective model prescribes spatial and temporal guidance for the fuel removals
-
-
-The US Forest Service seeks to ensure the sustained provision of these services, but climate change may threaten their ability to do so. Given this set of objectives, a central question to our analysis is, how will climate change impact the joint provision of these services? Will the provision of wildlife habitat require the same sacrifices in fire hazard under different climate conditions? Research agrees that climate change will alter the ability of forests to provide ecosystem services in isolation \cite{iverson1998predicting}\cite{Goode20121}\cite{vose2012effects}, but no research has considered the question of how it may impact the conflict among ecosystem services. We do so here by quantifying the performance of a multi-objective model optimizing ecosystem service achievement under three different climate change scenarios. The model determines how to schedule fuel removals over two twenty-year planning periods such that they have minimal impact on wildlife habitat and sediment delivery in the watershed while minimizing the fire hazard of the Drink Area 40 years after the fuel removals are performed.
-
-\begin{figure}[ht]
-\centering
-\includegraphics[width=.85\textwidth]{../images/DrinkMap_Overview}
-\caption[Overview of the study system, the Drink Planning Area]{Overview of the study system, the Drink Planning Area (in purple), consisting of 7056 ha in the Deschutes National Forest.}
-\label{fig:drinkOverview}
-\end{figure}
-
-\subsubsection{Model objectives: The set of ecosystem services}
-\paragraph{Northern Spotted Owl habitat}
-The first ecosystem service considered in our model is the provision of habitat for the northern spotted owl (NSO) (\textit{Strix occidentalis caurina}, Figure \ref{fig:nso}), which typically inhabits areas of old growth forest on the Pacific coast. This objective was included in our model for two primary reasons. First, the NSO often serves as an indicator species, meaning that conservation practitioners use the presence and health of the NSO population as a proxy for the overall health of old growth forest habitat (though this practice has not been without controversy \cite{simberloff1998flagships}). Second, logging and development along the coast have caused a decline in the species population size, and it is now listed as threatened and thus protected under the Endangered Species Act of 1973 \cite{congress1973endangered}.
-
-Because of the availability of dense old growth forest in the Drink Area, approximately 43\% of the area currently serves as suitable habitat for the NSO (see Figure \ref{fig:drinkOwlAndWatershed}). As specified by the USFS, areas meeting the following criteria are considered suitable NSO habitat:
-\begin{enumerate}
-	\item elevation less than 1830 m
-	\item the presence of trees with diameter at breast height (DBH) at least than 76 cm
-	\item canopy closure of at least 60\%
-\end{enumerate}
-These criteria determine the suitability of an area for NSO habitat. However, due to the territorial nature of the NSO and its large habitat requirements, suitable habitat is deemed less valuable if it is provided in an area less than 200 ha in contiguous size.
 
 \begin{figure}
 \centering
@@ -312,36 +283,14 @@ These criteria determine the suitability of an area for NSO habitat. However, du
 \includegraphics[width=.2\textwidth]{../images/NorthernSpottedOwl_USFWS}
 \end{figure}
 
-\paragraph{Fire Hazard}
-The second ecosystem service is protection from high severity wildfire. This protection is achieved by applying silvicultural treatments to designated treatment areas (forest stands) throughout the Drink Area. The types of treatments assigned to stands are defined in the appendix, \S \ref{chap:appendix_drinkTreatments}. We measure the fire hazard rating of a stand before and after treatment to assess the efficacy of the treatment. The fire hazard rating used here is described in more detail later and is summarized in Table \ref{tab:firehazards}. The USFS implements silvicultural treatments to reduce the fire hazard rating in order to protect the habitat of the NSO and also to protect the municipal watershed for the cities of Bend, OR and Sisters, OR which lies largely within the boundaries of the Drink Area (see Figure \ref{fig:drinkOwlAndWatershed}). Wildfires pose a threat to these cities' water supply, because wildfires can cause soil water repellency, surface runoff, and debris torrents \cite{ice2004effects} which would degrade the quality of the watershed. In addition, the Drink Area has never before undergone silvicultural treatments, which increases the expected severity of a fire should one occur. 
-\begin{figure}
-\centering
-\includegraphics[width=.5\textwidth]{../images/DrinkMap_NSOAndWatershed}
-\caption[NSO Habitat and municipal watershed in the Drink Planning Area]{Location of the municipal watershed and the suitable NSO habitat in the Drink area at the beginning of the planning horizon (2015). Interior polygons are the 303 management units.}
-\label{fig:drinkOwlAndWatershed}
-\end{figure}
+For these reasons, the managing entity, the United States Forest Service (USFS), would like to perform fuel removals in the Drink in order to reduce the area's fire hazard. However, while performing these fuel removals intends to provide long-term protection of the Drink Area, it has the potential to disrupt the habitat of the NSO \cite{bond2002short} and to induce short-term increases in sediment delivery \cite{o2005conceptual}. The latter is expected to be especially true in the Drink Area, where local USFS staff have noted that the watershed is unusually susceptible to spikes in sediment delivery as a result of foot traffic and other activities that occur within the watershed.
 
-Finally, we seek to minimize sediment delivery into the watershed. While the silvicultural treatments intend to provide long-term protection of the watershed, the disturbance caused by implementing the treatments has the potential to induce short-term increases in sediment delivery \cite{o2005conceptual}. This is expected to be especially true in the Drink Area, where local Forest Service staff have noted that the watershed is unusually susceptible to spikes in sediment delivery as a result of foot traffic and other activities that occur within the watershed.
+We developed a multi-objective mathematical program that optimizes the joint provision of these conflicting ecosystem services\footnote{These represent only a subset of the ecosystem services of concern to the USFS. While the USFS manages for many services simultaneously, many of the services are stacked rather than bundled, meaning the ecosystem services are not in conflict. These services need not all be considered in the multi-objective model, because the selection and maximization of one ecosystem service entails the maximization of all in the stack. For this reason, we have disregarded non-conflicting ecosystem services and selected a minimal bundle on which to employ multi-objective optimization. Those that do not conflict can be stacked post-optimization.}.
 
-These ecosystem services and their relationships with one another will likely be altered by the changing climate. The extent of these changes will depend on the severity of the realized climate change. Thus, to understand the potential impacts, multiple climate change scenarios representing a range of severities must be considered. The following section describes the climate scenarios considered in this case study.
+\subsubsection{The multi-objective model}
+The multi-objective model is a zero-one mathematical program that assigns spatiotemporal prescriptions for fuel removals across the Drink Area to optimize the joint provision of ecosystem services. The spatial component of the prescriptions refers to the selection from the 303 forest stands into which the Drink has been divided (the interior polygons in Figure \ref{fig:drinkOverview}). Temporally, the model operates over an 80-year planning horizon, from 2015 to 2095. The fuel removals are scheduled in two 20-year treatment periods: 2015-2035 and 2035-2055. For each stand, the model may prescribe fuel removals in the first period, the second period, neither, or both.
 
-\subsubsection{Climate Scenarios Considered}
-\label{sec:climateScenarios}
-In their assessments on the changing climate, the Intergovernmental Panel on Climate Change (IPCC) uses a scenario-based approach, considering many models of future climates from research groups around the world. They make no attempt to predict which of the future climates is most likely or to quantify the probability of realization of any one scenario. This same scenario-based approach is employed here in studying the potential impacts of climate change on trade-off relationships among bundled ecosystem services. Each scenario considered here results in a distinct multi-objective model and efficient frontier. We choose three climate scenarios for analysis. They were chosen from the set of climate models used by first working group (WG1) in the IPCC's Fifth Assessment (AR5) \cite{ipcc2013climate}. The scenarios will henceforth be referred to as ``None'', ``Ensemble RCP 4.5'' (or ``E45''), and ``Ensemble RCP 8.5'' (or ``E85'').
-
-The first scenario, ``None'', is the assumption of no climate change. While the number of studies incorporating climate change is increasing, this is still the assumption used for many modern studies such as Schroder \textit{et al}. (2013) \cite{schroder2016multi}. Because it has served as the basis for many studies and assumes a static climate resembling today's, the ``None'' climate scenario serves as a control against which to compare the other two climate scenarios.
-
-As their names suggest, the second and third scenarios are ensembles. Each ensemble is an assembly of 17 global circulation models (GCMs) used in IPCC AR5. The selection of component GCMs in the ensembles was performed by the USFS's Climate-Forest Vegetation Simulator (FVS) \cite{dixon2002essential} team. The list of the 17 scenarios included in the ensemble can be found in Crookston (2016) \cite{ClimateModelsInFVSEnsemble}. Each component GCM has a corresponding climate surface which contains a vector of 35 climate parameters at over 11,000 global locations for three time periods (2035, 2065, and 2095). The climate surfaces for the ensembles were created by averaging the values of all component GCMs for each climate parameter and each time period for each location. The result is a climate surface that, while temporally sparse, is spatially robust. Such a configuration is well-suited for use in the Drink Area given the variance in elevation of the area and its slow vegetation growth.
-
-The two ensembles are comprised of the same 17 GCMs, but the assumed representative concentration pathway (RCP) in the component GCMs differ. The RCP indicates the additional radiative forcing in $W/m^2$ above pre-industrial levels, with higher values of forcing indicative of more severe climate change. The GCMs in the Ensemble RCP 4.5 scenario assume 4.5 $W/m^2$ of additional radiative forcing, and the GCMs in the Ensemble RCP 8.5 scenario assume 8.5 $W/m^2$ of additional radiative forcing.
-
-These three chosen scenarios represent a range of predicted climate change severity, from a $0 \degree C$ warming by the year 2100 under the ``None'' scenario to a $2.6-4.8 \degree C$ warming under RCP 8.5 \cite{ipcc2013climate}. Using a range of climate change severities should produce efficient frontiers and conflict relationships among the objectives that allow for the demonstration of the comparison methods proposed in sections \ref{sec:waysToMeasureFrontiers} and \ref{sec:newConflictMetric}.
-
-\subsection{The Multi-objective Optimization Model}
-\label{sec:model}
-For each of the three climate scenarios specified in section \ref{sec:climateScenarios}, we parameterize and solve the following multi-objective zero-one mathematical program that optimizes the joint provision of ecosystem services in the Drink Area. The model operates over an 80-year planning horizon (2015-2095). In the planning horizon, there are two treatment periods (2015-2035 and 2035-2055). The model decides on which stands and in which periods to perform silvicultural treatments. Determining the treatment to apply to a stand was done \textit{a priori} and is dependent only on silvicultural characteristics at the time of treatment; the rules governing the assignment of treatment types can be found in the appendix, \S \ref{chap:appendix_drinkTreatments}.
-
-The model minimizes the fire hazard rating of the Drink Area at the end of the 80-year planning horizon, maximizes the area of NSO habitat at the end of each planning period, and minimizes the short-term spikes in sediment delivery resulting from the application of silvicultural treatments. Treatments are assumed to be performed at the midpoint year in the treatment periods: years 2025 and 2045 for the first and second periods, respectively. Figure \ref{fig:drinkPlanningHorizon} contains a schematic of the planning horizon showing the time of these events.
+The model minimizes the fire hazard rating of the Drink Area at the end of the 80-year planning horizon, maximizes the area of NSO habitat at the end of each planning period, and minimizes the short-term spikes in sediment delivery resulting from the application of silvicultural treatments. Furl removals are assumed to be performed at the midpoint year in the treatment periods: years 2025 and 2045 for the first and second periods, respectively. Figure \ref{fig:drinkPlanningHorizon} depicts the planning horizon of the study, showing the time of these events.
 
 \begin{figure}
 \centering
@@ -350,12 +299,15 @@ The model minimizes the fire hazard rating of the Drink Area at the end of the 8
 \label{fig:drinkPlanningHorizon}
 \end{figure}
 
-\subsubsection{Notation}
-The following notation is used throughout the model:
-\paragraph{Parameters}
+We use the following notation for the model.
+
+\paragraph{Model parameters}
 \begin{itemize}
 \item \textbf{$i \in I$:} the set of forest stands comprising the Drink Area ($|I| = 303$)
-\item \textbf{$r \in R$:} the set of treatment schedule prescriptions:
+
+\item \textbf{$a_i$:} the area of stand $i$
+
+\item \textbf{$r \in R$:} the set of fuel removal prescriptions:
 	$$
 	r =
 	\begin{cases}
@@ -365,17 +317,57 @@ The following notation is used throughout the model:
 	0 &\text{ no treatment applied in either period}
 	\end{cases}
 	$$
-\item \textbf{$F_{i,r}$:} the area-weighted fire hazard rating of stand $i$ at the end of the planning horizon if prescribed to treatment schedule $r$
-\item \textbf{$I_{\omega,t}$:} the set of stands that qualify as NSO habitat at the end of planning period $t$ under at least one treatment schedule
-\item \textbf{$a_i$:} the area of stand $i$
-\item \textbf{$e$:} the discount factor applied to NSO habitat when it is not part of a contiguous habitat cluster at least 200 ha in size
-\item \textbf{$j \in R_{i,t}$:} the set of treatment schedules such that stand $i$ qualifies as NSO habitat in planning period $t$
-\item \textbf{$s_{i,t}$:} the amount of sediment (in tons) delivered to the watershed as a result of performing fuel treatments on stand $i$ in planning period $t$
-\item \textbf{$c \in C$:} the set of all clusters of stands whose combined area exceeds 200 hectares
-\item \textbf{$i \in D_c$:} the set of all stands that comprise cluster $c$
-\item \textbf{$c \in C_i$:} the set of all clusters that contain stand $i$
-\item \textbf{$A$:} the maximum area in hectares that may be treated in either planning period
-\item \textbf{$\ell$, $u$:} the lower and upper bounds, respectively, on the relative fluctuation in the area treated in periods 1 and 2
+	
+\item \textbf{$F_{i,r}$:} the area-weighted fire hazard rating of stand $i$ at the end of the planning horizon if prescribed to fuel removal schedule $r$. The metric for fire hazard rating used in this analysis originated in the work by Schroder \textit{et al.} \cite{schroder2016multi}. This metric was developed for the Drink Area. It uses fire characteristics from the set of fuel models proposed by Anderson \cite{anderson1982aids} in order to assign a fire hazard rating. I expanded the rating system to include fuel models not present in Schroder \textit{et al.} See Table \ref{tab:firehazards}.
+
+The USFS's Climate-Forest Vegetation Simulator (Climate-FVS) was used to generate the fuels and vegetation characteristics of the stands in order to determine their fire hazard rating. Initial vegetation data for Climate-FVS came from the 2012 GNN structure map (\url{http://lemma.forestry.oregonstate.edu/data/structure-maps}) from Oregon State University's Landscape Ecology, Modeling, Mapping \& Analysis (LEMMA) group. Plots from the LEMMA database were mapped to the stands in the Drink area in order to produce tree and stand lists. These lists were used with Climate-FVS to simulate the stands' vegetation and fuels characteristics forward for the duration of the planning horizon under each climate scenario. Input climate data for Climate-FVS was obtained through the Climate-FVS climate data server \cite{climateFVSReadyData}.
+
+\begin{table}[!ht]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{l|c|crrr}
+\multicolumn{1}{c|}{Fuel Model} & \multicolumn{1}{c|}{\textbf{Fire Hazard Rating}} & \multicolumn{1}{c}{Group} & \multicolumn{1}{c}{Flame length (m)} & \multicolumn{1}{c}{Rate of spread (m/hr)} & \multicolumn{1}{c}{Total fuel load (tons/ha)} \\ \hline
+4*                              & \textbf{5}                                       & Shrub                     & 5.79                                 & 1508.76                                   & 32.12                                         \\
+5                               & \textbf{4}                                       & Shrub                     & 1.22                                 & 362.10                                    & 8.65                                          \\
+8                               & \textbf{1}                                       & Timber                    & 0.30                                 & 32.19                                     & 12.36                                         \\
+9*                              & \textbf{2}                                       & Timber                    & 0.79                                 & 150.88                                    & 8.65                                          \\
+10                              & \textbf{2}                                       & Timber                    & 1.46                                 & 158.92                                    & 29.65                                         \\
+11*                             & \textbf{2}                                       & Logging Slash             & 1.07                                 & 120.7                                     & 28.42                                         \\
+12                              & \textbf{4}                                       & Logging Slash             & 2.44                                 & 261.52                                    & 85.50                                         \\
+13                              & \textbf{5}                                       & Logging Slash             & 3.20                                 & 271.58                                    & 143.57                                       
+\end{tabular}%
+}
+\caption[Fire hazard ratings used in multi-objective model]{Fire hazard rating system used here, originally employed by Schroder \textit{et al.} \cite{schroder2016multi}.\\
+Asterisks (*) denote fuel models not present in Schroder \textit{et al.}\\
+The fuel model column refers to the Anderson fuel model ratings \cite{anderson1982aids}.}
+\label{tab:firehazards}
+\end{table}
+
+\item \textbf{$I_{\omega,t}$:} the set of stands that qualify as NSO habitat at the end of planning period $t$ under at least one fuel removal schedule. The stands that qualify as NSO habitat at the end of a planning period $t$ are those that meet the following three criteria, as specified by the USFS:
+	\begin{enumerate}
+	\item elevation less than 1830 m
+	\item the presence of trees with diameter at breast height (DBH) at least than 76 cm
+	\item canopy closure of at least 60\%
+	\end{enumerate}
+The elevation requirement was checked using a digital elevation model from the US Department of Agriculture's GeoSpatial Data Gateway; canopy closure and large tree criteria were determined using the simulated vegetation characteristics output from Climate-FVS.
+
+To account for the large habitat requirements of the NSO, stands must also be members of a cluster exceeding 200 ha in size, the entirety of which meets the aforementioned NSO habitat criteria. Stands that meet the first three criteria but are not part of such a cluster are less valuable NSO habitat and therefore have their contributions to the total owl habitat discounted by a factor of $e$.
+
+\item \textbf{$e$:} the discount factor applied to NSO habitat when it is not part of a contiguous habitat cluster at least 200 ha in size. Following the convention used in Schroder \textit{et al.} \cite{schroder2016multi}, we set $e = 0.5$.
+
+\item \textbf{$j \in R_{i,t}$:} the set of fuel removal schedules such that stand $i$ qualifies as NSO habitat at the end of planning period $t$. For instance, consider stand $i=15$ and planning period $t=2$ (2035-2055). We seek to find the set of fuel removal prescriptions $r \in R$ such that stand 15 is suitable NSO habitat at the end of planning period 2 (in year 2055). We enumerate the vegetation characteristics of stand 15 for all possible fuel removal schedules and determine that if fuel removals are assigned in the second planning period, then stand 15 does not qualify as NSO habitat in year 2055. Thus, $R_{15,2} = \{0,1\}$, since for $r=0$ (no fuel removals performed) and $r=1$ (fuel removals performed in first period only), stand 15 does qualify as NSO habitat in 2055.
+
+\item \textbf{$s_{i,t}$:} the amount of sediment (in tons) delivered to the watershed as a result of performing fuel removals on stand $i$ in planning period $t$. The contributions of sediment delivery from treatment of stand $i$ in period $t$ were determined using the online GIS tool for the Watershed Erosion Prediction Project (WEPP) \cite{frankenberger2011development}. This tool takes soil textures, treatment types, duration of simulation, and custom climate data as inputs. Soil texture data for the Drink area was obtained from the USDA's Soil Survey Geographic (SSURGO) database, treatment types are those specified in \S \ref{chap:appendix_drinkTreatments}, and the years of simulation correspond to the treatment years in the planning horizon (2015-2095). The custom climate data are those described above for use with Climate-FVS, obtained through the Climate-FVS data server.
+
+\item \textbf{$c \in C$:} Recall that the quantification of NSO habitat depends on the availability of large contiguous habitat patches; areas of NSO habitat less than than 200 ha in size are discounted. In order to determine when habitat is provided in sufficiently large areas, we must enumerate the set of clusters of stands whose combined area exceeds 200 ha. This set of clusters is the set $C$.
+
+\item \textbf{$i \in D_c$:} Given a cluster $c \in C$, the set $D_c$ is the set of stands that comprise cluster $c$.
+
+\item \textbf{$c \in C_i$:} Given a stand $i$, we define the set $C_i$ as the set of clusters that contain stand $i$
+
+\item \textbf{$A$:} the maximum area in hectares that may be treated in either planning period. We constrain the allowable treatment area per period to account for the limited availability of work crews to perform the fuel removals. Following guidance from the USFS, we set $A = 2428$ ha (approximately 6000 ac).
+
+\item \textbf{$\ell$, $u$:} the lower and upper bounds, respectively, on the relative fluctuation in the area treated in periods 1 and 2. These bounds are used to enforce regulation in the workflow for the USFS. Here we use values such that the area for which fuel removals are performed does not fluctuate more than 20\% between treatment periods; that is, we set the lower bound $\ell = 0.8$ and the upper bound $u = 1.2$.
 \end{itemize}
 
 \paragraph{Decision Variables}
@@ -399,50 +391,7 @@ $$
 \item \textbf{$H_t$:} the total area (in hectares) treated in planning period $t$
 \end{itemize}
 
-\subsubsection{Parameterization}
-The model was parameterized as follows:
-\begin{itemize}
-\item \textbf{$F_{i,r}$:} the metric for fire hazard rating used in this analysis originated in the work by Schroder \textit{et al.} \cite{schroder2016multi}. This metric was developed for the Drink Area. It uses fire characteristics from Anderson's fuel models \cite{anderson1982aids} to assign a fire hazard rating. I expanded the rating system to include fuel models not present in Schroder \textit{et al.} See Table \ref{tab:firehazards}.
-
-The stands' fuels and vegetation characteristics to determine the fire hazard rating were generated using the US Forest Service's Climate-Forest Vegetation Simulator (Climate-FVS). Input vegetation data to Climate-FVS came from the 2012 GNN structure map (\url{http://lemma.forestry.oregonstate.edu/data/structure-maps}) from Oregon State University's Landscape Ecology, Modeling, Mapping \& Analysis (LEMMA) group. Plots from the LEMMA database were mapped to the stands in the Drink area in order to produce tree and stand lists. These lists were used with Climate-FVS to simulate the stands' vegetation and fuels characteristics forward for the duration of the planning horizon under each climate scenario. Input climate data for Climate-FVS was obtained through the Climate-FVS climate data server \cite{climateFVSReadyData}.
-\item \textbf{$I_{\omega,t}$:} the set of stands that qualify as NSO habitat at the end of a planning period $t$ are those that meet the following three criteria, as specified by the USFS:
-	\begin{enumerate}
-	\item elevation less than 1830 m
-	\item the presence of trees with diameter at breast height (DBH) at least than 76 cm
-	\item canopy closure of at least 60\%
-	\end{enumerate}
-The elevation requirement was checked using a digital elevation model from the US Department of Agriculture's GeoSpatial Data Gateway; canopy closure and large tree criteria were determined using the simulated vegetation characteristics output from Climate-FVS.
-
-To account for the large habitat requirements of the NSO, stands must also be members of a cluster exceeding 200 ha in size, the entirety of which meets the aforementioned NSO habitat criteria. Stands that meet the first three criteria but are not part of such a cluster have their contributions to the total owl habitat discounted by a factor of $e$.
-\item \textbf{$e$:} the discount factor for sub-200 ha NSO habitat was set to $e = 0.5$ following the convention used in Schroder \textit{et al.} \cite{schroder2016multi}.
-\item \textbf{$j \in R_{i,t}$:} each combination of stand-treatment schedule is evaluated at the end of each planning period to determine its suitability as NSO habitat. The set $R_{i,t}$ consists of treatment schedules for which stand $i$ meets the NSO habitat criteria at the end of treatment period $t$. 
-\item \textbf{$s_{i,t}$:} the contributions of sediment delivery from treatment of stand $i$ in period $t$ were determined using the Watershed Erosion Prediction Project (WEPP) online GIS tool \cite{frankenberger2011development}. This tool takes as input soil textures, treatment types, duration of simulation, and custom climate data. Soil texture data for the Drink area was obtained from the USDA's Soil Survey Geographic (SSURGO) database, treatment types are those specified in \S \ref{chap:appendix_drinkTreatments}, and the years of simulation correspond to the treatment years in the planning horizon (2015-2095). The custom climate data are those described above for use with Climate-FVS, obtained through the Climate-FVS data server.
-\item \textbf{$C$,$D_c$,$C_i$:} the formulation of clusters was performed \textit{a priori} according to the algorithm used in Rebain and McDill (2003) \cite{rebain2003mixed}. The enumerated clusters can then be used to immediately determine cluster members $D_c$ and stand-owning clusters $C_i$.
-\item \textbf{$A$:} the maximum area that may be treated in either planning period was defined to be 6000 acres, or approximately 2428 ha
-\item \textbf{$\ell$, $u$:} the relative fluctuation in the area treated in periods 1 and 2 was defined to be 20\%. That is, the lower bound $\ell = 0.8$, and the upper bound $u = 1.2$.
-\end{itemize}
-\begin{table}[!ht]
-\centering
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{l|c|crrr}
-\multicolumn{1}{c|}{Fuel Model} & \multicolumn{1}{c|}{\textbf{Fire Hazard Rating}} & \multicolumn{1}{c}{Group} & \multicolumn{1}{c}{Flame length (m)} & \multicolumn{1}{c}{Rate of spread (m/hr)} & \multicolumn{1}{c}{Total fuel load (tons/ha)} \\ \hline
-4*                              & \textbf{5}                                       & Shrub                     & 5.79                                 & 1508.76                                   & 32.12                                         \\
-5                               & \textbf{4}                                       & Shrub                     & 1.22                                 & 362.10                                    & 8.65                                          \\
-8                               & \textbf{1}                                       & Timber                    & 0.30                                 & 32.19                                     & 12.36                                         \\
-9*                              & \textbf{2}                                       & Timber                    & 0.79                                 & 150.88                                    & 8.65                                          \\
-10                              & \textbf{2}                                       & Timber                    & 1.46                                 & 158.92                                    & 29.65                                         \\
-11*                             & \textbf{2}                                       & Logging Slash             & 1.07                                 & 120.7                                     & 28.42                                         \\
-12                              & \textbf{4}                                       & Logging Slash             & 2.44                                 & 261.52                                    & 85.50                                         \\
-13                              & \textbf{5}                                       & Logging Slash             & 3.20                                 & 271.58                                    & 143.57                                       
-\end{tabular}%
-}
-\caption[Fire hazard ratings used in multi-objective model]{Fire hazard rating system used here, originally employed by Schroder \textit{et al.} \cite{schroder2016multi}.\\
-Asterisks (*) denote fuel models not present in Schroder \textit{et al.}\\
-The fuel model column refers to the Anderson fuel model ratings \cite{anderson1982aids}.}
-\label{tab:firehazards}
-\end{table}
-
-\subsubsection{Formulation}
+\subsubsection{Model Formulation}
 The formulation of the multi-objective model is as follows:
 \begin{align}
 Minimize \quad & \notag\\
@@ -475,3 +424,87 @@ The set of equalities \eqref{eqn:constraintOnePrescrip} enforces the logical con
 
 \subsubsection{Solution method}
 I developed an implementation of T\'{o}th's Alpha-Delta algorithm \cite{TothThesis} to solve the model for each climate change scenario utilizing the IBM ILOG CPLEX optimization engine. For a problem with $M$ objectives, the Alpha-Delta algorithm finds the optimal set of solutions by iteratively slicing the $M$-dimensional objective space with a tilted $M-1$-dimensional hyperplane. The algorithm was implemented using an alpha parameter of $\alpha = .01$ and delta parameters of $\delta_{Hab} = 1$ ha and $\delta_{Sed} = 2$ tons for the NSO habitat and sediment delivery objectives, respectively.
+
+
+%THIS IS TRANSITION BETWEEN MODEL AND CLIMATE SCENARIO DESCRIPTIONS?
+%The US Forest Service seeks to ensure the sustained provision of these services, but climate change may threaten their ability to do so. Given this set of objectives, a central question to our analysis is, how will climate change impact the joint provision of these services? Will the provision of wildlife habitat require the same sacrifices in fire hazard under different climate conditions? Research agrees that climate change will alter the ability of forests to provide ecosystem services in isolation \cite{iverson1998predicting}\cite{Goode20121}\cite{vose2012effects}, but no research has considered the question of how it may impact the conflict among ecosystem services. We do so here by quantifying the performance of a multi-objective model optimizing ecosystem service achievement under three different climate change scenarios. The model determines how to schedule fuel removals over two twenty-year planning periods such that they have minimal impact on wildlife habitat and sediment delivery in the watershed while minimizing the fire hazard of the Drink Area 40 years after the fuel removals are performed.
+%
+%
+%\subsubsection{Model objectives: The set of ecosystem services}
+%\paragraph{Northern Spotted Owl habitat}
+%The first ecosystem service considered in our model is the provision of habitat for the northern spotted owl (NSO) (\textit{Strix occidentalis caurina}, Figure \ref{fig:nso}), which typically inhabits areas of old growth forest on the Pacific coast. This objective was included in our model for two primary reasons. First, the NSO often serves as an indicator species, meaning that conservation practitioners use the presence and health of the NSO population as a proxy for the overall health of old growth forest habitat (though this practice has not been without controversy \cite{simberloff1998flagships}). Second, logging and development along the coast have caused a decline in the species population size, and it is now listed as threatened and thus protected under the Endangered Species Act of 1973 \cite{congress1973endangered}.
+%
+%Because of the availability of dense old growth forest in the Drink Area, approximately 43\% of the area currently serves as suitable habitat for the NSO (see Figure \ref{fig:drinkOwlAndWatershed}). As specified by the USFS, areas meeting the following criteria are considered suitable NSO habitat:
+%\begin{enumerate}
+%	\item elevation less than 1830 m
+%	\item the presence of trees with diameter at breast height (DBH) at least than 76 cm
+%	\item canopy closure of at least 60\%
+%\end{enumerate}
+%These criteria determine the suitability of an area for NSO habitat. However, due to the territorial nature of the NSO and its large habitat requirements, suitable habitat is deemed less valuable if it is provided in an area less than 200 ha in contiguous size.
+%
+%
+%\paragraph{Fire Hazard}
+%The second ecosystem service is protection from high severity wildfire. This protection is achieved by applying silvicultural treatments to designated treatment areas (forest stands) throughout the Drink Area. The types of treatments assigned to stands are defined in the appendix, \S \ref{chap:appendix_drinkTreatments}. We measure the fire hazard rating of a stand before and after treatment to assess the efficacy of the treatment. The fire hazard rating used here is described in more detail later and is summarized in Table \ref{tab:firehazards}. The USFS implements silvicultural treatments to reduce the fire hazard rating in order to protect the habitat of the NSO and also to protect the municipal watershed for the cities of Bend, OR and Sisters, OR which lies largely within the boundaries of the Drink Area (see Figure \ref{fig:drinkOwlAndWatershed}). Wildfires pose a threat to these cities' water supply, because wildfires can cause soil water repellency, surface runoff, and debris torrents \cite{ice2004effects} which would degrade the quality of the watershed. In addition, the Drink Area has never before undergone silvicultural treatments, which increases the expected severity of a fire should one occur. 
+%\begin{figure}
+%\centering
+%\includegraphics[width=.5\textwidth]{../images/DrinkMap_NSOAndWatershed}
+%\caption[NSO Habitat and municipal watershed in the Drink Planning Area]{Location of the municipal watershed and the suitable NSO habitat in the Drink area at the beginning of the planning horizon (2015). Interior polygons are the 303 management units.}
+%\label{fig:drinkOwlAndWatershed}
+%\end{figure}
+%
+%Finally, we seek to minimize sediment delivery into the watershed. While the silvicultural treatments intend to provide long-term protection of the watershed, the disturbance caused by implementing the treatments has the potential to induce short-term increases in sediment delivery \cite{o2005conceptual}. This is expected to be especially true in the Drink Area, where local Forest Service staff have noted that the watershed is unusually susceptible to spikes in sediment delivery as a result of foot traffic and other activities that occur within the watershed.
+%
+%These ecosystem services and their relationships with one another will likely be altered by the changing climate. The extent of these changes will depend on the severity of the realized climate change. Thus, to understand the potential impacts, multiple climate change scenarios representing a range of severities must be considered. The following section describes the climate scenarios considered in this case study.
+
+\subsubsection{Climate Scenarios Considered}
+\label{sec:climateScenarios}
+In their assessments on the changing climate, the Intergovernmental Panel on Climate Change (IPCC) uses a scenario-based approach, considering many models of future climates from research groups around the world. They make no attempt to predict which of the future climates is most likely or to quantify the probability of realization of any one scenario. This same scenario-based approach is employed here in studying the potential impacts of climate change on trade-off relationships among bundled ecosystem services. Each scenario considered here results in a distinct multi-objective model and efficient frontier. We choose three climate scenarios for analysis. They were chosen from the set of climate models used by first working group (WG1) in the IPCC's Fifth Assessment (AR5) \cite{ipcc2013climate}. The scenarios will henceforth be referred to as ``None'', ``Ensemble RCP 4.5'' (or ``E45''), and ``Ensemble RCP 8.5'' (or ``E85'').
+
+The first scenario, ``None'', is the assumption of no climate change. While the number of studies incorporating climate change is increasing, this is still the assumption used for many modern studies such as Schroder \textit{et al}. (2013) \cite{schroder2016multi}. Because it has served as the basis for many studies and assumes a static climate resembling today's, the ``None'' climate scenario serves as a control against which to compare the other two climate scenarios.
+
+As their names suggest, the second and third scenarios are ensembles. Each ensemble is an assembly of 17 global circulation models (GCMs) used in IPCC AR5. The selection of component GCMs in the ensembles was performed by the USFS's Climate-Forest Vegetation Simulator (FVS) \cite{dixon2002essential} team. The list of the 17 scenarios included in the ensemble can be found in Crookston (2016) \cite{ClimateModelsInFVSEnsemble}. Each component GCM has a corresponding climate surface which contains a vector of 35 climate parameters at over 11,000 global locations for three time periods (2035, 2065, and 2095). The climate surfaces for the ensembles were created by averaging the values of all component GCMs for each climate parameter and each time period for each location. The result is a climate surface that, while temporally sparse, is spatially robust. Such a configuration is well-suited for use in the Drink Area given the variance in elevation of the area and its slow vegetation growth.
+
+The two ensembles are comprised of the same 17 GCMs, but the assumed representative concentration pathway (RCP) in the component GCMs differ. The RCP indicates the additional radiative forcing in $W/m^2$ above pre-industrial levels, with higher values of forcing indicative of more severe climate change. The GCMs in the Ensemble RCP 4.5 scenario assume 4.5 $W/m^2$ of additional radiative forcing, and the GCMs in the Ensemble RCP 8.5 scenario assume 8.5 $W/m^2$ of additional radiative forcing.
+
+These three chosen scenarios represent a range of predicted climate change severity, from a $0 \degree C$ warming by the year 2100 under the ``None'' scenario to a $2.6-4.8 \degree C$ warming under RCP 8.5 \cite{ipcc2013climate}. Using a range of climate change severities should produce efficient frontiers and conflict relationships among the objectives that allow for the demonstration of the comparison methods proposed in sections \ref{sec:waysToMeasureFrontiers} and \ref{sec:newConflictMetric}.
+
+%\subsection{The Multi-objective Optimization Model}
+%\label{sec:model}
+%For each of the three climate scenarios specified in section \ref{sec:climateScenarios}, we parameterize and solve the following multi-objective zero-one mathematical program that optimizes the joint provision of ecosystem services in the Drink Area. The model operates over an 80-year planning horizon (2015-2095). In the planning horizon, there are two treatment periods (2015-2035 and 2035-2055). The model decides on which stands and in which periods to perform silvicultural treatments. Determining the treatment to apply to a stand was done \textit{a priori} and is dependent only on silvicultural characteristics at the time of treatment; the rules governing the assignment of treatment types can be found in the appendix, \S \ref{chap:appendix_drinkTreatments}.
+%
+%The model minimizes the fire hazard rating of the Drink Area at the end of the 80-year planning horizon, maximizes the area of NSO habitat at the end of each planning period, and minimizes the short-term spikes in sediment delivery resulting from the application of silvicultural treatments. Treatments are assumed to be performed at the midpoint year in the treatment periods: years 2025 and 2045 for the first and second periods, respectively. Figure \ref{fig:drinkPlanningHorizon} contains a schematic of the planning horizon showing the time of these events.
+%
+%\begin{figure}
+%\centering
+%\includegraphics[width=.85\textwidth]{../images/Drink_PlanningHorizon_Sketch}
+%\caption[Planning horizon for the case study]{The planning horizon used in the case study spans the 80 year period from 2015 to 2095. Treatments may be performed in the first period, the second period, both, or neither. Treatments are assumed to be performed at the mid-point years of each period (black triangles). Sediment delivery is measured on treatment years. Stands' suitability for NSO habitat is measured at the end of the planning periods (gray triangles), and stands' fire hazard ratings are measured at the end of the planning horizon (white triangle).}
+%\label{fig:drinkPlanningHorizon}
+%\end{figure}
+%
+%\subsubsection{Notation}
+%The following notation is used throughout the model:
+%\paragraph{Parameters}
+%\begin{itemize}
+%\item \textbf{$i \in I$:} the set of forest stands comprising the Drink Area ($|I| = 303$)
+%\item \textbf{$r \in R$:} the set of treatment schedule prescriptions:
+%	$$
+%	r =
+%	\begin{cases}
+%	1 &\text{ treatment applied in the first period (2015-2035)}\\
+%	2 &\text{ treatment applied in the second period (2035-2055)}\\
+%	3 &\text{ treatment applied in both periods}\\
+%	0 &\text{ no treatment applied in either period}
+%	\end{cases}
+%	$$
+%\item \textbf{$F_{i,r}$:} the area-weighted fire hazard rating of stand $i$ at the end of the planning horizon if prescribed to treatment schedule $r$
+%\item \textbf{$I_{\omega,t}$:} the set of stands that qualify as NSO habitat at the end of planning period $t$ under at least one treatment schedule
+%\item \textbf{$a_i$:} the area of stand $i$
+%\item \textbf{$e$:} the discount factor applied to NSO habitat when it is not part of a contiguous habitat cluster at least 200 ha in size
+%\item \textbf{$j \in R_{i,t}$:} the set of treatment schedules such that stand $i$ qualifies as NSO habitat in planning period $t$
+%\item \textbf{$s_{i,t}$:} the amount of sediment (in tons) delivered to the watershed as a result of performing fuel treatments on stand $i$ in planning period $t$
+%\item \textbf{$c \in C$:} the set of all clusters of stands whose combined area exceeds 200 hectares
+%\item \textbf{$i \in D_c$:} the set of all stands that comprise cluster $c$
+%\item \textbf{$c \in C_i$:} the set of all clusters that contain stand $i$
+%\item \textbf{$A$:} the maximum area in hectares that may be treated in either planning period
+%\item \textbf{$\ell$, $u$:} the lower and upper bounds, respectively, on the relative fluctuation in the area treated in periods 1 and 2
+%\end{itemize}
