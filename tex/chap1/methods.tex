@@ -150,14 +150,8 @@ We initialize the algorithm with an empty set of non-dominated solutions in $L$ 
 
 $\overbar{V}_\mathbf{z}$ is computed as follows. Initialize $\overbar{V}_\mathbf{z} = 0$, and add $\mathbf{z}$ to the set $G$. Remove from $G$ any solutions that are dominated by $\mathbf{z}$ in $L$ dimensions. Add to $\overbar{V}_\mathbf{z}$ the value of the volume of $\mathbf{z}$ in $L$ dimensions (the union of the yellow and gray areas in Figure \ref{fig:AlgoAid}); this is simply the product of its components $z_\ell$ for $\ell \in \mathcal{L}$. Then subtract from $\overbar{V}_\mathbf{z}$ the volume of $G$ prior to the addition of $\mathbf{z}$ (the union of the gray and white areas in Figure \ref{fig:AlgoAid}). The last step is to compute and add back in the volume of the ``sides'' of $G$ that were subtracted in the previous step (the white areas in Figure \ref{fig:AlgoAid}). This volume is computed by taking the sum over each dimension $\ell \in \mathcal{L}$ of the areas along that dimension enclosed by the existing solutions in $G$. Pseudocode for this algorithm is presented in Figure \ref{algo:HypervolAlgo}.
 
-\begin{figure}[ht]
-\centering
-\caption[First iterations for computing $\overbar{V}$]{\textbf{Computing the hypervolume of a 3D frontier: first three iterations of the algorithm}. Consider a three-dimensional frontier $Z$. We sequentially add solutions to a 2D projection of the frontier, seen here (process moves from left to right). The solutions are added in order of decreasing value in their third component (height -- not seen here). At each iteration, we compute the contribution in 2D as follows: Add the product of the solution's 2D components (the union of the yellow and gray areas). Then subtract all the previous existing frontier area (the union of the gray and white areas). Then add back the value of the sides (white areas). This yields the value of the yellow area. Multiply this value by the third component of the solution to obtain the solution's contribution to the hypervolume $V$.}
-\label{fig:AlgoAid}
-\includegraphics[width=.85\textwidth]{../images/3DFrontierSchematic_SketchUp_FirstSteps_2D_clean}
-\end{figure}
-
-\begin{figure}[ht]
+\newpage
+\begin{figure}[H]
 \caption[Algorithm to compute the hypervolume indicator of a Pareto frontier]{Algorithm to compute the hypervolume $V$ of a Pareto frontier. Prior to running the algorithm, pick an objective $m$ from the objective set $\mathcal{M}$ and define the sub-dimensional objective set $\mathcal{L} = \mathcal{M} \backslash \{m\}$. Then sort $\mathbf{z} \in Z$ in descending order by their $m$th component. Here, $\mathbf{z} \in Z$ is the set of relative objective vectors. Let $\overbar{V_\mathbf{z}}$ be the ($M-1$)-dimensional volume contribution of the solution $\mathbf{z}$, and let $\mathbf{g} \in G$ be the non-dominated objective vectors in $M-1$ dimensions.}
 \label{algo:HypervolAlgo}
 \begin{algorithmic}[1]
@@ -201,6 +195,13 @@ $\overbar{V}_\mathbf{z}$ is computed as follows. Initialize $\overbar{V}_\mathbf
 
 
 \end{algorithmic}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\caption[First iterations for computing $\overbar{V}$]{\textbf{Computing the hypervolume of a 3D frontier: first three iterations of the algorithm}. Consider a three-dimensional frontier $Z$. We sequentially add solutions to a 2D projection of the frontier, seen here (process moves from left to right). The solutions are added in order of decreasing value in their third component (height -- not seen here). At each iteration, we compute the contribution in 2D as follows: Add the product of the solution's 2D components (the union of the yellow and gray areas). Then subtract all the previous existing frontier area (the union of the gray and white areas). Then add back the value of the sides (white areas). This yields the value of the yellow area. Multiply this value by the third component of the solution to obtain the solution's contribution to the hypervolume $V$.}
+\label{fig:AlgoAid}
+\includegraphics[width=.85\textwidth]{../images/3DFrontierSchematic_SketchUp_FirstSteps_2D_clean}
 \end{figure}
 
 \subsection{A new measure for pairwise objective conflict}
@@ -267,8 +268,8 @@ inhabitant of Pacific Northwest forests that is listed as a federally threatened
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=.85\textwidth]{../images/DrinkMap_Overview}
-\caption[Overview of the study system, the Drink Planning Area]{Overview of the study system, the Drink Planning Area (in purple), consisting of 7056 ha in the Deschutes National Forest.}
+\includegraphics[width=.9\textwidth]{../images/Drink_Overview}
+\caption[Overview of the study system, the Drink Planning Area]{Overview of the study system, the Drink Planning Area, consisting of 7056 ha in the Deschutes National Forest. The Drink Area contains old growth forest that make it suitable habitat for the northern spotted owl. It also houses the municipal watershed for Bend, OR and Sisters, OR.}
 \label{fig:drinkOverview}
 \end{figure}
 
@@ -425,35 +426,12 @@ We developed an implementation of T\'{o}th's Alpha-Delta algorithm \cite{TothThe
 \label{sec:climateChange}
 Like other ecosystems, forests will undergo changes as a result of the changing climate. For instance, researchers anticipate new spatial distributions of tree species \cite{iverson1998predicting}, increased sediment delivery to streams \cite{Goode20121}, and increasing disturbance regimes such as wildfires, droughts, and insect infestations \cite{vose2012effects}. As these transformations occur, the ability of forests to provide ecosystem services will change. Many studies have addressed the effects of climate change on isolated ecosystem services \cite{vose2012effects}\cite{bonan2008forests}\cite{mckenzie2004climatic}. However, forests provide these ecosystem services in concert with one another, and little attention has been given to understanding how climate change may impact the joint provision of ecosystem services.
 
-The extent of this impact will likely depend on the severity of the realized climate change. Thus, to understand the potential impacts, multiple climate change scenarios representing a range of severities should be considered. In our case study, we consider three climate scenarios: one scenario in which climate change is ignored, ``None''; one in which climate change is predicted to be mild, ``Ensemble RCP 4.5'' (or ``E45''); and one in which climate change is predicted to be severe, ``Ensemble RCP 8.5'' (or ``E85''). These scenarios differ in their assumed radiative forcing (RF), which represents the additional energy per unit area absorbed by the atmosphere. In general, larger values of RF correspond to more severe climate change.
+The extent of this impact will likely depend on the severity of the realized climate change. Thus, to understand the potential impacts, multiple climate change scenarios representing a range of severities should be considered. In our case study, we consider three climate scenarios: one scenario in which climate change is ignored, ``None''; one in which climate change is predicted to be mild, ``Ensemble RCP 4.5'' (or ``E45''); and one in which climate change is predicted to be severe, ``Ensemble RCP 8.5'' (or ``E85''). These scenarios differ in their assumptions for the additional energy per unit area that will be absorbed by the atmosphere, a value known as radiative forcing (RF). In general, larger values of RF correspond to more severe climate change.
 
-A given value for radiative forcing does not map to a single prediction of climate change, because researchers may disagree in how the climate will respond to a given amount RF. Indeed, for a given RF, numerous climate models exist. A common approach to handling the disagreement among the climate models is to use an ensemble of climate models that all assume the same RF. We adopt this approach here for our E85 and E45 scenarios.
+A given value for radiative forcing does not map to a single prediction of climate change, because researchers may disagree in how the climate will respond to a given amount of RF. Indeed, for a given RF, numerous climate models exist. A common approach to handling the disagreement among the climate models is to use an ensemble of climate models that all assume the same RF. We adopt this approach here for our E85 and E45 scenarios.
 
 Each of these scenarios corresponds to an ensemble of 17 climate models that originate from the Fifth Assessment (AR5) performed by the Intergovernmental Panel on Climate Change (IPCC). The selection and assembly of the 17 climate models used in these ensembles was conducted by Cookston (2016) and the Climate-FVS team \cite{ClimateModelsInFVSEnsemble}.
 
-The other scenario, None, ignores any effects of climate change. While the number of studies incorporating climate change is increasing, this is still the assumption used for many modern studies such as Schroder \textit{et al}. (2013) \cite{schroder2016multi}. Because it has served as the basis for many studies, the None climate scenario serves as a control against which to compare the other two.
+The other scenario, None, ignores any effects of climate change. While the number of studies incorporating climate change is increasing, this is still the assumption used for many modern studies such as Schroder \textit{et al}. (2013) \cite{schroder2016multi}. Because it has served as the basis for many past studies of ecosystem services, the None climate scenario serves as a control against which to compare the other two.
 
-HERE - talk about how climate affects the veg params and the impact of stuff on sediment delivery, and so will change model coefficients and so will have an impact on our objectives. After this, we're done with methods!
-
-
-%=============================================
-%THIS IS TRANSITION BETWEEN MODEL AND CLIMATE SCENARIO DESCRIPTIONS?
-%The US Forest Service seeks to ensure the sustained provision of these services, but climate change may threaten their ability to do so. Given this set of objectives, a central question to our analysis is, how will climate change impact the joint provision of these services? Will the provision of wildlife habitat require the same sacrifices in fire hazard under different climate conditions? Research agrees that climate change will alter the ability of forests to provide ecosystem services in isolation \cite{iverson1998predicting}\cite{Goode20121}\cite{vose2012effects}, but no research has considered the question of how it may impact the conflict among ecosystem services. We do so here by quantifying the performance of a multi-objective model optimizing ecosystem service achievement under three different climate change scenarios. The model determines how to schedule fuel removals over two twenty-year planning periods such that they have minimal impact on wildlife habitat and sediment delivery in the watershed while minimizing the fire hazard of the Drink Area 40 years after the fuel removals are performed.
-%
-%
-% ========================
-% SOME NSO STUFF WE COULD DIP INTO IF NECESSARY
-%\paragraph{Northern Spotted Owl habitat}
-%The first ecosystem service considered in our model is the provision of habitat for the northern spotted owl (NSO) (\textit{Strix occidentalis caurina}, Figure \ref{fig:nso}), which typically inhabits areas of old growth forest on the Pacific coast. This objective was included in our model for two primary reasons. First, the NSO often serves as an indicator species, meaning that conservation practitioners use the presence and health of the NSO population as a proxy for the overall health of old growth forest habitat (though this practice has not been without controversy \cite{simberloff1998flagships}). Second, logging and development along the coast have caused a decline in the species population size, and it is now listed as threatened and thus protected under the Endangered Species Act of 1973 \cite{congress1973endangered}.
-%
-%Because of the availability of dense old growth forest in the Drink Area, approximately 43\% of the area currently serves as suitable habitat for the NSO (see Figure \ref{fig:drinkOwlAndWatershed}). As specified by the USFS, areas meeting the following criteria are considered suitable NSO habitat:
-%\begin{enumerate}
-%	\item elevation less than 1830 m
-%	\item the presence of trees with diameter at breast height (DBH) at least than 76 cm
-%	\item canopy closure of at least 60\%
-%\end{enumerate}
-%These criteria determine the suitability of an area for NSO habitat. However, due to the territorial nature of the NSO and its large habitat requirements, suitable habitat is deemed less valuable if it is provided in an area less than 200 ha in contiguous size.
-%
-%============================
-% SOME CLIMATE CHANGE STUFF WE COULD DIP INTO IF NECESSARY
-%These ecosystem services and their relationships with one another will likely be altered by the changing climate. The extent of these changes will depend on the severity of the realized climate change. Thus, to understand the potential impacts, multiple climate change scenarios representing a range of severities must be considered. The following section describes the climate scenarios considered in this case study.
+Changing the climate scenario changes the parameterization of the model: the vegetation, fuels, and sediment delivery data depend on climate. Thus, changing the climate scenario can affect the amount and location of NSO habitat, the effects of fuel removals on NSO habitat, the fire hazard of the Drink Area, the efficacy of the fuel removals in reducing fire hazard, and the sediment delivered as a result of fuel removals. The result is a change in the interaction between ecosystem services and in the extent of conflict among them.
