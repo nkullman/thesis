@@ -50,7 +50,7 @@ The average achievement of all ecosystem services decreases with increasing seve
 
 The model data provide evidence of why this is the case. Consider Figure \ref{fig:avgSedimentDelivery}. This figure shows the average number of tonnes of sediment delivered as a result of performing fuel removals for each climate change scenario. The sediment delivery under E45 is nearly twice the sediment delivery under the None scenario (81\% higher), whereas the E85 scenario is only 0.4\% higher than the E45 scenario.
 
-We trace this phenomenon back to the response of the soils in the Drink Area to prescribed burns and the frequency with which they are assigned. While the sediment delivery response to thinnings is similar across climate scenarios, the response to prescribed burns is more pronounced. We also find that relative to the None scenario, prescribed burns are assigned 8 times more frequently in E45 and 10.1 times more frequently in E85. See Table \ref{tab:prscBurnsInClimChange}. These effects combine to produce the result seen in Figure \ref{fig:avgSedimentDelivery}. For additional information on the assignment of specific fuel removal techniques such as thinnings and prescribed burns, see the appendix, \S \ref{chap:appendix_drinkTreatments}.
+We trace this phenomenon back to the sediment delivery response to prescribed burns and the frequency with which they are assigned. While the sediment delivery response to thinnings is similar across climate scenarios, the response to prescribed burns is more pronounced. We also find that relative to the None scenario, prescribed burns are assigned 8 times more frequently in E45 and 10.1 times more frequently in E85. See Table \ref{tab:prscBurnsInClimChange}. These effects combine to produce the result seen in Figure \ref{fig:avgSedimentDelivery}. For additional information on how stands are assigned a specific fuel removal techniques such as thinning or prescribed burn, see the appendix, \S \ref{chap:appendix_drinkTreatments}.
 
 \begin{figure}[ht]
 \centering
@@ -65,17 +65,24 @@ We trace this phenomenon back to the response of the soils in the Drink Area to 
 \label{tab:prscBurnsInClimChange}
 \begin{tabular}{l|lll}
                                                                                                            & \textbf{None} & \textbf{E45} & \textbf{E85} \\ \hline
-\textbf{\begin{tabular}[c]{@{}l@{}}Average sediment delivery\\ (tonnes) from prescribed burn\end{tabular}} & 34            & 272          & 344          \\
-\textbf{\begin{tabular}[c]{@{}l@{}}Number of prescribed\\ burns assigned\end{tabular}}                     & 31.23         & 48.56        & 48.97       
+\textbf{\begin{tabular}[c]{@{}l@{}}Average sediment delivery\\ (tonnes) from prescribed burn\end{tabular}} & 31.23            & 48.56          & 48.97          \\
+\textbf{\begin{tabular}[c]{@{}l@{}}Number of prescribed\\ burns assigned\end{tabular}}                     & 34         & 272        & 344       
 \end{tabular}
 \end{table}
 
-Similarly, see Figure \ref{fig:cumSmallestFireHazard}. The figure shows for each climate scenario, the resulting fire hazard for the Drink Area if the most successful fire hazard reduction techniques were performed. These numbers represent an unconstrained lower bound for the minimum fire hazard, as they ignore inequalities \eqref{eqn:constraintAreaRestr}-\eqref{eqn:constraintAreaFlucU}. We again notice a larger difference between None and E45 than between E45 and E85.
+Similarly, consider Figure \ref{fig:cumSmallestFireHazard}. For each climate scenario, the figure shows the resulting fire hazard of the Drink Area if the most successful fire hazard reduction techniques were performed. We again notice increased fire hazard of the Drink Area as a result of climate change, with a larger difference between None and E45 than between E45 and E85. This is due to more stands in the Drink Area having a fuel model classification that is associated with higher fire hazard under climate change scenarios E45 and E85 than in the case of None. This trend is shown in Figure \ref{fig:distOfFireHazards}, where we observe a larger percentage of stands having a fire hazard rating of either 4 or 5 under the E45 and E85 scenarios than in None.
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=.55\textwidth]{../images/CumSmallestFireHazard}
-\caption[Lower bound on fire hazard for each climate scenario]{Shown here are lower bounds on the minimum fire hazard for the Drink Area under each climate change scenario. They represent the cumulative fire hazard if all constraints on fuel removals were ignored (inequalities \eqref{eqn:constraintAreaRestr}-\eqref{eqn:constraintAreaFlucU}).}
+\includegraphics[width=.40\textwidth]{../images/CumSmallestFireHazard}
+\caption[Lower bound on fire hazard for each climate scenario]{Shown here are lower bounds on the minimum fire hazard for the Drink Area under each climate change scenario. They represent the cumulative fire hazard of the Drink Area if the most extreme fire hazard reduction techniques were employed without regard to the constraints on fuel removals (inequalities \eqref{eqn:constraintAreaRestr}-\eqref{eqn:constraintAreaFlucU}).}
+\label{fig:distOfFireHazards}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.5\textwidth]{../images/FireHazardRatingsPerClimateScenario}
+\caption[Distribution of fire hazard ratings over the Drink Area for each climate change scenario]{Distributions of fire hazard ratings across the Drink Area under each climate change scenario. Moving from left to right (in increasing climate change severity), we observe an increase in the number of stands classified with more extreme fire hazards (ratings of 4 and 5).}
 \label{fig:cumSmallestFireHazard}
 \end{figure}
 
