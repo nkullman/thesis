@@ -49,7 +49,8 @@ We begin our analysis by investigating the impacts of climate change on the prov
 The average achievement of all ecosystem services decreases with increasing severity of climate change (see Table \ref{tab:frontiersSummary}, ``avg'' rows). We find the difference in ecosystem service provision greater between the assumption of no climate change and mild climate change (None to E45) than it is between mild climate change and severe climate change (E45 to E85). This suggests that, for the ecosystem services in this study, the realization of climate change is more significant than the severity of that change.
 
 The model data provide evidence of why this is the case. Consider Figure \ref{fig:avgSedimentDelivery}. This figure shows the average number of tonnes of sediment delivered as a result of performing fuel removals for each climate change scenario. The sediment delivery under E45 is nearly twice the sediment delivery under the None scenario (81\% higher), whereas the E85 scenario is only 0.4\% higher than the E45 scenario.
-% This have something to do with soil types? The type of trtmt applied in the diff clim scenarios? Idk anything about soils. I sure hope I don't have to investigate this
+
+We trace this phenomenon back to the response of the soils in the Drink Area to prescribed burns and the frequency with which they are assigned. While the sediment delivery response to thinnings is similar across climate scenarios, the response to prescribed burns is more pronounced. We also find that relative to the None scenario, prescribed burns are assigned 8 times more frequently in E45 and 10.1 times more frequently in E85. See Table \ref{tab:prscBurnsInClimChange}. These effects combine to produce the result seen in Figure \ref{fig:avgSedimentDelivery}. For additional information on the assignment of specific fuel removal techniques such as thinnings and prescribed burns, see the appendix, \S \ref{chap:appendix_drinkTreatments}.
 
 \begin{figure}[ht]
 \centering
@@ -57,6 +58,17 @@ The model data provide evidence of why this is the case. Consider Figure \ref{fi
 \caption[Average sediment delivery across climate scenarios]{Average spike in sediment delivery as a result of performing fuel removals for each of the climate change scenarios.}
 \label{fig:avgSedimentDelivery}
 \end{figure}
+
+\begin{table}[]
+\centering
+\caption[Frequency and impact of prescribed burns for each climate scenario]{Frequency and impact of prescribed burn for each climate scenario. The combination of more frequent prescribed burns and increased sediment delivery per prescribed burn results in the higher values of sediment delivery in E45 and E85 observed in Figure \ref{fig:avgSedimentDelivery}.}
+\label{tab:prscBurnsInClimChange}
+\begin{tabular}{l|lll}
+                                                                                                           & \textbf{None} & \textbf{E45} & \textbf{E85} \\ \hline
+\textbf{\begin{tabular}[c]{@{}l@{}}Average sediment delivery\\ (tonnes) from prescribed burn\end{tabular}} & 34            & 272          & 344          \\
+\textbf{\begin{tabular}[c]{@{}l@{}}Number of prescribed\\ burns assigned\end{tabular}}                     & 31.23         & 48.56        & 48.97       
+\end{tabular}
+\end{table}
 
 Similarly, see Figure \ref{fig:cumSmallestFireHazard}. The figure shows for each climate scenario, the resulting fire hazard for the Drink Area if the most successful fire hazard reduction techniques were performed. These numbers represent an unconstrained lower bound for the minimum fire hazard, as they ignore inequalities \eqref{eqn:constraintAreaRestr}-\eqref{eqn:constraintAreaFlucU}. We again notice a larger difference between None and E45 than between E45 and E85.
 
