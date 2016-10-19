@@ -46,11 +46,12 @@ We parameterized and solved the multi-objective model (\eqref{eqn:objFire}-\eqre
 We begin our analysis by investigating the impacts of climate change on the provision of individual ecosystem services. We then consider how climate change impacts the joint provision of ecosystem services and the conflict among them.
 
 \subsubsection{Individual ecosystem service achievement}
-The average achievement of all ecosystem services decreases with increasing severity of climate change (see Table \ref{tab:frontiersSummary}, ``avg'' rows). We find the difference in ecosystem service provision greater between the assumption of no climate change and mild climate change (None to E45) than it is between mild climate change and severe climate change (E45 to E85). This suggests that, for the ecosystem services in this study, the realization of climate change is more significant than the severity of that change.
+The average achievement of all ecosystem services decreases with increasing severity of climate change (see Table \ref{tab:frontiersSummary}, ``avg'' rows). We find the difference in ecosystem service provision is greater between the assumption of no climate change and mild climate change (None to E45) than it is between mild climate change and severe climate change (E45 to E85). This suggests that, for the ecosystem services in this study, the realization of climate change is more significant than the severity of that change. The model data provide evidence of why this is the case.
 
-The model data provide evidence of why this is the case. Consider Figure \ref{fig:avgSedimentDelivery}. This figure shows the average number of tonnes of sediment delivered as a result of performing fuel removals for each climate change scenario. The sediment delivery under E45 is nearly twice the sediment delivery under the None scenario (81\% higher), whereas the E85 scenario is only 0.4\% higher than the E45 scenario.
+\paragraph{Sediment delivery} 
+The average amount of sediment delivered is 172\% higher in E45 and 204\% higher in E85 than it is in None. To understand why this may be, consider Figure \ref{fig:avgSedimentDelivery}. The figure shows the average tonnes of sediment delivered as a result of performing fuel removals for each climate change scenario. The sediment delivery per fuel removal under E45 is nearly twice the sediment delivery under the None scenario (81\% higher), whereas the E85 scenario is only 0.4\% higher than the E45 scenario.
 
-We trace this phenomenon back to the sediment delivery response to prescribed burns and the frequency with which they are assigned. While the sediment delivery response to thinnings is similar across climate scenarios, the response to prescribed burns is more pronounced. We also find that relative to the None scenario, prescribed burns are assigned 8 times more frequently in E45 and 10.1 times more frequently in E85. See Table \ref{tab:prscBurnsInClimChange}. These effects combine to produce the result seen in Figure \ref{fig:avgSedimentDelivery}. For additional information on how stands are assigned a specific fuel removal techniques such as thinning or prescribed burn, see the appendix, \S \ref{chap:appendix_drinkTreatments}.
+This is a result of the sediment delivery response to prescribed burns and the frequency with which they are assigned\footnote{For additional information on how stands are assigned a specific fuel removal technique such as thinning or prescribed burn, see the appendix, \S \ref{chap:appendix_drinkTreatments}.}. Our simulations show that increasing the severity of climate change causes pronounced increases in sediment delivery as a result of prescribed burns. We also find that relative to the None scenario, prescribed burns are assigned more frequently in the climate change scenarios: 8 times more frequently in E45 and 10.1 times more frequently in E85. See Table \ref{tab:prscBurnsInClimChange}. These effects combine to produce the result seen in Figure \ref{fig:avgSedimentDelivery}.
 
 \begin{figure}[ht]
 \centering
@@ -70,14 +71,17 @@ We trace this phenomenon back to the sediment delivery response to prescribed bu
 \end{tabular}
 \end{table}
 
-Similarly, consider Figure \ref{fig:cumSmallestFireHazard}. For each climate scenario, the figure shows the resulting fire hazard of the Drink Area if the most successful fire hazard reduction techniques were performed. We again notice increased fire hazard of the Drink Area as a result of climate change, with a larger difference between None and E45 than between E45 and E85. This is due to more stands in the Drink Area having a fuel model classification that is associated with higher fire hazard under climate change scenarios E45 and E85 than in the case of None. This trend is shown in Figure \ref{fig:distOfFireHazards}, where we observe a larger percentage of stands having a fire hazard rating of either 4 or 5 under the E45 and E85 scenarios than in None.
-
-\begin{figure}[ht]
-\centering
-\includegraphics[width=.40\textwidth]{../images/CumSmallestFireHazard}
-\caption[Lower bound on fire hazard for each climate scenario]{Shown here are lower bounds on the minimum fire hazard for the Drink Area under each climate change scenario. They represent the cumulative fire hazard of the Drink Area if the most extreme fire hazard reduction techniques were employed without regard to the constraints on fuel removals (inequalities \eqref{eqn:constraintAreaRestr}-\eqref{eqn:constraintAreaFlucU}).}
-\label{fig:distOfFireHazards}
-\end{figure}
+\paragraph{Fire hazard}
+Similarly, we find that the average fire hazard of the Drink Area is worse in consideration of climate change, with E45 and E85 both performing approximately 9\% worse than None. 
+%consider Figure \ref{fig:cumSmallestFireHazard}. For each climate scenario, the figure shows the resulting fire hazard of the Drink Area if the most successful fire hazard reduction techniques were performed. We again notice increased fire hazard of the Drink Area as a result of climate change, with a larger difference between None and E45 than between E45 and E85.
+This is due to the impact of climate change on the fuel model classification of the stands in the Drink Area. In E45 and E85, more stands are assigned a fuel model classification that is associated with higher fire hazard (refer to table \ref{tab:firehazards} for the mapping from fuel model to fire hazard). This is shown in Figure \ref{fig:distOfFireHazards}, where we observe a larger percentage of stands having a fire hazard rating of either 4 or 5 under the E45 and E85 scenarios than in None.
+%
+%\begin{figure}[ht]
+%\centering
+%\includegraphics[width=.40\textwidth]{../images/CumSmallestFireHazard}
+%\caption[Lower bound on fire hazard for each climate scenario]{Shown here are lower bounds on the minimum fire hazard for the Drink Area under each climate change scenario. They represent the cumulative fire hazard of the Drink Area if the most extreme fire hazard reduction techniques were employed without regard to the constraints on fuel removals (inequalities \eqref{eqn:constraintAreaRestr}-\eqref{eqn:constraintAreaFlucU}).}
+%\label{fig:distOfFireHazards}
+%\end{figure}
 
 \begin{figure}[ht]
 \centering
@@ -86,12 +90,13 @@ Similarly, consider Figure \ref{fig:cumSmallestFireHazard}. For each climate sce
 \label{fig:cumSmallestFireHazard}
 \end{figure}
 
-The same holds true for NSO habitat. From the values in Table \ref{tab:nsoHabDQs} that fuel removals more frequently disqualify a stand from being NSO habitat under the climate change scenarios than for None.
+\paragraph{NSO habitat}
+Finally, we also observe a decrease in the provision of NSO habitat under the consideration of climate change. We see in Table \ref{tab:nsoHabDQs} the number of instances in which performing a fuel removal that fuel removals more frequently disqualify a stand from being NSO habitat under the climate change scenarios than for None.
 
 \begin{table}[ht]
 \centering
 \caption[Frequency of NSO habitat disqualifications for each climate scenario]{Shown here are the number of times for each climate scenario that a fuel removal triggers the disqualification of a stand from being NSO habitat.}
-\label{fig:nsoHabDQs}
+\label{tab:nsoHabDQs}
 \begin{tabular}{l|l}
 \textbf{Climate change scenario} & \begin{tabular}{@{}l@{}}\textbf{Disqualifications of NSO habitat} \\ \textbf{as a result of fuel removals}\end{tabular} \\ \hline
 \textbf{None}                    & 24                                                                               \\
