@@ -45,7 +45,7 @@ We parameterized and solved the multi-objective model (\eqref{eqn:objFire}-\eqre
 
 We begin our analysis by investigating the impacts of climate change on the provision of individual ecosystem services. We then consider how climate change impacts the joint provision of ecosystem services and the conflict among them.
 
-\subsubsection{Individual ecosystem service achievement}
+\subsubsection{Provision of individual ecosystem services}
 The average achievement of all ecosystem services decreases with increasing severity of climate change (see Table \ref{tab:frontiersSummary}, ``avg'' rows). We find the difference in ecosystem service provision is greater between the assumption of no climate change and mild climate change (None to E45) than it is between mild climate change and severe climate change (E45 to E85). This suggests that, for the ecosystem services in this study, the realization of climate change is more significant than the severity of that change. The model data provide evidence of why this is the case.
 
 \paragraph{Sediment delivery} 
@@ -91,8 +91,23 @@ This is due to the impact of climate change on the fuel model classification of 
 \end{figure}
 
 \paragraph{NSO habitat}
-Finally, we also observe a decrease in the provision of NSO habitat under the consideration of climate change. We see in Table \ref{tab:nsoHabDQs} the number of instances in which performing a fuel removal that fuel removals more frequently disqualify a stand from being NSO habitat under the climate change scenarios than for None.
+Finally, we also observe a decrease in the average provision of NSO habitat under the consideration of climate change. The average provision in the E45 scenario is 88.4 ha less than in None, and E85 is 114.3 ha less. The result is likely due to the effects of climate change on the vegetation characteristics that define whether a stand qualifies as NSO habitat. Of the criteria used, two of them are determined by vegetation characteristics: the presence of at least one tree with DBH $> 76$ cm and canopy closure at least 60\%. While climate change has minimal impact on the former, the average canopy closure for stands in the Drink Area decreases with increasing severity of climate change. See Figure \ref{fig:canopyClosure}.
 
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.5\textwidth]{../images/AvgCanopyCover_NoTrtmts}
+\caption[Average canopy closure in the Drink Area across climate scenarios]{Average canopy closure for stands in the Drink Area for each climate scenario. Shown are canopy closure values during years 2035 and 2055 (the years in which NSO habitat is measured) when no fuel removals are performed. We see that with increasing climate change severity, canopy closure decreases.}
+\label{fig:canopyClosure}
+\end{figure}
+
+With an understanding of how climate change impacts the provision of individual ecosystem services, we now consider how it affects the joint provision of ecosystem services.
+
+\subsubsection{Joint provision of ecosystem services}
+We determine that the 
+
+See figure. We see in Table \ref{tab:nsoHabDQs} the number of instances in which performing a fuel removal that fuel removals more frequently disqualify a stand from being NSO habitat under the climate change scenarios than for None.
+
+% USE THIS IN THE CONFLICT SECTION FOR NSO VS FIRE HAZARD
 \begin{table}[ht]
 \centering
 \caption[Frequency of NSO habitat disqualifications for each climate scenario]{Shown here are the number of times for each climate scenario that a fuel removal triggers the disqualification of a stand from being NSO habitat.}
@@ -107,6 +122,6 @@ Finally, we also observe a decrease in the provision of NSO habitat under the co
 
 % Talk about sources of conflict in between objectives. Well, the conflict metric is higher for this frontier than for this frontier (graph of cross section). The underlying reason for this is bc the ?sed contrib is higher in this scenario than that scenario? or ?the efficacy of treatments is highest in E85 and on the stands located in the watershed?. Something like that. Look into treatment efficacy on WS stands across the climate scenarios. And the sediment contributions vs climate scenarios.
 
-% Per stand, avg reduction in fire hazard vs sediment delivered as a result of fuel removal (same thing for reduc in fire hazard vs triggering NSO habitat)
+% Per stand, avg reduction in fire hazard vs sediment delivered as a result of fuel removal
 
 % For a given fuel removal that disqualifies a stand as NSO habitat, what is the difference in fire hazard between the "NONE" and (whatever that fuel removal action was) is?
