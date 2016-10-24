@@ -1,9 +1,9 @@
 \section{Results and Discussion}
 \label{sec:results}
-We first provide the results of the case study. Then we give more general results about the application of conflict-measuring methods to multiple multi-objective systems.
+We first provide results of the case study before commenting on the general application of conflict-measuring methods across multi-objective systems.
 
 \subsection{Case Study Results}
-We parameterized and solved the multi-objective model (\eqref{eqn:objFire}-\eqref{eqn:constraintNonNeg}) for each of the climate scenarios, generating three efficient frontiers: $Z_{\text{None}}$, $Z_{E45}$, and $Z_{E85}$ for the None, Ensemble RCP 4.5, and Ensemble RCP 8.5 scenarios, respectively. The frontiers are shown in Figure \ref{fig:frontiersAll}; their summary details are shown in Table \ref{tab:frontiersSummary}.
+We parameterized and solved the multi-objective model (\eqref{eqn:objFire}-\eqref{eqn:constraintNonNeg}) for each of the climate scenarios, generating three efficient frontiers: $Z_{\text{None}}$, $Z_{E45}$, and $Z_{E85}$ for the None, Ensemble RCP 4.5, and Ensemble RCP 8.5 scenarios, respectively. Figure \ref{fig:frontiersAll} shows the frontiers in their 3-dimensional objective spaces while Figure \ref{fig:frontiersPCPlot} provides a parallel coordinates view of the frontiers; their summary details are listed in Table \ref{tab:frontiersSummary}.
 
 \begin{table}[]
 \centering
@@ -11,7 +11,6 @@ We parameterized and solved the multi-objective model (\eqref{eqn:objFire}-\eqre
 \label{tab:frontiersSummary}
 \begin{tabular}{lllll}
 \multicolumn{2}{l|}{}                                                  & \textbf{None} & \textbf{E45} & \textbf{E85} \\ \hline
-\multicolumn{2}{l|}{\textbf{Hypervolume}}                              & 0.876977      & 0.866857     & 0.829541     \\ \hline
 \multirow{3}{*}{\textbf{Fire hazard}}       & \multicolumn{1}{l|}{min} & 21321.21      & 23219.82     & 23268.02     \\
                                             & \multicolumn{1}{l|}{max} & 21933.29      & 23973.79     & 23724.98     \\
                                             & \multicolumn{1}{l|}{avg} & 21406.26      & 23324.41     & 23369.57     \\ \hline
@@ -43,15 +42,22 @@ We parameterized and solved the multi-objective model (\eqref{eqn:objFire}-\eqre
   \label{fig:frontiersAll}
 \end{figure}
 
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.85\textwidth]{../images/FrontiersPCPlot}
+\caption[Parallel coordinates view of the three frontiers]{Parallel coordinates view of the frontiers. Each axis represents an ecosystem service optimized by the model and each line a solution. In all objectives, we notice that None appears to outperform both the E45 and E85 scenarios, which show similar average objective achievements. To increase visual clarity, only a subset of solutions for E45 and E85 are shown because of the number of solutions in these frontiers.}
+\label{fig:frontiersPCPlot}
+\end{figure}
+
 We begin our analysis by investigating the impacts of climate change on the provision of individual ecosystem services. We then consider how climate change impacts the joint provision of ecosystem services and the conflict among them.
 
 \subsubsection{Provision of individual ecosystem services}
-The average achievement of all ecosystem services decreases with increasing severity of climate change (see Table \ref{tab:frontiersSummary}, ``avg'' rows). We find the difference in ecosystem service provision is greater between the assumption of no climate change and mild climate change (None to E45) than it is between mild climate change and severe climate change (E45 to E85). This suggests that, for the ecosystem services in this study, the realization of climate change is more significant than the severity of that change. The model data provide evidence of why this is the case.
+The average achievement of all ecosystem services decreases with increasing severity of climate change (see Table \ref{tab:frontiersSummary}, ``avg'' rows). We find that the difference in ecosystem service provision is greater between the assumption of no climate change and mild climate change (None to E45) than it is between mild climate change and severe climate change (E45 to E85). This suggests that, for the ecosystem services in this study, the realization of climate change is more significant than the severity of that change. The model data provide evidence of why this is the case.
 
 \paragraph{Sediment delivery} 
-The average amount of sediment delivered is 172\% higher in E45 and 204\% higher in E85 than it is in None. To understand why this may be, consider Figure \ref{fig:avgSedimentDelivery}. The figure shows the average tonnes of sediment delivered as a result of performing fuel removals for each climate change scenario. The sediment delivery per fuel removal under E45 is nearly twice the sediment delivery under the None scenario (81\% higher), whereas the E85 scenario is only 0.4\% higher than the E45 scenario.
+Compared to the None scenario, the average amount of sediment delivered is 172\% higher in E45 and 204\% higher in E85. To understand why this may be, consider Figure \ref{fig:avgSedimentDelivery}. The figure shows the average tonnes of sediment delivered as a result of performing fuel removals for each climate change scenario. The sediment delivery per fuel removal under E45 is nearly twice the sediment delivery under the None scenario (81\% higher), whereas the E85 scenario is only 0.4\% higher than the E45 scenario.
 
-This is a result of the sediment delivery response to prescribed burns and the frequency with which they are assigned\footnote{For additional information on how stands are assigned a specific fuel removal technique such as thinning or prescribed burn, see the appendix, \S \ref{chap:appendix_drinkTreatments}.}. Our simulations show that increasing the severity of climate change causes pronounced increases in sediment delivery as a result of prescribed burns. We also find that relative to the None scenario, prescribed burns are assigned more frequently in the climate change scenarios: 8 times more frequently in E45 and 10.1 times more frequently in E85. See Table \ref{tab:prscBurnsInClimChange}. These effects combine to produce the result seen in Figure \ref{fig:avgSedimentDelivery}.
+This is a result of the response in sediment delivery to prescribed burns and the frequency with which they are assigned\footnote{For additional information on how stands are assigned a specific fuel removal technique such as thinning or prescribed burn, see the appendix, \S \ref{chap:appendix_drinkTreatments}.}. Our simulations show that increasing the severity of climate change causes pronounced increases in sediment delivery as a result of prescribed burns. We also find that relative to the None scenario, prescribed burns are assigned more frequently in the climate change scenarios: 8 times more frequently in E45 and 10.1 times more frequently in E85. See Table \ref{tab:prscBurnsInClimChange}. These effects combine to produce the result seen in Figure \ref{fig:avgSedimentDelivery} of increasing sediment levels with climate change severity.
 
 \begin{figure}[ht]
 \centering
@@ -72,26 +78,28 @@ This is a result of the sediment delivery response to prescribed burns and the f
 \end{table}
 
 \paragraph{Fire hazard}
-Similarly, we find that the average fire hazard of the Drink Area is worse in consideration of climate change, with E45 and E85 both performing approximately 9\% worse than None. 
-%consider Figure \ref{fig:cumSmallestFireHazard}. For each climate scenario, the figure shows the resulting fire hazard of the Drink Area if the most successful fire hazard reduction techniques were performed. We again notice increased fire hazard of the Drink Area as a result of climate change, with a larger difference between None and E45 than between E45 and E85.
-This is due to the impact of climate change on the fuel model classification of the stands in the Drink Area. In E45 and E85, more stands are assigned a fuel model classification that is associated with higher fire hazard (refer to table \ref{tab:firehazards} for the mapping from fuel model to fire hazard). This is shown in Figure \ref{fig:distOfFireHazards}, where we observe a larger percentage of stands having a fire hazard rating of either 4 or 5 under the E45 and E85 scenarios than in None.
-%
-%\begin{figure}[ht]
-%\centering
-%\includegraphics[width=.40\textwidth]{../images/CumSmallestFireHazard}
-%\caption[Lower bound on fire hazard for each climate scenario]{Shown here are lower bounds on the minimum fire hazard for the Drink Area under each climate change scenario. They represent the cumulative fire hazard of the Drink Area if the most extreme fire hazard reduction techniques were employed without regard to the constraints on fuel removals (inequalities \eqref{eqn:constraintAreaRestr}-\eqref{eqn:constraintAreaFlucU}).}
-%\label{fig:distOfFireHazards}
-%\end{figure}
+Similarly, we find that the average fire hazard of the Drink Area increases with climate change severity, with E45 and E85 both performing approximately 9\% worse than None. First, we note that this is not due to the model simply selecting less area for treatment under the climate change scenarios, as this value is essentially constant across both treatment periods and all climate scenarios (see Table \ref{tab:treatedAreas}). Instead, we find that the increase in fire hazard is due to the impact of climate change on the fuel model classification of the stands in the Drink Area. In E45 and E85, more stands are assigned a fuel model classification that is associated with higher fire hazard (refer to table \ref{tab:firehazards} for the mapping from fuel model to fire hazard). This is shown in Figure \ref{fig:distOfFireHazards}, where we observe a larger percentage of stands having a fire hazard rating of either 4 or 5 under the E45 and E85 scenarios than in None.
+
+\begin{table}[]
+\centering
+\caption[Area treated per period across climate scenarios]{Areas treated per period across climate scenarios. The values are nearly the same for both periods and for each climate scenario.}
+\label{tab:treatedAreas}
+\begin{tabular}{l|lll}
+                                                                                                           & \textbf{None} & \textbf{E45} & \textbf{E85} \\ \hline
+\textbf{Area treated (ha) in period 1} & 2427.31            & 2426.90 & 2414.58          \\
+\textbf{Area treated (ha) in period 2}                     & 2427.56         & 2427.71        & 2427.63      
+\end{tabular}
+\end{table}
 
 \begin{figure}[ht]
 \centering
 \includegraphics[width=.5\textwidth]{../images/FireHazardRatingsPerClimateScenario}
 \caption[Distribution of fire hazard ratings over the Drink Area for each climate change scenario]{Distributions of fire hazard ratings across the Drink Area under each climate change scenario. Moving from left to right (in increasing climate change severity), we observe an increase in the number of stands classified with more extreme fire hazards (ratings of 4 and 5).}
-\label{fig:cumSmallestFireHazard}
+\label{fig:distOfFireHazards}
 \end{figure}
 
 \paragraph{NSO habitat}
-Finally, we also observe a decrease in the average provision of NSO habitat under the consideration of climate change. The average provision in the E45 scenario is 88.4 ha less than in None, and E85 is 114.3 ha less. The result is likely due to the effects of climate change on the vegetation characteristics that define whether a stand qualifies as NSO habitat. Of the criteria used, two of them are determined by vegetation characteristics: the presence of at least one tree with DBH $> 76$ cm and canopy closure at least 60\%. While climate change has minimal impact on the former, the average canopy closure for stands in the Drink Area decreases with increasing severity of climate change. See Figure \ref{fig:canopyClosure}.
+Finally, we also observe a decrease in the average provision of NSO habitat under the consideration of climate change. The average provision in the E45 scenario is 88.4 ha less than in None, and E85 is 114.3 ha less. The result is likely due to the effects of climate change on the vegetation characteristics that define whether a stand qualifies as NSO habitat. Of the criteria used, two of them are determined by vegetation characteristics: the presence of at least one tree with DBH $> 76$ cm and canopy closure of at least 60\%. While climate change has minimal impact on the former, the average canopy closure for stands in the Drink Area decreases with increasing severity of climate change. See Figure \ref{fig:canopyClosure}.
 
 \begin{figure}[ht]
 \centering
@@ -100,10 +108,39 @@ Finally, we also observe a decrease in the average provision of NSO habitat unde
 \label{fig:canopyClosure}
 \end{figure}
 
-With an understanding of how climate change impacts the provision of individual ecosystem services, we now consider how it affects the joint provision of ecosystem services.
-
 \subsubsection{Joint provision of ecosystem services}
-We determine that the 
+Our results show that climate change will also have an impact on the joint provision of ecosystem services. We observe a decreasing hypervolume with increasing severity of climate change - see Table \ref{tab:hypervols}. A decreasing hypervolume is indicative of more conflict in the system, meaning that climate change is associated with more conflict among the ecosystem services.
+
+\begin{table}[]
+\centering
+\caption[Hypervolumes of the efficient frontiers]{Hypervolume for each climate change scenario. Hypervolume values increase with increasing severity of climate change.}
+\label{tab:hypervols}
+\begin{tabular}{lllll}
+\multicolumn{2}{l|}{}                                                  & \textbf{None} & \textbf{E45} & \textbf{E85} \\ \hline
+\multicolumn{2}{l|}{\textbf{Hypervolume}}                              & 0.876977      & 0.866857     & 0.829541       
+\end{tabular}
+\end{table}
+
+The difference in hypervolume between None and E45 is approximately 0.01. Recall the relationship between differences in the hypervolume and objective achievement, in which a difference of $h$ in hypervolumes equates to a difference of $h^{1/M}$ in each objective. Thus, despite the small size of the difference in $I_{H1}(Z_\text{None})$ and $I_{H1}(Z_\text{E45})$, it signifies an additional achievement in each objective of approximately 21.6\%. The difference is more substantial between None and E85. In this case, the difference in hypervolumes is approximately 0.05, which represents an additional achievement in each objective of 36.2\%.
+
+From the hypervolumes alone, it is uncertain whether None represents a strictly better frontier than either E45 and E85 or if, despite their smaller hypervolume values, E45 and E85 enclose some region of the objective space that is not enclosed by None. To address this question, we use the binary hypervolume indicator $I_{H2}$. The binary hypervolume values for each pair of frontiers are shown in Table \ref{tab:binaryHypervols}. In this table we see that all values are positive, indicating that no frontier is dominated by any other. Each frontier uniquely encloses some region of the objective space; that is, each climate scenario has less conflict than any other scenario in some regions of the objective space.
+
+The smallest value is for $I_{H2}(E85,E45)$, indicating that these two frontiers are 
+
+\begin{table}[]
+\centering
+\caption[Binary hypervolume values for each pair of climate scenarios]{Binary hypervolumes for each pair of climate scenarios. No values are negative, indicating that all frontiers uniquely enclose some volume of the objective space.}
+\label{tab:binaryHypervols}
+\begin{tabular}{ll|l}
+\textbf{$Z_1$} & \textbf{$Z_2$} & \textbf{$I_{H2}(Z_1,Z_2)$} \\ \hline
+\textbf{None}  & \textbf{E45}   & 0.026154                   \\
+\textbf{None}  & \textbf{E85}   & 0.058001                   \\
+\textbf{E45}   & \textbf{None}  & 0.016034                   \\
+\textbf{E45}   & \textbf{E85}   & 0.045156                   \\
+\textbf{E85}   & \textbf{None}  & 0.010565                   \\
+\textbf{E85}   & \textbf{E45}   & 0.007841                  
+\end{tabular}
+\end{table}
 
 See figure. We see in Table \ref{tab:nsoHabDQs} the number of instances in which performing a fuel removal that fuel removals more frequently disqualify a stand from being NSO habitat under the climate change scenarios than for None.
 
