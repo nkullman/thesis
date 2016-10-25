@@ -108,6 +108,8 @@ Finally, we also observe a decrease in the average provision of NSO habitat unde
 \label{fig:canopyClosure}
 \end{figure}
 
+We also find that the range of achievable values of NSO habitat is small for all climate scenarios, but that the size of this range increases with climate change severity. This is due to the impact of the aforementioned vegetation changes on the ability of NSO habitat to form in clusters.
+
 \subsubsection{Joint provision of ecosystem services}
 Our results show that climate change will also have an impact on the joint provision of ecosystem services. We observe a decreasing hypervolume with increasing severity of climate change - see Table \ref{tab:hypervols}. A decreasing hypervolume is indicative of more conflict in the system, meaning that climate change is associated with more conflict among the ecosystem services.
 
@@ -121,15 +123,15 @@ Our results show that climate change will also have an impact on the joint provi
 \end{tabular}
 \end{table}
 
-The difference in hypervolume between None and E45 is approximately 0.01. Recall the relationship between differences in the hypervolume and objective achievement, in which a difference of $h$ in hypervolumes equates to a difference of $h^{1/M}$ in each objective. Thus, despite the small size of the difference in $I_{H1}(Z_\text{None})$ and $I_{H1}(Z_\text{E45})$, it signifies an additional achievement in each objective of approximately 21.6\%. The difference is more substantial between None and E85. In this case, the difference in hypervolumes is approximately 0.05, which represents an additional achievement in each objective of 36.2\%.
+The difference in hypervolume between None and E45 is approximately 0.01. Recall that a difference of $h$ in hypervolumes equates to a difference of $h^{1/M}$ in each objective. Thus, despite the small size of the difference between $I_{H1}(Z_\text{None})$ and $I_{H1}(Z_\text{E45})$, it signifies an additional achievement in each objective of approximately 21.6\%. The difference is greater between None and E85, approximately 0.05, which represents an additional achievement in each objective of 36.2\%.
 
-From the hypervolumes alone, it is uncertain whether None represents a strictly better frontier than either E45 and E85 or if, despite their smaller hypervolume values, E45 and E85 enclose some region of the objective space that is not enclosed by None. To address this question, we use the binary hypervolume indicator $I_{H2}$. The binary hypervolume values for each pair of frontiers are shown in Table \ref{tab:binaryHypervols}. In this table we see that all values are positive, indicating that no frontier is dominated by any other. Each frontier uniquely encloses some region of the objective space; that is, each climate scenario has less conflict than any other scenario in some regions of the objective space.
+From the hypervolumes alone, it is uncertain whether None represents a strictly better frontier than either E45 or E85 or if, despite their smaller hypervolume values, E45 and E85 enclose some region of the objective space that is not enclosed by None. We use the binary hypervolume indicator $I_{H2}$ to address this question.
 
-The smallest value is for $I_{H2}(E85,E45)$, indicating that these two frontiers are 
+The binary hypervolume values for each pair of frontiers are shown in Table \ref{tab:binaryHypervols}. The binary hypervolume values tend to align with the hypervolume values, with larger binary hypervolumes when $I_{H1}(Z_1) > I_{H1}(Z_2)$ and smaller values when $I_{H1}(Z_2) > I_{H1}(Z_1)$. Interestingly, all binary hypervolume values are positive, indicating that no frontier is dominated by any other; each frontier uniquely encloses some region of the objective space. This region of the objective space bound only by a frontier $Z_i$ indicates the presence solutions in climate scenario $i$ that achieve greater joint provision of ecosystem services.% than those in the other climate scenarios in this region. 
 
 \begin{table}[]
 \centering
-\caption[Binary hypervolume values for each pair of climate scenarios]{Binary hypervolumes for each pair of climate scenarios. No values are negative, indicating that all frontiers uniquely enclose some volume of the objective space.}
+\caption[Binary hypervolume values for each pair of climate scenarios]{Binary hypervolumes for each pair of climate scenarios. No values are negative, indicating that no frontiers are dominated by another and that all frontiers uniquely enclose some volume of the objective space.}
 \label{tab:binaryHypervols}
 \begin{tabular}{ll|l}
 \textbf{$Z_1$} & \textbf{$Z_2$} & \textbf{$I_{H2}(Z_1,Z_2)$} \\ \hline
@@ -142,6 +144,36 @@ The smallest value is for $I_{H2}(E85,E45)$, indicating that these two frontiers
 \end{tabular}
 \end{table}
 
+To determine the location of these regions and better understand the basis of the change in conflict between climate scenarios, we examine pairwise objective relationships.
+
+\paragraph{Sediment delivery-NSO Habitat}
+We observe no clear relationship between climate change severity and the conflict between sediment delivery and NSO habitat; see Figure \ref{fig:pairplotNSOSed}. The figure shows the efficient frontier plotted in the sediment delivery-NSO habitat plane, where each objective has been normalized such that better values are higher and worse values are lower. In this graph, the point $(1,1)$ represents 0 sediment delivery and maximum NSO habitat. For each climate scenario, we see that the solutions have similar spreads in this plane.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.75\textwidth]{../images/2DSlice_NSO_Sed}
+\caption[NSO habitat vs. sediment delivery for all climate scenarios]{NSO habitat versus sediment delivery for all climate scenarios. No obvious conflict pattern exists between the objectives in any climate scenario.}
+\label{fig:pairplotNSOSed}
+\end{figure}
+
+The values for pairwise conflict also indicate a lack of conflict, as seen in Table \ref{tab:pairConflict-SedNSO}. Values for $C_{ij}$ are all less than $0.25$, with the highest value for the E45 scenario and lower values for E85 and None. To determine the reason for the variation in $C_{ij}$ by climate scenario, we disassemble the conflict metric into components. A value of $c_{ij,\rho} = 0.5$ indicates the absence of rank correlation, and we find no climate scenario that differs significantly from this value. Lower values of $c_{ij,\rho}$ indicate positive rank correlation, such as in None ($c_{ij,\rho}=0$ for non-conflicting objectives); higher values for $c_{ij,\rho}$ indicate more conflict. $c_{ij,d} \in [0,1]$ represents the average distance of solutions from the sub-dimensional ideal solution. The solutions in the E45 and None scenarios are further away from the sub-dimensional ideal solution than those in E85, leading to larger values of $c_{ij,d}$.
+
+\begin{table}[]
+\centering
+\caption[Sediment-NSO conflict across climate scenarios]{Conflict between sediment delivery and NSO habitat across climate scenarios.}
+\label{tab:pairConflict-SedNSO}
+\begin{tabular}{l|l|ll}
+\textbf{}     & \textbf{$C_{ij}$} & \textbf{$c_{ij,\rho}$} & \textbf{$c_{ij,d}$} \\ \hline
+\textbf{None} & 0.19639           & 0.3974                 & 0.4942              \\
+\textbf{E45}  & 0.25667           & 0.5194                 & 0.4941              \\
+\textbf{E85}  & 0.19284           & 0.5160                 & 0.3737             
+\end{tabular}
+\end{table}
+
+\paragraph{NSO habitat-fire hazard}
+The conflict between NSO habitat and fire hazard, while small, appears to decrease with increasing severity of climate change according to the proposed conflict metric. We find this is due primarily to the increasing density of solutions nearer the sub-dimensional ideal solution in the E45 and E85 scenarios compared to None. See Figure ADDIN2DSLICEFIGURE. Breaking the conflict metric again into components (see Table MAKETHECOMPONENTRYTABLE), we see that the average distance to the ideal decreases with increasing severity of climate change, while the rank correlation again does not differ significantly from $0.5$.
+
+MOVE THIS TO RANGE OF NSO HABITAT SECTION
 See figure. We see in Table \ref{tab:nsoHabDQs} the number of instances in which performing a fuel removal that fuel removals more frequently disqualify a stand from being NSO habitat under the climate change scenarios than for None.
 
 % USE THIS IN THE CONFLICT SECTION FOR NSO VS FIRE HAZARD
@@ -162,3 +194,22 @@ See figure. We see in Table \ref{tab:nsoHabDQs} the number of instances in which
 % Per stand, avg reduction in fire hazard vs sediment delivered as a result of fuel removal
 
 % For a given fuel removal that disqualifies a stand as NSO habitat, what is the difference in fire hazard between the "NONE" and (whatever that fuel removal action was) is?
+
+\subsection{General results}
+\subsubsection{New conflict metric}
+
+\paragraph{Pros}
+We saw that fire-sed relationship got worse, and data supported that.
+
+\paragraph{Cons}
+When looking at all pairwise conflict metrics for a frontier, their combination does not let you make deductions of the whole system level conflict.
+Weights average objective achievement perhaps too much. Frontiers with a bunch of solutions nearer the ideal are given less conflict. perhaps that's OK though.
+
+
+TO TALK ABOUT SOMEWHERE:
+Why the disparity in number of solutions?
+Why E85 achieve relatively more NSO habitat and relatively less FH on average than the others (fig \ref{fig:pairplotNSOSed} and sim for NSO-FH)?
+The increased range in achievable values for the objs in the case of climate change leads to results that show tighter clustering closer to ideal, which weights the conflict towards "less". Basically, more extreme extremes make most other values seem more normal(?).
+
+INVESTIGATE MORE:
+What's the difference in actual acreage of NSO hab vs diffs due to clustering discounts?
