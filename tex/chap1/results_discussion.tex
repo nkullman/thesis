@@ -108,7 +108,22 @@ Finally, we also observe a decrease in the average provision of NSO habitat unde
 \label{fig:canopyClosure}
 \end{figure}
 
-We also find that the range of achievable values of NSO habitat is small for all climate scenarios, but that the size of this range increases with climate change severity. This is due to the impact of the aforementioned vegetation changes on the ability of NSO habitat to form in clusters.
+We also find that the range of achievable values of NSO habitat is small for all climate scenarios, but that the size of this range increases with climate change severity. There are two primary drivers for this increase. The first is in the impact of fuel removals on the amount of NSO habitat available. We see in Table \ref{tab:nsoHabDQs} the number of instances in which performing a fuel removal disqualifies a stand from being NSO habitat under each climate change scenario. This happens more than twice as frequently in E45 and E85 than in None. We also find that the given efficacy in fire hazard reduction when performing a fuel removal that disqualifies a stand from being NSO habitat increases with climate severity. That is, the model is more incentivized to sacrifice NSO habitat in favor of fire hazard reduction. This in turn leads to a reduction in clustering of NSO habitat, further reducing the objective function value (equation NSOOBJVALEQN). This data is shown in Figure MAKEFHEFFECTIVENESSFIG, in which we see the reduction in fire hazard as a result of fuel removals that disqualify a stand as NSO habitat. We see that these values increase with climate change severity.
+
+% USE THIS IN THE CONFLICT SECTION FOR NSO VS FIRE HAZARD
+\begin{table}[ht]
+\centering
+\caption[Frequency of NSO habitat disqualifications for each climate scenario]{Shown here are the number of times for each climate scenario that a fuel removal triggers the disqualification of a stand from being NSO habitat.}
+\label{tab:nsoHabDQs}
+\begin{tabular}{l|l}
+\textbf{Climate change scenario} & \begin{tabular}{@{}l@{}}\textbf{Disqualifications of NSO habitat} \\ \textbf{as a result of fuel removals}\end{tabular} \\ \hline
+\textbf{None}                    & 24                                                                               \\
+\textbf{Ensemble RCP 4.5}        & 60                                                                               \\
+\textbf{Ensemble RCP 8.5}        & 60                                                                              
+\end{tabular}
+\end{table}
+
+in part due to the impact of fuel removals on due to the impact of the aforementioned vegetation changes on the ability of NSO habitat to form in clusters.
 
 \subsubsection{Joint provision of ecosystem services}
 Our results show that climate change will also have an impact on the joint provision of ecosystem services. We observe a decreasing hypervolume with increasing severity of climate change - see Table \ref{tab:hypervols}. A decreasing hypervolume is indicative of more conflict in the system, meaning that climate change is associated with more conflict among the ecosystem services.
@@ -147,7 +162,7 @@ The binary hypervolume values for each pair of frontiers are shown in Table \ref
 To determine the location of these regions and better understand the basis of the change in conflict between climate scenarios, we examine pairwise objective relationships.
 
 \paragraph{Sediment delivery-NSO Habitat}
-We observe no clear relationship between climate change severity and the conflict between sediment delivery and NSO habitat; see Figure \ref{fig:pairplotNSOSed}. The figure shows the efficient frontier plotted in the sediment delivery-NSO habitat plane, where each objective has been normalized such that better values are higher and worse values are lower. In this graph, the point $(1,1)$ represents 0 sediment delivery and maximum NSO habitat. For each climate scenario, we see that the solutions have similar spreads in this plane.
+We observe no clear relationship between climate change severity and the conflict between sediment delivery and NSO habitat; see Figure \ref{fig:pairplotNSOSed}. The figure shows the efficient frontier plotted in the sediment delivery-NSO habitat plane, where each objective has been normalized such that better values are higher and worse values are lower. For instance, in this graph, the point $(1,1)$ represents 0 sediment delivery and maximum NSO habitat. We see similar uniform spreads of solutions for each climate scenario.
 
 \begin{figure}[ht]
 \centering
@@ -156,7 +171,7 @@ We observe no clear relationship between climate change severity and the conflic
 \label{fig:pairplotNSOSed}
 \end{figure}
 
-The values for pairwise conflict also indicate a lack of conflict, as seen in Table \ref{tab:pairConflict-SedNSO}. Values for $C_{ij}$ are all less than $0.25$, with the highest value for the E45 scenario and lower values for E85 and None. To determine the reason for the variation in $C_{ij}$ by climate scenario, we disassemble the conflict metric into components. A value of $c_{ij,\rho} = 0.5$ indicates the absence of rank correlation, and we find no climate scenario that differs significantly from this value. Lower values of $c_{ij,\rho}$ indicate positive rank correlation, such as in None ($c_{ij,\rho}=0$ for non-conflicting objectives); higher values for $c_{ij,\rho}$ indicate more conflict. $c_{ij,d} \in [0,1]$ represents the average distance of solutions from the sub-dimensional ideal solution. The solutions in the E45 and None scenarios are further away from the sub-dimensional ideal solution than those in E85, leading to larger values of $c_{ij,d}$.
+The values for pairwise conflict also indicate a lack of conflict, as seen in Table \ref{tab:pairConflict-SedNSO}. Values for $C_{ij}$ are all less than $0.25$, with the highest value for the E45 scenario and lower values for E85 and None. To determine the reason for the variation in $C_{ij}$ by climate scenario, we disassemble the conflict metric into components. A value of $c_{ij,\rho} = 0.5$ indicates the absence of rank correlation, and we find no climate scenario that differs significantly from this value. Lower values of $c_{ij,\rho}$ indicate positive rank correlation, such as in None ($c_{ij,\rho}=0$ for non-conflicting objectives); higher values for $c_{ij,\rho}$ indicate more conflict. $c_{ij,d} \in [0,1]$ represents the average distance of solutions from the sub-dimensional ideal solution. The solutions in the E45 and None scenarios are further away from the sub-dimensional ideal solution than those in E85 leading to larger values of $c_{ij,d}$, but all climate scenarios have on average solutions that are near the mid-point mark of $c_{ij,d} = 0.5$.
 
 \begin{table}[]
 \centering
@@ -171,25 +186,8 @@ The values for pairwise conflict also indicate a lack of conflict, as seen in Ta
 \end{table}
 
 \paragraph{NSO habitat-fire hazard}
-The conflict between NSO habitat and fire hazard, while small, appears to decrease with increasing severity of climate change according to the proposed conflict metric. We find this is due primarily to the increasing density of solutions nearer the sub-dimensional ideal solution in the E45 and E85 scenarios compared to None. See Figure ADDIN2DSLICEFIGURE. Breaking the conflict metric again into components (see Table MAKETHECOMPONENTRYTABLE), we see that the average distance to the ideal decreases with increasing severity of climate change, while the rank correlation again does not differ significantly from $0.5$.
+According to the conflict metric proposed here, the conflict between NSO habitat and fire hazard is small for all climate scenarios but appears to decrease with increasing severity of climate change. We find this is due primarily to the increasing density of solutions nearer the sub-dimensional ideal solution in the E45 and E85 scenarios compared to None. See Figure ADDIN2DSLICEFIGURE. Breaking the conflict metric again into components (see Table MAKETHECOMPONENTRYTABLE), we see that the average distance to the ideal decreases with increasing severity of climate change, while the rank correlation again does not differ significantly from $0.5$.
 
-MOVE THIS TO RANGE OF NSO HABITAT SECTION
-See figure. We see in Table \ref{tab:nsoHabDQs} the number of instances in which performing a fuel removal that fuel removals more frequently disqualify a stand from being NSO habitat under the climate change scenarios than for None.
-
-% USE THIS IN THE CONFLICT SECTION FOR NSO VS FIRE HAZARD
-\begin{table}[ht]
-\centering
-\caption[Frequency of NSO habitat disqualifications for each climate scenario]{Shown here are the number of times for each climate scenario that a fuel removal triggers the disqualification of a stand from being NSO habitat.}
-\label{tab:nsoHabDQs}
-\begin{tabular}{l|l}
-\textbf{Climate change scenario} & \begin{tabular}{@{}l@{}}\textbf{Disqualifications of NSO habitat} \\ \textbf{as a result of fuel removals}\end{tabular} \\ \hline
-\textbf{None}                    & 24                                                                               \\
-\textbf{Ensemble RCP 4.5}        & 60                                                                               \\
-\textbf{Ensemble RCP 8.5}        & 60                                                                              
-\end{tabular}
-\end{table}
-
-% Talk about sources of conflict in between objectives. Well, the conflict metric is higher for this frontier than for this frontier (graph of cross section). The underlying reason for this is bc the ?sed contrib is higher in this scenario than that scenario? or ?the efficacy of treatments is highest in E85 and on the stands located in the watershed?. Something like that. Look into treatment efficacy on WS stands across the climate scenarios. And the sediment contributions vs climate scenarios.
 
 % Per stand, avg reduction in fire hazard vs sediment delivered as a result of fuel removal
 
@@ -213,3 +211,4 @@ The increased range in achievable values for the objs in the case of climate cha
 
 INVESTIGATE MORE:
 What's the difference in actual acreage of NSO hab vs diffs due to clustering discounts?
+NUM SOLUTIONS = bc of the DQing of NSO hab as a result of actions, there are more combos of ways to do that and pvar values as a result.
