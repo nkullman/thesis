@@ -34,7 +34,7 @@ Objective vectors' components are referred to in subscripts:
 \begin{align}
 \mathbf{z} = [z_1, z_2, \ldots, z_M]
 \end{align}
-Objective vectors provide the decision maker with knowledge of the objective achievement of a solution $\mathbf{x}$ - the $i$th component of an objective vector $\mathbf{z}$ represents the achievement in objective $i$ by the corresponding decision vector $\mathbf{x}$.
+Objective vectors provide the decision maker with knowledge of the objective achievement of a solution $\mathbf{x}$ -- the $i$th component of an objective vector $\mathbf{z}$ represents the achievement in objective $i$ by the corresponding decision vector $\mathbf{x}$.
 
 \paragraph{Ideal and nadir objective vectors}
 The \textit{ideal objective vector} is defined as the vector
@@ -45,22 +45,22 @@ Analogously, define the nadir solution as the vector
 \begin{align}
 \mathbf{z}^{\text{nadir}} = \min_{\mathbf{x} \in X}\{f_i(\mathbf{x})\} \quad \forall i \in \mathcal{M}.
 \end{align}
-The ideal objective vector represents the impossible ideal scenario in which each objective is simultaneously optimized. The nadir objective vector represents the worst case scenario in which each objective attains its lowest value. These solutions are the diagonal corners of the minimum bounding box for the efficient frontier $Z$. Since they provide upper and lower bounds for each objective, they serve as reference points against which the decision maker can compare solutions. 
+The ideal objective vector represents the impossible ideal scenario in which each objective is simultaneously optimized. The nadir objective vector represents the worst case scenario in which each objective attains its lowest value. These solutions are the diagonal corners of the minimum bounding box for the efficient frontier $Z$. Since together they provide upper and lower bounds for each objective, they serve as reference points against which the decision maker can compare solutions. 
 
 \paragraph{Trade-offs}
 The \textit{trade-off} between two objective vectors $\mathbf{z}^1$ and $\mathbf{z}^2$ is the vector of differences in their objective achievements:
 \begin{align}
 \mathbf{\tau}^{1,2} = [z^2_1 - z^1_1, z^2_2 - z^1_2, \ldots, z^2_M - z^1_M]
 \end{align}
-The components of $\mathbf{\tau}^{1,2}$ represent the amount of each objective that would be sacrificed or gained by selecting $\mathbf{z}^2$ instead of $\mathbf{z}^1$.
+The components of $\mathbf{\tau}^{1,2}$ represent the amount of each objective that would be sacrificed or gained if the decision maker selected solution $\mathbf{z}^2$ instead of $\mathbf{z}^1$.
 Note that $\mathbf{\tau}^{1,2} = - \mathbf{\tau}^{2,1}$. 
 
 \paragraph{Sub-dimensions}
-During analysis, we often wish to consider only a subset of the objectives $\mathcal{L} \subset\mathcal{M}$. We define such subsets as \textit{sub-dimensional objective sets}. In these cases, it is simpler to work with constructs that have only those components that correspond to the objectives in $\mathcal{L}$. For instance, define the \textit{sub-dimensional objective vector} for the solution $\mathbf{x}^i$ as $\mathbf{z}^i_\mathcal{L}$ which has components $\forall \ell \in \mathcal{L}. \, z^i_\ell = f_\ell(\mathbf{x}^i)$.
-Define the \textit{sub-dimensional trade-off} $\tau^{1,2}_\mathcal{L}$ as the vector with components $\forall \ell \in \mathcal{L}. \, \tau^{1,2}_\ell$.
+During analysis, we often wish to consider only a subset of the objectives $\mathcal{L} \subset\mathcal{M}$. We define such subsets as \textit{sub-dimensional objective sets}. In these cases, it is simpler to work with constructs that have only those components that correspond to the objectives in $\mathcal{L}$. For instance, define the \textit{sub-dimensional objective vector} for the solution $\mathbf{x}^i$ as $\mathbf{z}^i_\mathcal{L}$ which has components $\forall \ell \in \mathcal{L} \; z^i_\ell = f_\ell(\mathbf{x}^i)$.
+Define the \textit{sub-dimensional trade-off} $\tau^{1,2}_\mathcal{L}$ as the vector with components $\forall \ell \in \mathcal{L} \; \tau^{1,2}_\ell$.
 
 \paragraph{Relative objective achievements, relative objective vectors, and relative trade-offs}
-Using the nadir and ideal objective vectors, we can represent each solution as a vector of its relative objective achievements. This allows for dimensionless and scale-agnostic comparison of solutions. For an objective vector $\mathbf{z}$, its \textit{relative achievement in objective} $i$ is
+Using the nadir and ideal objective vectors, we can represent each solution as a vector of its relative objective achievements, each taking a value in $[0,1]$. This allows for dimensionless and scale-agnostic comparison of solutions. For an objective vector $\mathbf{z}$, its \textit{relative achievement in objective} $i$ is
 \begin{align}
 \overbar{z_i} = \frac{z_i - z^\text{nadir}_i}{z^\text{ideal}_i - z^\text{nadir}_i},
 \end{align}
@@ -74,10 +74,10 @@ For two objective vectors $\mathbf{z}^1$ and $\mathbf{z}^2$, the corresponding \
 \end{align}
 
 \paragraph{Conflict, monotonicity, bundles and stacks}
-We use the following test to determine if Objectives in an objective set $\mathcal{L}$ \textit{do not conflict} if the objectives improve simultaneously:
-$\forall \mathbf{z}^1, \mathbf{z}^2 \in Z, i \in \mathcal{L}$
+Objectives in an objective set $\mathcal{L}$ \textit{do not conflict} if the objectives improve simultaneously:
+$\forall \mathbf{z}^1, \mathbf{z}^2 \in Z,\, i,j \in \mathcal{L}, \, j \neq i$
 \begin{align}
-(z^1_i \ge z^2_i) \Rightarrow (z^1_j \ge z^2_j) \quad \forall j \in \mathcal{L}, j \neq i \label{eqn:objPairHarmony}
+(z^1_i \ge z^2_i) \Rightarrow (z^1_j \ge z^2_j)\label{eqn:objPairHarmony}
 \end{align}
 If \eqref{eqn:objPairHarmony} does not hold, then the objectives conflict. Any pair of objectives $i,j \in \mathcal{M}$ such that equation \eqref{eqn:objPairHarmony} holds are said to \textit{increase monotonically}. In the case of monotonically increasing objectives $i$ and $j$, improving objective $i$ also yields improvement in objective $j$. Conversely, if 
 \begin{align}
@@ -87,12 +87,12 @@ holds, then objectives $i$ and $j$ are said to \textit{decrease monotonically}.
 
 When the objectives represent goods or services, a set of objectives that conflict is defined as a \textit{bundle} and a set of objectives that do not conflict is defined as a \textit{stack}.
 
-Equation \eqref{eqn:objPairHarmony} checks for monotonically increasing relationships among objectives. This means of detecting conflict is functionally equivalent to that used by many studies, such as Brockhoff and Zitzler (2009) \cite{brockhoff2009objective} and Purshouse and Fleming (2003) \cite{purshouse2003conflict}.
+Equation \eqref{eqn:objPairHarmony} checks for monotonically increasing relationships among objectives. This means of detecting conflict is functionally equivalent to that used by many past studies, such as Brockhoff and Zitzler (2009) \cite{brockhoff2009objective} and Purshouse and Fleming (2003) \cite{purshouse2003conflict}.
 
 \subsection{Measuring conflict: the hypervolume indicators}
 \label{sec:waysToMeasureFrontiers}
 % given a system, here's what we're going to measure and how we'll measure it.
-Any multi-objective problem whose efficient frontier consists of more than one solution contains conflict. The decision maker responsible for these multi-objective systems must determine which solution represents the best compromise among the objectives, and their ability to do so is improved by knowledge of the conflict in the system. This includes both the amount of overall system conflict as well as the source of that conflict. For the former, we can draw on existing measures from EMO; for the latter, we propose a new metric that quantifies the conflict between pairs of objectives. We begin with a description of the measures from EMO that we use to measure system-level conflict: the hypervolume indicators.
+Any multi-objective problem whose efficient frontier consists of more than one solution contains conflict. The decision maker responsible for these multi-objective systems must determine which solution represents the best compromise among the objectives, and understanding the conflict in the system imroves their ability to do so. This includes both the amount of system conflict as well as the source of that conflict. For the former, we can draw on existing measures from EMO; for the latter, we propose a new metric that quantifies the conflict between pairs of objectives. We begin with a description of the measures from EMO that we use to measure system-level conflict: the hypervolume indicators.
 
 \subsubsection{Hypervolume indicator}
 The \textit{hypervolume indicator} $I_{H1}(Z)$ measures the percentage of the objective space that is bounded by the non-dominated objective vectors $\mathbf{z} \in Z$. See Figure \ref{fig:frontierVolumes}. Systems with less conflict will produce solutions with greater joint provision of objectives, leading to a greater proportion of enclosed objective space and thus a larger value for the hypervolume. In contrast, systems with more conflict produce solutions with less joint provision of objectives, leading to a lesser proportion of enclosed objective space and a smaller value for the hypervolume. That is, the greater the value of the hypervolume indicator, the lower the conflict in the system.
@@ -104,7 +104,7 @@ The \textit{hypervolume indicator} $I_{H1}(Z)$ measures the percentage of the ob
 \label{fig:frontierVolumes}
 \end{figure}
 
-To measure the hypervolume indicator, for each relative objective vector $\overbar{\mathbf{z}^i}$ in the frontier $Z$, define its corresponding hyperrectangle $r_i$. $r_i$ is the $M$-orthotope with the pair of diagonally opposite points the origin and the point defined by the components of the relative objective vector $\overbar{\mathbf{z}^i}$. Then the hypervolume indicator is the volume of the union of these hyperrectangles:
+To measure the hypervolume indicator, for each relative objective vector $\overbar{\mathbf{z}^i}$ in the frontier $Z$, define its corresponding hyperrectangle $r_i$. $r_i$ is the $M$-orthotope with opposite corners the origin and the point defined by the components of the relative objective vector $\overbar{\mathbf{z}^i}$. Then the hypervolume indicator is the volume of the union of these hyperrectangles:
 \begin{align}
 I_{H1}(Z) = \text{vol} \left( \bigcup_{i = 1}^{|Z|} r_i \right). \label{eqn:hypervol}
 \end{align}
@@ -115,7 +115,7 @@ In general, an increase of $h$ in the value of the hypervolume equates to an inc
 \begin{figure}
 \centering
 \includegraphics[width=.5\textwidth]{../images/HypervolumeImprovements}
-\caption[Interpreting differences in hypervolumes]{To compute the hypervolume, we use the relative objective vectors for the solutions in a frontier. As a result, the frontier is bounded by the $M$-cube which has a pair of diagonal corners at the origin and $\vec{1}$. Shown here is the 2-cube (a square) representing the space in which we compute the hypervolume for a bi-objective frontier ($M=2$). The space bound by the shaded square in the lower left represents an achievement of 10\% in each objective yet makes up only 1\% of the objective space. Its intent is to show that small differences in hypervolumes are significant: with two objectives, an improvement of 0.01 in the value of the hypervolume represents an additional achievement of 10\% in each objective.}
+\caption[Interpreting differences in hypervolumes]{To compute the hypervolume, we use the relative objective vectors for the solutions in a frontier. Thus, the frontier is bounded by the $M$-cube which has a pair of diagonal corners at the origin and $\vec{1}$. Shown here is the 2-cube (a square) representing the space in which we compute the hypervolume for a bi-objective frontier ($M=2$). The space bound by the shaded square in the lower left represents an achievement of 10\% in each objective yet makes up only 1\% of the objective space. Its intent is to show that small differences in hypervolumes are significant: with two objectives, an improvement of 0.01 in the value of the hypervolume represents an additional achievement of 10\% in each objective.}
 \label{fig:Hypervol10percent}
 \end{figure}
 
@@ -126,7 +126,7 @@ Following the definition proposed by Zitzler (1999) \cite{zitzler1999evolutionar
 \begin{align}
 I_{H2} (Z^1,Z^2) = I_{H1} (Z^1 + Z^2) - I_{H1} (Z^2)
 \end{align}
-where $I_{H1} (Z^1 + Z^2)$ is the unary hypervolume indicator of the frontier that consists of the nondominated points in $\{Z^1 \cup Z^2\}$. See the lower-left panel in Figure \ref{fig:binaryHypervolume}.
+where $I_{H1} (Z^1 + Z^2)$ is the hypervolume indicator of the frontier that consists of the nondominated points in $\{Z^1 \cup Z^2\}$. See the lower-left panel in Figure \ref{fig:binaryHypervolume}.
 
 \begin{figure}[ht]
 \centering
@@ -142,13 +142,13 @@ where $I_{H1} (Z^1 + Z^2)$ is the unary hypervolume indicator of the frontier th
 \end{figure}
 
 \subsection{Computing the hypervolume indicator}
-Computing the hypervolume is a nontrivial task that has received attention from the EMO community. For a comparison of previous algorithms that compute the hypervolume, see While (2006) \cite{while2006faster}. For this work, we developed our own algorithm to compute the hypervolume indicator.
+Computing the hypervolume is a nontrivial task that has received attention from the EMO community. For a comparison of previous algorithms that compute the hypervolume, see While (2006) \cite{while2006faster}. We developed our own algorithm to compute the hypervolume indicator.
 
-The algorithm begins with a list of the relative objective vectors, denoted in the algorithm simply by $\mathbf{z} \in Z$. These vectors are assumed to be sorted in descending order based on their $m$th component, for some arbitrary objective $m \in \mathcal{M}$. We define the sub-dimensional objective set $\mathcal{L} = \mathcal{M} \backslash \{m\}$ whose cardinality we denote by $|\mathcal{L}| = L = M - 1$.
+The algorithm begins with a list of the relative objective vectors (in describing the algorithm here, we omit the bar and simply denote them by $\mathbf{z} \in Z$). These vectors are assumed to be sorted in descending order based on their $m$th component, for some arbitrary objective $m \in \mathcal{M}$. We define the sub-dimensional objective set $\mathcal{L} = \mathcal{M} \backslash \{m\}$ whose cardinality we denote by $|\mathcal{L}| = L = M - 1$.
 
-We initialize the algorithm with an empty set of non-dominated solutions in $L$ dimensions; refer to this set as $G$. Let the volume of this nondominated set be denoted $\overbar{V}$. We sequentially add solutions from $Z$ to $G$, at each iteration adding the contribution of the solution $\mathbf{z}$ to the hypervolume indicator $V$. These contributions are computed by multiplying the solution's $m$th component $z_m$ by its contribution to the volume of $G$, $\overbar{V}_\mathbf{z}$. See Figure \ref{fig:AlgoAid} for a visual reference (the solutions' contribution to the volume of $G$, $\overbar{V}_\mathbf{z}$, are the yellow regions in the figure).
+We initialize the algorithm with an empty set $G$ of non-dominated solutions in $L$ dimensions. Let the volume of this set be denoted $\overbar{V}$. We add solutions $\mathbf{z}$ from $Z$ to $G$ in order of decreasing $z_m$, at each iteration adding the contribution of the solution $\mathbf{z}$ to the hypervolume indicator $V$. These contributions are computed by multiplying the solution's $m$th component $z_m$ by $\overbar{V}_\mathbf{z}$, its contribution to the volume of $G$. See Figure \ref{fig:AlgoAid} for a visual reference (the solutions' contribution to the volume of $G$, $\overbar{V}_\mathbf{z}$, are the yellow regions in the figure).
 
-$\overbar{V}_\mathbf{z}$ is computed as follows. Initialize $\overbar{V}_\mathbf{z} = 0$, and add $\mathbf{z}$ to the set $G$. Remove from $G$ any solutions that are dominated by $\mathbf{z}$ in $L$ dimensions. Add to $\overbar{V}_\mathbf{z}$ the value of the volume of $\mathbf{z}$ in $L$ dimensions (the union of the yellow and gray areas in Figure \ref{fig:AlgoAid}); this is simply the product of its components $z_\ell$ for $\ell \in \mathcal{L}$. Then subtract from $\overbar{V}_\mathbf{z}$ the volume of $G$ prior to the addition of $\mathbf{z}$ (the union of the gray and white areas in Figure \ref{fig:AlgoAid}). The last step is to compute and add back in the volume of the ``sides'' of $G$ that were subtracted in the previous step (the white areas in Figure \ref{fig:AlgoAid}). This volume is computed by taking the sum over each dimension $\ell \in \mathcal{L}$ of the areas along that dimension enclosed by the existing solutions in $G$. Pseudocode for this algorithm is presented in Figure \ref{algo:HypervolAlgo}.
+We compute $\overbar{V}_\mathbf{z}$ as follows. Initialize $\overbar{V}_\mathbf{z} = 0$, and add $\mathbf{z}$ to the set $G$. Remove from $G$ any solutions that are dominated by $\mathbf{z}$ in $L$ dimensions. Add to $\overbar{V}_\mathbf{z}$ the value of the volume of $\mathbf{z}$ in $L$ dimensions (the union of the yellow and gray areas in Figure \ref{fig:AlgoAid}); this is simply the product of its components $z_\ell$ for $\ell \in \mathcal{L}$. Then subtract from $\overbar{V}_\mathbf{z}$ the volume of $G$ prior to the addition of $\mathbf{z}$ (the union of the gray and white areas in Figure \ref{fig:AlgoAid}). The last step is to compute and add back in the volume of the ``sides'' of $G$ that were subtracted in the previous step (the white areas in Figure \ref{fig:AlgoAid}). This ``sides'' volume is computed by taking the sum over each dimension $\ell \in \mathcal{L}$ of the areas along that dimension enclosed by the existing solutions in $G$. Pseudocode for this algorithm is presented in Figure \ref{algo:HypervolAlgo}.
 
 \newpage
 \begin{figure}[H]
@@ -166,7 +166,7 @@ $\overbar{V}_\mathbf{z}$ is computed as follows. Initialize $\overbar{V}_\mathbf
 	\State $\overbar{V}_\mathbf{z} \gets \prod_{\ell \in \mathcal{L}} z_\ell - \overbar{V}$
 		
 	\ForAll{$\mathbf{g} \in G$}
-		\If{$g_\ell < z_\ell \, \forall \ell \in \mathcal{L}$}
+		\If{$\forall \ell \in \mathcal{L} \; g_\ell < z_\ell$}
 			\State $G \gets G \backslash \{\mathbf{g}\}$
 		\EndIf
 	\EndFor
@@ -199,7 +199,7 @@ $\overbar{V}_\mathbf{z}$ is computed as follows. Initialize $\overbar{V}_\mathbf
 
 \begin{figure}[ht]
 \centering
-\caption[First iterations for computing $\overbar{V}$]{\textbf{Computing the hypervolume of a 3D frontier: first three iterations of the algorithm}. Consider a three-dimensional frontier $Z$. We sequentially add solutions to a 2D projection of the frontier, seen here (process moves from left to right). The solutions are added in order of decreasing value in their third component (height -- not seen here). At each iteration, we compute the contribution in 2D as follows: Add the product of the solution's 2D components (the union of the yellow and gray areas). Then subtract all the previous existing frontier area (the union of the gray and white areas). Then add back the value of the sides (white areas). This yields the value of the yellow area. Multiply this value by the third component of the solution to obtain the solution's contribution to the hypervolume $V$.}
+\caption[First iterations for computing $\overbar{V}$]{\textbf{Computing the hypervolume of a 3D frontier: first three iterations of the algorithm} (process moves from left to right). Consider a three-dimensional frontier $Z$. We sequentially add solutions to a 2D projection of the frontier, seen here. The solutions are added in order of decreasing value in their third component (height -- not seen here). At each iteration, we compute the contribution in 2D as follows: Add the product of the solution's 2D components (the union of the yellow and gray areas). Then subtract all the previous existing 2D frontier area (the union of the gray and white areas). Then add back the value of the sides (white areas). This yields the value of the yellow area. Multiply this value by the third component of the solution to obtain the solution's contribution to the hypervolume $V$.}
 \label{fig:AlgoAid}
 \includegraphics[width=.85\textwidth]{../images/3DFrontierSchematic_SketchUp_FirstSteps_2D_clean}
 \end{figure}
@@ -207,9 +207,9 @@ $\overbar{V}_\mathbf{z}$ is computed as follows. Initialize $\overbar{V}_\mathbf
 \subsection{A new measure for pairwise objective conflict}
 \label{sec:newConflictMetric}
 % This is our cool new way of drilling down into an objective pair to assess conflict
-When the hypervolume indicates that there is conflict in the system, how does the decision maker determine which objectives are responsible for the conflict? In the case of the hospital, is it cost and patient throughput that are most conflicting, or is it cost and required back-up? For the forest manager, are carbon sequestration and timber revenue the incompatible objectives responsible for the low hypervolume value, or is it wildlife habitat and timber revenue? If the forest manager oversees multiple independent forests, they may also ask whether the answers to these questions are the same in each. With the suite of measures currently available, the decision maker cannot adequately answer these questions. Here we propose a new measure of conflict to fill the void.
+When the hypervolume indicates that there is conflict in the system, how does the decision maker determine which objectives are responsible for the conflict? In the case of the hospital, is it cost and patient throughput that are most conflicting, or is it cost and required back-up? For the forest manager, are carbon sequestration and timber revenue the incompatible objectives responsible for the low hypervolume value, or is it wildlife habitat and timber revenue? If the forest manager oversees multiple independent forests, they may also ask whether the answers to these questions are the same in each. With the suite of measures currently available, the decision maker cannot adequately answer these questions. Here we propose a new measure of conflict to fill this void.
 
-Consider the frontiers in Figure \ref{fig:ConflictVariesExample}. The conflict between maximization objectives $i$ and $j$ is greatest in Frontier C and least in Frontier A.
+To motivate the metric, we consider the simple example in Figure \ref{fig:ConflictVariesExample}. For the frontiers shown here, the conflict between objectives $i$ and $j$ is greatest in Frontier C and least in Frontier A (all objectives are maximized).
 \begin{figure}[ht]
 \centering
 \includegraphics[width=.6\textwidth]{../images/ConflictVariesExample}
@@ -217,7 +217,7 @@ Consider the frontiers in Figure \ref{fig:ConflictVariesExample}. The conflict b
 \label{fig:ConflictVariesExample}
 \end{figure}
 
-Many authors have previously measured conflict between objectives \cite{brockhoff2009objective}\cite{purshouse2003conflict}\cite{gal1977redundant}, with most commonly used metrics deriving from measures of linear correlation (such as the Pearson correlation coefficient \cite{deb2006searching}) or rank correlation (such as Kendall's Tau \cite{kanoulas2009empirical} or Spearman's rho \cite{karande2012application}). The motivation behind these metrics is often the removal of redundant objectives from a many-objective optimization problem. In such cases, measures of monotonicity or correlation alone suffice. However, the current metrics fall short of providing a quantification of conflict between pairs of objectives. Metrics for linear correlation are limited in their ability to capture the montonicity between objectives, which is the fundamental principle that determines if objectives conflict. Furthermore, both linear and rank correlation metrics fail to capture the objective achievement of the solutions. Thus, for a more nuanced understanding of the relationship between the objectives, a different metric is required.
+Many authors have previously measured conflict between objectives \cite{brockhoff2009objective}\cite{purshouse2003conflict}\cite{gal1977redundant}, with most commonly used metrics deriving from measures of linear correlation (such as the Pearson correlation coefficient \cite{deb2006searching}) or rank correlation (such as Kendall's Tau \cite{kanoulas2009empirical} or Spearman's rho \cite{karande2012application}). The motivation behind these metrics is often the removal of redundant objectives from a many-objective optimization problem. In such cases, these measures of monotonicity or correlation alone suffice. However, they fall short of providing a quantification of conflict between pairs of objectives for the sake of decision making or more general system analysis. For instance, metrics for linear correlation are limited in their ability to capture the montonicity between objectives, which is the fundamental principle that determines if objectives conflict. Furthermore, both linear and rank correlation metrics fail to capture the objective achievement of the solutions. Thus, for a more nuanced understanding of the relationship between the objectives, a different metric is required.
 
 Let $\mathbf{z}_{ij}$ be the sub-dimensional objective vector comprised of only the components corresponding to the $i$th and $j$th objectives $\mathbf{z}_{ij} = [z_i,z_j]$. We define the following measure of conflict between objectives $i$ and $j$:
 \begin{align}
@@ -245,7 +245,7 @@ The conflict metric proposed here (equation \eqref{eqn:defConflict}) addresses t
 \label{fig:WhyOursIsBetter}
 \end{figure}
 
-To interpret differences in $C_{ij}$ for different objective pairs, we decompose the metric into components: one for rank correlation
+To interpret differences in $C_{ij}$ for different objective pairs, we may decompose the metric into components: one for rank correlation
 \begin{align}
 c_{ij,\rho} = \frac{1-\rho_{ij}}{2},
 \end{align}
@@ -253,4 +253,4 @@ and one for objective achievement
 \begin{align}
 c_{ij,d} = \frac{\overbar{d}{ij}}{d_{\max,ij}}.
 \end{align}
-The components for different objective pairs ($i,j$) can be used to determine whether the 
+The comparison of these components for different objective pairs can be used to infer whether the solutions primarily vary in their joint provision of objectives or in their general ordering. For large enough frontiers, a significance test is available for $\rho_{ij}$ to determine whether it is significantly different from 0 (if $c_{ij,\rho}$ is significantly different from 0.5).
