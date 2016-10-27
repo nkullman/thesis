@@ -298,7 +298,14 @@ In the pairwise comparison of objectives, we observe no clear relationship betwe
 \end{figure}
 
 \paragraph{NSO habitat-fire hazard}
-According to $C_{ij}$, the conflict between NSO habitat and fire hazard is again small for all climate scenarios; however, it appears to decrease with increasing severity of climate change. We find this is due primarily to the increasing density of solutions nearer the sub-dimensional ideal solution in the E45 and E85 scenarios compared to None. See Figure ADDIN2DSLICEFIGURE. Breaking the conflict metric again into components (see Table \ref{tab:pairConflict-NSOFire}), we see that the average distance to the ideal decreases with increasing severity of climate change, while the rank correlation again does not differ significantly from $0.5$.
+According to $C_{ij}$, the conflict between NSO habitat and fire hazard is again small for all climate scenarios; however, it appears to decrease with increasing severity of climate change. We find this is due primarily to the increasing density of solutions nearer the sub-dimensional ideal solution in the E45 and E85 scenarios compared to None. See Figure \ref{fig:pairplotNSOFire}. Breaking the conflict metric again into components (Table \ref{tab:pairConflict-NSOFire}), we see that the average distance to the ideal decreases with increasing severity of climate change, while the rank correlation again does not differ significantly from $0.5$.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.75\textwidth]{../images/2DSlice_NSO_Fire}
+\caption[NSO habitat vs. fire hazard for all climate scenarios]{NSO habitat versus fire hazard for all climate scenarios.}
+\label{fig:pairplotNSOFire}
+\end{figure}
 
 \begin{table}[]
 \centering
@@ -313,10 +320,28 @@ According to $C_{ij}$, the conflict between NSO habitat and fire hazard is again
 \end{table}
 
 \paragraph{Fire hazard-sediment delivery}
-In all climate scenarios, the strongest pairwise conflict is between fire hazard and sediment delivery. This is apparent from both Figure MAKE2DSLICEFIGURE and the conflict metric MAKECOMPONENTTABLE. All rank correlation conflict values $c_{ij,\rho} > 0.95$, indicating strong negative rank correlation. In Figure MAKE2DSlICEFIG we observe a clear void of solutions in all climate change scenarios near the sub-dimensional ideal solution at $(1,1)$, unlike in Figures \ref{fig:pairplotNSOSed} and NSO-FIREFIGURE. We also notice that the None and E45 solutions generally extend beyond the E85 solutions in this plane.
+In all climate scenarios, the strongest pairwise conflict is between fire hazard and sediment delivery. This is apparent from both Figure \ref{fig:pairplotSedFire} and the conflict metric, Table \ref{tab:pairConflict-SedFire}. All rank correlation conflict values $c_{ij,\rho} > 0.95$, indicating strong negative rank correlation. In Figure \ref{fig:pairplotSedFire} we observe a clear void of solutions in all climate change scenarios near the sub-dimensional ideal solution at $(1,1)$, unlike in Figures \ref{fig:pairplotNSOSed} and \ref{fig:pairplotNSOFire}. We also notice that the None and E45 solutions generally extend beyond the E85 solutions in this plane.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.75\textwidth]{../images/2DSlice_Sed_Fire}
+\caption[Sediment delivery vs. fire hazard for all climate scenarios]{Sediment delivery versus fire hazard for all climate scenarios.}
+\label{fig:pairplotSedFire}
+\end{figure}
+
+\begin{table}[]
+\centering
+\caption[Sediment delivery-fire hazard conflict across climate scenarios]{Conflict between sediment delivery and fire hazard across climate scenarios.}
+\label{tab:pairConflict-SedFire}
+\begin{tabular}{l|l|ll}
+\textbf{}     & \textbf{$C_{ij}$} & \textbf{$c_{ij,\rho}$} & \textbf{$c_{ij,d}$} \\ \hline
+\textbf{None} & 0.36039           & 0.9927                 & 0.3630              \\
+\textbf{E45}  & 0.36097           & 0.9853                 & 0.3664              \\
+\textbf{E85}  & 0.38261           & 0.9514                 & 0.4021
+\end{tabular}
+\end{table}
 
 \subsection{Discussion}
-MOVE A BUNCH OF STUFF FROM ABOVE DOWN HERE
 %BEGIN DISCUSSION
 This suggests that, for the ecosystem services in this study, the realization of climate change is more significant than the severity of that change. The model data provide evidence of why this is the case.
 
