@@ -181,7 +181,7 @@ Each climate scenario corresponds to a different parameterization of the model, 
 
 
 \subsection{Results}
-We parameterized and solved the multi-objective model (\eqref{eqn:objFire}-\eqref{eqn:constraintNonNeg}) for each of the climate scenarios, generating three efficient frontiers: $Z_{\text{None}}$, $Z_{E45}$, and $Z_{E85}$ for the None, Ensemble RCP 4.5, and Ensemble RCP 8.5 scenarios, respectively. Figure \ref{fig:frontiersAll} shows the frontiers in their 3-dimensional objective spaces while Figure \ref{fig:frontiersPCPlot} provides a parallel coordinates view of the frontiers. The summary details of their objective achievements are listed in Table \ref{tab:frontiersSummary}. $Z_{\text{None}}$ consists of 51 solutions, $Z_{\text{E45}}$ consists of 701 solutions, and $Z_{\text{E85}}$ consists of 1083.
+We parameterized and solved the multi-objective model (equations \eqref{eqn:objFire}-\eqref{eqn:constraintNonNeg}) for each of the climate scenarios, generating three efficient frontiers: $Z_{\text{None}}$, $Z_{E45}$, and $Z_{E85}$ for the None, Ensemble RCP 4.5, and Ensemble RCP 8.5 scenarios, respectively.  $Z_{\text{None}}$ consists of 51 solutions, $Z_{\text{E45}}$ consists of 701 solutions, and $Z_{\text{E85}}$ consists of 1083. Figure \ref{fig:frontiersAll} shows the frontiers in their 3-dimensional objective spaces while Figure \ref{fig:frontiersPCPlot} provides a single parallel coordinates plot with all frontiers. The summary details of their objective achievements are listed in Table \ref{tab:frontiersSummary}.
 
 \begin{table}[]
 \centering
@@ -222,7 +222,7 @@ We parameterized and solved the multi-objective model (\eqref{eqn:objFire}-\eqre
 \begin{figure}[ht]
 \centering
 \includegraphics[width=.85\textwidth]{../images/FrontiersPCPlot}
-\caption[Parallel coordinates view of the three frontiers]{Parallel coordinates view of the frontiers. Each axis represents an ecosystem service optimized by the model and each line a solution. In all objectives, we notice that None appears to outperform both the E45 and E85 scenarios, which show similar average objective achievements. To increase visual clarity, only a subset of solutions for E45 and E85 are shown because of the number of solutions in these frontiers.}
+\caption[Parallel coordinates view of the three frontiers]{Parallel coordinates view of the frontiers. Each axis represents an ecosystem service optimized by the model and each line represents a solution. In all objectives, we notice that None appears to outperform both the E45 and E85 scenarios, which show similar average objective achievements. To increase visual clarity, only a subset of solutions for E45 and E85 are shown.}
 \label{fig:frontiersPCPlot}
 \end{figure}
 
@@ -238,14 +238,14 @@ All scenarios have a lower bound on sediment delivery of 0, but the upper bound 
 Similarly, we find that the average fire hazard of the Drink Area increases with climate change severity. The average for None is 21406.26 while E45 and E85 both perform approximately 9\% worse with an average of 23324.41 and 23369.57, respectively.
 
 \paragraph{NSO habitat}
-Finally, we also observe a decrease in the average provision of NSO habitat under the consideration of climate change. Compared to None with an average provision of 2536.31 ha of NSO habitat, the average provision in the E45 scenario is 88.4 ha less, and E85 is 114.3 ha less.
+Finally, we also observe a decrease in the average provision of NSO habitat with increasing climate change. Compared to None which has an average provision of 2536.31 ha of NSO habitat, the average provision in the E45 scenario is 88.4 ha less (-3.5\%), and E85 is 114.3 ha less (-4.5\%).
 
-We also find that for the sediment delivery and NSO habitat objectives, the range of achievable values increases with climate change severity. For sediment delivery the range increases from 24.57 tonnes in None to 63.43 in E45 to 69.68 in E85. And for NSO habitat, the range increases from 7.72 ha in None to 65 ha in E45 and to 309.91 ha in E85.
+We also find that for the sediment delivery and NSO habitat objectives, the range of achievable values increases with climate change severity. For sediment delivery, the range increases from 24.57 tonnes in None to 63.43 in E45 to 69.68 in E85. And for NSO habitat, the range increases from 7.72 ha in None to 65 ha in E45 and to 309.91 ha in E85.
 
 \subsubsection{Conflict and the joint provision of ecosystem services}
 As we saw for provision of individual ecosystem services, our results show that climate change will have an impact on conflict and the joint provision of ecosystem services as well.
 
-We observe a decreasing hypervolume with increasing severity of climate change -- see Table \ref{tab:binaryHypervols}. The hypervolume for E45 is $0.0101$ less than None, and E85 is $0.0373$ less than E45. The binary hypervolumes (see Table \ref{tab:binaryHypervols}) tend to align with the hypervolumes, with larger values of $I_{H2}(Z_1,Z_2)$ when $I_{H1}(Z_1) > I_{H1}(Z_2)$ and smaller values when $I_{H1}(Z_2) > I_{H1}(Z_1)$. Using the binary hypervolume measure, we find that no frontier is dominated by any other -- note the strictly positive values in Table \ref{tab:binaryHypervols}.
+We observe a decreasing hypervolume with increasing severity of climate change -- see Table \ref{tab:hypervols}. The hypervolume for E45 is $0.0101$ less than None, and E85 is $0.0474$ less than None. However, all hypervolumes indicate frontiers which fill a large percentage of the objective space, as the smallest value (E85) is $I_{H1}(Z_\text{E85}) = 0.8295$. The binary hypervolumes (see Table \ref{tab:binaryHypervols}) tend to align with the hypervolumes, with larger values of $I_{H2}(Z_1,Z_2)$ when $I_{H1}(Z_1) > I_{H1}(Z_2)$ and smaller values when $I_{H1}(Z_2) > I_{H1}(Z_1)$. We note that no frontier is dominated by any other, as all values in Table \ref{tab:binaryHypervols} are strictly positive.
 
 \begin{table}[]
 \centering
@@ -272,10 +272,8 @@ We observe a decreasing hypervolume with increasing severity of climate change -
 \end{tabular}
 \end{table}
 
-%To determine the location of these regions and better understand the basis of the change in conflict between climate scenarios, we examine pairwise objective relationships.
-
 \paragraph{Sediment delivery-NSO Habitat}
-In the pairwise comparison of objectives, we observe no clear relationship between climate change severity and the conflict between sediment delivery and NSO habitat. The conflict between these objectives is small for each climate scenario; all values for $C_{ij}$ are less than $0.25$. See Table \ref{tab:pairConflict-SedNSO} and Figure \ref{fig:pairplotNSOSed}. The figure shows the efficient frontier plotted in the sediment delivery-NSO habitat plane, where each objective has been normalized such that better values are higher and worse values are lower. For instance, in this graph, the point $(1,1)$ represents 0 sediment delivery and maximum NSO habitat. We see similar uniform spreads of solutions for each climate scenario.
+In the pairwise comparison of objectives, we observe little conflict between sediment delivery and NSO habitat under all climate scenarios. This is evident first in the proposed conflict metric $C_{ij}$, for which the largest value across all frontiers is 0.25 -- see Table \ref{tab:pairConflict-SedNSO}. We also notice the lack of conflict in Figure \ref{fig:pairplotNSOSed}. The figure shows the efficient frontier plotted in the sediment delivery-NSO habitat plane, where each objective has been normalized such that better values are higher and worse values are lower. For instance, in this graph, the point $(1,1)$ represents 0 sediment delivery and maximum NSO habitat. For all climate scenarios, we see similar uniform spreads of solutions as well as multiple solutions near the sub-dimensional ideal solution at $(1,1)$.
 
 \begin{table}[]
 \centering
@@ -298,7 +296,7 @@ In the pairwise comparison of objectives, we observe no clear relationship betwe
 \end{figure}
 
 \paragraph{NSO habitat-fire hazard}
-According to $C_{ij}$, the conflict between NSO habitat and fire hazard is again small for all climate scenarios; however, it appears to decrease with increasing severity of climate change. We find this is due primarily to the increasing density of solutions nearer the sub-dimensional ideal solution in the E45 and E85 scenarios compared to None. See Figure \ref{fig:pairplotNSOFire}. Breaking the conflict metric again into components (Table \ref{tab:pairConflict-NSOFire}), we see that the average distance to the ideal decreases with increasing severity of climate change, while the rank correlation again does not differ significantly from $0.5$.
+According to $C_{ij}$, the conflict between NSO habitat and fire hazard is again small for all climate scenarios; however, it appears to decrease with increasing severity of climate change. We see in Table \ref{tab:pairConflict-NSOFire} that the average distance to the ideal decreases with increasing severity of climate change. See also Figure \ref{fig:pairplotNSOFire} which shows spreads of solutions for each climate scenario in the NSO habitat-fire hazard plane. The solutions are increasingly more clustered near the sub-dimensional ideal solution with increasing climate change severity.
 
 \begin{figure}[ht]
 \centering
@@ -320,7 +318,7 @@ According to $C_{ij}$, the conflict between NSO habitat and fire hazard is again
 \end{table}
 
 \paragraph{Fire hazard-sediment delivery}
-In all climate scenarios, the strongest pairwise conflict is between fire hazard and sediment delivery. This is apparent from both Figure \ref{fig:pairplotSedFire} and the conflict metric, Table \ref{tab:pairConflict-SedFire}. All rank correlation conflict values $c_{ij,\rho} > 0.95$, indicating strong negative rank correlation. In Figure \ref{fig:pairplotSedFire} we observe a clear void of solutions in all climate change scenarios near the sub-dimensional ideal solution at $(1,1)$, unlike in Figures \ref{fig:pairplotNSOSed} and \ref{fig:pairplotNSOFire}. We also notice that the None and E45 solutions generally extend beyond the E85 solutions in this plane.
+In all climate scenarios, the strongest pairwise conflict is between fire hazard and sediment delivery. This is apparent from both Figure \ref{fig:pairplotSedFire} and the conflict metric, Table \ref{tab:pairConflict-SedFire}. All rank correlation conflict values $c_{ij,\rho} > 0.95$, indicating strong negative rank correlation. In Figure \ref{fig:pairplotSedFire} we observe a clear void of solutions in all climate change scenarios near the sub-dimensional ideal solution at $(1,1)$; this is unlike Figures \ref{fig:pairplotNSOSed} and \ref{fig:pairplotNSOFire}. We also notice that the None and E45 solutions generally extend beyond the E85 solutions in this plane.
 
 \begin{figure}[ht]
 \centering
