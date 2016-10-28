@@ -1,24 +1,34 @@
 \section{Discussion \& Conclusion}
-We demonstrated a ne
+% We did good
+We used a case study of the impact of climate change on the joint provision of forest ecosystem services to successfully demonstrate the utility of a new measure of pairwise objective conflict and to demonstrate a new application of existing conflict measures in the quantification of conflict within and among multi-objective systems.
 
-\subsection{New conflict metric} - should this still stay here? probably. Try to keep wording non-specific to the case study, since some readers will have skipped it. Go with something like "We saw in the case study that the conflict metric was able to sniff out nuanced differences between objectives across multi-obj systems..." or soemthing else awesome like that.
+% We did good in something that was hard to do good in
+A general lack of conflict between objectives and the similarity across climate scenarios considered in this case study make it a rigorous test of the utility of the existing and proposed conflict measures. In the case study, the hypervolumes for the climate scenarios were relatively large, with over 80\% of the objective space consistently occupied by solutions. In addition, in all but one pairwise objective comparison, it was difficult to discern any distinct conflict relationship between the objectives. Thus the new conflict metric was required to detect subtle difference in conflict, which we argue it did. Should the difference between scenarios have been more pronounced, or should the objectives have been in greater conflict with one another, we suspect the utility of the process we demonstrated here would only increase.
 
-\paragraph{Pros}
-We saw that fire-sed relationship is very similar across climate scenarios, and the metric captures this. However, it even succeeds in capturing the nuanced "gets worse with climate change" even though its slight. Man o man.
-Also, it gives a higher conflict value for fire-sed than it does to either of the other obj pairs, which is good, bc there's more conflict there. The others are more scattered, and it gives low values for these.
-However, it might be that it isn't as good as sniffing out conflict among minimally conflicting objective pairs. It tends to vary a lot for the scattered ones, although that can be justified too, since the sols in that one plot show that E85 spends less time near the bad values, so really, I mean, it's OK.
+% But who's to say that it will always do good. It may not, but to check we need the tool, and that's what we came up with.
+We saw that it worked for us, but the results may be different if under diff circumstances. But we need to be able to perform this sort of analysis, and that is why we came up with what we did. We showed that it was useful here.
 
-\paragraph{Cons}
-When looking at all pairwise conflict metrics for a frontier, their combination does not let you make deductions of the whole system level conflict.
-Weights average objective achievement perhaps too much. Frontiers with a bunch of solutions nearer the ideal are given less conflict. perhaps that's OK though.
+% You might also look at this thing to see if it does good here
+For instance, if a food processing facility HAD BLANK SOME LARGE SWEEPING MACHINE-TECH CHANGE, then BLANK WOULD HAPPEN AND OUR CONFLICT MEASURE WOULD BE GREAT TO DETECT THESE DIFFS.
+
+% Or this other thing
+Or if some regulatory change happened to hospitals LIKE BLANK, then YOU MIGHT NOTICE THESE ENORMOUS DIFFS AND AGAIN OUR THING WOULD BE GREAT.
+
+% We think our thing would continue to do good, bc, again, it did good here. It was so great.
+Based off of our results, we believe that our new measure and the process which we suggest here would be useful in these cases. The EMO measures detected increasing system-level conflict, which our sed/owl/fire data backed up. We also had the new conflict measure report more conflict for fire-sed than it did for the others, which is good (bc that's what we expected).
+
+% But it's not perfect, you know?
+However, the tool is not without its shortcomings. We first note that differences in low-level-of-conflict scenarios should be investigated more thoroughly, bc Cij may vary widely when both its components are small. In these cases, the individual components have more influence, and so slight variations in them can lead to large diffs in Cij. Also, when looking at the combination of all Cij measures for objs within a frontier, their combination does not give you details about how the hypervol measure may vary. For instance, the lowest hypervol scenario for us also had the lowest sum of Cijs.
+
+% So we need to do more research, more case studies, and we need to try to make our tool better.
+In sum, more case studies should be done using this conflict measure and the others old ones we used here. Additionally, refinements to the conflict measure should be investigated, especially in the case where ran correlation and avg distance to ideal are both mid-range.
+
+% But suffice it to say, we're awesome. Over and out.	
+
+
+%\paragraph{Pros}
+%However, it might be that it isn't as good as sniffing out conflict among minimally conflicting objective pairs. It tends to vary a lot for the scattered ones, although that can be justified too, since the sols in that one plot show that E85 spends less time near the bad values, so really, I mean, it's OK.
+
+%\paragraph{Cons}
+%When looking at all pairwise conflict metrics for a frontier, their combination does not let you make deductions of the whole system level conflict.
 %SHORTCOMING: THE FACT THAT THE COMBNIATION OF C\_IJ MEASURES DOES NOT PROVIDE ANY %EVIDENCE FOR WHY A HYPERVOL MIGHT BE BIG OR SMALL
-
-
-TO TALK ABOUT SOMEWHERE:
-Why the disparity in number of solutions?
-Why E85 achieve relatively more NSO habitat and relatively less FH on average than the others (fig \ref{fig:pairplotNSOSed} and sim for NSO-FH)?
-The increased range in achievable values for the objs in the case of climate change leads to results that show tighter clustering closer to ideal, which weights the conflict towards "less". Basically, more extreme extremes make most other values seem more normal(?).
-
-INVESTIGATE MORE:
-What's the difference in actual acreage of NSO hab vs diffs due to clustering discounts? Made that map, but don't want to talk about unless I'm encouraged (Sandor...) to talk about it. Make sure this sentence doesn't make it into my next draft.
-NUM SOLUTIONS = bc of the DQing of NSO hab as a result of actions, there are more combos of ways to do that and pvar values as a result. And so the model has to make more decisions about whether to make something owl habitat or instead do a treatment. And this leads to many more results that we didn't have before. And lots of constraints involve the pvars and qvars, and so this would mean harder to solve (which we saw but didn't talk about here). Also the 
