@@ -345,7 +345,7 @@ We consider our results in 4 groups: 1) the decreasing provision of individal ec
 We observe decreasing provision of individual ecosystem services with increasing severity of climate change. In particular, we see that the difference between no climate change (None) and mild climate change (E45) was greater than the difference between mild climate change (E45) and severe climate change (E85). Refer to Table \ref{tab:frontiersSummary}. This suggests that, at least for the ecosystem services in this study, the realization of climate change is more significant than the severity of that change.
 
 \paragraph{Sediment delivery}
-Investigating the cause of the degradation in objective provision, we find for sediment delivery that the average amount of sediment delivered per fuel removal increases with climate change. See Figure \ref{fig:avgSedimentDelivery}. The average sediment delivery per fuel removal under E45 is nearly twice the sediment delivery under the None scenario (81\% higher), whereas the E85 scenario is only 0.4\% higher than the E45 scenario. This is in turn driven by two underlying factors: the response in sediment delivery to prescribed burns and the frequency with which prescribed burns are assigned\footnote{For additional information on how stands are assigned a specific fuel removal technique such as thinning or prescribed burn, see the appendix, \S \ref{chap:appendix_drinkTreatments}.}. Our simulations show that increasing the severity of climate change causes pronounced increases in sediment delivery as a result of prescribed burns. We also find that relative to the None scenario, prescribed burns are assigned more frequently in the climate change scenarios: 8 times more frequently in E45 and 10.1 times more frequently in E85. See Table \ref{tab:prscBurnsInClimChange}. These effects combine to produce the result seen in Figure \ref{fig:avgSedimentDelivery} of increasing sediment delivery levels with climate change severity.
+Investigating the cause of the degradation in objective provision, we find for sediment delivery that the average amount of sediment delivered per fuel removal increases with climate change. See Figure \ref{fig:avgSedimentDelivery}. The average sediment delivery per fuel removal under E45 is nearly twice the sediment delivery under the None scenario (81\% higher), whereas the E85 scenario is only 0.4\% higher than the E45 scenario. This is in turn driven by two underlying factors: the response in sediment delivery to prescribed burns and the frequency with which prescribed burns are assigned\footnote{For additional information on how stands are assigned a specific fuel removal technique such as thinning or prescribed burn, see the appendix, \S \ref{chap:appendix_drinkTreatments}.}. Our simulations show that increasing the severity of climate change causes pronounced increases in sediment delivery as a result of prescribed burns. We also find that relative to the None scenario, prescribed burns are assigned more frequently in the climate change scenarios -- 8 times more frequently in E45 and 10.1 times more frequently in E85. See Table \ref{tab:prscBurnsInClimChange}. These effects combine to produce the result seen in Figure \ref{fig:avgSedimentDelivery} of increasing sediment delivery levels with climate change severity.
 
 \begin{figure}[ht]
 \centering
@@ -366,7 +366,7 @@ Investigating the cause of the degradation in objective provision, we find for s
 \end{table}
 
 \paragraph{Fire hazard}
-For the fire hazard objective, we first note that the increase in fire hazard is not simply due to the model selecting less area for treatment under the climate change scenarios. This value is essentially constant across both treatment periods and all climate scenarios -- see Table \ref{tab:treatedAreas}. Instead, we find that the increase in fire hazard is due to the impact of climate change on the fuel model classification of the stands in the Drink Area. In E45 and E85, more stands are assigned a fuel model classification that is associated with higher fire hazard (refer to table \ref{tab:firehazards} for the mapping from fuel models to fire hazard). This is shown in Figure \ref{fig:distOfFireHazards}, where we observe a larger percentage of stands having a fire hazard rating of either 4 or 5 under the E45 and E85 scenarios than in None.
+For the fire hazard objective, we first note that the increase in fire hazard with climate change severity is not simply due to the model selecting less area for treatment. This value is essentially constant across both treatment periods and all climate scenarios -- see Table \ref{tab:treatedAreas}. Instead, we find that the increase in fire hazard is due to the impact of climate change on the fuel model classification of the stands in the Drink Area. In E45 and E85, more stands are assigned a fuel model classification that is associated with higher fire hazard (refer to Table \ref{tab:firehazards} for the mapping from fuel models to fire hazard). This is shown in Figure \ref{fig:distOfFireHazards}, where we observe a larger percentage of stands having a fire hazard rating of either 4 or 5 under the E45 and E85 scenarios than in None.
 
 \begin{table}[]
 \centering
@@ -388,7 +388,7 @@ For the fire hazard objective, we first note that the increase in fire hazard is
 % If we need a map, show a single map that shows the diff in FH at 2095 for a good sol from E85 - good sol from None
 
 \paragraph{NSO habitat}
-Lastly, we find that the decrease in NSO habitat is largely due to the effects of climate change on the vegetation characteristics that define whether a stand qualifies as NSO habitat. Of the criteria used, two of them are determined by vegetation characteristics: the presence of at least one tree with DBH $> 76$ cm and canopy closure of at least 60\%. While climate change has minimal impact on the former, the average canopy closure for stands in the Drink Area decreases with increasing severity of climate change. See Figure \ref{fig:canopyClosure}.
+Lastly, we find that the decrease in NSO habitat is largely due to the effects of climate change on the vegetation in the Drink Area. Recall that of the criteria used to determine if a stand qualifies as NSO habitat, two of them are determined by vegetation characteristics: the presence of at least one tree with DBH $> 76$ cm and canopy closure of at least 60\%. While climate change has minimal impact on the former, the average canopy closure for stands in the Drink Area decreases with increasing severity of climate change. See Figure \ref{fig:canopyClosure}.
 
 \begin{figure}[ht]
 \centering
@@ -398,11 +398,10 @@ Lastly, we find that the decrease in NSO habitat is largely due to the effects o
 \end{figure}
 
 
-\subsubsection{Increasing number of solutions and range of values for NSO habitat}
-We speculate that the increase in the number of solutions in the frontiers and the increase in the range of NSO habitat are results of the same thing -- the impact of fuel removals on whether a stand qualifies as NSO habitat.
+\subsubsection{Variation in number of solutions and range of values for NSO habitat}
+With increasing climate change severity, our model generated more solutions.  $Z_{\text{None}}$ consists of 51 solutions, $Z_{\text{E45}}$ consists of 701 solutions, and $Z_{\text{E85}}$ consists of 1083. We speculate that this increase and the increase in the range of NSO habitat are produced by the same cause -- the impact of fuel removals on whether a stand qualifies as NSO habitat.
 
-HERE
-There are two primary drivers for this increase. The first is in the impact of fuel removals on the amount of NSO habitat available. We see in Table \ref{tab:nsoHabDQs} the number of instances in which performing a fuel removal disqualifies a stand from being NSO habitat under each climate change scenario. This happens more than twice as frequently in E45 and E85 than in None. Second, we find that the reduction in fire hazard that results from performing a fuel removal which leads to the disqualification of NSO habitat increases with climate severity. That is, the model is more incentivized to sacrifice NSO habitat in favor of fire hazard reduction. This in turn leads to a reduction in clustering of NSO habitat, further reducing the objective function value (equation \eqref{eqn:eqn:constraintDefOwl}). This data is shown in Figure \ref{fig:nsoHabDQFHEfficacy}, in which we see the reduction in fire hazard as a result of fuel removals that disqualify a stand as NSO habitat. These values increase with climate change severity.
+We see in Table \ref{tab:nsoHabDQs} the number of instances in which performing a fuel removal disqualifies a stand from being NSO habitat. Let us refer to such a fuel removal as a ``disqualifying treatment.'' We notice that disqualifying treatments occur more than twice as frequently in E45 and E85 than in None. To understand why the increase in the number of disqualifying treatments increases the number of solutions, consider a stand $i$ which is NSO habitat under all fuel removal schedules $r$ in the None scenario. Then the values of sediment delivery and fire hazard would vary with selection of $r$, but the resulting NSO habitat would always be the same. Now, in the case of climate change, say E45, some fuel removal schedules $r$ are disqualifying treatments. That is, the selection of $r$ also now changes whether the stand qualifies as NSO habitat. This influences the objective function value, equation \eqref{eqn:eqn:constraintDefOwl}, and it also affects the clustering associated with that stand (constraints \eqref{eqn:constraintClusterTriggers} and \eqref{eqn:constraintPVarTriggers}). This leads to solutions that did not exist in None.
 
 \begin{table}[ht]
 \centering
@@ -416,12 +415,17 @@ There are two primary drivers for this increase. The first is in the impact of f
 \end{tabular}
 \end{table}
 
+Now if the disqualifying treatments generated little fire hazard reduction in return for the disqualification of NSO habitat, then these decisions would not be part of the optimal solutions $\mathbf{x} \in P$. However, we also find that the reduction in fire hazard for a given disqualifying treatment increases with climate severity (Figure \ref{fig:nsoHabDQFHEfficacy}). This leads to greater incentive for the model to sacrifice NSO habitat in favor of fire hazard reduction.
+
 \begin{figure}[ht]
 \centering
 \includegraphics[width=.5\textwidth]{../images/AvgFireHazardEffectivenessForNSODQs}
 \caption[Efficacy of fuel removals for NSO habitat disqualification]{Some stands may always be NSO habitat and others may never be NSO habitat, regardless of model decisions. For those stands which vary based on model decisions, we see here the average efficacy of fuel removals which disqualify their being NSO habitat. This value increases with increasing climate change, indicating greater incentive for the model to forgo NSO habitat in favor of fire hazard reduction.}
 \label{fig:nsoHabDQFHEfficacy}
 \end{figure}
+
+Together, these factors lead to an increase in the number of solution as well as greater diversity in the total amount of NSO habitat provided by the models.
+
 %Could add a figure to show the map of what's NSO hab in a good sol vs a bad sol. Already made this on my work computer. Use it if req'd
 
 
