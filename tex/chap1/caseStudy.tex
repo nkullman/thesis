@@ -340,25 +340,23 @@ In all climate scenarios, the strongest pairwise conflict is between fire hazard
 \end{table}
 
 \subsection{Discussion}
-%BEGIN DISCUSSION
-This suggests that, for the ecosystem services in this study, the realization of climate change is more significant than the severity of that change. The model data provide evidence of why this is the case.
+We consider our results in 4 groups: 1) the decreasing provision of individal ecosystem services, 2) the increase in the range of sediment and NSO habitat, 3) the decreasing hypervol with climate change, and 4) conflict among the objectives
+\subsubsection{Decreasing provision individual of ecosystem services}
+We observe decreasing provision of individual ecosystem services with increasing severity of climate change. In particular, we see that the difference between no climate change (None) and mild climate change (E45) was greater than the difference between mild climate change (E45) and severe climate change (E85). Refer to Table \ref{tab:frontiersSummary}. This suggests that, at least for the ecosystem services in this study, the realization of climate change is more significant than the severity of that change.
 
-%BEGIN DISCUSSION
-To understand why this may be, consider Figure \ref{fig:avgSedimentDelivery}. The figure shows the average tonnes of sediment delivered as a result of performing fuel removals for each climate change scenario. The sediment delivery per fuel removal under E45 is nearly twice the sediment delivery under the None scenario (81\% higher), whereas the E85 scenario is only 0.4\% higher than the E45 scenario.
-
-% BEGIN DISCUSSION
-This is a result of the response in sediment delivery to prescribed burns and the frequency with which they are assigned\footnote{For additional information on how stands are assigned a specific fuel removal technique such as thinning or prescribed burn, see the appendix, \S \ref{chap:appendix_drinkTreatments}.}. Our simulations show that increasing the severity of climate change causes pronounced increases in sediment delivery as a result of prescribed burns. We also find that relative to the None scenario, prescribed burns are assigned more frequently in the climate change scenarios: 8 times more frequently in E45 and 10.1 times more frequently in E85. See Table \ref{tab:prscBurnsInClimChange}. These effects combine to produce the result seen in Figure \ref{fig:avgSedimentDelivery} of increasing sediment levels with climate change severity.
+\paragraph{Sediment delivery}
+Investigating the cause of the degradation in objective provision, we find for sediment delivery that the average amount of sediment delivered per fuel removal increases with climate change. See Figure \ref{fig:avgSedimentDelivery}. The average sediment delivery per fuel removal under E45 is nearly twice the sediment delivery under the None scenario (81\% higher), whereas the E85 scenario is only 0.4\% higher than the E45 scenario. This is in turn driven by two underlying factors: the response in sediment delivery to prescribed burns and the frequency with which prescribed burns are assigned\footnote{For additional information on how stands are assigned a specific fuel removal technique such as thinning or prescribed burn, see the appendix, \S \ref{chap:appendix_drinkTreatments}.}. Our simulations show that increasing the severity of climate change causes pronounced increases in sediment delivery as a result of prescribed burns. We also find that relative to the None scenario, prescribed burns are assigned more frequently in the climate change scenarios: 8 times more frequently in E45 and 10.1 times more frequently in E85. See Table \ref{tab:prscBurnsInClimChange}. These effects combine to produce the result seen in Figure \ref{fig:avgSedimentDelivery} of increasing sediment delivery levels with climate change severity.
 
 \begin{figure}[ht]
 \centering
 \includegraphics[width=.55\textwidth]{../images/AvgSedimentSpikes}
-\caption[Average sediment delivery across climate scenarios]{Average spike in sediment delivery as a result of performing fuel removals for each of the climate change scenarios.}
+\caption[Average sediment delivery across climate scenarios]{Average spike in sediment delivery as a result of performing fuel removals for each climate change scenario.}
 \label{fig:avgSedimentDelivery}
 \end{figure}
 
 \begin{table}[]
 \centering
-\caption[Frequency and impact of prescribed burns across climate scenarios]{Frequency and impact of prescribed burn for each climate scenario. The combination of more frequent prescribed burns and increased sediment delivery per prescribed burn results in the higher values of sediment delivery in E45 and E85 observed in Figure \ref{fig:avgSedimentDelivery}.}
+\caption[Frequency and impact of prescribed burns across climate scenarios]{Frequency and impact of prescribed burns for each climate scenario. The combination of more frequent prescribed burns and increased sediment delivery per prescribed burn results in the higher values of sediment delivery in E45 and E85 observed in Figure \ref{fig:avgSedimentDelivery}.}
 \label{tab:prscBurnsInClimChange}
 \begin{tabular}{l|lll}
                                                                                                            & \textbf{None} & \textbf{E45} & \textbf{E85} \\ \hline
@@ -367,12 +365,12 @@ This is a result of the response in sediment delivery to prescribed burns and th
 \end{tabular}
 \end{table}
 
-% BEGIN DISCUSSION
-First, we note that this is not due to the model simply selecting less area for treatment under the climate change scenarios, as this value is essentially constant across both treatment periods and all climate scenarios (see Table \ref{tab:treatedAreas}). Instead, we find that the increase in fire hazard is due to the impact of climate change on the fuel model classification of the stands in the Drink Area. In E45 and E85, more stands are assigned a fuel model classification that is associated with higher fire hazard (refer to table \ref{tab:firehazards} for the mapping from fuel model to fire hazard). This is shown in Figure \ref{fig:distOfFireHazards}, where we observe a larger percentage of stands having a fire hazard rating of either 4 or 5 under the E45 and E85 scenarios than in None.
+\paragraph{Fire hazard}
+For the fire hazard objective, we first note that the increase in fire hazard is not simply due to the model selecting less area for treatment under the climate change scenarios. This value is essentially constant across both treatment periods and all climate scenarios -- see Table \ref{tab:treatedAreas}. Instead, we find that the increase in fire hazard is due to the impact of climate change on the fuel model classification of the stands in the Drink Area. In E45 and E85, more stands are assigned a fuel model classification that is associated with higher fire hazard (refer to table \ref{tab:firehazards} for the mapping from fuel models to fire hazard). This is shown in Figure \ref{fig:distOfFireHazards}, where we observe a larger percentage of stands having a fire hazard rating of either 4 or 5 under the E45 and E85 scenarios than in None.
 
 \begin{table}[]
 \centering
-\caption[Area treated per period across climate scenarios]{Areas treated per period across climate scenarios. The values are nearly the same for both periods and for each climate scenario.}
+\caption[Area treated per period across climate scenarios]{Areas treated per period across climate scenarios. The values are nearly constant for both periods and for each climate scenario.}
 \label{tab:treatedAreas}
 \begin{tabular}{l|lll}
                                                                                                            & \textbf{None} & \textbf{E45} & \textbf{E85} \\ \hline
@@ -384,14 +382,13 @@ First, we note that this is not due to the model simply selecting less area for 
 \begin{figure}[ht]
 \centering
 \includegraphics[width=.5\textwidth]{../images/FireHazardRatingsPerClimateScenario}
-\caption[Distribution of fire hazard ratings over the Drink Area for each climate change scenario]{Distributions of fire hazard ratings across the Drink Area under each climate change scenario. Moving from left to right (in increasing climate change severity), we observe an increase in the number of stands classified with more extreme fire hazards (ratings of 4 and 5).}
+\caption[Distribution of fire hazard ratings over the Drink Area for each climate change scenario]{Distributions of fire hazard ratings across the Drink Area under each climate change scenario. Moving from left to right (in increasing climate change severity), we observe an increase in the percent of stands classified with more extreme fire hazards (ratings of 4 and 5).}
 \label{fig:distOfFireHazards}
 \end{figure}
 % If we need a map, show a single map that shows the diff in FH at 2095 for a good sol from E85 - good sol from None
 
-
-% BEGIN DISCUSSION
-The result is largely due to the effects of climate change on the vegetation characteristics that define whether a stand qualifies as NSO habitat. Of the criteria used, two of them are determined by vegetation characteristics: the presence of at least one tree with DBH $> 76$ cm and canopy closure of at least 60\%. While climate change has minimal impact on the former, the average canopy closure for stands in the Drink Area decreases with increasing severity of climate change. See Figure \ref{fig:canopyClosure}.
+\paragraph{NSO habitat}
+Lastly, we find that the decrease in NSO habitat is largely due to the effects of climate change on the vegetation characteristics that define whether a stand qualifies as NSO habitat. Of the criteria used, two of them are determined by vegetation characteristics: the presence of at least one tree with DBH $> 76$ cm and canopy closure of at least 60\%. While climate change has minimal impact on the former, the average canopy closure for stands in the Drink Area decreases with increasing severity of climate change. See Figure \ref{fig:canopyClosure}.
 
 \begin{figure}[ht]
 \centering
@@ -401,7 +398,10 @@ The result is largely due to the effects of climate change on the vegetation cha
 \end{figure}
 
 
-% BEGIN DISCUSSION
+\subsubsection{Increasing number of solutions and range of values for NSO habitat}
+We speculate that the increase in the number of solutions in the frontiers and the increase in the range of NSO habitat are results of the same thing -- the impact of fuel removals on whether a stand qualifies as NSO habitat.
+
+HERE
 There are two primary drivers for this increase. The first is in the impact of fuel removals on the amount of NSO habitat available. We see in Table \ref{tab:nsoHabDQs} the number of instances in which performing a fuel removal disqualifies a stand from being NSO habitat under each climate change scenario. This happens more than twice as frequently in E45 and E85 than in None. Second, we find that the reduction in fire hazard that results from performing a fuel removal which leads to the disqualification of NSO habitat increases with climate severity. That is, the model is more incentivized to sacrifice NSO habitat in favor of fire hazard reduction. This in turn leads to a reduction in clustering of NSO habitat, further reducing the objective function value (equation \eqref{eqn:eqn:constraintDefOwl}). This data is shown in Figure \ref{fig:nsoHabDQFHEfficacy}, in which we see the reduction in fire hazard as a result of fuel removals that disqualify a stand as NSO habitat. These values increase with climate change severity.
 
 \begin{table}[ht]
