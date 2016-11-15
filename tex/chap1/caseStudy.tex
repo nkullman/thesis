@@ -58,7 +58,7 @@ We use the following notation in the development of the model:
 	\end{cases}
 	$$
 	
-\item \textbf{$F_{i,r}$:} the area-weighted fire hazard rating of stand $i$ at the end of the planning horizon if prescribed to fuel removal schedule $r$. The metric for fire hazard rating used in this analysis originated in the work by Schroder \textit{et al.} \cite{schroder2016multi}. This metric was developed for the Drink Area. It uses fire characteristics from the set of fuel models proposed by Anderson \cite{anderson1982aids} in order to assign a fire hazard rating. I expanded the rating system to include fuel models not present in Schroder \textit{et al.} See Table \ref{tab:firehazards} for the mapping of fuel models to fire hazard ratings.
+\item \textbf{$F_{i,r}$:} the area-weighted fire hazard rating of stand $i$ at the end of the planning horizon if prescribed to fuel removal schedule $r$. For instance, if a stand $i$ under fuel removal schedule $r$ has a fire hazard rating of 4 in the year 2095, and its area is 10 hectares, then $F_{i,r} = 40$. The metric for fire hazard rating used in this analysis was developed by Schroder \textit{et al.} \cite{schroder2016multi} specifically for the Drink Area. It uses fire characteristics from the set of fuel models proposed by Anderson \cite{anderson1982aids} in order to assign a fire hazard rating. We expand the rating system to include fuel models not present in Schroder \textit{et al.} See Table \ref{tab:firehazards} for the mapping of fuel models to fire hazard ratings.
 
 The USFS's Climate-Forest Vegetation Simulator (Climate-FVS) was used to generate the fuels and vegetation characteristics of the stands in order to determine their fire hazard rating. Initial vegetation data for Climate-FVS came from the 2012 GNN structure map (\url{http://lemma.forestry.oregonstate.edu/data/structure-maps}) from Oregon State University's Landscape Ecology, Modeling, Mapping \& Analysis (LEMMA) group. Plots from the LEMMA database were mapped to the stands in the Drink area in order to produce tree and stand lists. These lists were used with Climate-FVS to simulate the stands' vegetation and fuels characteristics forward for the duration of the planning horizon under each climate scenario. Input climate data for Climate-FVS was obtained through the Climate-FVS climate data server \cite{climateFVSReadyData}.
 
@@ -77,7 +77,7 @@ The USFS's Climate-Forest Vegetation Simulator (Climate-FVS) was used to generat
 13                              & \textbf{5}                                       & Logging Slash             & 3.20                                 & 271.58                                    & 143.57                                       
 \end{tabular}%
 }
-\caption[Fire hazard ratings used in multi-objective model]{Fire hazard rating system used here, originally employed by Schroder \textit{et al.} \cite{schroder2016multi}.\\
+\caption[Fire hazard ratings used in multi-objective model]{Fire hazard rating system used here, originally employed by Schroder \textit{et al.} \cite{schroder2016multi}. Non-forested areas are assigned a fire hazard value of 0.\\
 Asterisks (*) denote fuel models not present in Schroder \textit{et al.}\\
 The fuel model column refers to the Anderson fuel model ratings \cite{anderson1982aids}.}
 \label{tab:firehazards}
@@ -189,13 +189,13 @@ We parameterized and solved the multi-objective model (equations \eqref{eqn:objF
 \label{tab:frontiersSummary}
 \begin{tabular}{lllll}
 \multicolumn{2}{l|}{}                                                  & \textbf{None} & \textbf{E45} & \textbf{E85} \\ \hline
-\multirow{3}{*}{\textbf{Fire hazard}}       & \multicolumn{1}{l|}{min} & 21321.21      & 23219.82     & 23268.02     \\
-                                            & \multicolumn{1}{l|}{avg} & 21406.26      & 23324.41     & 23369.57     \\
-                                            & \multicolumn{1}{l|}{max} & 21933.29      & 23973.79     & 23724.98     \\ \hline
-\multirow{3}{*}{\textbf{NSO habitat}}       & \multicolumn{1}{l|}{min} & 2532.33       & 2412.18      & 2171.10      \\
-                                            & \multicolumn{1}{l|}{avg} & 2536.31       & 2447.92      & 2421.99      \\
-                                            & \multicolumn{1}{l|}{max} & 2540.05       & 2477.18      & 2481.01      \\ \hline
-\multirow{3}{*}{\textbf{Sediment delivery}} & \multicolumn{1}{l|}{min} & 0             & 0            & 0            \\
+\multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}\textbf{Fire hazard (cumulative}\\ \textbf{area-weighted fire hazard)}\end{tabular}}       & \multicolumn{1}{l|}{min} & 21,321.21      & 23,219.82     & 23,268.02     \\
+                                            & \multicolumn{1}{l|}{avg} & 21,406.26      & 23,324.41     & 23,369.57     \\
+                                            & \multicolumn{1}{l|}{max} & 21,933.29      & 23,973.79     & 23,724.98     \\ \hline
+\multirow{3}{*}{\textbf{NSO habitat (ha)}}       & \multicolumn{1}{l|}{min} & 2,532.33       & 2,412.18      & 2,171.10      \\
+                                            & \multicolumn{1}{l|}{avg} & 2,536.31       & 2,447.92      & 2,421.99      \\
+                                            & \multicolumn{1}{l|}{max} & 2,540.05       & 2,477.18      & 2,481.01      \\ \hline
+\multirow{3}{*}{\textbf{Sediment delivery (tonnes)}} & \multicolumn{1}{l|}{min} & 0             & 0            & 0            \\
                                             & \multicolumn{1}{l|}{avg} & 10.25         & 27.98        & 31.19        \\
                                             & \multicolumn{1}{l|}{max} & 24.57         & 63.43        & 69.68        
 \end{tabular}
