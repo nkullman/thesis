@@ -65,8 +65,8 @@ The USFS's Climate-Forest Vegetation Simulator (Climate-FVS) was used to generat
 \begin{table}[!ht]
 \centering
 \resizebox{\textwidth}{!}{%
-\begin{tabular}{l|c|crrr}
-\multicolumn{1}{c|}{Fuel Model} & \multicolumn{1}{c|}{\textbf{Fire Hazard Rating}} & \multicolumn{1}{c}{Group} & \multicolumn{1}{c}{Flame length (m)} & \multicolumn{1}{c}{Rate of spread (m/hr)} & \multicolumn{1}{c}{Total fuel load (tons/ha)} \\ \hline
+\begin{tabular}{lccrrr}
+\multicolumn{1}{c}{Fuel Model} & \multicolumn{1}{c}{\textbf{Fire Hazard Rating}} & \multicolumn{1}{c}{Group} & \multicolumn{1}{c}{Flame length (m)} & \multicolumn{1}{c}{Rate of spread (m/hr)} & \multicolumn{1}{c}{Total fuel load (tons/ha)} \\ \hline
 4*                              & \textbf{5}                                       & Shrub                     & 5.79                                 & 1508.76                                   & 32.12                                         \\
 5                               & \textbf{4}                                       & Shrub                     & 1.22                                 & 362.10                                    & 8.65                                          \\
 8                               & \textbf{1}                                       & Timber                    & 0.30                                 & 32.19                                     & 12.36                                         \\
@@ -188,16 +188,16 @@ We parameterized and solved the multi-objective model (equations \eqref{eqn:objF
 \caption[Summary of objective achievement across climate scenarios]{Summary of the performance of the efficient frontiers for each climate change scenario.}
 \label{tab:frontiersSummary}
 \begin{tabular}{lllll}
-\multicolumn{2}{l|}{}                                                  & \textbf{None} & \textbf{E45} & \textbf{E85} \\ \hline
-\multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}\textbf{Fire hazard (cumulative}\\ \textbf{area-weighted fire hazard)}\end{tabular}}       & \multicolumn{1}{l|}{min} & 21,321.21      & 23,219.82     & 23,268.02     \\
-                                            & \multicolumn{1}{l|}{avg} & 21,406.26      & 23,324.41     & 23,369.57     \\
-                                            & \multicolumn{1}{l|}{max} & 21,933.29      & 23,973.79     & 23,724.98     \\ \hline
-\multirow{3}{*}{\textbf{NSO habitat (ha)}}       & \multicolumn{1}{l|}{min} & 2,532.33       & 2,412.18      & 2,171.10      \\
-                                            & \multicolumn{1}{l|}{avg} & 2,536.31       & 2,447.92      & 2,421.99      \\
-                                            & \multicolumn{1}{l|}{max} & 2,540.05       & 2,477.18      & 2,481.01      \\ \hline
-\multirow{3}{*}{\textbf{Sediment delivery (tonnes)}} & \multicolumn{1}{l|}{min} & 0             & 0            & 0            \\
-                                            & \multicolumn{1}{l|}{avg} & 10.25         & 27.98        & 31.19        \\
-                                            & \multicolumn{1}{l|}{max} & 24.57         & 63.43        & 69.68        
+\multicolumn{2}{l}{}                                                  & \textbf{None} & \textbf{E45} & \textbf{E85} \\ \hline
+\multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}\textbf{Fire hazard (cumulative}\\ \textbf{area-weighted fire hazard)}\end{tabular}}       & \multicolumn{1}{l}{min} & 21,321.21      & 23,219.82     & 23,268.02     \\
+                                            & \multicolumn{1}{l}{avg} & 21,406.26      & 23,324.41     & 23,369.57     \\
+                                            & \multicolumn{1}{l}{max} & 21,933.29      & 23,973.79     & 23,724.98     \\ \hline
+\multirow{3}{*}{\textbf{NSO habitat (ha)}}       & \multicolumn{1}{l}{min} & 2,532.33       & 2,412.18      & 2,171.10      \\
+                                            & \multicolumn{1}{l}{avg} & 2,536.31       & 2,447.92      & 2,421.99      \\
+                                            & \multicolumn{1}{l}{max} & 2,540.05       & 2,477.18      & 2,481.01      \\ \hline
+\multirow{3}{*}{\textbf{Sediment delivery (tonnes)}} & \multicolumn{1}{l}{min} & 0             & 0            & 0            \\
+                                            & \multicolumn{1}{l}{avg} & 10.25         & 27.98        & 31.19        \\
+                                            & \multicolumn{1}{l}{max} & 24.57         & 63.43        & 69.68        
 \end{tabular}
 \end{table}
 
@@ -252,8 +252,8 @@ We observe a decreasing hypervolume with increasing severity of climate change -
 \caption[Hypervolumes of the efficient frontiers]{Hypervolume for each climate change scenario. Hypervolume values increase with increasing severity of climate change.}
 \label{tab:hypervols}
 \begin{tabular}{lllll}
-\multicolumn{2}{l|}{}                                                  & \textbf{None} & \textbf{E45} & \textbf{E85} \\ \hline
-\multicolumn{2}{l|}{\textbf{Hypervolume}}                              & 0.876977      & 0.866857     & 0.829541       
+\multicolumn{2}{l}{}                                                  & \textbf{None} & \textbf{E45} & \textbf{E85} \\ \hline
+\multicolumn{2}{l}{\textbf{Hypervolume}}                              & 0.876977      & 0.866857     & 0.829541       
 \end{tabular}
 \end{table} 
 
@@ -261,7 +261,7 @@ We observe a decreasing hypervolume with increasing severity of climate change -
 \centering
 \caption[Binary hypervolume values for each pair of climate scenarios]{Binary hypervolumes for each pair of climate scenarios. No values are negative, indicating that no frontiers are dominated by another and that all frontiers uniquely enclose some volume of the objective space.}
 \label{tab:binaryHypervols}
-\begin{tabular}{ll|l}
+\begin{tabular}{lll}
 \textbf{$Z_1$} & \textbf{$Z_2$} & \textbf{$I_{H2}(Z_1,Z_2)$} \\ \hline
 \textbf{None}  & \textbf{E45}   & 0.026154                   \\
 \textbf{None}  & \textbf{E85}   & 0.058001                   \\
@@ -279,7 +279,7 @@ In the pairwise comparison of objectives, we observe little conflict between sed
 \centering
 \caption[Sediment-NSO conflict across climate scenarios]{Conflict between sediment delivery and NSO habitat across climate scenarios.}
 \label{tab:pairConflict-SedNSO}
-\begin{tabular}{l|l|ll}
+\begin{tabular}{llll}
 \textbf{}     & \textbf{$C_{ij}$} & \textbf{$c_{ij,\rho}$} & \textbf{$c_{ij,d}$} \\ \hline
 \textbf{None} & 0.19639           & 0.3974                 & 0.4942              \\
 \textbf{E45}  & 0.25667           & 0.5194                 & 0.4941              \\
@@ -309,7 +309,7 @@ According to $C_{ij}$, the conflict between NSO habitat and fire hazard is again
 \centering
 \caption[NSO-fire hazard conflict across climate scenarios]{Conflict between NSO habitat and fire hazard across climate scenarios.}
 \label{tab:pairConflict-NSOFire}
-\begin{tabular}{l|l|ll}
+\begin{tabular}{llll}
 \textbf{}     & \textbf{$C_{ij}$} & \textbf{$c_{ij,\rho}$} & \textbf{$c_{ij,d}$} \\ \hline
 \textbf{None} & 0.25805           & 0.6622                 & 0.3897              \\
 \textbf{E45}  & 0.20560           & 0.5807                 & 0.3541              \\
@@ -331,7 +331,7 @@ In all climate scenarios, the strongest pairwise conflict is between fire hazard
 \centering
 \caption[Sediment delivery-fire hazard conflict across climate scenarios]{Conflict between sediment delivery and fire hazard across climate scenarios.}
 \label{tab:pairConflict-SedFire}
-\begin{tabular}{l|l|ll}
+\begin{tabular}{llll}
 \textbf{}     & \textbf{$C_{ij}$} & \textbf{$c_{ij,\rho}$} & \textbf{$c_{ij,d}$} \\ \hline
 \textbf{None} & 0.36039           & 0.9927                 & 0.3630              \\
 \textbf{E45}  & 0.36097           & 0.9853                 & 0.3664              \\
@@ -359,7 +359,7 @@ Investigating the cause of the degradation in objective provision, we find for s
 \centering
 \caption[Frequency and impact of prescribed burns across climate scenarios]{Frequency and impact of prescribed burns for each climate scenario. The combination of more frequent prescribed burns and increased sediment delivery per prescribed burn results in the higher values of sediment delivery in E45 and E85 observed in Figure \ref{fig:avgSedimentDelivery}.}
 \label{tab:prscBurnsInClimChange}
-\begin{tabular}{l|lll}
+\begin{tabular}{llll}
                                                                                                            & \textbf{None} & \textbf{E45} & \textbf{E85} \\ \hline
 \textbf{\begin{tabular}[c]{@{}l@{}}Average sediment delivery\\ (tonnes) from prescribed burn\end{tabular}} & 31.23            & 48.56          & 48.97          \\
 \textbf{\begin{tabular}[c]{@{}l@{}}Number of prescribed\\ burns assigned\end{tabular}}                     & 34         & 272        & 344       
@@ -373,7 +373,7 @@ For the fire hazard objective, we first note that the increase in fire hazard wi
 \centering
 \caption[Area treated per period across climate scenarios]{Areas treated per period across climate scenarios. The values are nearly constant for both periods and for each climate scenario.}
 \label{tab:treatedAreas}
-\begin{tabular}{l|lll}
+\begin{tabular}{llll}
                                                                                                            & \textbf{None} & \textbf{E45} & \textbf{E85} \\ \hline
 \textbf{Area treated (ha) in period 1} & 2427.31            & 2426.90 & 2414.58          \\
 \textbf{Area treated (ha) in period 2}                     & 2427.56         & 2427.71        & 2427.63      
@@ -408,7 +408,7 @@ We see in Table \ref{tab:nsoHabDQs} the number of instances in which performing 
 \centering
 \caption[Frequency of NSO habitat disqualifications across climate scenarios]{Shown here are the number of times for each climate scenario that a fuel removal triggers the disqualification of a stand from being NSO habitat.}
 \label{tab:nsoHabDQs}
-\begin{tabular}{l|l}
+\begin{tabular}{ll}
 \textbf{Climate change scenario} & \begin{tabular}{@{}l@{}}\textbf{Disqualifications of NSO habitat} \\ \textbf{as a result of fuel removals}\end{tabular} \\ \hline
 \textbf{None}                    & 24                                                                               \\
 \textbf{Ensemble RCP 4.5}        & 63                                                                               \\
