@@ -1,6 +1,6 @@
 \section{Methods}
 \label{sec:methods}
-We lay a foundation for quantitative conflict analysis of multi-objective systems. The analysis centers on the use of three metrics: two existing measures from EMO and one that we have developed and introduce for the first time here. A case study on the impacts of climate change on forest management serves to illustrate the conflict analysis. Prior to describing the case study, we first define terminology and describe each of the measures used in our analysis.
+We lay a foundation for quantitative conflict analysis of objective functions in multi-objective systems. The analysis centers on the use of three metrics: two existing measures from EMO and one that we have developed and introduce for the first time here. Two case studies on the in forest management serve to illustrate the conflict analysis. Prior to describing the case studies, we first define terminology and describe each of the measures used in our analysis.
 
 \subsection{Terminology}
 \label{subsec:terminology}
@@ -30,11 +30,15 @@ The \textit{Pareto-optimal frontier}, the \textit{efficient frontier} or, simply
 \begin{align}
 Z = \{\mathbf{z} = [f_1(\mathbf{x}),\ldots,f_M(\mathbf{x})] \:|\: \mathbf{x} \in P\}
 \end{align}
-Objective vectors' components are referred to in subscripts:
+We say that a frontier $Z_1$ dominates another frontier $Z_2$ $Z_1 \succ Z_2$ if for each $\mathbf{z}^2 \in Z_2$,
+\begin{align}
+\exists \mathbf{z}^1 \in Z_1 : \mathbf{z}^1 \succ \mathbf{z}^2.
+\end{align}
+
+Objective vectors provide the decision maker with knowledge of the objective achievement of a solution $\mathbf{x}$ -- the $i$th component of an objective vector $\mathbf{z}$ represents the achievement in objective $i$ by the corresponding decision vector $\mathbf{x}$. Objective vectors' components are referred to using subscripts:
 \begin{align}
 \mathbf{z} = [z_1, z_2, \ldots, z_M]
 \end{align}
-Objective vectors provide the decision maker with knowledge of the objective achievement of a solution $\mathbf{x}$ -- the $i$th component of an objective vector $\mathbf{z}$ represents the achievement in objective $i$ by the corresponding decision vector $\mathbf{x}$.
 
 \paragraph{Ideal and nadir objective vectors}
 The \textit{ideal objective vector} is defined as the vector
