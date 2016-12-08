@@ -1,10 +1,9 @@
 \chapter{Methods}
-\section{Methods}
-\label{sec:methods}
+\label{ch:methods}
 We lay a foundation for quantitative conflict analysis of objective functions in multi-objective systems. The analysis centers on the use of three metrics: two existing measures from EMO and one that we have developed and introduce for the first time here. Two case studies on the in forest management serve to illustrate the conflict analysis. Prior to describing the case studies, we first define terminology and describe each of the measures used in our analysis.
 
-\subsection{Terminology}
-\label{subsec:terminology}
+\section{Terminology}
+\label{sec:terminology}
   
 \paragraph{The multi-objective problem}
 Consider the $M$-objective optimization problem
@@ -94,12 +93,12 @@ When the objectives represent goods or services, a set of objectives that confli
 
 Equation \eqref{eqn:objPairHarmony} checks for monotonically increasing relationships among objectives. This means of detecting conflict is functionally equivalent to that used by many past studies, such as Brockhoff and Zitzler (2009) \cite{brockhoff2009objective} and Purshouse and Fleming (2003) \cite{purshouse2003conflict}.
 
-\subsection{Measuring conflict: the hypervolume indicators}
+\section{Measuring conflict: the hypervolume indicators}
 \label{sec:waysToMeasureFrontiers}
 % given a system, here's what we're going to measure and how we'll measure it.
 Any multi-objective problem whose efficient frontier consists of more than one solution contains conflict. The decision maker responsible for these multi-objective systems must determine which solution represents the best compromise among the objectives, and understanding the conflict in the system imroves their ability to do so. This includes both the amount of system conflict as well as the source of that conflict. For the former, we can draw on existing measures from EMO; for the latter, we propose a new metric that quantifies the conflict between pairs of objectives. We begin with a description of the measures from EMO that we use to measure system-level conflict: the hypervolume indicators.
 
-\subsubsection{Hypervolume indicator}
+\subsection{Hypervolume indicator}
 The \textit{hypervolume indicator} $I_{H1}(Z)$ measures the percentage of the objective space that is bounded by the non-dominated objective vectors $\mathbf{z} \in Z$. See Figure \ref{fig:frontierVolumes}. Systems with less conflict will produce solutions with greater joint provision of objectives, leading to a greater proportion of enclosed objective space and thus a larger value for the hypervolume. In contrast, systems with more conflict produce solutions with less joint provision of objectives, leading to a lesser proportion of enclosed objective space and a smaller value for the hypervolume. That is, the greater the value of the hypervolume indicator, the lower the conflict in the system.
 
 \begin{figure}[ht]
@@ -124,7 +123,7 @@ In general, an increase of $h$ in the value of the hypervolume equates to an inc
 \label{fig:Hypervol10percent}
 \end{figure}
 
-\subsubsection{Binary Hypervolume Indicator}
+\subsection{Binary Hypervolume Indicator}
 If a frontier $Z^2$ is found to have a smaller hypervolume than another $Z^1$, one may wonder whether $Z^2$ is completely enclosed within $Z^1$ or simply bounds a different but smaller region of the relative objective space. We use the binary hypervolume indicator to address this question. The binary hypervolume $I_{H2}(Z^1,Z^2)$ computes the volume of the objective space bounded by $Z^1$ but not by $Z^2$. See Figure \ref{fig:binaryHypervolume}. As such, if $Z^2$ is completely enclosed within $Z^1$, then $I_{H2}(Z^2,Z^1) \le 0$. On the other hand, if $I_{H2}(Z^2,Z^1) > 0$ then $Z^2$ encloses regions of the objective space that $Z^1$ does not.
 
 Following the definition proposed by Zitzler (1999) \cite{zitzler1999evolutionary}, the \textit{binary hypervolume indicator} of two frontiers $Z^1$ and $Z^2$ is \cite{zitzler1999evolutionary}
@@ -146,7 +145,7 @@ where $I_{H1} (Z^1 + Z^2)$ is the hypervolume indicator of the frontier that con
 \label{fig:binaryHypervolume}
 \end{figure}
 
-\subsection{Computing the hypervolume indicator}
+\section{Computing the hypervolume indicator}
 Computing the hypervolume is a nontrivial task that has received attention from the EMO community. For a comparison of previous algorithms that compute the hypervolume, see While (2006) \cite{while2006faster}. We developed our own algorithm to compute the hypervolume indicator.
 
 The algorithm begins with a list of the relative objective vectors (in describing the algorithm here, we omit the bar and simply denote them by $\mathbf{z} \in Z$). These vectors are assumed to be sorted in descending order based on their $m$th component, for some arbitrary objective $m \in \mathcal{M}$. We define the sub-dimensional objective set $\mathcal{L} = \mathcal{M} \backslash \{m\}$ whose cardinality we denote by $|\mathcal{L}| = L = M - 1$.
@@ -209,7 +208,7 @@ We compute $\overbar{V}_\mathbf{z}$ as follows. Initialize $\overbar{V}_\mathbf{
 \includegraphics[width=.85\textwidth]{../images/3DFrontierSchematic_SketchUp_FirstSteps_2D_clean}
 \end{figure}
 
-\subsection{A new measure for pairwise objective conflict}
+\section{A new measure for pairwise objective conflict}
 \label{sec:newConflictMetric}
 % This is our cool new way of drilling down into an objective pair to assess conflict
 When the hypervolume indicates that there is conflict in the system, how does the decision maker determine which objectives are responsible for the conflict? In the case of the hospital, is it cost and patient throughput that are most conflicting, or is it cost and required back-up? For the forest manager, are carbon sequestration and timber revenue the incompatible objectives responsible for the low hypervolume value, or is it wildlife habitat and timber revenue? If the forest manager oversees multiple independent forests, they may also ask whether the answers to these questions are the same in each. With the suite of measures currently available, the decision maker cannot adequately answer these questions. Here we propose a new measure of conflict to fill this void.

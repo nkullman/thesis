@@ -1,10 +1,9 @@
-\chapter{Case Study: Impacts of Climate Change on Competing Ecosystem Services in the Deschutes National Forest}
-\section{Case Study: Impacts of Climate Change on Competing Ecosystem Services in the Deschutes National Forest}
-\label{sec:caseStudy}
+\chapter{Case Study: Impacts of climate change on competing forest ecosystem services}
+\label{ch:caseStudyDeschutes}
 To demonstrate the application of the hypervolume indicators and the proposed pairwise objective metric to the analysis of conflict in multi-objective systems, we perform a case study on forest management in the Deschutes National Forest. We compare the conflict among ecosystem services in three multi-objective systems: one in which climate change is ignored, one in which climate change is predicted to be mild, and one in which it is predicted to be severe. For each climate change scenario, we solve a multi-objective mathematical program that optimizes ecosystem service achievement. The model aims to minimize fire hazard and sediment delivery while maximizing habitat for the northern spotted owl. In the coming sections we describe the study area and the importance of each of these ecosystem services. We then formally define the mathematical program solved for each climate change scenario, describe the climate scenarios considered, and finally present and discuss the results.
 
-\subsection{Study area and selection of ecosystem services}
-\label{subsec:studyArea}
+\section{Study area and selection of ecosystem services}
+\label{sec:studyArea}
 %To provide context for the selection of ecosystem services for the model, we first describe the area in which the case study was conducted.
 Our study area is the Drink Planning Area. It consists of 7056 ha of federally owned forest land on the east slopes of the Cascade Mountain Range located within the Deschutes National Forest. See Figure \ref{fig:drinkOverview}. Having never undergone logging or treatment, the Drink contains large areas of old growth forest. The large swaths of old growth forest in the Drink make it prime habitat for the northern spotted owl (NSO) (\textit{Strix occidentalis caurina}, Figure \ref{fig:nso}), an iconic % (albeit controversial \cite{simberloff1998flagships}) 
 inhabitant of Pacific Northwest forests that is listed as a federally threatened species \cite{congress1973endangered}. However, the same old growth conditions that render the area suitable habitat for the NSO also render it susceptible to high-severity wildfires. Such a wildfire would put at risk the NSO's habitat \cite{courtney2004scientific} as well as one of the Drink's other notable features - the municipal watershed for the cities of Bend, OR and Sisters, OR. Wildfires pose a threat to these cities' water supply, because they can cause soil water repellency, surface runoff, and debris torrents \cite{ice2004effects} which degrade watershed quality.
@@ -27,7 +26,7 @@ For these reasons, the managing entity, the United States Forest Service (USFS),
 
 We developed a multi-objective mathematical program that optimizes the joint provision of these conflicting ecosystem services\footnote{These represent only a subset of the ecosystem services of concern to the USFS in the Drink Area. While the USFS manages for many ecosystem services simultaneously, many of the services are stacked rather than bundled, meaning the ecosystem services are not in conflict. These services need not all be considered in the multi-objective model, because the selection and maximization of one ecosystem service entails the maximization of all in the stack. For this reason, we have disregarded non-conflicting ecosystem services and selected a minimal bundle on which to employ multi-objective optimization. Those that do not conflict can be stacked post-optimization.}.
 
-\subsection{The multi-objective model}
+\section{The multi-objective model}
 The multi-objective model is a zero-one mathematical program that assigns spatiotemporal prescriptions for fuel removals across the Drink Area to optimize the joint provision of ecosystem services. Spatially, the model prescribes fuel removals across 303 forest stands into which the Drink has been divided (the interior polygons in Figure \ref{fig:drinkOverview}). Temporally, the model operates over an 80-year planning horizon, from 2015 to 2095. The fuel removals are scheduled in two 20-year treatment periods: 2015-2035 and 2035-2055. For each stand, the model may prescribe fuel removals in the first period, the second period, neither, or both.
 
 To ensure long-term efficacy of the fuel removals, the model minimizes the fire hazard rating of the Drink Area at the end of the 80-year planning horizon. To mitigate impacts of the fuel removals on NSO habitat, the model maximizes the area of NSO habitat at the end of each planning period. Similarly, the model minimizes the short-term spikes in sediment delivery resulting from the application of fuel removals, which are assumed to be performed at the midpoint year in the treatment periods (years 2025 and 2045). Figure \ref{fig:drinkPlanningHorizon} contains a schematic of the planning horizon which shows the timing of these events.
@@ -39,7 +38,7 @@ To ensure long-term efficacy of the fuel removals, the model minimizes the fire 
 \label{fig:drinkPlanningHorizon}
 \end{figure}
 
-\subsubsection{Notation}
+\subsection{Notation}
 We use the following notation in the development of the model:
 
 \paragraph{Model parameters}
@@ -132,7 +131,7 @@ $$
 \item \textbf{$H_t$:} the total area (in hectares) treated in planning period $t$
 \end{itemize}
 
-\subsubsection{Model formulation}
+\subsection{Model formulation}
 The formulation of the multi-objective model is as follows:
 \begin{align}
 Minimize \quad & \notag\\
@@ -163,10 +162,10 @@ Inequality set \eqref{eqn:constraintClusterTriggers} controls the value of the c
 
 The set of equalities \eqref{eqn:constraintOnePrescrip} enforces the logical constraint that each stand must be prescribed to exactly one fuel removal schedule. Equations \eqref{eqn:constraintAreaAcctg1} and \eqref{eqn:constraintAreaAcctg2} are accounting constraints for the total area treated in each planning period, and inequalities \eqref{eqn:constraintAreaRestr} ensure that this area does not exceed the predefined maximum. Inequalities \eqref{eqn:constraintAreaFlucL} and \eqref{eqn:constraintAreaFlucU} bound the fluctuation in treated area between the planning periods. Finally, constraint \eqref{eqn:constraintNonNeg} defines the decision and indicator variables as binary.
 
-\subsection{Solution method}
+\section{Solution method}
 We developed an implementation of T\'{o}th's Alpha-Delta algorithm \cite{TothThesis} to solve the model \eqref{eqn:objFire}-\eqref{eqn:constraintNonNeg} utilizing the IBM ILOG CPLEX optimization engine. For a problem with $M$ objectives, the Alpha-Delta algorithm finds the Pareto frontier by iteratively slicing the $M$-dimensional objective space with a tilted $M-1$-dimensional hyperplane. The algorithm was implemented using an alpha parameter of $\alpha = .01$ and delta parameters of $\delta_{Hab} = 1$ ha and $\delta_{Sed} = 2$ tonnes for the NSO habitat and sediment delivery objectives, respectively.
 
-\subsection{Climate change scenarios}
+\section{Climate change scenarios}
 \label{sec:climateChange}
 Like other ecosystems, forests will undergo changes as a result of the changing climate. For instance, researchers anticipate new spatial distributions of tree species \cite{iverson1998predicting}, increased sediment delivery to streams \cite{Goode20121}, and increasing disturbance regimes such as wildfires, droughts, and insect infestations \cite{vose2012effects}. As these transformations occur, the ability of forests to provide ecosystem services will change.
 
@@ -181,7 +180,7 @@ The other scenario, None, ignores any effects of climate change. While the numbe
 Each climate scenario corresponds to a different parameterization of the model, since the vegetation, fuels, and sediment delivery data depend on climate. Thus, changing the climate scenario has the potential to affect the amount and location of NSO habitat, the effects of fuel removals on NSO habitat, the fire hazard of the Drink Area, the efficacy of the fuel removals in reducing fire hazard, and the sediment delivered as a result of fuel removals. This drives changes to the relationships among the ecosystem services as well, which we investigate using the aforementioned conflict measures.
 
 
-\subsection{Results}
+\section{Results}
 We parameterized and solved the multi-objective model (equations \eqref{eqn:objFire}-\eqref{eqn:constraintNonNeg}) for each of the climate scenarios, generating three efficient frontiers: $Z_{\text{None}}$, $Z_{E45}$, and $Z_{E85}$ for the None, Ensemble RCP 4.5, and Ensemble RCP 8.5 scenarios, respectively.  $Z_{\text{None}}$ consists of 51 solutions, $Z_{\text{E45}}$ consists of 701 solutions, and $Z_{\text{E85}}$ consists of 1083. Figure \ref{fig:frontiersAll} shows the frontiers in their 3-dimensional objective spaces while Figure \ref{fig:frontiersPCPlot} provides a single parallel coordinates plot with all frontiers. The summary details of their objective achievements are listed in Table \ref{tab:frontiersSummary}.
 
 \begin{table}[]
@@ -229,21 +228,21 @@ We parameterized and solved the multi-objective model (equations \eqref{eqn:objF
 
 %We first report the impacts of climate change on the provision of individual ecosystem services before analyzing its impacts on the joint provision of ecosystem services and the conflict among them.
 
-\subsubsection{Individual provision of ecosystem services}
+\subsection{Individual provision of ecosystem services}
 The average achievement of all ecosystem services decreases with increasing severity of climate change -- see Table \ref{tab:frontiersSummary}. We find that the difference in ecosystem service provision is greater between the assumption of no climate change and mild climate change (None to E45) than it is between mild climate change and severe climate change (E45 to E85).
 
 \paragraph{Sediment delivery} 
 All scenarios have a lower bound on sediment delivery of 0, but the upper bound and the average sediment delivery both increase with climate change severity. Compared to the None scenario with an average sediment delivery of 10.25 tonnes, the average amount of sediment delivered in E45 is 27.98 tonnes, an increase of 172\%. The average for E85 is 31.19 tonnes, 204\% higher than None.
 
 \paragraph{Fire hazard}
-Similarly, we find that the average fire hazard of the Drink Area increases with climate change severity. The average for None is $21,410$ while E45 and E85 both perform approximately 9\% worse with averages of $23,320$ and $23,370$, respectively.
+Similarly, we find that the average fire hazard of the Drink Area increases with climate change severity. The average for None is 21406.26 while E45 and E85 both perform approximately 9\% worse with an average of 23324.41 and 23369.57, respectively.
 
 \paragraph{NSO habitat}
 Finally, we also observe a decrease in the average provision of NSO habitat with increasing climate change. Compared to None which has an average provision of 2536.31 ha of NSO habitat, the average provision in the E45 scenario is 88.4 ha less (-3.5\%), and E85 is 114.3 ha less (-4.5\%).
 
 We also find that for the sediment delivery and NSO habitat objectives, the range of achievable values increases with climate change severity. For sediment delivery, the range increases from 24.57 tonnes in None to 63.43 in E45 to 69.68 in E85. And for NSO habitat, the range increases from 7.72 ha in None to 65 ha in E45 and to 309.91 ha in E85.
 
-\subsubsection{Conflict and the joint provision of ecosystem services}
+\subsection{Conflict and the joint provision of ecosystem services}
 As we saw for provision of individual ecosystem services, our results show that climate change will have an impact on conflict and the joint provision of ecosystem services as well.
 
 We observe a decreasing hypervolume with increasing severity of climate change -- see Table \ref{tab:hypervols}. The hypervolume for E45 is $0.0101$ less than None, and E85 is $0.0474$ less than None. However, all hypervolumes indicate frontiers which fill a large percentage of the objective space, as the smallest value (E85) is $I_{H1}(Z_\text{E85}) = 0.8295$. The binary hypervolumes (see Table \ref{tab:binaryHypervols}) tend to align with the hypervolumes, with larger values of $I_{H2}(Z_1,Z_2)$ when $I_{H1}(Z_1) > I_{H1}(Z_2)$ and smaller values when $I_{H1}(Z_2) > I_{H1}(Z_1)$. We note that no frontier is dominated by any other, as all values in Table \ref{tab:binaryHypervols} are strictly positive.
@@ -319,7 +318,7 @@ According to $C_{ij}$, the conflict between NSO habitat and fire hazard is again
 \end{table}
 
 \paragraph{Fire hazard-sediment delivery}
-In all climate scenarios, the strongest pairwise conflict is between fire hazard and sediment delivery. This is apparent from both Figure \ref{fig:pairplotSedFire} and the conflict metric, Table \ref{tab:pairConflict-SedFire}. All rank correlation conflict values $c_{ij,\rho} > 0.95$, indicating strong negative rank correlation. In Figure \ref{fig:pairplotSedFire} we observe a clear void of solutions in all climate change scenarios near the sub-dimensional ideal solution at $(1,1)$; this is unlike Figures \ref{fig:pairplotNSOSed} and \ref{fig:pairplotNSOFire}. We also notice that the None and E45 solutions generally extend beyond the E85 solutions in this plane, seen most clearly near the top-center region of Figure \ref{fig:pairplotSedFire}.
+In all climate scenarios, the strongest pairwise conflict is between fire hazard and sediment delivery. This is apparent from both Figure \ref{fig:pairplotSedFire} and the conflict metric, Table \ref{tab:pairConflict-SedFire}. All rank correlation conflict values $c_{ij,\rho} > 0.95$, indicating strong negative rank correlation. In Figure \ref{fig:pairplotSedFire} we observe a clear void of solutions in all climate change scenarios near the sub-dimensional ideal solution at $(1,1)$; this is unlike Figures \ref{fig:pairplotNSOSed} and \ref{fig:pairplotNSOFire}. We also notice that the None and E45 solutions generally extend beyond the E85 solutions in this plane.
 
 \begin{figure}[ht]
 \centering
@@ -340,10 +339,10 @@ In all climate scenarios, the strongest pairwise conflict is between fire hazard
 \end{tabular}
 \end{table}
 
-\subsection{Discussion}
+\section{Discussion}
 We divide our discussion of results into three sections: first, the decreasing provision of individual ecosystem services with climate change; second, the increase in the number of solutions and in the range of NSO habitat available; and third, conflict and the joint provision of ecosystem services.
 
-\subsubsection{Decreasing provision of individual ecosystem services}
+\subsection{Decreasing provision of individual ecosystem services}
 We observe decreasing provision of individual ecosystem services with increasing severity of climate change. In particular, we see that the difference between no climate change (None) and mild climate change (E45) was greater than the difference between mild climate change (E45) and severe climate change (E85). Refer to Table \ref{tab:frontiersSummary}. This suggests that, at least for the ecosystem services in this study, the realization of climate change is more significant than the severity of that change.
 
 \paragraph{Sediment delivery}
@@ -400,7 +399,7 @@ Lastly, we find that the decrease in NSO habitat is largely due to the effects o
 \end{figure}
 
 
-\subsubsection{Variation in number of solutions and range of values for NSO habitat}
+\subsection{Variation in number of solutions and range of values for NSO habitat}
 With increasing climate change severity, we noted an increase in the number of solutions generated by our model:  51 for $Z_{\text{None}}$, 701 for $Z_{\text{E45}}$, and 1083 for $Z_{\text{E85}}$. We speculate that the cause of this is the same as that of the increase in the range of NSO habitat provided -- the impact of fuel removals on whether a stand qualifies as NSO habitat.
 
 We see in Table \ref{tab:nsoHabDQs} the number of instances in which performing a fuel removal disqualifies a stand from being NSO habitat. Let us refer to such a fuel removal as a ``disqualifying treatment.'' We notice that disqualifying treatments occur more than twice as frequently in E45 and E85 than in None. To understand why the increase in the number of disqualifying treatments increases the number of solutions, consider a stand $i$ which is suitable NSO habitat under all fuel removal schedules $r$ in the None scenario. Then the values of sediment delivery and fire hazard would vary with selection of $r$, but the resulting NSO habitat would always be the same. Now, in the case of climate change (say E45) some fuel removal schedules $r$ are disqualifying treatments. That is, the selection of $r$ also now changes whether stand $i$ qualifies as NSO habitat. This influences the objective function value via equation \eqref{eqn:constraintDefOwl}, and it also affects the clustering associated with that stand (constraints \eqref{eqn:constraintClusterTriggers} and \eqref{eqn:constraintPVarTriggers}). This leads to solutions that did not exist in None.
@@ -430,7 +429,7 @@ Together, these factors lead to an increase in the number of solutions as well a
 
 %Could add a figure to show the map of what's NSO hab in a good sol vs a bad sol. Already made this on my work computer. Use it if req'd
 
-\subsubsection{Conflict and the joint provision of ecosystem services}
+\subsection{Conflict and the joint provision of ecosystem services}
 We observe a decreasing hypervolume with increasing climate change severity. Lower values for the hypervolume are indicative of more conflict, meaning that climate change induces more conflict among the ecosystem services and leads to less joint provision of objectives.
 
 The difference in hypervolume between None and E45 $I_{H1}(Z_\text{None}) - I_{H1}(Z_\text{E45}) \approx 0.01$. Recall that a difference of $h$ in hypervolumes equates to a difference of $h^{1/M}$ in each objective (Figure \ref{fig:Hypervol10percent}). Thus, despite the small size of the difference between $I_{H1}(Z_\text{None})$ and $I_{H1}(Z_\text{E45})$, it signifies an additional joint provision of objectives of approximately 21.6\%. This difference is greater between None and E85, approximately 0.05, representing an additional joint provision of ecosystem services of approximately 36.2\%.
