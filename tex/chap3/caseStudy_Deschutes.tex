@@ -186,7 +186,7 @@ Each climate scenario corresponds to a different parameterization of the model, 
 
 
 \section{Results}
-We parameterized and solved the multi-objective model (equations \eqref{eqn:objFire}-\eqref{eqn:constraintNonNeg}) for each of the climate scenarios, generating three efficient frontiers: $Z_{\text{None}}$, $Z_{E45}$, and $Z_{E85}$ for the None, Ensemble RCP 4.5, and Ensemble RCP 8.5 scenarios, respectively.  $Z_{\text{None}}$ consists of 51 solutions, $Z_{\text{E45}}$ consists of 701 solutions, and $Z_{\text{E85}}$ consists of 1083. Figure \ref{fig:frontiersAll} shows the frontiers in their 3-dimensional objective spaces while Figure \ref{fig:frontiersPCPlot} provides a single parallel coordinates plot with all frontiers. The summary details of their objective achievements are listed in Table \ref{tab:frontiersSummary}.
+We parameterized and solved the multi-objective model (equations \eqref{eqn:objFire}-\eqref{eqn:constraintNonNeg}) for each of the climate scenarios, generating three efficient frontiers: $Z_{\text{None}}$, $Z_{E45}$, and $Z_{E85}$ for the None, Ensemble RCP 4.5, and Ensemble RCP 8.5 scenarios, respectively.  $Z_{\text{None}}$ consists of 51 solutions, $Z_{\text{E45}}$ consists of 701 solutions, and $Z_{\text{E85}}$ consists of 1083. Figure \ref{fig:frontiersAll} shows the frontiers in their 3-dimensional objective spaces, Figure \ref{fig:consolidatedFrontiers} shows all frontiers in a single 3-dimensional view, and Figure \ref{fig:frontiersPCPlot} provides a single parallel coordinates plot with all frontiers. The summary details of their objective achievements are listed in Table \ref{tab:frontiersSummary}.
 
 \begin{table}[]
 \centering
@@ -222,6 +222,13 @@ We parameterized and solved the multi-objective model (equations \eqref{eqn:objF
   }
   \caption[Frontiers for each climate change scenario]{Efficient frontiers for each climate change scenario.}
   \label{fig:frontiersAll}
+\end{figure}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=.65\textwidth]{../images/consolidated3DFrontiers}
+\caption[Unscaled 3D frontiers for all climate change scenarios]{Unscaled 3D frontiers for all climate change scenarios.}
+\label{fig:consolidatedFrontiers}
 \end{figure}
 
 \begin{figure}[ht]
