@@ -32,6 +32,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{multirow}
 \usepackage{longtable}
+\usepackage[caption=false]{subfig}
 
 \newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
 
@@ -47,10 +48,11 @@
 % ==========      Text pages
 %
 \textpages
-\input{./chap1/kullman_thesis_chap1}
-%\include{./chap2/kullman_thesis_chap2}
-%\include{./chap3/kullman_thesis_chap3}
-%\include{./chap4/kullman_thesis_chap4}
+\input{./chap1/intro}
+\input{./chap2/methods}
+\input{./chap3/caseStudy_Deschutes}
+\input{./chap4/discussion_conclusion}
+
 
 %
 % ==========   Bibliography
@@ -63,9 +65,7 @@
 %
 \appendix
 \raggedbottom\sloppy
-\include{./appA/kullman_thesis_appA}
-\include{./appB/kullman_thesis_appB}
-\include{./appC/kullman_thesis_appC}
+\include{./appendix_drinkTreatments/kullman_thesis_appendix_drinkTreatments}
 
 
 \end{document}

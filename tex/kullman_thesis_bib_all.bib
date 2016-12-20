@@ -1,0 +1,1011 @@
+Bibliography file for sources cited in the developer's manual for ADP
+% MY RESEARCH:
+%% Model forest growth under different climate projections
+%% Consider: Sediment delivery, fire risk, owl habitat in each scenario
+%% Given these growth conditions, we want to determine how to reduce fire hazard while still maintaining respectable levels of sediment delivery and owl habitat
+%% Spatial optimization
+%% Not planning on doing stochastic programming, but not ruling it out completely at this point
+%% Deterministic
+	
+
+Sandor's thesis. Introducd as a reference, because this document introduces the Alpha Delta algorithm
+@phdthesis{TothThesis,
+author = {T{\'o}th, S{\'a}ndor},
+title = {Modeling Timber and Non-timber Trade-offs in Spatially-Explicit Forest Planning},
+institution = {Pennsylvania State University}
+}
+
+This document applies the Alpha Delta algorithm in a study published in Forest Sciences
+@article{TothFsci2009,
+author = {T{\'o}th, S{\'a}ndor and McDill, Marc},
+title = {Finding Efficient Harvest Schedules under Three Conflicting Objectives},
+journaltitle = {Forest Science},
+year = {2009},
+OPTvolume = {55},
+OPTissue = {15},
+OPTmonth = {April},
+OPTpages = {117-131}
+}
+
+This document compares algorithms, including the Alpha-Delta, for problems in forest management
+@article{TothFsci2006,
+author = {T{\'o}th, S{\'a}ndor and McDill, Marc and Rebain, Stephanie},
+title = {Finding the Efficient Frontier of a Bi-Criteria, Spatially Explicit, Harvest Scheduling Problem},
+journaltitle = {Forest Science},
+year = {2006},
+OPTvolume = {52},
+OPTmonth = {January},
+OPTpages = {93-107}
+}
+
+Postfire sediment erosion
+@article{wondzell2003postfire,
+  title={Postfire erosional processes in the Pacific Northwest and Rocky Mountain regions},
+  author={Wondzell, Steven M and King, John G},
+  journal={Forest Ecology and Management},
+  volume={178},
+  number={1},
+  pages={75--87},
+  year={2003},
+  publisher={Elsevier},
+  url={http://firearchaeology.com/firearchaeology/Stabilization_files/Wondzella.pdf}
+}
+
+Citation for Eclipse, the Java IDE I used to build the Alpha Delta program
+@online{Eclipse,
+author = {Eclipse Foundation},
+title = {Eclipse},
+year = {2014},
+url = {https://www.eclipse.org/home/index.php}
+}
+
+Article discussing climate change in forest in B.C., Canada.
+Climate-smart management is addressed, but does not employ OR/efficient frontiers
+@article{NitschkeInnes2008,
+author = {Nitschke, Craig R. and Innes, John L.},
+title = {Integrating climate change into forest management in South-Central British Columbia: An assessment of landscape vulnerability and development of a climate-smart framework},
+journaltitle = {Forest Ecology and Management},
+year = {2008},
+OPTvolume = {256},
+OPTpages = {313-327}
+}
+
+Assesses feasibility of policy options to meet (multi-obj.) resource management goals.
+Minimize cost while meeting certain ResMgmt goals.
+Diff models are for diff. ecological targets - nothing climate change related
+@article{Bryan20081175,
+title = "Systematic regional planning for multiple objective natural resource management ",
+journal = "Journal of Environmental Management ",
+volume = "88",
+number = "4",
+pages = "1175 - 1189",
+year = "2008",
+note = "",
+issn = "0301-4797",
+doi = "http://dx.doi.org/10.1016/j.jenvman.2007.06.003",
+url = "http://www.sciencedirect.com/science/article/pii/S0301479707002009",
+author = "Brett A. Bryan and Neville D. Crossman",
+keywords = "Decision theory",
+keywords = "Multi-criteria decision analysis",
+keywords = "Environmental policy and economics",
+keywords = "Geographic information systems",
+keywords = "Integrated planning "
+}
+
+This one looks unnervingly close to what we're proposing at first glance.
+Upon quick review, appears to compare efficient frontiers under alternate policy regimes, rather than on climate regimes
+At second glance, all curves are "economic tradeoff curves" and are bi-objective ($$ vs. bird, $$ vs. %old growth)
+Does not consider changing frontiers with changing climate, but rather changing frontiers with changing environmental policy
+Liked this quote: "quantitative understanding of the tradeoffs between marketed products and environmental quality"
+@article{Hauer20102590,
+title = "Tradeoffs between forestry resource and conservation values under alternate policy regimes: A spatial analysis of the western Canadian boreal plains ",
+journal = "Ecological Modelling ",
+volume = "221",
+number = "21",
+pages = "2590 - 2603",
+year = "2010",
+note = "",
+issn = "0304-3800",
+doi = "http://dx.doi.org/10.1016/j.ecolmodel.2010.07.013",
+url = "http://www.sciencedirect.com/science/article/pii/S0304380010003534",
+author = "Grant Hauer and Steve Cumming and Fiona Schmiegelow and Wiktor Adamowicz and Marian Weber and Robert Jagodzinski",
+keywords = "Production possibility frontier",
+keywords = "Forest management",
+keywords = "Spatial simulation",
+keywords = "Natural disturbance regime",
+keywords = "Range of natural variation",
+keywords = "Coarse-filter indicators",
+keywords = "Fine-filter indicators "
+}
+
+Uses "grey systems theory" (with mathematical programming) to address uncertainty in climate indicators. Case study is agricultural expansion in the Mackenzie River Basin. Should read more thoroughly to be better informed, but does not study climate change as a driver of change in forest management (nor is it multi-objective or compare tradeoffs)
+@article{Bass1997107,
+title = "Incorporating Climate Change into Risk Assessment Using Grey Mathematical Programming ",
+journal = "Journal of Environmental Management ",
+volume = "49",
+number = "1",
+pages = "107 - 123",
+year = "1997",
+note = "",
+issn = "0301-4797",
+doi = "http://dx.doi.org/10.1006/jema.1996.0119",
+url = "http://www.sciencedirect.com/science/article/pii/S030147979690119X",
+author = "Brad Bass and Guohe Huang and Joe Russo",
+keywords = "grey systems theory",
+keywords = "mathematical programming",
+keywords = "uncertainty",
+keywords = "climate change",
+keywords = "climate impact assessment "
+}
+
+Uses stochastic programming to incorporate the uncertainty of climate change into energy planning.
+What is effect of climate change on energy planning? Uses stochastic modeling to answer this.
+Multiple scenarios included are those associated with climate change.
+No comparison of efficient frontiers nor any tie to forest management
+@article{Kanudia199815,
+title = "Robust responses to climate change via stochastic MARKAL: The case of Québec ",
+journal = "European Journal of Operational Research ",
+volume = "106",
+number = "1",
+pages = "15 - 30",
+year = "1998",
+note = "",
+issn = "0377-2217",
+doi = "http://dx.doi.org/10.1016/S0377-2217(98)00356-7",
+url = "http://www.sciencedirect.com/science/article/pii/S0377221798003567",
+author = "Amit Kanudia and Richard Loulou",
+keywords = "Energy",
+keywords = "Environment",
+keywords = "Stochastic programming "
+}
+
+If climate change threatens water supplies, and we end up in a world where we have to have a trading market for water, this paper will help.
+It models how to operate a water trading system.
+Not really related to our work (at all).
+@article{luo2003adaption,
+  title={Adaption to Climate Change through Water Trading under Uncertainty- An Inexact Two-Stage Nonlinear Programming Approach},
+  author={Luo, B and Maqsood, I and Yin, YY and Huang, GH and Cohen, SJ},
+  journal={Journal of Environmental Informatics},
+  volume={2},
+  number={2},
+  pages={58--68},
+  year={2003}
+}
+
+Simulated growth under different management scenarios for 3 different climate projections (w/ and w/o effects of bark beetle)
+No use of mathematical programming, no inclusion of multiple objectives, no comparison of frontiers
+@article{seidl2008impact,
+  title={Impact of bark beetle (< i> Ips typographus</i> L.) disturbance on timber production and carbon sequestration in different management strategies under climate change},
+  author={Seidl, Rupert and Rammer, Werner and J{\"a}ger, Dietmar and Lexer, Manfred J},
+  journal={Forest Ecology and Management},
+  volume={256},
+  number={3},
+  pages={209--220},
+  year={2008},
+  publisher={Elsevier}
+}
+
+Not relevant to research
+Could be interesting if trying to apply optimization methods in the realm of social sciences.
+Author's quote "Our objective in this study is to provide ecologists with an overview of quantitative social science methods that distills this complexity [understanding the array of available quantitative methods and their associated terminology] into a taxonomy of techniques"
+@article {JPE:JPE1615,
+author = {Cooke, Ira R. and Queenborough, Simon A. and Mattison, Elizabeth H. A. and Bailey, Alison P. and Sandars, Daniel L. and Graves, A. R. and Morris, J. and Atkinson, Philip W. and Trawick, Paul and Freckleton, Robert P. and Watkinson, Andrew R. and Sutherland, William J.},
+title = {Integrating socio-economics and ecology: a taxonomy of quantitative methods and a review of their use in agro-ecology},
+journal = {Journal of Applied Ecology},
+volume = {46},
+number = {2},
+publisher = {Blackwell Publishing Ltd},
+issn = {1365-2664},
+url = {http://dx.doi.org/10.1111/j.1365-2664.2009.01615.x},
+doi = {10.1111/j.1365-2664.2009.01615.x},
+pages = {269--277},
+keywords = {agriculture, ecological model, interdisciplinary, socio-economic model},
+year = {2009},
+}
+
+Not relevant to research
+Studies efficiency of Japanese forestry since 1960 and considers what impacts gov't policy may have had.
+@inproceedings{managi2005evaluation,
+  title={Evaluation and Policy Analysis of Japanese Forestry},
+  author={Managi, Shunsuke},
+  booktitle={2005 Annual meeting, July 24-27, Providence, RI},
+  number={19358},
+  year={2005},
+  organization={American Agricultural Economics Association (New Name 2008: Agricultural and Applied Economics Association)}
+}
+
+Reviews the risk and uncertainty that forest planners may encounter. Summarizes techniques/methods used to deal with the risk and uncertainty.
+@article{FS3063,
+	author = {M. Pasalodos-Tato and A. Mäkinen and J. Garcia-Gonzalo and J.G. Borges and T. Lämås and L.O. Eriksson},
+	title = {Review. Assessing uncertainty and risk in forest planning and decision support systems: review of classical methods and introduction of new approaches},
+	journal = {Forest Systems},
+	volume = {22},
+	number = {2},
+	year = {2013},
+	keywords = {},
+	issn = {2171-9845},
+	url = {http://revistas.inia.es/index.php/fs/article/view/3063}
+}
+
+Optimization for conservation with multiple objectives. Will update description after reading.
+Update: Did not read entire article, but enough to grasp the following:
+	Optimization was done using MARXAN 1.8.2
+	Compared optimizing for biodiversity vs. optimizing for ecosystem services
+	No integration of climate change or production of efficient frontiers or comparison of tradeoffs
+@article{chan2006conservation,
+  title={Conservation planning for ecosystem services},
+  author={Chan, Kai MA and Shaw, M Rebecca and Cameron, David R and Underwood, Emma C and Daily, Gretchen C},
+  journal={PLoS biology},
+  volume={4},
+  number={11},
+  pages={e379},
+  year={2006},
+  publisher={Public Library of Science}
+}
+
+Takes issue with a general outdated definition of ecosystem services and how to quantify them.
+Not relevant.
+@article{naidoo2008global,
+  title={Global mapping of ecosystem services and conservation priorities},
+  author={Naidoo, Robin and Balmford, Andrew and Costanza, Robert and Fisher, Brendan and Green, Rhys E and Lehner, B and Malcolm, TR and Ricketts, Taylor H},
+  journal={Proceedings of the National Academy of Sciences},
+  volume={105},
+  number={28},
+  pages={9495--9500},
+  year={2008},
+  publisher={National Acad Sciences}
+}
+
+Uses progressive hedging in stochastic modeling (solve each scenario of a stochastic problem in isolation and then combine - in iteration) to solve the problem of harvest scheduling and road construction. Not multi-objective, no comparison of frontiers, no analysis of changing tradeoffs. Ours answers a more ecological question compared to this piece.
+Article was not available publicly or through UW libraries so could not read whole thing to confirm.
+@article{veliz2014stochastic,
+  title={Stochastic optimization models in forest planning: a progressive hedging solution approach},
+  author={Veliz, Fernando Badilla and Watson, Jean-Paul and Weintraub, Andres and Wets, Roger J-B and Woodruff, David L},
+  journal={Annals of Operations Research},
+  pages={1--16},
+  year={2014},
+  publisher={Springer}
+}
+
+Discusses how to formulate stochastic multiobjective problems as deterministic in order to solve them.
+Also discusses how to define efficiency in these cases
+@article{abdelaziz2012solution,
+  title={Solution approaches for the multiobjective stochastic programming},
+  author={Abdelaziz, Fouad Ben},
+  journal={European Journal of Operational Research},
+  volume={216},
+  number={1},
+  pages={1--16},
+  year={2012},
+  publisher={Elsevier}
+}
+
+At first glance, appears to be considering how to visualize efficient solutions when 3+ objectives are considered. Seems to suggest using 2D-slices. Is this really all the novelty happening here?
+Multiobjective forest management problem and assesses resulting tradeoffs in the solution, but no comparison of objectives.
+Claims to be able to do some fancy searching of the feasible space to provide interactive and animated visualization of the Pareto frontier generated by the ERM (Lotov et al. 2004).
+@article{borges2014addressing,
+  title={Addressing Multicriteria Forest Management With Pareto Frontier Methods: An Application in Portugal},
+  author={Borges, Jose G and Garcia-Gonzalo, Jordi and Bushenkov, Vladimir and McDill, Marc E and Marques, Susete and Oliveira, Manuela M},
+  journal={Forest Science},
+  volume={60},
+  number={1},
+  pages={63--72},
+  year={2014},
+  publisher={Society of American Foresters}
+}
+
+Describes how to visualize mutlicritera optimization (written in 2004, so perhaps not the most up to date, but may have useful information).
+Note: this is a book. See if Sandor has a copy before dropping \$25 on a used copy.
+ISBN: 9781402076312
+@book{lotov2004interactive,
+  title={Interactive decision maps: Approximation and visualization of Pareto frontier},
+  author={Lotov, Alexander V and Bushenkov, Vladimir A and Kamenev, Georgy K},
+  volume={89},
+  year={2004},
+  publisher={Springer}
+}
+Here is a paper from the same author also about visualizing the pareto frontier:
+@incollection{lotov2008visualizing,
+  title={Visualizing the Pareto frontier},
+  author={Lotov, Alexander V and Miettinen, Kaisa},
+  booktitle={Multiobjective optimization},
+  pages={213--243},
+  year={2008},
+  publisher={Springer}
+}
+
+Review of multicriteria optimization in forest planning. Will likely be useful for finding other references.
+@article{diaz2008making,
+  title={Making forestry decisions with multiple criteria: a review and an assessment},
+  author={Diaz-Balteiro, Luis and Romero, Carlos},
+  journal={Forest Ecology and Management},
+  volume={255},
+  number={8},
+  pages={3222--3241},
+  year={2008},
+  publisher={Elsevier}
+}
+
+Studies volume over time with and without climate change - but no comparison of tradeoffs between objectives (single objective problem)
+Strives to build decision support tool for forest managers that incorporates climate change
+@article{garcia2014decision,
+  title={A decision support system for management planning of Eucalyptus plantations facing climate change},
+  author={Garcia-Gonzalo, J and Borges, JG and Palma, JHN and Zubizarreta-Gerendiain, A},
+  journal={Annals of Forest Science},
+  volume={71},
+  number={2},
+  pages={187--199},
+  year={2014},
+  publisher={Springer}
+}
+
+Classic intro to ecosystem services
+@book{daily1997ecosystem,
+  title={Ecosystem services: benefits supplied to human societies by natural ecosystems},
+  author={Daily, Gretchen C and Alexander, Susan and Ehrlich, Paul R and Goulder, Larry and Lubchenco, Jane and Matson, Pamela A and Mooney, Harold A and Postel, Sandra and Schneider, Stephen H and Tilman, David and others},
+  volume={2},
+  year={1997},
+  publisher={Ecological Society of America Washington (DC)}
+}
+
+Northern Spotted Owl (Oregon-specific) info:
+http://www.fws.gov/oregonfwo/Species/Data/NorthernSpottedOwl/default.asp
+@misc{NSOInformationORFWO,
+  title = {Species Fact Sheet: Northern spotted owl},
+  author = {Oregon Fish and Wildlife Office},
+  howpublished = {\url{http://www.fws.gov/oregonfwo/Species/Data/NorthernSpottedOwl/default.asp}},
+  note = {Accessed: 2015-02-06}
+}
+
+From term paper for Sandor's class, reference 5(NSOs and forest thinning - will need a refresher to say for sure what's in this article):
+@article{gaines2010integration,
+  title={Integration of Northern spotted owl habitat and fuels treatments in the eastern Cascades, Washington, USA},
+  author={Gaines, William L and Harrod, Richy J and Dickinson, James and Lyons, Andrea L and Halupka, Karl},
+  journal={Forest Ecology and Management},
+  volume={260},
+  number={11},
+  pages={2045--2052},
+  year={2010},
+  publisher={Elsevier}
+}
+
+From term paper for Sandor's class, reference 6(NSOs and forest thinning - will need a refresher to say for sure what's in this article):
+@article{lee2005assessing,
+  title={Assessing risks to spotted owls from forest thinning in fire-adapted forests of the western United States},
+  author={Lee, Danny C and Irwin, Larry L},
+  journal={Forest Ecology and Management},
+  volume={211},
+  number={1},
+  pages={191--209},
+  year={2005},
+  publisher={Elsevier}
+}
+
+
+Who own's the world's forests?
+This is handy for the statement "many forests are managed by someone".
+@article{white2002owns,
+  title={Who owns the world’s forests},
+  author={White, Andy and Martin, Alejandra},
+  journal={Forest Trends, Washington, DC},
+  year={2002}
+}
+
+Iverson and Prasad, 1998 -
+New spatial distributions of trees expected with climate change
+@article{iverson1998predicting,
+  title={Predicting abundance of 80 tree species following climate change in the eastern United States},
+  author={Iverson, Louis R and Prasad, Anantha M},
+  journal={Ecological Monographs},
+  volume={68},
+  number={4},
+  pages={465--485},
+  year={1998},
+  publisher={Eco Soc America}
+}
+
+Goode, Luce, Buffington 2012 - 
+Sediment delivery and climate change
+@article{Goode20121,
+title = "Enhanced sediment delivery in a changing climate in semi-arid mountain basins: Implications for water resource management and aquatic habitat in the northern Rocky Mountains ",
+journal = "Geomorphology ",
+volume = "139–140",
+number = "0",
+pages = "1 - 15",
+year = "2012",
+note = "",
+issn = "0169-555X",
+doi = "http://dx.doi.org/10.1016/j.geomorph.2011.06.021",
+url = "http://www.sciencedirect.com/science/article/pii/S0169555X11003187",
+author = "Jaime R. Goode and Charles H. Luce and John M. Buffington",
+keywords = "Sediment yield",
+keywords = "Climate change",
+keywords = "Wildfire",
+keywords = "Forest roads",
+keywords = "Aquatic habitat",
+keywords = "Idaho batholith "
+}
+
+Vose and Peterson 2012 - 
+Increased disturbance regimes with climate change
+@book{vose2012effects,
+  title={Effects of climatic variability and change on forest ecosystems: a comprehensive science synthesis for the US forest sector},
+  author={Vose, James M and Peterson, David Lawrence and Patel-Weynand, Toral and others},
+  year={2012},
+  publisher={US Department of Agriculture, Forest Service, Pacific Northwest Research Station Portland, OR}
+}
+
+Bonan et al 2008 - 
+Discusses the effects of climate change on fire and the carbon cycle.
+Nifty for "climate change will increase disturbances which will impact carbon storage"
+@article{bonan2008forests,
+  title={Forests and climate change: forcings, feedbacks, and the climate benefits of forests},
+  author={Bonan, Gordon B},
+  journal={Science},
+  volume={320},
+  number={5882},
+  pages={1444--1449},
+  year={2008},
+  publisher={American Association for the Advancement of Science}
+}
+
+McKenzie et al 2012 - 
+Useful for saying "increasing disturbance regimes will influence plant and animals in forests"
+@article{mckenzie2004climatic,
+  title={Climatic change, wildfire, and conservation},
+  author={McKenzie, Donald and Gedalof, Ze'ev and Peterson, David L and Mote, Philip},
+  journal={Conservation Biology},
+  volume={18},
+  number={4},
+  pages={890--902},
+  year={2004},
+  publisher={Wiley Online Library}
+}
+
+Thomas et al 2004 - 
+Climate change is going to threaten animal species
+@article{thomas2004extinction,
+  title={Extinction risk from climate change},
+  author={Thomas, Chris D and Cameron, Alison and Green, Rhys E and Bakkenes, Michel and Beaumont, Linda J and Collingham, Yvonne C and Erasmus, Barend FN and De Siqueira, Marinez Ferreira and Grainger, Alan and Hannah, Lee and others},
+  journal={Nature},
+  volume={427},
+  number={6970},
+  pages={145--148},
+  year={2004},
+  publisher={Nature Publishing Group}
+}
+
+Toth 2009 - 
+Habitat, edge, and NPV multiobjective study
+@article{toth2009finding,
+  title={Finding efficient harvest schedules under three conflicting objectives},
+  author={T{\'o}th, S{\'a}ndor F and McDill, Marc E},
+  journal={Forest Science},
+  volume={55},
+  number={2},
+  pages={117--131},
+  year={2009},
+  publisher={Society of American Foresters}
+}
+
+Yousefpour and Jacobsen 2011 - 
+A review of how forest management is including the uncertainties of climate change
+@article{yousefpour2012review,
+  title={A review of decision-making approaches to handle uncertainty and risk in adaptive forest management under climate change},
+  author={Yousefpour, Rasoul and Jacobsen, Jette Bredahl and Thorsen, Bo Jellesmark and Meilby, Henrik and Hanewinkel, Marc and Oehler, Karoline},
+  journal={Annals of forest science},
+  volume={69},
+  number={1},
+  pages={1--15},
+  year={2012},
+  publisher={Springer}
+}
+
+Citation for FVS
+@article{dixon2002essential,
+  title={Essential FVS: A user’s guide to the Forest Vegetation Simulator},
+  author={Dixon, Gary E and others},
+  journal={Fort Collins, CO: USDA-Forest Service, Forest Management Service Center},
+  year={2002}
+}
+
+Citation for Climate-FVS
+@article{crookston2014climate,
+  title={Climate-FVS Version 2: Content, users guide, applications, and behavior},
+  author={Crookston, Nicholas L},
+  year={2014}
+}
+
+Citation for Svetlana's doctoral dissertation
+@phdthesis{svetlanaDissertation2013,
+author = {Schroder, Svetlana Kushch},
+title = {Optimizing forest management in consideration of environmental regulations, economic constraints, and ecosystem services},
+institution = {University of Washington},
+year = {2013}
+}
+
+Citation for Courtney et al 2004 who showed that wildfires do long term damage to NSO habitat (imagine that)
+@book{courtney2004scientific,
+  title={Scientific evaluation of the status of the Northern Spotted Owl},
+  author={Courtney, Steven P and Carey, Andrew B},
+  year={2004},
+  publisher={Sustainable Ecosystems Institute Portland, OR}
+}
+
+Citation for IPCC webpage describing the rationale for scenario-based process for AR5
+@misc{IPCCScenariosAR5,
+  title = {{Scenario Process for AR5}},
+  author = {Intergovernmental Panel on Climate Change},
+  howpublished = {\url{http://sedac.ipcc-data.org/ddc/ar5\_scenario\_process/scenario\_background.html}},
+  year = {2014}
+}
+
+The Millenium Ecosystem Assessment, which defined what an "ecosystem service" is
+@book{assessment2005ecosystems,
+  title={Ecosystems and human well-being},
+  author={Assessment, Millennium Ecosystem and others},
+  volume={5},
+  year={2005},
+  publisher={Island press Washington, DC:}
+}
+
+The Summary for Policymakers from the IPCC's AR5 (Working Group 1) - all the big highlights of climate change research
+@book{ipcc2013climate,
+  title={Climate Change 2013-The Physical Science Basis: Summary for Policymakers},
+  author={IPCC Working Group I},
+  year={2013},
+  publisher={Intergovernmental Panel on Climate Change}
+}
+
+Describes which climate models are included in the ensembles for Climate FVS
+@online{ClimateModelsInFVSEnsemble,
+  author = {Nicholas Crookston},
+  title = {Details of Data and Methods Used for Calculating Future Climate Estimates},
+  year = 2016,
+  url = {http://charcoal.cnre.vt.edu/climate/future/details.php},
+  urldate = {2016-05-31}
+}
+
+Website for access to Climate-FVS ready data
+@online{climateFVSReadyData,
+  author = {Nicholas Crookston},
+  title = {Get Climate-FVS Ready Data},
+  year = 2016,
+  url = {http://charcoal.cnre.vt.edu/climate/customData/fvs_data.php},
+  urldate = {2015-09-29}
+}
+
+Anderson's 13 original fuel models
+@article{anderson1982aids,
+  title={Aids to determining fuel models for estimating fire behavior},
+  author={Anderson, Hal E},
+  journal={The Bark Beetles, Fuels, and Fire Bibliography},
+  pages={143},
+  year={1982}
+}
+
+Albini 1976 - Original source of the 13 fuel models used in Anderson (page 92)
+@article{albini1976estimating,
+  title={Estimating wildfire behavior and effects},
+  author={Albini, Frank A},
+  year={1976}
+}
+
+The recovery plan for the NSO. Table III-1 lists habitat size requirements for NSO
+@article{us2011revised,
+  title={Revised recovery plan for the northern spotted owl (Strix occidentalis caurina)},
+  author={US Fish and Wildlife Service and others},
+  journal={USDI Fish and Wildlife Service, Portland, OR USA},
+  year={2011}
+}
+
+A citation for the online interface for WEPP Watershed (which I used to determine sediment coefficients)
+@inproceedings{frankenberger2011development,
+  title={Development of a GIS interface for {WEPP} model application to Great Lakes forested watersheds},
+  author={Frankenberger, James R and Dun, Shuhui and Flanagan, Dennis C and Wu, Joan Q and Elliot, William J},
+  booktitle={International Symposium on Erosion and Landscape Evolution ({ISELE}), 18-21 September 2011, Anchorage, Alaska},
+  pages={139},
+  year={2011},
+  organization={American Society of Agricultural and Biological Engineers}
+}
+
+Citation for SSURGO soils data
+Soil Survey Staff, Natural Resources Conservation Service, United States Department of Agriculture. Soil Survey Geographic (SSURGO) Database. Available online at http://sdmdataaccess.nrcs.usda.gov/. Accessed [month/day/year].
+@online{SSURGO,
+  author = {{Soil Survey Staff}},
+  organization = {{Natural Resources Conservation Service, United States Department of Agriculture}},
+  title = {Soil Survey Geographic (SSURGO) Database},
+  url = {http://sdmdataaccess.nrcs.usda.gov/},
+  urldate = {2015-09-27}
+}
+
+List of climate models used in IPCC AR5
+@online{ipccListOfAR5Models,
+  author = {German Climate Computing Centre ({DKRZ})},
+  title = {{IPCC} Working Group I {AR5} Snapshot},
+  url = {http://www.ipcc-data.org/sim/gcm_monthly/AR5/WG1-Archive.html},
+  urldate = {2016-06-06}
+}
+
+Citation for FVS's FFE
+@article{reinhardt2003fire,
+  title={The fire and fuels extension to the forest vegetation simulator},
+  author={Reinhardt, Elizabeth and Crookston, Nicholas L},
+  year={2003}
+}
+
+Seminal description of multi-objective evolutionary algorithms
+@book{deb2001multi,
+  title={Multi-objective optimization using evolutionary algorithms},
+  author={Deb, Kalyanmoy},
+  volume={16},
+  year={2001},
+  publisher={John Wiley \& Sons}
+}
+
+Solid, early (2002) work on comparing frontiers, although it falls short of Zitzler's analysis.
+Has a good, brief description of evolutionary algorithms.
+@inproceedings{knowles2002metrics,
+  title={On metrics for comparing nondominated sets},
+  author={Knowles, Joshua and Corne, David},
+  booktitle={Evolutionary Computation, 2002. CEC'02. Proceedings of the 2002 Congress on},
+  volume={1},
+  pages={711--716},
+  year={2002},
+  organization={IEEE}
+}
+
+Go-to work on ways to compare of frontiers
+@article{zitzler2003performance,
+  title={Performance assessment of multiobjective optimizers: an analysis and review},
+  author={Zitzler, Eckart and Thiele, Lothar and Laumanns, Marco and Fonseca, Carlos M and Da Fonseca, Viviane Grunert},
+  journal={Evolutionary Computation, IEEE Transactions on},
+  volume={7},
+  number={2},
+  pages={117--132},
+  year={2003},
+  publisher={IEEE}
+}
+
+Zitzler's PhD thesis. This guy was a baller. Almost 2000 citations!
+Includes the definition of the binary hypervolume indicator
+@book{zitzler1999evolutionary,
+  title={Evolutionary algorithms for multiobjective optimization: Methods and applications},
+  author={Zitzler, Eckart},
+  volume={63},
+  year={1999},
+  publisher={Citeseer}
+}
+
+Early paper on simulated annealing that defines the distance metric from an approximated  non-dominated set to a reference set.
+@article{czyzzak1998pareto,
+  title={Pareto simulated annealing—a metaheuristic technique for multiple-objective combinatorial optimization},
+  author={Czyz{\.z}ak, Piotr and Jaszkiewicz, Adrezej},
+  journal={Journal of Multi-Criteria Decision Analysis},
+  volume={7},
+  number={1},
+  pages={34--47},
+  year={1998},
+  publisher={Wiley Online Library}
+}
+
+The paper in which Schott defines the Schott Spacing Metric
+@techreport{schott1995fault,
+  title={Fault Tolerant Design Using Single and Multicriteria Genetic Algorithm Optimization.},
+  author={Schott, Jason R},
+  year={1995},
+  institution={DTIC Document}
+}
+
+Source used to support the claim that more objectives make a multi-obj model harder to solve
+@inproceedings{khare2003performance,
+  title={Performance scaling of multi-objective evolutionary algorithms},
+  author={Khare, Vineet and Yao, Xin and Deb, Kalyanmoy},
+  booktitle={Evolutionary Multi-Criterion Optimization},
+  pages={376--390},
+  year={2003},
+  organization={Springer}
+}
+
+Describes using correlation/principle component analysis in objective reduction
+@article{deb2005finding,
+  title={On finding pareto-optimal solutions through dimensionality reduction for certain large-dimensional multi-objective optimization problems},
+  author={Deb, Kalyanmoy and Saxena, Dhish Kumar},
+  journal={Kangal report},
+  volume={2005011},
+  year={2005}
+}
+
+Defines how the USFS approaches land management. Best quote:
+"sustain the multiple use of its renewable resources in perpetuity while maintaining the longterm health and productivity of the land"
+https://www.law.cornell.edu/cfr/text/36/219.1
+@Misc{cfrForestMgmt,
+title = {National Forest System Land Management Planning},
+author={{36 {CFR} 219.1}},
+year = {2012}
+}
+
+Chapter from a book that specifies that forest's ability to provide habitat may change with climate change
+@article{harding1997ecosystem,
+  title={Ecosystem response to climate change in British Columbia and Yukon: threats and opportunities for biodiversity},
+  author={Harding, Lee E and McCullum, Emily},
+  journal={Responding to global climate change in British Columbia and Yukon},
+  volume={1},
+  pages={9--1},
+  year={1997}
+}
+
+Has a table that predicts changes in regional timber production as a response to climate change.
+@article{forschungsanstalten2009adaptation,
+  title={Adaptation of forests and people to climate change},
+  author={Forschungsanstalten, Foresti{\`e}res Internationaler Verband Forstlicher},
+  year={2009}
+}
+
+Proposes different ideal management practices for different climate scenarios
+@article{linder2000developing,
+  title={Developing adaptive forest management strategies to cope with climate change},
+  author={Linder, Marcus},
+  journal={Tree Physiology},
+  volume={20},
+  number={5-6},
+  pages={299--307},
+  year={2000},
+  publisher={Oxford University Press}
+}
+
+Killer source detailing the effects of fire on soils and watershed processes
+@article{ice2004effects,
+  title={Effects of wildfire on soils and watershed processes},
+  author={Ice, George G and Neary, Daniel G and Adams, Paul W},
+  journal={Journal of Forestry},
+  volume={102},
+  number={6},
+  pages={16--20},
+  year={2004},
+  publisher={Society of American Foresters}
+}
+
+Endangered Species Act of 1973
+@article{congress1973endangered,
+  title={Endangered species act},
+  author={Congress, US},
+  journal={Washington DC},
+  year={1973}
+}
+
+Discusses controversy over indicator species, umbrella species, keystone species, etc. NSO is included in the discussion
+@article{simberloff1998flagships,
+  title={Flagships, umbrellas, and keystones: is single-species management pass{\'e} in the landscape era?},
+  author={Simberloff, Daniel},
+  journal={Biological conservation},
+  volume={83},
+  number={3},
+  pages={247--257},
+  year={1998},
+  publisher={Elsevier}
+}
+
+Paper documenting short-term vs long-term effects of management practices on streams
+@article{o2005conceptual,
+  title={Conceptual model for comparative ecological risk assessment of wildfire effects on fish, with and without hazardous fuel treatment},
+  author={O’Laughlin, Jay},
+  journal={Forest Ecology and Management},
+  volume={211},
+  number={1},
+  pages={59--72},
+  year={2005},
+  publisher={Elsevier}
+}
+
+Citation for IPCC webpage definitions
+@misc{ipcc2013Definition,
+  title = {Definition of Terms Used Within the {DDC} Pages},
+  author = {Intergovernmental Panel on Climate Change},
+  howpublished = {\url{http://www.ipcc-data.org/guidelines/pages/definitions.html}},
+  year = {2013}
+}
+
+Definition of Stand Density Index from the source
+@article{reineke1933perfecting,
+  title={Perfecting a stand-density index for even-aged forests},
+  author={Reineke, Lester Henry},
+  year={1933},
+  publisher={US Government Printing Office Washington, DC}
+}
+
+Svetlana's new manuscript for the Drink area
+@article{schroder2016multi,
+  title={Multi-objective optimization to evaluate tradeoffs among forest ecosystem services following fire hazard reduction in the {Deschutes National Forest, USA}},
+  author={Schroder, Svetlana A (Kushch) and T{\'o}th, S{\'a}ndor F and Deal, Robert L and Ettl Gregory J},
+  journal={Ecosystem Services},
+  volume={Special Issue ``Integrated Valuation of Ecosystem Services: Challenges and Solutions''},
+  year={accepted}
+}
+
+Paper for cluster enumeration algorithm
+@article{rebain2003mixed,
+  title={A mixed-integer formulation of the minimum patch size problem},
+  author={Rebain, Stephanie and McDill, Marc E},
+  journal={Forest Science},
+  volume={49},
+  number={4},
+  pages={608--618},
+  year={2003},
+  publisher={Society of American Foresters}
+}
+
+Zitzler defining conflict
+@article{brockhoff2009objective,
+  title={Objective reduction in evolutionary multiobjective optimization: Theory and applications},
+  author={Brockhoff, Dimo and Zitzler, Eckart},
+  journal={Evolutionary Computation},
+  volume={17},
+  number={2},
+  pages={135--166},
+  year={2009},
+  publisher={MIT Press}
+}
+
+Purshouse and Fleming - another (simpler) measure of conflict
+@inproceedings{purshouse2003conflict,
+  title={Conflict, harmony, and independence: Relationships in evolutionary multi-criterion optimisation},
+  author={Purshouse, Robin C and Fleming, Peter J},
+  booktitle={International Conference on Evolutionary Multi-Criterion Optimization},
+  pages={16--30},
+  year={2003},
+  organization={Springer}
+}
+
+Gal and Leberling - early work on conflicting and redundant objectives
+@article{gal1977redundant,
+  title={Redundant objective functions in linear vector maximum problems and their determination},
+  author={Gal, Tomas and Leberling, Heiner},
+  journal={European Journal of Operational Research},
+  volume={1},
+  number={3},
+  pages={176--184},
+  year={1977},
+  publisher={Elsevier}
+}
+
+Deb and Saxena - using correlation and PCA for obj reduction
+@inproceedings{deb2006searching,
+  title={Searching for Pareto-optimal solutions through dimensionality reduction for certain large-dimensional multi-objective optimization problems},
+  author={Deb, Kalyanmoy and Saxena, D},
+  booktitle={Proceedings of the World Congress on Computational Intelligence (WCCI-2006)},
+  pages={3352--3360},
+  year={2006}
+}
+
+Someone using Kendall's Tau in MOO
+@inproceedings{kanoulas2009empirical,
+  title={Empirical justification of the gain and discount function for nDCG},
+  author={Kanoulas, Evangelos and Aslam, Javed A},
+  booktitle={Proceedings of the 18th ACM conference on Information and knowledge management},
+  pages={611--620},
+  year={2009},
+  organization={ACM}
+}
+
+Zitzler's delta-error and minimum objective set problems
+@incollection{brockhoff2006all,
+  title={Are all objectives necessary? On dimensionality reduction in evolutionary multiobjective optimization},
+  author={Brockhoff, Dimo and Zitzler, Eckart},
+  booktitle={Parallel Problem Solving from Nature-PPSN IX},
+  pages={533--542},
+  year={2006},
+  publisher={Springer}
+}
+
+A paper using Spearman's rho to compare objectives
+@article{karande2012application,
+  title={Application of multi-objective optimization on the basis of ratio analysis (MOORA) method for materials selection},
+  author={Karande, Prasad and Chakraborty, Shankar},
+  journal={Materials \& Design},
+  volume={37},
+  pages={317--324},
+  year={2012},
+  publisher={Elsevier}
+}
+
+Aircraft design is multiobjective
+@article{wang2014multi,
+  title={Multi-objective optimization of aircraft design for emission and cost reductions},
+  author={Wang, Yu and Yin, Hailian and Zhang, Shuai and Yu, Xiongqing},
+  journal={Chinese Journal of Aeronautics},
+  volume={27},
+  number={1},
+  pages={52--58},
+  year={2014},
+  publisher={Elsevier}
+}
+
+Hospitals are multiobjective
+@inproceedings{hutzschenreuter2009evolutionary,
+  title={Evolutionary multiobjective optimization for dynamic hospital resource management},
+  author={Hutzschenreuter, Anke K and Bosman, Peter AN and La Poutr{\'U}, Han},
+  booktitle={International Conference on Evolutionary Multi-Criterion Optimization},
+  pages={320--334},
+  year={2009},
+  organization={Springer}
+}
+
+Food production is multi-objective
+@article{sendin2010efficient,
+  title={Efficient and robust multi-objective optimization of food processing: A novel approach with application to thermal sterilization},
+  author={Send{\'\i}n, Jos{\'e} Oscar H and Alonso, Antonio A and Banga, Julio R},
+  journal={Journal of Food Engineering},
+  volume={98},
+  number={3},
+  pages={317--324},
+  year={2010},
+  publisher={Elsevier}
+}
+
+Sandor's pack forest paper for ecosel (hab vs co2 vs revenues)
+@article{toth2013ecosel,
+  title={ECOSEL: multi-objective optimization to sell forest ecosystem services},
+  author={T{\'o}th, S{\'a}ndor F and Ettl, Gregory J and K{\"o}nny{\H{u}}, N{\'o}ra and Rabotyagov, Sergey S and Rogers, Luke W and Comnick, Jeffrey M},
+  journal={Forest Policy and Economics},
+  volume={35},
+  pages={73--82},
+  year={2013},
+  publisher={Elsevier}
+}
+
+New way of calculating the hypervolume and also shows old ways (bunch of algorithms)
+@article{while2006faster,
+  title={A faster algorithm for calculating hypervolume},
+  author={While, Lyndon and Hingston, Philip and Barone, Luigi and Huband, Simon},
+  journal={IEEE transactions on evolutionary computation},
+  volume={10},
+  number={1},
+  pages={29--38},
+  year={2006},
+  publisher={IEEE}
+}
+
+Looks at impact of fuel removals (prescribed burns) on NSO survival stuff
+@article{bond2002short,
+  title={Short-term effects of wildfires on spotted owl survival, site fidelity, mate fidelity, and reproductive success},
+  author={Bond, Monica L and Guti{\'e}rrez, RJ and Franklin, Alan B and LaHaye, William S and May, Christopher A and Seamans, Mark E},
+  journal={Wildlife Society Bulletin},
+  pages={1022--1028},
+  year={2002},
+  publisher={JSTOR}
+}
+
+Objs under diff FSC scenarios
+@article{toth2013ecosel,
+  title={ECOSEL: multi-objective optimization to sell forest ecosystem services},
+  author={T{\'o}th, S{\'a}ndor F and Ettl, Gregory J and K{\"o}nny{\H{u}}, N{\'o}ra and Rabotyagov, Sergey S and Rogers, Luke W and Comnick, Jeffrey M},
+  journal={Forest Policy and Economics},
+  volume={35},
+  pages={73--82},
+  year={2013},
+  publisher={Elsevier}
+}
+
+@misc{mooviz,
+  title = {{MOO Viz}: Multi-objective optimization visualization},
+  howpublished = {\url{https://nkullman.github.io/mooViz/}},
+  note = {Accessed: 2016-12-08}
+}
+
+@inproceedings{deb2002scalable,
+  title={Scalable multi-objective optimization test problems},
+  author={Deb, Kalyanmoy and Thiele, Lothar and Laumanns, Marco and Zitzler, Eckart},
+  booktitle={Evolutionary Computation, 2002. CEC'02. Proceedings of the 2002 Congress on},
+  volume={1},
+  pages={825--830},
+  year={2002},
+  organization={IEEE}
+}
+
+Ancient foresty-optimization articles:
+1) A Mathematical Programming System for the
+Management of Industrial Forests
+GLENN O. WARE
+JEROME L. CLUTTER
+(check its sources for others)
